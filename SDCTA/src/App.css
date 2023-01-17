@@ -1,39 +1,271 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@font-face {
+	font-family: ‘helvetica neue’;
+	src: local(‘Arial’);
+}
+
+@font-face {
+	font-family: ‘helvetica neue’;
+	font-weight: bold;
+	src: local(‘Arial’);
+}
+
+@font-face {
+	font-family: ‘helvetica’;
+	src: local(‘Arial’);
+}
+
+.opensans {
+	font-family: "Open Sans", sans-serif;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
+/*body styling*/
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans";
+	background-color: #E5E5E5;
+}
+
+.heading {
+	padding-left: 84px;
+	padding-top: 47px;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 49px;
+}
+
+.description {
+	padding-top: 12px;
+	padding-left: 84px;
+	padding-right: 156px;
+	padding-bottom: 47px;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.box {
+	padding-top: 48px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-content: center;
+	width: 100%;
+	padding-bottom: 48px;
+
+}
+
+.box-heading {
+	color: #7F1922;
+	font-family: 'Helvetica Neue';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 29px;
+	display: flex;
+	align-items: center;
+	padding-top: 24px;
+	padding-bottom: 16px;
+}
+
+.box-description {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.one {
+	padding-left: 120px;
+	padding-right: 75px;
+	flex-wrap: 1
+}
+
+.two {
+	padding-left: 75px;
+	padding-right: 75px;
+	flex-wrap: 1
+}
+
+.three {
+	padding-left: 75px;
+	padding-right: 120px;
+	flex-wrap: 1
+}
+
+
+/* Navbar Styles */
+.navbar {
+	display: flex;
+	align-items: center;
+	height: 106px;
+	background-color: white;
+	font-weight: 600;
+
+}
+
+.nav-items {
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
+	margin-left: 60px;
+}
+
+.nav-item {
+
+	color: black;
+	text-decoration: none;
+}
+
+.active-page {
+	color: #7F1922;
+}
+
+.nav-item:hover {
+	color: red;
+}
+
+.nav-actions {
+	display: flex;
+
+	justify-content: flex-end;
+
+	width: 50%;
+}
+
+.login {
+	color: black;
+	text-decoration: none;
+	margin-right: 20px;
+	padding: 15px
+}
+
+.login:hover {
+	color: red;
+}
+
+.sign-up {
+	color: white;
+	text-decoration: none;
+	margin-right: 20px;
+	background-color: red;
+	padding: 15px;
+	border-radius: 4px
+}
+
+.sign-up:hover {
+	background-color: white;
+	color: red;
+}
+
+.logo {
+	width: 174px;
+	height: 80px;
+	padding-left: 20px;
+
+}
+
+.footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 20px;
+	background-color: #7F1922;
+	font-size: 18px;
+}
+
+.footer-left {
+	width: 60%;
+	padding-left: 40px;
+}
+
+.footer-left h3 {
+	margin: 0;
+	color: white;
+	font-weight: 700;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+.footer-left p {
+	margin: 10px 0 0 0;
+	font-weight: 400;
+	color: white;
+
+}
+
+.footer-right {
+	width: 20%;
+	text-align: right;
+}
+
+.address {
+	margin-bottom: 10px;
+}
+
+.address p {
+	margin: 0;
+
+	text-indent: 10px;
+	text-align: left;
+	color: white;
+}
+
+.social-icons {
+	display: flex;
+	align-items: flex-end;
+}
+
+.social-icons a {
+	margin-left: 10px;
+	color: white;
+	text-decoration: none;
+}
+
+.social-icons .icon {
+	font-size: 20px;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: rgb(112, 76, 182);
+	color: #61dafb;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }
