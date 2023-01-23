@@ -7,7 +7,6 @@ import logo from "./SDTEF Logo Transparent Background 1.svg"
 export const Navbar = () => {
    return (
       <nav> 
-         <div className="navLeft">
          <img src={logo} className='logo'/>
 
          <div className="navLinks">
@@ -16,7 +15,6 @@ export const Navbar = () => {
             <Link to="/Homelessness" className='links'>Homelessness</Link> 
             <Link to="/Municipal" className='links'>Municipal</Link>            
          </div>            
-         </div>
 
              
          <div className='right'>

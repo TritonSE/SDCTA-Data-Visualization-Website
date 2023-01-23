@@ -1,26 +1,21 @@
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url('https://fonts.cdnfonts.com/css/open-sans');
+}
+
 nav {
     background-color: white;
     padding: 10px;
-    display: flex;
+    display: flex; 
     align-items: center;
     flex-direction: row;
-}
-
-.navLeft{
-   display: flex;
-   align-items: center;
-   flex-direction: row;
 }
 
 .links {
     color: black;
     text-decoration: none;
-    margin: 10px;
-
-    /* is this how you do it? */
-    /* display: inline-block; */
+    margin: 10px 15px;
     vertical-align: middle; 
-    background-color: aqua;
     font-size: 18px;
 }
 
@@ -30,7 +25,7 @@ nav {
 }
 
 .right {
-    float: right;
+   margin-left: auto;
 }
 
 button {
