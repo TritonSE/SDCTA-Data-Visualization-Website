@@ -1,6 +1,6 @@
 
 import Nav from 'react-bootstrap/Nav';
-import Companylogo from '../SDTEF Logo Transparent Background 1.jpg';
+import Companylogo from '../Images/SDTEF Logo Transparent Background 1.jpg';
 
 export const NavBar = () => {
 	return (
