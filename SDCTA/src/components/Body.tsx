@@ -4,39 +4,39 @@ import EdVis from '../Images/Graph.jpg';
 export const Body = () => {
 	return (
 		<><div>
-			<div class="heading" >
+			<div className="heading" >
 				Data Museum
 			</div>
-			<div class="description" >
+			<div className="description" >
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 			</div>
 			<img src={landscape} alt="sd landscape" />
 		</div>
-			<div class="box" >
-				<div class="one">
+			<div className="box" >
+				<div className="one">
 					<img src={EdVis} alt="Education Visualization" />
-					<div class="box-heading" >
+					<div className="box-heading" >
 						Education
 					</div>
-					<div class="box-description" >
+					<div className="box-description" >
 						Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 					</div>
 				</div>
-				<div class="two">
+				<div className="two">
 					<img src={EdVis} alt="Homeless Visualization" />
-					<div class="box-heading" >
+					<div className="box-heading" >
 						Homelessness
 					</div>
-					<div class="box-description" >
+					<div className="box-description" >
 						Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 					</div>
 				</div>
-				<div class="three">
+				<div className="three">
 					<img src={EdVis} alt="Municipal Visualization" />
-					<div class="box-heading" >
+					<div className="box-heading" >
 						Municipal
 					</div>
-					<div class="box-description" >
+					<div className="box-description" >
 						Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 					</div>
 				</div>

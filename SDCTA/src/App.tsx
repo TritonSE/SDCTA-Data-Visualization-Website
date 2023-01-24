@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import {Body} from './components/Body.jsx';
+import {Body} from './components/Body';
 import {NavBar} from './components/NavBar.jsx';
-import {Footer} from './components/Footer.jsx';
+import {Footer} from './components/Footer';
 
 import './App.css';
 
