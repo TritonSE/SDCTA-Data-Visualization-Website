@@ -1,7 +1,41 @@
-import React from 'react'
-import './signup.css'
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import './signup.css';
+import { auth } from "../../firebase-config";
 
 const SignUp = () => {
+
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+
+  console.log("here");
+  const register = async () => {
+    try {
+
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+
+    } catch (error) {
+
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+      
+    }
+  }
+
+  const login = async () => {
+
+  }
+
+  const logout = async () => {
+
+  }
+
   return (
     <div className='signup-form-wrapper'>
 
@@ -9,13 +43,12 @@ const SignUp = () => {
           Create Your Account
       </p>
 
-      <form className="signup-form">
+      <div className="signup-form">
         <div className="signup-form-content">
           {/* <h3 className="Auth-form-title">Create Your Account</h3> */}
           <div className="form-group mt-3">
             <p>Full Name</p>
             <input
-              type="email"
               className="form-control mt-1"
             />
           </div>
@@ -24,6 +57,9 @@ const SignUp = () => {
             <input
               type="email"
               className="form-control mt-1"
+              onChange={(event) => {
+                setRegisterEmail(event.target.value);
+              }}
             />
           </div>
           <div className="form-group mt-3">
@@ -31,6 +67,9 @@ const SignUp = () => {
             <input
               type="password"
               className="form-control mt-1"
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
             />
           </div>
           <div className='terms-checkbox'>
@@ -42,12 +81,15 @@ const SignUp = () => {
             </label>
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
+            <button 
+              onClick={register} 
+              className="btn btn-primary"
+            >
               Submit
             </button>
           </div>
         </div>
-      </form> 
+      </div> 
     </div>
   )
 }
