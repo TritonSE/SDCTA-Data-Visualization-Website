@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import logo from "./SDTEF Logo Transparent Background 1.svg"
 
@@ -10,15 +10,23 @@ export const Navbar = () => {
          <img src={logo} className='logo'/>
 
          <div className="navLinks">
-            <Link to="/" className='links'>Data Museum</Link>
-            <Link to="/Education" className='links'>Education</Link>
-            <Link to="/Homelessness" className='links'>Homelessness</Link> 
-            <Link to="/Municipal" className='links'>Municipal</Link>            
+         <NavLink style={({ isActive }) =>
+              isActive ? {color:"#7F1922"} : undefined
+            } to="/" className='links'>Data Museum</NavLink>
+            <NavLink style={({ isActive }) =>
+              isActive ? {color:"#7F1922"} : undefined
+            } to="/Education" className='links'>Education</NavLink>
+            <NavLink style={({ isActive }) =>
+              isActive ? {color:"#7F1922"} : undefined
+            } to="/Homelessness" className='links'>Homelessness</NavLink> 
+            <NavLink style={({ isActive }) =>
+              isActive ? {color:"#7F1922"} : undefined
+            } to="/Municipal" className='links'>Municipal</NavLink>            
          </div>            
 
              
          <div className='right'>
-            <Link to="/page1" className='links'>Login</Link>  
+            <NavLink to="/page1" className='links'>Login</NavLink>  
             <button>Sign Up</button>
          </div>
       </nav>
