@@ -4,15 +4,13 @@ const router = express.Router()
 
 module.exports = router;
 
-const Model = require('../models/user');
+const Model = require('../models/category');
 
 //Post Method
 router.post('/post', async (req, res) => {
     const data = new Model({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        tier: req.body.tier
+        name: req.body.name,
+        visualizations: req.body.visualizations
     })
 
     try {
@@ -68,7 +66,7 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with ${data.username} has been deleted..`)
+        res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })

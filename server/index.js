@@ -24,7 +24,12 @@ app.listen(3000, () => {
 
 const routesTier = require('./routes/tier');
 const routesUser = require('./routes/user');
+const routesCategory = require('./routes/category');
+const routesVisualization = require('./routes/visualization');
 
 
 app.use('/api/tier', routesTier)
 app.use('/api/user', routesUser)
+app.use('/api/category', routesCategory)
+app.use('/api/visualization', routesVisualization)
+
