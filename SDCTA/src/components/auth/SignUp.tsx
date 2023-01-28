@@ -1,29 +1,36 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import './signup.css';
 import { auth } from "../../firebase-config";
 
 const SignUp = () => {
 
+  const [userDisplayName, setUserDisplayName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  console.log("here");
   const register = async () => {
     try {
 
-      const user = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
-      console.log(user);
+
+      updateProfile(userCredential.user, {
+        displayName: userDisplayName
+      });
+
+      console.log(userCredential);
 
     } catch (error) {
 
       if (error instanceof Error) {
         console.log(error.message);
       }
+
     }
   }
 
@@ -41,6 +48,9 @@ const SignUp = () => {
           <div className="form-group mt-3">
             <p>Full Name</p>
             <input
+            onChange={(event) => {
+              setUserDisplayName(event.target.value);
+            }}
               className="form-control mt-1"
             />
           </div>

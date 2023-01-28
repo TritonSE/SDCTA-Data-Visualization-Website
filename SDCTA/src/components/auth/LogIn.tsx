@@ -51,7 +51,9 @@ const LogIn = () => {
             <button
               onClick={login} 
               className="btn btn-primary"
-            ></button>
+            >
+                Login
+            </button>
         </div>
     )
 }
