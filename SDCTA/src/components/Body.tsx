@@ -1,5 +1,6 @@
 import landscape from '../Images/unsplash_dsV4yvL5UJk.jpg';
 import EdVis from '../Images/Graph.jpg';
+import './body.css'
 
 export const Body = () => {
 	return (
