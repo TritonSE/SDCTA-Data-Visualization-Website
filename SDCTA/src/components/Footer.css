@@ -2,22 +2,24 @@
 .footer {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
-	padding: 20px;
+	/* align-items: flex-end; */
+	padding: 40px;
+	/* padding-bottom: 50px; */
+	
 	background-color: #7F1922;
 	font-size: 18px;
 }
 
 .footer-left {
-	width: 60%;
-	padding-left: 40px;
+	width: 55%;
+	
 }
 
 .footer-left h3 {
 	margin: 0;
 	color: white;
 	font-weight: 700;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	font-weight: bold;
 }
 
@@ -34,24 +36,24 @@
 }
 
 .address {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .address p {
 	margin: 0;
-
 	text-indent: 10px;
+	line-height: 25px;
 	text-align: left;
 	color: white;
 }
 
 .social-icons {
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 }
 
 .social-icons a {
-	margin-left: 10px;
+	margin-left: 12px;
 	color: #7F1922;
 	text-decoration: none;
 	
