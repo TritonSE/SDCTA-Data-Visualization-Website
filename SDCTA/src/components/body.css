@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans";
+	background-color: #E5E5E5;
+}
+
+.heading {
+	padding-left: 84px;
+	padding-top: 47px;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 49px;
+}
+
+.description {
+	padding-top: 12px;
+	padding-left: 84px;
+	padding-right: 156px;
+	padding-bottom: 47px;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.box {
+	padding-top: 48px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-content: center;
+	width: 100%;
+	padding-bottom: 48px;
+
+}
+
+.box-heading {
+	color: #7F1922;
+	font-family: 'Helvetica Neue';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 29px;
+	display: flex;
+	align-items: center;
+	padding-top: 24px;
+	padding-bottom: 16px;
+}
+
+.box-description {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.one {
+	padding-left: 120px;
+	padding-right: 75px;
+	flex-wrap: 1
+}
+
+.two {
+	padding-left: 75px;
+	padding-right: 75px;
+	flex-wrap: 1
+}
+
+.three {
+	padding-left: 75px;
+	padding-right: 120px;
+	flex-wrap: 1
+}
