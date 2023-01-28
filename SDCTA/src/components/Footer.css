@@ -42,12 +42,13 @@
 .address p {
 	margin: 0;
 	text-indent: 10px;
-	line-height: 25px;
+	line-height: 27px;
 	text-align: left;
 	color: white;
 }
 
 .social-icons {
+	margin-top: -5px;
 	display: flex;
 	align-items: flex-start;
 }
