@@ -1,9 +1,9 @@
 import landscape from '../Images/unsplash_dsV4yvL5UJk.jpg';
 import EdVis from '../Images/Graph.jpg';
 import './body.css'
-import EducationVis from '/src/Images/Education_Standin.png';
-import HomelessnessVis from 'src/images/Homesless_Standin.jpg';
-import MunicipalVis from 'src/images/Municipal_Standin.jpg'
+import EducationVis from '../Images/Education_Standin.png';
+import HomelessnessVis from '../Images/Homelessness_Standin.png';
+import MunicipalVis from '../Images/Municipal_Standin.png'
 
 
 export const Body = () => {
