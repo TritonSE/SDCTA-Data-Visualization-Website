@@ -10,7 +10,7 @@ export const Body = () => {
 	return (
 		<><div>
 			<div className="heading" >
-				Data Museum
+				SDTEF Data Museum
 			</div>
 			<div className="description" >
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -19,7 +19,9 @@ export const Body = () => {
 		</div>
 			<div className="box" >
 				<div className="one">
-					<img src={EducationVis} alt="Education Visualization" />
+					<div className='img' >
+						<img src={EducationVis} alt="Education Visualization" ></img>
+						</div>
 					<div className="box-heading" >
 						Education
 					</div>
@@ -28,7 +30,9 @@ export const Body = () => {
 					</div>
 				</div>
 				<div className="two">
-					<img src={HomelessnessVis} alt="Homeless Visualization" />
+					<div className='img' >
+						<img src={HomelessnessVis} alt="Homelessness Visualization" ></img>
+						</div>
 					<div className="box-heading" >
 						Homelessness
 					</div>
@@ -37,7 +41,9 @@ export const Body = () => {
 					</div>
 				</div>
 				<div className="three">
-					<img src={MunicipalVis} alt="Municipal Visualization" />
+				<div className='img' >
+						<img src={MunicipalVis} alt="Municipal Visualization" ></img>
+						</div>
 					<div className="box-heading" >
 						Municipal
 					</div>
