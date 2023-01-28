@@ -1,4 +1,5 @@
-import { FaFacebookSquare, FaTwitterSquare, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import './Footer.css';
 
 export const Footer = () => {
 	return (
@@ -16,16 +17,16 @@ export const Footer = () => {
 				</div>
 				<div className="social-icons">
 					<a href="https://www.facebook.com/sdcta">
-						<FaFacebookSquare className="icon" />
+						<FaFacebookF className="icon" />
 					</a>
 					<a href="https://twitter.com/sdcta">
-						<FaTwitterSquare className="icon" />
+						<FaTwitter className="icon" />
 					</a>
 					<a href="https://www.instagram.com/sdcta">
 						<FaInstagram className="icon" />
 					</a>
 					<a href="https://www.linkedin.com/company/sdcta">
-						<FaLinkedin className="icon" />
+						<FaYoutube className="icon" />
 					</a>
 				</div>
 			</div>

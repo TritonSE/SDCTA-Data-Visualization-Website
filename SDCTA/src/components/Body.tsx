@@ -1,6 +1,10 @@
 import landscape from '../Images/unsplash_dsV4yvL5UJk.jpg';
 import EdVis from '../Images/Graph.jpg';
 import './body.css'
+import EducationVis from '../Images/Education_Standin.png';
+import HomelessnessVis from '../Images/Homelessness_Standin.png';
+import MunicipalVis from '../Images/Municipal_Standin.png'
+
 
 export const Body = () => {
 	return (
@@ -15,7 +19,7 @@ export const Body = () => {
 		</div>
 			<div className="box" >
 				<div className="one">
-					<img src={EdVis} alt="Education Visualization" />
+					<img src={EducationVis} alt="Education Visualization" />
 					<div className="box-heading" >
 						Education
 					</div>
@@ -24,7 +28,7 @@ export const Body = () => {
 					</div>
 				</div>
 				<div className="two">
-					<img src={EdVis} alt="Homeless Visualization" />
+					<img src={HomelessnessVis} alt="Homeless Visualization" />
 					<div className="box-heading" >
 						Homelessness
 					</div>
@@ -33,7 +37,7 @@ export const Body = () => {
 					</div>
 				</div>
 				<div className="three">
-					<img src={EdVis} alt="Municipal Visualization" />
+					<img src={MunicipalVis} alt="Municipal Visualization" />
 					<div className="box-heading" >
 						Municipal
 					</div>
