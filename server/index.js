@@ -29,7 +29,3 @@ app.use('/api/visualization', routesVisualization)
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`)
 })
-
-
-
-
