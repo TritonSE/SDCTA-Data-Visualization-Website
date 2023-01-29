@@ -1,11 +1,13 @@
-import { Navbar } from './Navbar';
+import { Navbar } from './Navbar/Navbar';
 import { BrowserRouter as Router, Route, Routes as ReactRoutes } from 'react-router-dom';
-import Home from '../pages/tempHome';
-import Page1 from '../pages/tempPage1';
+import Login from '../pages/Login';
+import SignUp from '../pages/sign-up/SignUp';
 import DataMuseum from '../pages/DataMuseum';
 import Education from '../pages/Education';
 import Homelessness from '../pages/Homelessness';
 import Municipal from '../pages/Municipal';
+import Subscribe from '../pages/Subscribe';
+import Profile from '../pages/Profile';
 
 
 export const Routes = () => {
@@ -17,7 +19,10 @@ export const Routes = () => {
             <Route path="/Education" element={<Education />}/>
             <Route path="/Homelessness" element={<Homelessness />}/>
             <Route path="/Municipal" element={<Municipal />}/>
-
+            <Route path="/Login" element={<Login />}/>
+            <Route path="/Signup" element={<SignUp />}/>
+            <Route path="/Subscribe" element={<Subscribe />}/>
+            <Route path="/Profile" element={<Profile />}/>
         </ReactRoutes>
     </Router>      
    );       

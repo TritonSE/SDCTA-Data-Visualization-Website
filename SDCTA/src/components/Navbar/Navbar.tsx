@@ -1,18 +1,27 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { NavbarLogin } from './NavbarLogin';
+import { NavbarSubscribe } from './NavbarSubscribe';
+import { NavbarNoButton } from './NavbarNoButton';
 import './Navbar.css';
-import logo from "./SDTEF Logo Transparent Background 1.svg"
-
+import logo from "./SDTEF Logo Transparent Background 1.svg";
 
 export const Navbar = () => {
+   const navigate = useNavigate();
+   const [isFree, setIsFree] = useState(false);
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+   const [isSubscribed, setIsSubscribed] = useState(true);
+
    return (
       <nav> 
-         <img src={logo} className='logo'/>
+         <a href="https://sdtef.org/"  target="_blank"> 
+            <img src={logo} className='logo'/>
+         </a>
 
          <div className="navLinks">
          <NavLink style={({ isActive }) =>
               isActive ? {color:"#7F1922"} : undefined
-            } to="/" className='links'>Data Museum</NavLink>
+            } to="/" className='links' id='data-museum'>Data Museum</NavLink>
             <NavLink style={({ isActive }) =>
               isActive ? {color:"#7F1922"} : undefined
             } to="/Education" className='links'>Education</NavLink>
@@ -23,11 +32,11 @@ export const Navbar = () => {
               isActive ? {color:"#7F1922"} : undefined
             } to="/Municipal" className='links'>Municipal</NavLink>            
          </div>            
-
              
          <div className='right'>
-            <NavLink to="/page1" className='links'>Login</NavLink>  
-            <button>Sign Up</button>
+            {isFree && <NavbarLogin />}
+            {isLoggedIn && <NavbarSubscribe />}
+            {isSubscribed && <NavbarNoButton />}
          </div>
       </nav>
    );
