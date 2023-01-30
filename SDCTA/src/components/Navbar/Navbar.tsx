@@ -13,22 +13,22 @@ export const Navbar = () => {
 
    return (
       <nav> 
-         <a href="https://sdtef.org/"  target="_blank"> 
+         <a href="https://sdtef.org/"> 
             <img src={logo} className='logo'/>
          </a>
 
          <div className="navLinks">
          <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922"} : undefined
+              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
             } to="/" className='links' id='data-museum'>Data Museum</NavLink>
             <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922"} : undefined
+              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
             } to="/Education" className='links'>Education</NavLink>
             <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922"} : undefined
+              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
             } to="/Homelessness" className='links'>Homelessness</NavLink> 
             <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922"} : undefined
+              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
             } to="/Municipal" className='links'>Municipal</NavLink>            
          </div>            
              

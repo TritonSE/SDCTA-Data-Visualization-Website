@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 nav {
@@ -62,6 +61,7 @@ nav {
 
 .pfp {
     margin-right: 20px;
+    margin-left: 10px;
 }
 
 .pfp-subscribe-class {
