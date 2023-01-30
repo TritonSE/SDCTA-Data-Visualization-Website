@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NavbarLogin } from './NavbarLogin';
 import { NavbarSubscribe } from './NavbarSubscribe';
 import { NavbarNoButton } from './NavbarNoButton';
@@ -7,7 +7,6 @@ import './Navbar.css';
 import logo from "./SDTEF Logo Transparent Background 1.svg";
 
 export const Navbar = () => {
-   const navigate = useNavigate();
    const [isFree, setIsFree] = useState(false);
    const [isLoggedIn, setIsLoggedIn] = useState(false);
    const [isSubscribed, setIsSubscribed] = useState(true);
