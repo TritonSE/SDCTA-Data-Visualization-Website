@@ -4,16 +4,17 @@ const router = express.Router()
 
 module.exports = router;
 
-const Model = require('../models/user');
+const UserModel = require('../models/user');
+const TierModel = require('../models/tier');
 
 //Post Method
-router.post('/post', async (req, res) => {
+router.post('/create', async (req, res) => {
     const data = new Model({
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        tier: req.body.tier
     })
+    const tier = TierModel
 
     try {
         const dataToSave = await data.save();
