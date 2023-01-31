@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import './signup.css';
+import './login.css';
 import { auth } from "../../firebase-config";
 
 const LogIn = () => {
@@ -25,6 +25,8 @@ const LogIn = () => {
             
         }
     }
+
+
 
     return (
         <div>
@@ -56,6 +58,8 @@ const LogIn = () => {
             </button>
         </div>
     )
+
+
 }
 
 export default LogIn
