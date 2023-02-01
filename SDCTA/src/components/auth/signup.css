@@ -1,60 +1,98 @@
 
 
 .signup-form-wrapper {
-    justify-content: center;
-}
-
-
-
-.form-label {
-    font-family: 'Helvetica Neue';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 49px;
-    /* identical to box height */
-
-    text-align: center;
-
-    color: #7F1922;
-
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-
-.terms-checkbox {
-    display: flex;
-    flex-direction: row;
-    /* align-items: flex-start; */
-    padding: 0px;
-    gap: 12px;
-}
-
-
-p {
-    margin-bottom: 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
 
 .signup-form {
-    width: 50%;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    justify-content: center;
+  width: 50%;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
-  
 
-  .signup-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
-    justify-content: center;
-  }
-  
+
+.signup-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+  /* text-align: center; */   /* adding this moves textbox to center as well */
+}
+
+
+.signup-form-title {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    color: #7F1922;
+}
+
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 0rem;
+}
+
+
+.form-group {
+
+}
+
+
+.textbox-label {
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+input {
+
+}
+
+.form-control {
+
+}
+
+
+
+.terms-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+}
+
+.checkbox-label {
+  margin-top: 0.6rem;
+  margin-bottom: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+}
+
+.btn.signup {
+  background: #C3272E;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 10px 164px;
+  cursor: pointer;
+  text-align: center;
+
+  /* Text styling */
+  /* font-family: 'Open Sans'; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+  color: #FFFFFF;
+
 
   
-  label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000000;
-  }
+}

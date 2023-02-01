@@ -38,25 +38,21 @@ const SignUpPage = () => {
 
   return (
     <div className='signup-form-wrapper'>
-
-      <p className='form-label'>
-          Create Your Account
-      </p>
-
       <div className="signup-form">
         <div className="signup-form-content">
-          {/* <h3 className="Auth-form-title">Create Your Account</h3> */}
+          <h1 className='signup-form-title'>Create Your Account</h1>
           <div className="form-group mt-3">
-            <p>Full Name</p>
+            <p className='textbox-label'>Full Name</p>
             <input
-            onChange={(event) => {
-              setUserDisplayName(event.target.value);
-            }}
+              type="fullname"
               className="form-control mt-1"
+              onChange={(event) => {
+                setUserDisplayName(event.target.value);
+              }}
             />
           </div>
           <div className="form-group mt-3">
-            <p>Email address</p>
+            <p className='textbox-label'>Email</p>
             <input
               type="email"
               className="form-control mt-1"
@@ -66,7 +62,7 @@ const SignUpPage = () => {
             />
           </div>
           <div className="form-group mt-3">
-            <p>Password</p>
+            <p className='textbox-label'>Password</p>
             <input
               type="password"
               className="form-control mt-1"
@@ -76,20 +72,13 @@ const SignUpPage = () => {
             />
           </div>
           <div className='terms-checkbox'>
-            <label>
-              <input 
-                type='checkbox'
-              />
+            <label className='checkbox-label'>
+              <input type='checkbox'/>
               I agree to the Terms of Service and Privacy Policy
             </label>
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button 
-              onClick={register} 
-              className="btn btn-primary"
-            >
-              Submit
-            </button>
+            <button onClick={register} className="btn signup">Submit</button>
           </div>
         </div>
       </div> 
