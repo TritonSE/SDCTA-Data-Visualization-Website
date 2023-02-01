@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import './signup.css';
 import { auth } from "../../firebase-config";
 
-const LogIn = () => {
+const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
@@ -58,4 +58,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn
+export default LogInPage

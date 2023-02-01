@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import './signup.css';
 import { auth } from "../../firebase-config";
+import {registerUser} from "../../api/auth";
 
-const SignUp = () => {
+const SignUpPage = () => {
 
   const [userDisplayName, setUserDisplayName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -96,4 +97,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUpPage
