@@ -9,10 +9,12 @@ const TierModel = require('../models/tier');
 
 //Post Method
 router.post('/create', async (req, res) => {
+    console.log("here");
+    console.log(req.body);
     const data = new Model({
         username: req.body.username,
-        password: req.body.password,
         email: req.body.email,
+        tier: req.body.tier
     })
     const tier = TierModel
 

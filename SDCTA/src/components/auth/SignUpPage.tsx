@@ -20,11 +20,11 @@ const SignUpPage = () => {
         registerPassword
       );
 
-      updateProfile(userCredential.user, {
+      await updateProfile(userCredential.user, {
         displayName: userDisplayName
       });
 
-      console.log(userCredential);
+      await registerUser(userCredential);
 
     } catch (error) {
 
