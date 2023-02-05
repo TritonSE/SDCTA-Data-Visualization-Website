@@ -5,20 +5,18 @@ const router = express.Router()
 module.exports = router;
 
 const UserModel = require('../models/user');
-const TierModel = require('../models/tier');
+const tierServices = require('../services/tier');
 
 //Post Method
 router.post('/create', async (req, res) => {
-    console.log("here");
-    console.log(req.body);
-    const data = new Model({
-        username: req.body.username,
-        email: req.body.email,
-        tier: req.body.tier
-    })
-    const tier = TierModel
-
     try {
+        const tier = await tierServices.getTier(req.body.tier);
+        const data = new UserModel({
+            username: req.body.username,
+            email: req.body.email,
+            tier: tier._id
+        })
+        console.log(data);
         const dataToSave = await data.save();
         res.status(200).json(dataToSave)
     }
@@ -30,7 +28,7 @@ router.post('/create', async (req, res) => {
 //Get all Method
 router.get('/getAll', async (req, res) => {
     try{
-        const data = await Model.find();
+        const data = await UserModel.find();
         res.json(data)
     }
     catch(error){
