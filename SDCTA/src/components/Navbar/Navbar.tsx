@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { NavbarLogin } from './NavbarLogin';
@@ -9,10 +8,26 @@ import logo from "./SDTEF Logo Transparent Background 1.svg";
 import {selectLogin} from "./loginSlice"
 import { selectSubscribe } from './subscribeSlice';
 export const Navbar = () => {
-   // const [isFree, setIsFree] = useState(false);
    const isLoggedIn = useAppSelector(selectLogin);
    const isSubscribed = useAppSelector(selectSubscribe);
-
+   const links = [
+      {
+         name: "Data Museum",
+         route: "/",
+      },
+      {
+         name: "Education",
+         route: "/Education",
+      },
+      {
+         name: "Homelessness",
+         route: "/Homelessness",
+      }, 
+      {
+         name: "Municipal",
+         route: "/Municipal"
+      }
+   ]
    return (
       <nav> 
          <a href="https://sdtef.org/"> 
@@ -20,18 +35,11 @@ export const Navbar = () => {
          </a>
 
          <div className="navLinks">
-         <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
-            } to="/" className='links' id='data-museum'>Data Museum</NavLink>
-            <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
-            } to="/Education" className='links'>Education</NavLink>
-            <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
-            } to="/Homelessness" className='links'>Homelessness</NavLink> 
-            <NavLink style={({ isActive }) =>
-              isActive ? {color:"#7F1922", fontWeight:1000} : undefined
-            } to="/Municipal" className='links'>Municipal</NavLink>            
+            {links.map((link, index) => (
+               <NavLink style={({ isActive }) =>
+               isActive ? {color:"#7F1922", fontWeight:1000} : undefined
+             } to={link.route} className='links' key={index}>{link.name}</NavLink>
+            ))}
          </div>            
              
          <div className='right'>

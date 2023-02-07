@@ -24,6 +24,7 @@ nav {
 .logo {
    width: 174px;
    height: 80px;
+   margin-right: 40px;
 }
 
 .right {
@@ -47,9 +48,6 @@ nav {
     padding: 10px 20px;
 }
 
-#data-museum {
-    margin-left: 40px; 
-}
 
 #login {
     margin-right: 30px;
