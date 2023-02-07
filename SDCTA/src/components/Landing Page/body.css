@@ -41,7 +41,7 @@ body {
 	display: block;
 }
 
-.box {
+.image_line {
 	padding-top: 48px;
 	display: flex;
 	flex-direction: row;
@@ -52,7 +52,7 @@ body {
 
 }
 
-.box-heading {
+.image_line-heading {
 	color: #7F1922;
 	font-family: 'Helvetica Neue';
 	font-style: normal;
@@ -65,7 +65,7 @@ body {
 	padding-bottom: 16px;
 }
 
-.box-description {
+.image_line-description {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 400;
@@ -73,19 +73,19 @@ body {
 	line-height: 22px;
 }
 
-.one {
+.first_Visual {
 	padding-left: 120px;
 	padding-right: 75px;
 	flex-wrap: 1
 }
 
-.two {
+.second_Visual {
 	padding-left: 75px;
 	padding-right: 75px;
 	flex-wrap: 1
 }
 
-.three {
+.third_Visual {
 	padding-left: 75px;
 	padding-right: 120px;
 	flex-wrap: 1
