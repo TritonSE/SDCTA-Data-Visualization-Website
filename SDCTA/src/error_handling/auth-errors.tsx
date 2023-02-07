@@ -27,4 +27,18 @@ const signUpErrorHandler = async (error: Error) => {
     }
 }
 
-export {signUpErrorHandler}
+const logInErrorHandler = async (error: Error) => {
+    const errorMessage = error.message;
+
+    if (errorMessage.includes("user-not-found")) {
+        return "A user has not been found with this email."
+    } 
+    else if (errorMessage.includes("wrong-password")) {
+        return "Wrong password."
+    }
+    else {
+        return errorMessage;
+    }
+}
+
+export {signUpErrorHandler, logInErrorHandler}

@@ -2,10 +2,12 @@ import { SetStateAction, useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import './login.css';
 import { auth } from "../../firebase-config";
+import {logInErrorHandler} from "../../error_handling/auth-errors"
 
 const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const [errorMessage,setErrorMessage] = useState("");
 
     const login = async () => {
         try {
@@ -16,11 +18,12 @@ const LogInPage = () => {
                 loginPassword
             );
             console.log(user);
+            setErrorMessage("Logged in!");
     
         } catch (error) {
-    
+            
             if (error instanceof Error) {
-                console.log(error.message);
+                setErrorMessage(await logInErrorHandler(error));
             }
             
         }
@@ -49,6 +52,7 @@ const LogInPage = () => {
                     setLoginPassword(event.target.value);
                 }}
                 />
+                <p className='error-message'>{errorMessage}</p>
             </div>
             <button
               onClick={login} 

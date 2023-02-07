@@ -11,7 +11,7 @@ const SignUpPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error,setError] = useState("");
+  const [errorMessage,setErrorMessage] = useState("");
   const [agreedTerms,setAgreedTerms] = useState(false);
 
   const register = async () => {
@@ -45,7 +45,7 @@ const SignUpPage = () => {
     } catch (error) {
 
       if (error instanceof Error) {
-        setError(await signUpErrorHandler(error));
+        setErrorMessage(await signUpErrorHandler(error));
       }
 
     }
@@ -96,7 +96,7 @@ const SignUpPage = () => {
                 setConfirmPassword(event.target.value);
               }}
             />
-            <p className='error-message'>{error}</p>
+            <p className='error-message'>{errorMessage}</p>
           </div>
           <div className='terms-checkbox'>
             <label className='checkbox-label'>
