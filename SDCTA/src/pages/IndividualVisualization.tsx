@@ -16,7 +16,7 @@ export default function IndividualVisualization() {
             </div>
             <img className='tableauVisualization' src={tableauVisualization} alt="Tableau Data Visualization"/>
             <div className='body-text'>
-                <h2>Data Analysis</h2>
+                <h2 id="Analysis">Data Analysis</h2>
                 <p className="dscription">
                     <span>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
