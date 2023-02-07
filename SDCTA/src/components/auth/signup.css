@@ -96,3 +96,8 @@ input {
 
   
 }
+
+.error-message {
+  color: red;
+  margin-top: 0px;
+}

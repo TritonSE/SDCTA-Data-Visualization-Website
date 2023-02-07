@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import './signup.css';
 import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
+import {signUpErrorHandler} from "../../error_handling/auth-errors"
 
 const SignUpPage = () => {
 
@@ -10,9 +11,24 @@ const SignUpPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error,setError] = useState("");
+  const [agreedTerms,setAgreedTerms] = useState(false);
 
   const register = async () => {
     try {
+
+      //make sure display name is set.
+      if (!(confirmPassword === registerPassword)) {
+        throw Error("Passwords do not match.");
+      }
+
+      if (userDisplayName === "") {
+        throw Error("Please enter your full name.")
+      }
+
+      if (!(agreedTerms)) {
+        throw Error("Must agree to the terms and services to register.");
+      }
 
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -29,7 +45,7 @@ const SignUpPage = () => {
     } catch (error) {
 
       if (error instanceof Error) {
-        console.log(error.message);
+        setError(await signUpErrorHandler(error));
       }
 
     }
@@ -71,9 +87,24 @@ const SignUpPage = () => {
               }}
             />
           </div>
+          <div className="form-group mt-3">
+            <p className='textbox-label'>Confirm Password</p>
+            <input
+              type="password"
+              className="form-control mt-1"
+              onChange={(event) => {
+                setConfirmPassword(event.target.value);
+              }}
+            />
+            <p className='error-message'>{error}</p>
+          </div>
           <div className='terms-checkbox'>
             <label className='checkbox-label'>
-              <input type='checkbox'/>
+              <input 
+                onChange={(event)=> {
+                  setAgreedTerms(event.target.checked);
+                }}
+                type='checkbox'/>
               I agree to the Terms of Service and Privacy Policy
             </label>
           </div>
