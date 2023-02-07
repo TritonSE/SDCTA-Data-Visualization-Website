@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 import { NavbarLogin } from './NavbarLogin';
 import { NavbarSubscribe } from './NavbarSubscribe';
 import { NavbarNoButton } from './NavbarNoButton';
 import './Navbar.css';
 import logo from "./SDTEF Logo Transparent Background 1.svg";
-
+import {selectLogin} from "./loginSlice"
+import { selectSubscribe } from './subscribeSlice';
 export const Navbar = () => {
-   const [isFree, setIsFree] = useState(false);
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   const [isSubscribed, setIsSubscribed] = useState(true);
+   // const [isFree, setIsFree] = useState(false);
+   const isLoggedIn = useAppSelector(selectLogin);
+   const isSubscribed = useAppSelector(selectSubscribe);
 
    return (
       <nav> 
@@ -33,9 +35,9 @@ export const Navbar = () => {
          </div>            
              
          <div className='right'>
-            {isFree && <NavbarLogin />}
-            {isLoggedIn && <NavbarSubscribe />}
-            {isSubscribed && <NavbarNoButton />}
+            {!isLoggedIn && !isSubscribed && <NavbarLogin />}
+            {isLoggedIn && !isSubscribed && <NavbarSubscribe />}
+            {isSubscribed && isLoggedIn && <NavbarNoButton />}
          </div>
       </nav>
    );
