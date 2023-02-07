@@ -2,7 +2,7 @@ import landscape from 'src/Images/Landing_Image.jpg';
 import './body.css'
 import EducationVis from 'src/Images/Education_Standin.png';
 import HomelessnessVis from 'src/Images/Homelessness_Standin.png';
-import MunicipalVis from 'src/Images/Municipal_Standin.png'
+import MunicipalVis from 'src/Images/Municipal_Standin.png';
 
 
 export const Body = () => {
