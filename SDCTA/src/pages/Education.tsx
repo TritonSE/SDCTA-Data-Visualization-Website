@@ -1,4 +1,4 @@
-import downloadIcon from "./Icon.png"
+import downloadIcon from "../Images/Icon.png"
 import {Footer} from '../components/Footer';
 import './Pages.css';
 
