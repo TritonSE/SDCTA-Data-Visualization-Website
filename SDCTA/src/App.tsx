@@ -1,12 +1,13 @@
 
 import {LandingPage} from './pages/LandingPage';
-
 import './App.css';
+import { Education } from './pages/Education';
 
 const App = () => {
   return (
    <div className="App">
-	<LandingPage />
+	{/* <LandingPage /> */}
+  <Education />
 	</div>
   );
 }
