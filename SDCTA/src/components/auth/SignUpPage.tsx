@@ -88,48 +88,42 @@ const SignUpPage = () => {
 
 
 
-
-
   return (
     <div className='signup-form-wrapper'>
       <div className="signup-form">
         <div className="signup-form-content">
           <h1 className='signup-form-title'>Create Your Account</h1>
-          <div className="form-group mt-3">
+          <div>
             <p className='textbox-label'>Full Name</p>
             <input
               type="fullname"
-              className="form-control mt-1"
               onChange={(event) => {
                 setUserDisplayName(event.target.value);
               }}
             />
           </div>
-          <div className="form-group mt-3">
+          <div>
             <p className='textbox-label'>Email</p>
             <input
               type="email"
-              className="form-control mt-1"
               onChange={(event) => {
                 setRegisterEmail(event.target.value);
               }}
             />
           </div>
-          <div className="form-group mt-3">
+          <div>
             <p className='textbox-label'>Password</p>
             <input
               type="password"
-              className="form-control mt-1"
               onChange={(event) => {
                 setRegisterPassword(event.target.value);
               }}
             />
           </div>
-          <div className="form-group mt-3">
+          <div>
             <p className='textbox-label'>Confirm Password</p>
             <input
               type="password"
-              className="form-control mt-1"
               onChange={(event) => {
                 setConfirmPassword(event.target.value);
               }}
