@@ -5,6 +5,10 @@ import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
 import {signUpErrorHandler} from "../../error_handling/auth-errors"
 
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { signInWithRedirect, getRedirectResult} from "firebase/auth";
+
+
 const SignUpPage = () => {
 
   const [userDisplayName, setUserDisplayName] = useState("");
@@ -50,6 +54,40 @@ const SignUpPage = () => {
 
     }
   }
+
+
+  const provider = new GoogleAuthProvider();
+  const auth_ = getAuth();
+
+  const loginWithGoogle = async () => {
+    signInWithRedirect(auth_, provider); 
+    getRedirectResult(auth_)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        // @ts-ignore: Object is possibly 'null'.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // @ts-ignore: Object is possibly 'null'.
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        // @ts-ignore: Object is possibly 'null'.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+
+
+
 
 
   return (
@@ -108,9 +146,15 @@ const SignUpPage = () => {
               I agree to the Terms of Service and Privacy Policy
             </label>
           </div>
-          <div className="d-grid gap-2 mt-3">
+
+          <div>
             <button onClick={register} className="btn signup">Submit</button>
           </div>
+
+          <div>
+            <button onClick={loginWithGoogle} className='btn google-signup'>Login With Google</button>
+          </div>
+
         </div>
       </div> 
     </div>
