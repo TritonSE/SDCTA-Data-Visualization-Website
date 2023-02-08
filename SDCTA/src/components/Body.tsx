@@ -1,5 +1,5 @@
 import landscape from '../Images/unsplash_dsV4yvL5UJk.jpg';
-import EdVis from '../Images/Graph.jpg';
+//import EdVis from '../Images/Graph.jpg';
 import './body.css'
 import EducationVis from '../Images/Education_Standin.png';
 import HomelessnessVis from '../Images/Homelessness_Standin.png';
@@ -20,8 +20,10 @@ export const Body = () => {
 			<div className="box" >
 				<div className="one">
 					<div className='img' >
-						<img src={EducationVis} alt="Education Visualization" ></img>
-						</div>
+						<a href="../pages/Education.tsx">
+							<img src={EducationVis} alt="Education Visualization" ></img>
+						</a>	
+					</div>
 					<div className="box-heading" >
 						Education
 					</div>
