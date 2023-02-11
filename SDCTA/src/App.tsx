@@ -1,16 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+
+import { LandingPage } from './pages/LandingPage';
+
 import './App.css';
 import { Routes } from './components/Routes';
 
-function App() {
+const App = () => {
   return (
     <>
-    <Routes />
+      <Routes />
+      <div className="App">
+        <LandingPage />
+      </div>
     </>
+
 
   );
 }
+
 
 export default App;
