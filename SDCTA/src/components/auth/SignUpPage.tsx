@@ -89,68 +89,80 @@ const SignUpPage = () => {
 
 
   return (
-    <div className='signup-form-wrapper'>
+    <div>
+
+      <h1 className='signup-form-title'>Create Your Account</h1>
+
       <div className="signup-form">
-        <div className="signup-form-content">
-          <h1 className='signup-form-title'>Create Your Account</h1>
-          <div>
-            <p className='textbox-label'>Full Name</p>
-            <input
-              type="fullname"
-              onChange={(event) => {
-                setUserDisplayName(event.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <p className='textbox-label'>Email</p>
-            <input
-              type="email"
-              onChange={(event) => {
-                setRegisterEmail(event.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <p className='textbox-label'>Password</p>
-            <input
-              type="password"
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <p className='textbox-label'>Confirm Password</p>
-            <input
-              type="password"
-              onChange={(event) => {
-                setConfirmPassword(event.target.value);
-              }}
-            />
-            <p className='error-message'>{errorMessage}</p>
-          </div>
-          <div className='terms-checkbox'>
-            <label className='checkbox-label'>
-              <input 
-                onChange={(event)=> {
-                  setAgreedTerms(event.target.checked);
-                }}
-                type='checkbox'/>
-              I agree to the Terms of Service and Privacy Policy
-            </label>
-          </div>
+        <div className = "input-boxes">
+          {/* Name input */}
+          <h3 className='textbox-label'>Full Name</h3>
+          <input
+            className = "text-input"
+            type="fullname"
+            onChange={(event) => {
+              setUserDisplayName(event.target.value);
+            }}
+          />
 
-          <div>
-            <button onClick={register} className="btn signup">Submit</button>
-          </div>
+          {/* Email input */}
+          <h3 className='textbox-label'>Email</h3>
+          <input
+            className = "text-input"
+            type="email"
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
+          />
 
-          <div>
-            <button onClick={loginWithGoogle} className='btn google-signup'>Login With Google</button>
-          </div>
+          {/* Password input */}
+          <h3 className='textbox-label'>Password</h3>
+          <input
+            className = "text-input"
+            type="password"
+            onChange={(event) => {
+              setRegisterPassword(event.target.value);
+            }}
+          />
 
+          {/* Confirm password */}
+          <h3 className='textbox-label'>Confirm Password</h3>
+          <input
+            className = "text-input"
+            type="password"
+            onChange={(event) => {
+              setConfirmPassword(event.target.value);
+            }}
+          />
+
+          <h3 className='error-message'>{errorMessage}</h3>
+        
         </div>
-      </div> 
+
+        <div className='terms'>
+          <input 
+            className = 'terms-checkbox'
+            onChange={(event)=> {
+              setAgreedTerms(event.target.checked);
+            }}
+            type='checkbox'
+          />
+          <label className='terms-label'>
+            I agree to the <a href="/">Terms of Service</a> and <a href="/">Privacy Policy</a>
+          </label>
+        </div>
+
+        <button onClick={register} className="btn-signup">Sign Up</button>
+        <div className="separator">
+          <div className="line"></div>
+          <p className="or">&nbsp; or &nbsp;</p>
+          <div className="line"></div>
+        </div>
+        <div>
+          <button onClick={loginWithGoogle} className='btn google-signup'>Login With Google</button>
+        </div>
+      </div>
+
     </div>
   )
 }
