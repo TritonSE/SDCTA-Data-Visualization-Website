@@ -135,7 +135,6 @@ const SignUpPage = () => {
             }}
           />
 
-          <h3 className='error-message'>{errorMessage}</h3>
         
         </div>
 
@@ -151,7 +150,7 @@ const SignUpPage = () => {
             I agree to the <a href="/">Terms of Service</a> and <a href="/">Privacy Policy</a>
           </label>
         </div>
-
+        <p className='error-message'>{errorMessage}</p>
         <button onClick={register} className="btn-signup">Sign Up</button>
         <div className="separator">
           <div className="line"></div>
