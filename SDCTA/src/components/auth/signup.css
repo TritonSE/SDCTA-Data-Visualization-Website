@@ -200,5 +200,6 @@ body {
 .error-message {
   color: red;
   margin-top: 2px;
-  position: fixed;
+  position: relative;
+  margin-bottom: 0px;
 }
