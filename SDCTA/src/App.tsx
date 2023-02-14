@@ -9,7 +9,6 @@ const App = () => {
     <>
       <Routes />
       <div className="App">
-        <LandingPage />
       </div>
     </>
 

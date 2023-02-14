@@ -2,7 +2,7 @@ import { Navbar } from './Navbar/Navbar';
 import { BrowserRouter as Router, Route, Routes as ReactRoutes } from 'react-router-dom';
 import Login from '../pages/Login';
 import SignUp from '../pages/sign-up/SignUp';
-import DataMuseum from '../pages/DataMuseum';
+import { LandingPage } from '../pages/LandingPage';
 import Education from '../pages/Education';
 import Homelessness from '../pages/Homelessness';
 import Municipal from '../pages/Municipal';
@@ -15,7 +15,7 @@ export const Routes = () => {
     <Router>
         <Navbar />
         <ReactRoutes>
-            <Route path="/" element={<DataMuseum />}/>
+            <Route path="/" element={<LandingPage />}/>
             <Route path="/Education" element={<Education />}/>
             <Route path="/Homelessness" element={<Homelessness />}/>
             <Route path="/Municipal" element={<Municipal />}/>
