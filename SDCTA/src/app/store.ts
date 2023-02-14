@@ -6,9 +6,13 @@ import createSagaMiddleware from 'redux-saga'
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]
 
+import loginReducer from '../components/Navbar/loginSlice';
+import subscribeReducer from '../components/Navbar/subscribeSlice';
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    login: loginReducer,
+    subscribe: subscribeReducer
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(middleware),
