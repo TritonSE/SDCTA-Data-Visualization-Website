@@ -7,7 +7,5 @@
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-import": "^2.27.5"
   }
 }
