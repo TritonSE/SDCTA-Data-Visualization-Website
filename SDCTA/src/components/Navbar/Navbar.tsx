@@ -5,8 +5,8 @@ import { NavbarSubscribe } from './NavbarSubscribe';
 import { NavbarNoButton } from './NavbarNoButton';
 import './Navbar.css';
 import logo from "./SDTEF Logo Transparent Background 1.svg";
-import {selectLogin} from "./loginSlice"
-import { selectSubscribe } from './subscribeSlice';
+import { selectLogin } from "../../slices/loginSlice"
+import { selectSubscribe } from '../../slices/subscribeSlice';
 export const Navbar = () => {
    const isLoggedIn = useAppSelector(selectLogin);
    const isSubscribed = useAppSelector(selectSubscribe);
@@ -22,26 +22,26 @@ export const Navbar = () => {
       {
          name: "Homelessness",
          route: "/Homelessness",
-      }, 
+      },
       {
          name: "Municipal",
          route: "/Municipal"
       }
    ]
    return (
-      <nav> 
-         <a href="https://sdtef.org/"> 
-            <img src={logo} className='logo'/>
+      <nav>
+         <a href="https://sdtef.org/">
+            <img src={logo} className='logo' />
          </a>
 
          <div className="navLinks">
             {links.map((link, index) => (
                <NavLink style={({ isActive }) =>
-               isActive ? {color:"#7F1922", fontWeight:1000} : undefined
-             } to={link.route} className='links' key={index}>{link.name}</NavLink>
+                  isActive ? { color: "#7F1922", fontWeight: 1000 } : undefined
+               } to={link.route} className='links' key={index}>{link.name}</NavLink>
             ))}
-         </div>            
-             
+         </div>
+
          <div className='right'>
             {!isLoggedIn && !isSubscribed && <NavbarLogin />}
             {isLoggedIn && !isSubscribed && <NavbarSubscribe />}
