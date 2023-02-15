@@ -6,23 +6,23 @@ import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import {style} from './styleObjects/subscribeStyle';
-import {exitButtonStyle} from './styleObjects/subscribeStyle';
-import {titleStyle} from './styleObjects/subscribeStyle';
-import {textStyle} from './styleObjects/subscribeStyle';
-import {buttonStyle} from './styleObjects/subscribeStyle';
+import {style, exitButtonStyle, titleStyle, textStyle, buttonStyle} from './styleObjects/subscribeStyle';
 
-export default function SubscribeModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+interface ModalType {
+  show: boolean;
+  setShow: (show: boolean) => void 
+}
+
+export default function SubscribeModal(props: ModalType) {
+  const handleOpen = () => props.setShow(true);
+  const handleClose = () => props.setShow(false);
 
   return (
     <div>
       <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
-        // onClose={handleClose}
+        open={props.show}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
