@@ -11,7 +11,8 @@ router.post('/post', async (req, res) => {
     const data = new Model({
         title: req.body.title,
         analysis: req.body.analysis,
-        link: req.body.link
+        link: req.body.link,
+        csvLink: req.body.csvLink
     })
 
     try {

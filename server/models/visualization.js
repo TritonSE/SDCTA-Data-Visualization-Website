@@ -15,6 +15,11 @@ const dataSchema = new mongoose.model("Visualization",
             required: true,
             unique: true,
             type: String
+        },
+        csvLink: {
+            required: true,
+            unique: true,
+            type: String
         }
     })
 )

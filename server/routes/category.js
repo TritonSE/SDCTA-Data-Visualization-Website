@@ -5,6 +5,7 @@ const router = express.Router()
 module.exports = router;
 
 const Model = require('../models/category');
+const categoryServices = require('../services/category');
 
 //Post Method
 router.post('/post', async (req, res) => {
@@ -32,6 +33,18 @@ router.get('/getAll', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
+
+// Get by Name Method
+router.get('/getOne/:name', async (req, res) => {
+    try{
+        const data = await categoryServices.getCategoryByName(req.params.name);
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
 //Get by ID Method
 router.get('/getOne/:id', async (req, res) => {
     try{
