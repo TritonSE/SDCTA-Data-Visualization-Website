@@ -1,6 +1,8 @@
 import React, {useRef, useEffect} from "react"
+import { visitLexicalEnvironment } from "typescript";
 const { tableau } = window;
 function TableauEmbed(){
+	let viz;
 	const ref = useRef(null);
 	console.log(ref);
 	const url = 
@@ -8,16 +10,22 @@ function TableauEmbed(){
 	const options = {
 		device: "desktop",
 	};
-function initViz(){
-	new tableau.Viz(ref.current, url, options);
-}
+	function initViz(){
+		viz = window.tableau.VizManager.getVizs()[0];
+		if (viz) {
+			viz.dispose()
+		}
+		viz = new tableau.Viz(ref.current, url, options);
+
+	}
 
 useEffect(() => {
 	initViz();
-});
+}, []);
 
 return (
-	<div ref={ref}> </div>
+    <div ref={ref} style={{width:'70%', margin:'auto'}} />
+
 )
 }
 export default TableauEmbed;
