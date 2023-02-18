@@ -1,18 +1,18 @@
 
-import {LandingPage} from './pages/LandingPage';
+import { LandingPage } from './pages/LandingPage';
 
 import './App.css';
-import LogInPage from './components/auth/LogInPage'
-import SignUpPage from './components/auth/SignUpPage'
-
-
-import './App.css';
+import { Routes } from './components/Routes';
 
 const App = () => {
   return (
-   <div className="App">
-	<SignUpPage/>
-	</div>
+    <>
+      <Routes />
+      <div className="App">
+      </div>
+    </>
+
+
   );
 }
 
