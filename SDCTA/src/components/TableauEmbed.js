@@ -1,5 +1,4 @@
 import React, {useRef, useEffect} from "react"
-
 const { tableau } = window;
 function TableauEmbed(){
 	const ref = useRef(null);
@@ -18,7 +17,7 @@ useEffect(() => {
 });
 
 return (
-	<div ref={ref}></div>
+	<div ref={ref}> </div>
 )
 }
 export default TableauEmbed;
