@@ -27,5 +27,5 @@ app.use('/api/category', routesCategory)
 app.use('/api/visualization', routesVisualization)
 
 app.listen(3001, () => {
-    console.log(`Server Started at ${3001}`)
+    console.log(`Server Started at ${process.env.PORT}`)
 })
