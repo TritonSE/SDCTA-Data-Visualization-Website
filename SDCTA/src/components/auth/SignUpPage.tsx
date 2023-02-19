@@ -4,6 +4,8 @@ import './signup.css';
 import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
 import {signUpErrorHandler} from "../../error_handling/auth-errors"
+import {useNavigate} from 'react-router-dom';
+
 
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
@@ -17,6 +19,7 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage,setErrorMessage] = useState("");
   const [agreedTerms,setAgreedTerms] = useState(false);
+  const navigate = useNavigate();
 
   const register = async () => {
     try {
@@ -45,6 +48,8 @@ const SignUpPage = () => {
       });
 
       await registerUser(userCredential);
+
+      navigate("/");
 
     } catch (error) {
 
