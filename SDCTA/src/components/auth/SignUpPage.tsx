@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
-import './signup.css';
+import './auth.css';
 import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
 import {signUpErrorHandler} from "../../error_handling/auth-errors"

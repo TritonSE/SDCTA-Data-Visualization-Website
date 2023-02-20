@@ -1,13 +1,15 @@
 import { SetStateAction, useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import './login.css';
+import './auth.css';
 import { auth } from "../../firebase-config";
 import {logInErrorHandler} from "../../error_handling/auth-errors"
+import {useNavigate} from 'react-router-dom';
 
 const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [errorMessage,setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     const login = async () => {
         try {
@@ -19,6 +21,7 @@ const LogInPage = () => {
             );
             console.log(user);
             setErrorMessage("Logged in!");
+            navigate("/");
     
         } catch (error) {
             
@@ -33,33 +36,41 @@ const LogInPage = () => {
 
     return (
         <div>
-            <div className="form-group mt-3">
-                <p>Email address</p>
-                <input
-                type="email"
-                className="form-control mt-1"
-                onChange={(event) => {
-                    setLoginEmail(event.target.value);
-                }}
-                />
+            <h1 className='signup-form-title'>Welcome Back</h1>
+
+            <div className="signup-form">
+                <div className="input-boxes">
+                    <h3 className="textbox-label">Email</h3>
+                    <input
+                        type="email"
+                        className="text-input"
+                        onChange={(event) => {
+                            setLoginEmail(event.target.value);
+                        }}
+                    />
+
+                    <h3 className="textbox-label">Password</h3>
+                    <input
+                        type="password"
+                        className="text-input"
+                        onChange={(event) => {
+                            setLoginPassword(event.target.value);
+                        }}
+                    />
+                    <p className='error-message'>{errorMessage}</p>
+                </div>
+                <button
+                    onClick={login} 
+                    className="btn-signup"
+                    >
+                        Login
+                </button>
+                <div className="separator">
+                    <div className="line"></div>
+                    <p className="or">&nbsp; or &nbsp;</p>
+                    <div className="line"></div>
+                </div>
             </div>
-            <div className="form-group mt-3">
-                <p>Password</p>
-                <input
-                type="password"
-                className="form-control mt-1"
-                onChange={(event) => {
-                    setLoginPassword(event.target.value);
-                }}
-                />
-                <p className='error-message'>{errorMessage}</p>
-            </div>
-            <button
-              onClick={login} 
-              className="btn btn-primary"
-            >
-                Login
-            </button>
         </div>
     )
 
