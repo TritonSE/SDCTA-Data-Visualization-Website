@@ -40,13 +40,13 @@ const logInErrorHandler = async (error: Error) => {
     const errorMessage = error.message;
 
     if (errorMessage.includes("user-not-found")) {
-        return "A user has not been found with this email."
+        return ["email","A user has not been found with this email."]
     } 
     else if (errorMessage.includes("wrong-password")) {
-        return "Wrong password."
+        return ["password","Wrong password."]
     }
     else {
-        return errorMessage;
+        return ["unknown",errorMessage];
     }
 }
 

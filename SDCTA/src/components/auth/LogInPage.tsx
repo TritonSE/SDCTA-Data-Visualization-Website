@@ -11,6 +11,10 @@ const LogInPage = () => {
     const [errorMessage,setErrorMessage] = useState("");
     const navigate = useNavigate();
 
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [unknownError, setUnknownError] = useState("");
+
     const login = async () => {
         try {
     
@@ -24,9 +28,19 @@ const LogInPage = () => {
             navigate("/");
     
         } catch (error) {
-            
+            setPasswordError("");
+            setEmailError("");
             if (error instanceof Error) {
-                setErrorMessage(await logInErrorHandler(error));
+                const errorMessage = await logInErrorHandler(error);
+                if (errorMessage[0] === "email") {
+                    setEmailError(errorMessage[1]);
+                }
+                if (errorMessage[0] === "password") {
+                    setPasswordError(errorMessage[1]);
+                }
+                if (errorMessage[0] === "unknown") {
+                    setUnknownError(errorMessage[1] + " Reload and try again.");
+                }
             }
             
         }
@@ -43,21 +57,26 @@ const LogInPage = () => {
                     <h3 className="textbox-label">Email</h3>
                     <input
                         type="email"
-                        className="text-input"
+                        className={emailError === "" ? 'text-input':'text-input error'}
                         onChange={(event) => {
                             setLoginEmail(event.target.value);
                         }}
                     />
+                    {emailError !== "" ? <h3 className="error-message">{emailError}</h3>:''}
 
                     <h3 className="textbox-label">Password</h3>
                     <input
                         type="password"
-                        className="text-input"
+                        className={passwordError === "" ? 'text-input':'text-input error'}
                         onChange={(event) => {
                             setLoginPassword(event.target.value);
                         }}
                     />
-                    <p className='error-message'>{errorMessage}</p>
+
+                    {passwordError !== "" ? <h3 className="error-message">{passwordError}</h3>:''}
+
+                    {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
+
                 </div>
                 <button
                     onClick={login} 
