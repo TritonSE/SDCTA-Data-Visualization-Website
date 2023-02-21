@@ -3,9 +3,7 @@ const signUpErrorHandler = async (error: Error) => {
 
 
     if (errorMessage.includes("internal-error")) {
-        
-        return ["unknown","Internal error. Try again, and make sure you have typed a valid password."]
-
+        return ["unknown","Internal error. Make sure you have typed a valid password."]
     }
     else if (errorMessage.includes("invalid-email")) {
 
@@ -42,8 +40,14 @@ const logInErrorHandler = async (error: Error) => {
     if (errorMessage.includes("user-not-found")) {
         return ["email","A user has not been found with this email."]
     } 
+    else if (errorMessage.includes("invalid-email")) {
+        return ["email","The email is invalid. Try again with a valid email."];
+    }
     else if (errorMessage.includes("wrong-password")) {
         return ["password","Wrong password."]
+    }
+    else if (errorMessage.includes("internal-error")) {
+        return ["unknown","Internal error. Make sure you have typed a valid password."]
     }
     else {
         return ["unknown",errorMessage];

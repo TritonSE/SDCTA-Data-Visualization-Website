@@ -71,7 +71,7 @@ const SignUpPage = () => {
           if (errorMessage[1].includes("terms")) {
             setUnknownError(errorMessage[1]);
           } else {
-            setUnknownError(errorMessage[1]+ " Reload and try again.");
+            setUnknownError(errorMessage[1]+ " (Reload and try again)");
           }
         }
         if (errorMessage[0] === "password") {

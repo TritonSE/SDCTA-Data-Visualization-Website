@@ -4,7 +4,7 @@ body {
 
 .signup-form {
   width:30%;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 20px;
   margin: auto;
 }
@@ -198,10 +198,36 @@ body {
   color: #7F1922;
 }
 
-
 .error-message {
   color: red;
   margin-top: 2px;
   position: relative;
   margin-bottom: 0px;
+}
+
+.bottom-text {
+  text-align: center;
+}
+
+.password-reset {
+  cursor: pointer;
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+
+  color: #C3272E;
+}
+
+.signup-link-text {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #C3272E;
 }

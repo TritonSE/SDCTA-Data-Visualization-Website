@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom';
 const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
-    const [errorMessage,setErrorMessage] = useState("");
+    const [rememberUser,setRememberUser] = useState(false);
     const navigate = useNavigate();
 
     const [emailError, setEmailError] = useState("");
@@ -24,12 +24,13 @@ const LogInPage = () => {
                 loginPassword
             );
             console.log(user);
-            setErrorMessage("Logged in!");
             navigate("/");
     
         } catch (error) {
             setPasswordError("");
             setEmailError("");
+            setUnknownError("");
+
             if (error instanceof Error) {
                 const errorMessage = await logInErrorHandler(error);
                 if (errorMessage[0] === "email") {
@@ -39,7 +40,7 @@ const LogInPage = () => {
                     setPasswordError(errorMessage[1]);
                 }
                 if (errorMessage[0] === "unknown") {
-                    setUnknownError(errorMessage[1] + " Reload and try again.");
+                    setUnknownError(errorMessage[1] + " (Reload and try again)");
                 }
             }
             
@@ -75,19 +76,50 @@ const LogInPage = () => {
 
                     {passwordError !== "" ? <h3 className="error-message">{passwordError}</h3>:''}
 
-                    {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
 
                 </div>
+                <div className='terms'>
+                    <input 
+                        className = 'terms-checkbox'
+                        onChange={(event)=> {
+                        setRememberUser(event.target.checked);
+                        }}
+                        type='checkbox'
+                    />
+                    
+                    <label className='terms-label'>
+                        Remember me?
+                    </label>
+                </div>
+
+                {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
+
                 <button
                     onClick={login} 
                     className="btn-signup"
                     >
                         Login
                 </button>
+
                 <div className="separator">
                     <div className="line"></div>
                     <p className="or">&nbsp; or &nbsp;</p>
                     <div className="line"></div>
+                </div>
+
+                <div>
+                    <button className='btn google-signup'>Login With Google</button>
+                </div>
+
+                <div className="bottom-text">
+                    <p className="password-reset">Forgot your password?</p>
+                    <p className="signup-link-text">
+                        Don't have an account? 
+                        <a
+                            className="password-reset"
+                            onClick={()=>navigate("/Signup")}
+                        > Sign up for free</a>
+                    </p>
                 </div>
             </div>
         </div>
