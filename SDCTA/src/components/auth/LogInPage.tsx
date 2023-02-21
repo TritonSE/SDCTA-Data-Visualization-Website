@@ -112,11 +112,11 @@ const LogInPage = () => {
                 </div>
 
                 <div className="bottom-text">
-                    <p className="password-reset">Forgot your password?</p>
+                    <p className="clickable-text">Forgot your password?</p>
                     <p className="signup-link-text">
                         Don't have an account? 
                         <a
-                            className="password-reset"
+                            className="clickable-text"
                             onClick={()=>navigate("/Signup")}
                         > Sign up for free</a>
                     </p>

@@ -209,7 +209,7 @@ body {
   text-align: center;
 }
 
-.password-reset {
+.clickable-text {
   cursor: pointer;
   font-family: 'Helvetica Neue';
   font-style: normal;
