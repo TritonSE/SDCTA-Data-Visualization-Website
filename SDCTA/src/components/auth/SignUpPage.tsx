@@ -17,24 +17,29 @@ const SignUpPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage,setErrorMessage] = useState("");
   const [agreedTerms,setAgreedTerms] = useState(false);
   const navigate = useNavigate();
+
+  const [unknownError, setUnknownError] = useState("");
+  const [passwordError,setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
+  const [emailError,setEmailError] = useState("");
+  const [nameError,setNameError] = useState("");
 
   const register = async () => {
     try {
 
       //make sure display name is set.
       if (!(confirmPassword === registerPassword)) {
-        throw Error("Passwords do not match.");
+        throw Error("no-match");
       }
 
       if (userDisplayName === "") {
-        throw Error("Please enter your full name.")
+        throw Error("empty-name")
       }
 
       if (!(agreedTerms)) {
-        throw Error("Must agree to the terms and services to register.");
+        throw Error("no-terms");
       }
 
       const userCredential = await createUserWithEmailAndPassword(
@@ -54,7 +59,29 @@ const SignUpPage = () => {
     } catch (error) {
 
       if (error instanceof Error) {
-        setErrorMessage(await signUpErrorHandler(error));
+        const errorMessage = await signUpErrorHandler(error);
+
+        setUnknownError("");
+        setPasswordError("");
+        setConfirmError("");
+        setEmailError("");
+        setNameError("");
+
+        if (errorMessage[0] === "unknown") {
+          setUnknownError(errorMessage[1]);
+        }
+        if (errorMessage[0] === "password") {
+          setPasswordError(errorMessage[1]);
+        }
+        if (errorMessage[0] === "confirmPassword") {
+          setConfirmError(errorMessage[1]);
+        }
+        if (errorMessage[0] === "email") {
+          setEmailError(errorMessage[1]);
+        }
+        if (errorMessage[0] === "name") {
+          setNameError(errorMessage[1]);
+        }
       }
 
     }
@@ -103,43 +130,46 @@ const SignUpPage = () => {
           {/* Name input */}
           <h3 className='textbox-label'>Full Name</h3>
           <input
-            className = "text-input"
+            className = {nameError === "" ? 'text-input':'text-input error'}
             type="fullname"
             onChange={(event) => {
               setUserDisplayName(event.target.value);
             }}
           />
+          {nameError !== "" ? <h3 className="error-message">{nameError}</h3>:''}
 
           {/* Email input */}
           <h3 className='textbox-label'>Email</h3>
           <input
-            className = "text-input"
+            className = {emailError === "" ? 'text-input':'text-input error'}
             type="email"
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
           />
+          {emailError !== "" ? <h3 className="error-message">{emailError}</h3>:''}
 
           {/* Password input */}
           <h3 className='textbox-label'>Password</h3>
           <input
-            className = "text-input"
+            className = {passwordError === "" ? 'text-input':'text-input error'}
             type="password"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
             }}
           />
+          {passwordError !== "" ? <h3 className="error-message">{passwordError}</h3>:''}
 
           {/* Confirm password */}
           <h3 className='textbox-label'>Confirm Password</h3>
           <input
-            className = "text-input"
+            className = {confirmError === "" ? 'text-input':'text-input error'}
             type="password"
             onChange={(event) => {
               setConfirmPassword(event.target.value);
             }}
           />
-
+          {confirmError !== "" ? <h3 className="error-message">{confirmError}</h3>:''}
         
         </div>
 
@@ -151,20 +181,26 @@ const SignUpPage = () => {
             }}
             type='checkbox'
           />
+          
           <label className='terms-label'>
             I agree to the <a href="/">Terms of Service</a> and <a href="/">Privacy Policy</a>
           </label>
         </div>
-        <p className='error-message'>{errorMessage}</p>
+
+        {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
+
         <button onClick={register} className="btn-signup">Sign Up</button>
+
         <div className="separator">
           <div className="line"></div>
           <p className="or">&nbsp; or &nbsp;</p>
           <div className="line"></div>
         </div>
+
         <div>
           <button onClick={loginWithGoogle} className='btn google-signup'>Login With Google</button>
         </div>
+
       </div>
 
     </div>

@@ -85,7 +85,9 @@ body {
   line-height: 22px;
 }
 
-
+.error {
+  border: 2px solid red;
+}
 
 .terms {
   margin-top: 10px;

@@ -4,26 +4,35 @@ const signUpErrorHandler = async (error: Error) => {
 
     if (errorMessage.includes("internal-error")) {
         
-        return ("Internal error. Try again, and make sure you have typed a valid password.")
+        return ["unknown","Internal error. Try again, and make sure you have typed a valid password."]
 
     }
     else if (errorMessage.includes("invalid-email")) {
 
-        return ("The email is invalid. Try again with a valid email.")
+        return ["email","The email is invalid. Try again with a valid email."];
 
     }
     else if (errorMessage.includes("weak-password")) {
 
-        return ("The password is invalid. It should be at least 6 characters.");
+        return ["password","The password is invalid. It should be at least 6 characters."];
 
     }
     else if (errorMessage.includes("email-already-in-use")) {
 
-        return ("This email is already in use. Try signing in or using a different email.");
+        return ["email","This email is already in use. Try signing in or using a different email."];
         
+    } 
+    else if (errorMessage.includes("empty-name")) {
+        return ["name","Please enter your full name."];
+    }
+    else if (errorMessage.includes("no-match")) {
+        return ["confirmPassword","Passwords do not match."]
+    } 
+    else if (errorMessage.includes("no-terms")) {
+        return ["unknown","Must agree to the terms and services to register."]
     }
     else {
-        return (errorMessage);
+        return ["unknown",errorMessage];
     }
 }
 
