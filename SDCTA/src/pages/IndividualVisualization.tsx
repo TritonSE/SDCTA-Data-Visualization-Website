@@ -2,8 +2,14 @@ import backIcon from "./backIcon.svg"
 import downloadIcon from "./downloadIcon.svg"
 import tableauVisualization from "./tableauVisualization.png"
 import "./IndividualVisualization.css"
+import TableauEmbed from '../components/TableauEmbed';
 
-export default function IndividualVisualization() {
+interface IndividualVisualizationProp {
+    url : string;
+    csvlink : string;
+}
+
+export default function IndividualVisualization({ url, csvlink }:IndividualVisualizationProp) {
     return (
       <div>
         <div>
@@ -14,7 +20,8 @@ export default function IndividualVisualization() {
                 <h2>Data Subcategory Title</h2>
                 <p className="download-button">Download <img src={downloadIcon} alt="download icon"/></p>
             </div>
-            <img className='tableauVisualization' src={tableauVisualization} alt="Tableau Data Visualization"/>
+            {/* <img className='tableauVisualization' src={tableauVisualization} alt="Tableau Data Visualization"/> */}
+            <TableauEmbed url={url} />
             <div className='body-text'>
                 <h2 id="Analysis">Data Analysis</h2>
                 <p className="dscription">
