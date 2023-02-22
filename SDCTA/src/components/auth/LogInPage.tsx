@@ -5,6 +5,10 @@ import { auth } from "../../firebase-config";
 import {logInErrorHandler} from "../../error_handling/auth-errors"
 import {useNavigate} from 'react-router-dom';
 
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { signInWithRedirect, getRedirectResult} from "firebase/auth";
+
+
 const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -45,6 +49,39 @@ const LogInPage = () => {
             }
             
         }
+    }
+
+
+
+
+    const provider = new GoogleAuthProvider();
+    const auth_ = getAuth();
+  
+    const loginWithGoogle = async () => {
+  
+      signInWithRedirect(auth_, provider); 
+      getRedirectResult(auth_)
+        .then((result) => {
+  
+          // This gives you a Google Access Token. You can use it to access Google APIs.
+          // @ts-ignore: Object is possibly 'null'.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+  
+          // @ts-ignore: Object is possibly 'null'.
+          const token = credential.accessToken;
+  
+          // The signed-in user info.
+          // @ts-ignore: Object is possibly 'null'.
+          const user = result.user;
+  
+          // IdP data available using getAdditionalUserInfo(result)
+          // ...
+  
+          navigate("/");
+  
+        }).catch((error) => {
+
+        }); // end of catch
     }
 
 

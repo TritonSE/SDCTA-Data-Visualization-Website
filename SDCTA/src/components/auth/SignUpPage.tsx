@@ -115,6 +115,8 @@ const SignUpPage = () => {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
 
+        navigate("/");
+
       }).catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
@@ -160,7 +162,8 @@ const SignUpPage = () => {
         //       }).then(function() {
 
         //         // Google account successfully linked to the existing Firebase user.
-        //         goToApp();
+        //         // goToApp();
+        //         navigate("/");
         //       });
         //       return;
         //     }
@@ -187,7 +190,8 @@ const SignUpPage = () => {
         //       // As we have access to the pending credential, we can directly call the link method.
         //       result.user.linkAndRetrieveDataWithCredential(pendingCred).then(function(usercred) {
         //         // Google account successfully linked to the existing Firebase user.
-        //         goToApp();
+        //         // goToApp();
+        //         navigate("/");
         //       });
         //     });
         //   });
