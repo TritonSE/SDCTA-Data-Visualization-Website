@@ -11,7 +11,7 @@ import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
 
 
-const SignUpPage = () => {
+export const SignUpPage = () => {
 
   const [userDisplayName, setUserDisplayName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
@@ -289,5 +289,3 @@ const SignUpPage = () => {
     </div>
   )
 }
-
-export default SignUpPage

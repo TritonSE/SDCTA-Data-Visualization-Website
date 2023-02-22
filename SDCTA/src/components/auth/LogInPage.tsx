@@ -9,7 +9,7 @@ import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
 
 
-const LogInPage = () => {
+export const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [rememberUser,setRememberUser] = useState(false);
@@ -164,5 +164,3 @@ const LogInPage = () => {
 
 
 }
-
-export default LogInPage
