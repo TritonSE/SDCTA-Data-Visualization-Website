@@ -1,12 +1,10 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import { Counter } from './features/counter/Counter';
-// import './App.css';
+
 import IndividualVisualization from './pages/IndividualVisualization';
 
 import { LandingPage } from './pages/LandingPage';
 import './App.css';
 import { Municipal } from './pages/Municipal';
+import { Routes } from './components/Routes';
 
 declare global {
   interface Window {
@@ -16,9 +14,13 @@ declare global {
 const App = () => {
 
   return (
-    <div className="App">
-      <Municipal />
-    </div>
+    <>
+      <Routes />
+      <div className="App">
+        <Municipal />
+      </div>    
+    </>
+
   );
 }
 
