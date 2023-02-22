@@ -281,7 +281,7 @@ const SignUpPage = () => {
         </div>
 
         <div>
-          <button onClick={loginWithGoogle} className='btn google-signup'>Login With Google</button>
+          <button onClick={loginWithGoogle} className='btn google-signup'>Sign in with Google</button>
         </div>
 
       </div>
