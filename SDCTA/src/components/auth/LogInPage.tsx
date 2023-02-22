@@ -145,7 +145,7 @@ export const LogInPage = () => {
                 </div>
 
                 <div>
-                    <button className='btn google-signup'>Login With Google</button>
+                    <button className='btn google-signup'>Log in With Google</button>
                 </div>
 
                 <div className="bottom-text">
