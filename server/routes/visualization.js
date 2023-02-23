@@ -5,6 +5,8 @@ const router = express.Router()
 module.exports = router;
 
 const Model = require('../models/visualization');
+const visualizationServices = require('../services/visualization');
+
 
 //Post Method
 router.post('/post', async (req, res) => {
@@ -34,6 +36,18 @@ router.get('/getAll', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
+
+// Get by Title Method
+router.get('/getOne/:title', async (req, res) => {
+    try{
+        const data = await visualizationServices.getVisualizationByTitle(req.params.title);
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
 //Get by ID Method
 router.get('/getOne/:id', async (req, res) => {
     try{
