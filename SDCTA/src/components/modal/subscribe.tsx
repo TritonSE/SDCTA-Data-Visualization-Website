@@ -11,7 +11,7 @@ import {exitButtonStyle, titleStyle, buttonStyle} from './styleObjects/modals';
 
 interface ModalType {
   show: boolean;
-  setShow: (show: boolean) => void 
+  setShow: (show: boolean) => void;
 }
 
 export default function SubscribeModal(props: ModalType) {
