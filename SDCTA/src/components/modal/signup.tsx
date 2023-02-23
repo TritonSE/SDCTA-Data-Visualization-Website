@@ -9,12 +9,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import {style, textStyle} from './styleObjects/signupStyle';
 import {exitButtonStyle, titleStyle, buttonStyle} from './styleObjects/modals';
 
-interface ModalType {
+interface ModalProps {
   show: boolean;
   setShow: (show: boolean) => void;
 }
 
-export default function SignupModal(props: ModalType) {
+export const SignupModal = (props: ModalProps) => {
   const handleOpen = () => props.setShow(true);
   const handleClose = () => props.setShow(false);
 
