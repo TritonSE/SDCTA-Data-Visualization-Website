@@ -6,23 +6,24 @@ import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import {style} from './styleObjects/signupStyle';
-import {exitButtonStyle} from './styleObjects/modals';
-import {titleStyle} from './styleObjects/modals';
-import {textStyle} from './styleObjects/signupStyle';
-import {buttonStyle} from './styleObjects/modals';
+import {style, textStyle} from './styleObjects/signupStyle';
+import {exitButtonStyle, titleStyle, buttonStyle} from './styleObjects/modals';
 
-export default function SignupModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+interface ModalType {
+  show: boolean;
+  setShow: (show: boolean) => void 
+}
+
+export default function SignupModal(props: ModalType) {
+  const handleOpen = () => props.setShow(true);
+  const handleClose = () => props.setShow(false);
 
   return (
     <div>
       <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
-        // onClose={handleClose}
+        open={props.show}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

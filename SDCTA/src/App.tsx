@@ -1,16 +1,20 @@
-import React from 'react';
-import SignupModal from './components/modal/signup';
-import SubscribeModal from './components/modal/subscribe';
-import './App.css';
 
-function App() {
+import { LandingPage } from './pages/LandingPage';
+
+import './App.css';
+import { Routes } from './components/Routes';
+
+const App = () => {
   return (
-    <div className="App">
-      <SignupModal/>
-      <SubscribeModal/>
-      
-    </div>
+    <>
+      <Routes />
+      <div className="App">
+      </div>
+    </>
+
+
   );
 }
+
 
 export default App;
