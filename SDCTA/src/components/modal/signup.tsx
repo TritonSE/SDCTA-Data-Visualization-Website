@@ -7,10 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 import {style} from './styleObjects/signupStyle';
-import {exitButtonStyle} from './styleObjects/signupStyle';
-import {titleStyle} from './styleObjects/signupStyle';
+import {exitButtonStyle} from './styleObjects/modals';
+import {titleStyle} from './styleObjects/modals';
 import {textStyle} from './styleObjects/signupStyle';
-import {buttonStyle} from './styleObjects/signupStyle';
+import {buttonStyle} from './styleObjects/modals';
 
 export default function SignupModal() {
   const [open, setOpen] = React.useState(false);

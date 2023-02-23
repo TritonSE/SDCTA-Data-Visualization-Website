@@ -7,10 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 import {style} from './styleObjects/subscribeStyle';
-import {exitButtonStyle} from './styleObjects/subscribeStyle';
-import {titleStyle} from './styleObjects/subscribeStyle';
+import {exitButtonStyle} from './styleObjects/modals';
+import {titleStyle} from './styleObjects/modals';
 import {textStyle} from './styleObjects/subscribeStyle';
-import {buttonStyle} from './styleObjects/subscribeStyle';
+import {buttonStyle} from './styleObjects/modals';
 
 export default function SubscribeModal() {
   const [open, setOpen] = React.useState(false);
