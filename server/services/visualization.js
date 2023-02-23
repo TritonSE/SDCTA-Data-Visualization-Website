@@ -1,7 +1,7 @@
 const Model = require('../models/visualization');
 
 module.exports = {
-    getCategoryByName: async function getVisualizationByTitle(title) {
+    getVisualizationByTitle: async function getVisualizationByTitle(title) {
         try{
             const data = await Model.find({title: title});
             return data[0];
