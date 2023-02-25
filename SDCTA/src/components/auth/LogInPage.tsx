@@ -7,6 +7,8 @@ import {useNavigate} from 'react-router-dom';
 
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
+import { loginReducer } from "../../slices/loginSlice";
+
 
 
 export const LogInPage = () => {
@@ -28,6 +30,11 @@ export const LogInPage = () => {
                 loginPassword
             );
             console.log(user);
+            user.user.getIdToken(true).then(function(idToken) {
+                loginReducer(idToken);
+            }).catch(function(error) {
+                setUnknownError(error);
+            });
             navigate("/");
     
         } catch (error) {
