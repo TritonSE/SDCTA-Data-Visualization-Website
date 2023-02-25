@@ -6,6 +6,7 @@ module.exports = router;
 
 const Model = require('../models/category');
 const categoryServices = require('../services/category');
+const visualizationServices = require('../services/visualization');
 
 //Post Method
 router.post('/post', async (req, res) => {
@@ -38,6 +39,9 @@ router.get('/getAll', async (req, res) => {
 router.get('/getOne/:name', async (req, res) => {
     try{
         const data = await categoryServices.getCategoryByName(req.params.name);
+        data["visualizations"] = await Promise.all(data["visualizations"].map(
+            visualizationServices.getVisualizationByTitle
+        ));
         res.json(data)
     }
     catch(error){
