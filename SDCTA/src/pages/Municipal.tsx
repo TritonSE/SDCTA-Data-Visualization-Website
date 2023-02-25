@@ -8,7 +8,7 @@ export const Municipal = () => {
 	return (
 		<>
 			<IndividualVisualization url={url} csvlink={"https://www.google.com"} />
-			<TableauEmbed url={url}/>
+			{/* <TableauEmbed url={url}/> */}
 			<Footer />
 		</>
 	)

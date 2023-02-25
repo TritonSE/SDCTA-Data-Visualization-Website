@@ -11,19 +11,19 @@ import Profile from '../pages/Profile';
 
 
 export const Routes = () => {
-   return (
-    <Router>
-        <Navbar />
-        <ReactRoutes>
-            <Route path="/" element={<LandingPage />}/>
-            <Route path="/Education" element={<Education />}/>
-            <Route path="/Homelessness" element={<Homelessness />}/>
-            <Route path="/Municipal" element={<Municipal />}/>
-            <Route path="/Login" element={<Login />}/>
-            <Route path="/Signup" element={<SignUp />}/>
-            <Route path="/Subscribe" element={<Subscribe />}/>
-            <Route path="/Profile" element={<Profile />}/>
-        </ReactRoutes>
-    </Router>      
-   );       
+    return (
+        <Router>
+            <Navbar />
+            <ReactRoutes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/Education" element={<Education />} />
+                <Route path="/Homelessness" element={<Homelessness />} />
+                <Route path="/Municipal" element={<Municipal />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Signup" element={<SignUp />} />
+                <Route path="/Subscribe" element={<Subscribe />} />
+                <Route path="/Profile" element={<Profile />} />
+            </ReactRoutes>
+        </Router>
+    );
 }

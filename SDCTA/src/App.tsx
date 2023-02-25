@@ -5,6 +5,7 @@ import { LandingPage } from './pages/LandingPage';
 import './App.css';
 import { Municipal } from './pages/Municipal';
 import { Routes } from './components/Routes';
+import { Education } from './pages/Education';
 
 declare global {
   interface Window {
@@ -18,7 +19,7 @@ const App = () => {
       <Routes />
       <div className="App">
         <Municipal />
-      </div>    
+      </div>
     </>
 
   );
