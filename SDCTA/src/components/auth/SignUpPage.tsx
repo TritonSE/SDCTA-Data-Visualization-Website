@@ -5,6 +5,7 @@ import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
 import {signUpErrorHandler} from "../../error_handling/auth-errors"
 import {useNavigate} from 'react-router-dom';
+import { loginReducer } from '../../slices/loginSlice';
 
 
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
@@ -53,6 +54,12 @@ export const SignUpPage = () => {
       });
 
       await registerUser(userCredential);
+
+      userCredential.user.getIdToken(true).then(function(idToken) {
+        loginReducer(idToken);
+      }).catch(function(error) {
+        setUnknownError(error);
+      });
 
       navigate("/");
 
