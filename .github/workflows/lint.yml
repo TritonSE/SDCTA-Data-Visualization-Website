@@ -1,34 +1,27 @@
-name: Lint
+name: Lint and style checks
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    branches: main
 
 jobs:
-  run-linters:
-    name: Run linters
+  backend:
+    name: Backend lint and style check
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-
-      # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
-        run: npm ci
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - working-directory: server # Change this to the name of your backend directory
+        run: |
+          npm ci
+          npm run lint-check
+  frontend:
+    name: Frontend lint and style check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - working-directory: SDCTA # Change this to the name of your frontend directory
+        run: |
+          npm ci
+          npm run lint-check
