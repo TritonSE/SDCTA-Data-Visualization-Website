@@ -1,6 +1,6 @@
-import React from 'react'
-import { Body } from '../components/Landing_Page/Body'
-import { Footer } from '../components/Footer/Footer'
+import React from "react";
+import { Body } from "../components/Landing_Page/Body";
+import { Footer } from "../components/Footer/Footer";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -8,5 +8,5 @@ export const LandingPage: React.FC = () => {
       <Body />
       <Footer />
     </div>
-  )
-}
+  );
+};

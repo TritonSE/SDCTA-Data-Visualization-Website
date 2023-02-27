@@ -3,5 +3,5 @@ export const SignUp: React.FC = () => {
     <div>
       <h1>Signup</h1>
     </div>
-  )
-}
+  );
+};

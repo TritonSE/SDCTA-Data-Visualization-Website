@@ -3,5 +3,5 @@ export const Homelessness: React.FC = () => {
     <div>
       <h1>Homelessness</h1>
     </div>
-  )
-}
+  );
+};

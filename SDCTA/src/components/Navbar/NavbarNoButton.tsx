@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom'
-import './Navbar.css'
-import pfp from './Profile Picture.svg'
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
+import pfp from "./Profile Picture.svg";
 
 export const NavbarNoButton: React.FC = () => {
   return (
@@ -9,5 +9,5 @@ export const NavbarNoButton: React.FC = () => {
         <img src={pfp} className="pfp" />
       </NavLink>
     </div>
-  )
-}
+  );
+};

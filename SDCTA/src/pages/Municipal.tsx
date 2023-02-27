@@ -3,5 +3,5 @@ export const Municipal: React.FC = () => {
     <div>
       <h1>Municipal</h1>
     </div>
-  )
-}
+  );
+};

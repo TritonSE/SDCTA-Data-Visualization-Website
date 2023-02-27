@@ -3,5 +3,5 @@ export const Subscribe: React.FC = () => {
     <div>
       <h1>Subscribe</h1>
     </div>
-  )
-}
+  );
+};

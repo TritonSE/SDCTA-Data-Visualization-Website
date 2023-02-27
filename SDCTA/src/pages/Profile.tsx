@@ -3,5 +3,5 @@ export const Profile: React.FC = () => {
     <div>
       <h1>Profile</h1>
     </div>
-  )
-}
+  );
+};

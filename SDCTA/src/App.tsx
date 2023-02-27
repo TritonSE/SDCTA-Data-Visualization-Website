@@ -1,5 +1,5 @@
-import './App.css'
-import { Routes } from './components/Routes'
+import "./App.css";
+import { Routes } from "./components/Routes";
 
 const App: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const App: React.FC = () => {
       <Routes />
       <div className="App"></div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

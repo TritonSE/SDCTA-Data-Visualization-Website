@@ -1,26 +1,30 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { style, textStyle } from './styleObjects/subscribeStyle'
+import { style, textStyle } from "./styleObjects/subscribeStyle";
 import {
   exitButtonStyle,
   titleStyle,
-  buttonStyle
-} from './styleObjects/modals'
+  buttonStyle,
+} from "./styleObjects/modals";
 
 interface ModalProps {
-  show: boolean
-  setShow: (show: boolean) => void
+  show: boolean;
+  setShow: (show: boolean) => void;
 }
 
 export const SubscribeModal: React.FC<ModalProps> = (props: ModalProps) => {
-  const handleOpen = (): void => { props.setShow(true) }
-  const handleClose = (): void => { props.setShow(false) }
+  const handleOpen = (): void => {
+    props.setShow(true);
+  };
+  const handleClose = (): void => {
+    props.setShow(false);
+  };
 
   return (
     <div>
@@ -58,5 +62,5 @@ export const SubscribeModal: React.FC<ModalProps> = (props: ModalProps) => {
         </Box>
       </Modal>
     </div>
-  )
-}
+  );
+};
