@@ -10,8 +10,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "avoidEscape": true,
-    "allowTemplateLiterals": true,
+    "quotes": 0,
     "semi": 0
   }
 }
