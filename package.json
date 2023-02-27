@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix SDCTA",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+
+}
