@@ -1,7 +1,7 @@
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import "./Footer.css";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
+import './Footer.css'
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-left">
@@ -35,5 +35,5 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
