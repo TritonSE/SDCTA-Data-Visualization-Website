@@ -14,8 +14,8 @@ import {
 } from "./styleObjects/modals";
 
 interface ModalProps {
-  show: boolean
-  setShow: (show: boolean) => void
+  show: boolean;
+  setShow: (show: boolean) => void;
 }
 
 export const SignupModal: React.FC<ModalProps> = (props: ModalProps) => {

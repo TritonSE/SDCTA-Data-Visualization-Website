@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { type RootState } from "../app/store";
 
 export interface LoginState {
-  value: boolean
+  value: boolean;
 }
 
 const initialState: LoginState = {
