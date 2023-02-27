@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 // The following is an example of a worker saga from https://redux-saga.js.org/docs/introduction/GettingStarted
 // We will import the appropriate API functions that call our backend here and then use them in the Saga.
@@ -17,14 +17,14 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 //   }
 // }
 
-const fetchUser = () => {}
+const fetchUser = () => {};
 
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
 function* mySaga() {
-  yield takeEvery('USER_FETCH_REQUESTED', fetchUser)
+  yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
 }
 
-export default mySaga
+export default mySaga;
