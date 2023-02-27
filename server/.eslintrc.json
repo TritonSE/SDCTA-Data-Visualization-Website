@@ -10,7 +10,10 @@
     "ecmaVersion": "latest"
   },
   "rules": {
+    // Disable rules that conflict with Mongo
     "quotes": 0,
-    "semi": 0
+    "semi": 0,
+    "comma-dangle": 0,
+    "new-cap": 0
   }
 }
