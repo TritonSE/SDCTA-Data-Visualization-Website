@@ -7,13 +7,16 @@ import {useNavigate} from 'react-router-dom';
 
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
-
+import {login} from "../../slices/loginSlice"
+import {useDispatch} from "react-redux";
+import { resetPassword } from '../../api/passwordReset';
 
 export const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [rememberUser,setRememberUser] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     let [inputError, setInputError] = useState({
         emailError: "",
@@ -21,7 +24,7 @@ export const LogInPage = () => {
         unknownError: ""
     });
 
-    const login = async () => {
+    const loginUser = async () => {
         try {
             inputError = {
                 emailError: "",
@@ -40,6 +43,8 @@ export const LogInPage = () => {
                 loginEmail,
                 loginPassword
             );
+
+            dispatch(login());
             navigate("/");
     
         } catch (error) {
@@ -135,7 +140,7 @@ export const LogInPage = () => {
                 {inputError.unknownError !== "" ? <p className="error-message">{inputError.unknownError}</p>:''}
 
                 <button
-                    onClick={login} 
+                    onClick={loginUser} 
                     className="btn-signup"
                     >
                         Login
@@ -152,7 +157,10 @@ export const LogInPage = () => {
                 </div>
 
                 <div className="bottom-text">
-                    <p className="clickable-text">Forgot your password?</p>
+                    <p 
+                        className="clickable-text" 
+                        onClick = {()=>resetPassword(loginEmail)}>
+                        Forgot your password?</p>
                     <p className="signup-link-text">
                         Don't have an account? 
                         <a

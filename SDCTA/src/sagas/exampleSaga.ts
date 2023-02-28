@@ -1,4 +1,5 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import {login} from '../slices/loginSlice'
 
 // The following is an example of a worker saga from https://redux-saga.js.org/docs/introduction/GettingStarted
 // We will import the appropriate API functions that call our backend here and then use them in the Saga.
@@ -11,13 +12,13 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 // function* fetchUser(action) {
 //   try {
 //     const user = yield call(Api.fetchUser, action.payload.userId)
-//     yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
+//     yield put(login())
 //   } catch (e) {
 //     yield put({ type: 'USER_FETCH_FAILED', message: e.message })
 //   }
 // }
 
-const fetchUser = () => {}
+const fetchUser = () =>{};
 
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.

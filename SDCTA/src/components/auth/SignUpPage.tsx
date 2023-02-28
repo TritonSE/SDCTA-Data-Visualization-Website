@@ -5,7 +5,8 @@ import { auth } from "../../firebase-config";
 import {registerUser} from "../../api/auth";
 import {signUpErrorHandler} from "../../error_handling/auth-errors"
 import {useNavigate} from 'react-router-dom';
-
+import {login} from "../../slices/loginSlice"
+import {useDispatch} from "react-redux";
 
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
@@ -19,6 +20,7 @@ export const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreedTerms,setAgreedTerms] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   let [inputError, setInputError] = useState({
     unknownError: "", 
@@ -70,6 +72,7 @@ export const SignUpPage = () => {
 
         await registerUser(userCredential);
 
+        dispatch(login());
         navigate("/");
       }
 
