@@ -15,10 +15,7 @@ const App = () => {
 
   return (
     <>
-      {/* <Routes /> */}
-      <div className="App">
-        <Municipal />
-      </div>    
+      <Routes />
     </>
 
   );

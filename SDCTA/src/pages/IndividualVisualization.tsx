@@ -1,7 +1,7 @@
 import backIcon from "./backIcon.svg"
 import downloadIcon from "./downloadIcon.svg"
-import tableauVisualization from "./tableauVisualization.png"
 import "./IndividualVisualization.css"
+import { Footer } from '../components/Footer';
 import TableauEmbed from '../components/TableauEmbed';
 
 interface IndividualVisualizationProp {
@@ -14,18 +14,18 @@ export const IndividualVisualization = ({ url, csvlink }:IndividualVisualization
     return (
       <div>
         <div>
-            <p className='back-button'> <img src={backIcon} alt="back arrow icon"/>  Back to Education Data</p>
+            <p className='IV-back-button'> <img style={{paddingLeft:"3px"}}src={backIcon} alt="back arrow icon"/>  Back to Education Data</p>
         </div>
         <div className='body'>
-            <div className="top-row">
+            <div className="IV-Top-row">
                 <h2>Data Subcategory Title</h2>
                 <p className="download-button">Download <img src={downloadIcon} alt="download icon"/></p>
             </div>
-            {/* <img className='tableauVisualization' src={tableauVisualization} alt="Tableau Data Visualization"/> */}
+
             <TableauEmbed url={url} />
             <div className='body-text'>
                 <h2 id="Analysis">Data Analysis</h2>
-                <p className="dscription">
+                <p className="IV-description">
                     <span>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
                     do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

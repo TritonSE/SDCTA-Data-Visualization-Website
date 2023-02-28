@@ -7,6 +7,7 @@ body {
 
 h2 {
    font-size: 24px;
+   font-weight: 700;
 }
 
 .body {
@@ -17,16 +18,17 @@ h2 {
 }
 
 
-.back-button {
+.IV-back-button {
    color: #C3272E;
    margin: 0 auto 0 40px;
    display: flex;
    flex-direction: row;
    align-items: center;
    font-weight: 600;
+   margin-top: 30px;
 }
 
-.back-button img {
+.IV-back-button img {
    margin-right: 5px;
    margin-top: 3px;
 }
@@ -45,11 +47,13 @@ h2 {
     max-width: 100%;
 }
 
-.description {
+.IV-description {
    text-align: left;
+   font-size: 20px;
+   margin-bottom: 60px;
 }
 
-.top-row {
+.IV-Top-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
