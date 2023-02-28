@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from 'react';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,sendPasswordResetEmail} from "firebase/auth";
 import './auth.css';
 import { auth } from "../../firebase-config";
 import {logInErrorHandler} from "../../error_handling/auth-errors"
@@ -9,12 +9,13 @@ import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { signInWithRedirect, getRedirectResult} from "firebase/auth";
 import {login} from "../../slices/loginSlice"
 import {useDispatch} from "react-redux";
-import { resetPassword } from '../../api/passwordReset';
 
 export const LogInPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [rememberUser,setRememberUser] = useState(false);
+    const [resetMessage,setResetMessage] = useState("");
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -38,6 +39,10 @@ export const LogInPage = () => {
                 unknownError: ""
             });
 
+            if (loginPassword == "") {
+                inputError.passwordError = "Type in a password."
+                setInputError(inputError);
+            }
             const user = await signInWithEmailAndPassword(
                 auth,
                 loginEmail,
@@ -59,7 +64,17 @@ export const LogInPage = () => {
         }
     }
 
-
+    const sendReset = () => {
+        sendPasswordResetEmail(auth, loginEmail)
+        .then(() => {
+            setResetMessage("Reset email sent successfully to: " + loginEmail);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setResetMessage(errorMessage + " (Try again, make sure to type email in email box)");
+        });
+    }
 
 
     const provider = new GoogleAuthProvider();
@@ -159,8 +174,12 @@ export const LogInPage = () => {
                 <div className="bottom-text">
                     <p 
                         className="clickable-text" 
-                        onClick = {()=>resetPassword(loginEmail)}>
-                        Forgot your password?</p>
+                        onClick = {sendReset}>
+                        Forgot your password?
+                    </p>
+
+                    {resetMessage !== "" ? <p>{resetMessage}</p>:''}
+
                     <p className="signup-link-text">
                         Don't have an account? 
                         <a
