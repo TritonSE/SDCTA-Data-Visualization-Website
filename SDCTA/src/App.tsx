@@ -1,5 +1,5 @@
 
-import IndividualVisualization from './pages/IndividualVisualization';
+import { IndividualVisualization } from './pages/IndividualVisualization';
 
 import { LandingPage } from './pages/LandingPage';
 import './App.css';
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <>
-      <Routes />
+      {/* <Routes /> */}
       <div className="App">
         <Municipal />
       </div>    

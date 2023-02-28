@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import TableauEmbed from '../components/TableauEmbed';
-import IndividualVisualization from './IndividualVisualization';
+import { IndividualVisualization } from './IndividualVisualization';
 
 
 export const Municipal = () => {
@@ -8,7 +8,7 @@ export const Municipal = () => {
 	return (
 		<>
 			<IndividualVisualization url={url} csvlink={"https://www.google.com"} />
-			<TableauEmbed url={url}/>
+			{/* <TableauEmbed url={url}/> */}
 			<Footer />
 		</>
 	)

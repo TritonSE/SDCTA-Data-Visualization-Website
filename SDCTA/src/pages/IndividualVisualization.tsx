@@ -9,7 +9,8 @@ interface IndividualVisualizationProp {
     csvlink : string;
 }
 
-export default function IndividualVisualization({ url, csvlink }:IndividualVisualizationProp) {
+export const IndividualVisualization = ({ url, csvlink }:IndividualVisualizationProp) => {
+
     return (
       <div>
         <div>
