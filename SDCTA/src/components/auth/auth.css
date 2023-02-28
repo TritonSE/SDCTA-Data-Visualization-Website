@@ -3,14 +3,14 @@ body {
 }
 
 .signup-form {
-  width:30%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  width:28%;
+  padding-top: 1.5%;
+  padding-bottom: 2%;
   margin: auto;
 }
 
 .signup-form-title {
-  font-size: 40px;
+  font-size: 225%;
   margin-bottom: 0rem;
   font-family: 'Helvetica Neue';
   font-style: normal;
@@ -20,24 +20,25 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 30%;
-  margin-top: 80px;
+  margin-top: 4%;
 }
 
 .input-boxes {
+  margin-top: -2%;
+  height: 5%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .textbox-label {
-  height: 25px;
 
   /* H3 */
   white-space: nowrap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 100%;
+  line-height: 100%;
   /* identical to box height */
 
 
@@ -49,7 +50,7 @@ body {
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin-bottom: 5px;
+  margin-bottom: 2%;
 }
 
 .text-input {
@@ -64,7 +65,7 @@ body {
   gap: 10px;
 
   width: 100%;
-  height: 40px;
+  height: 38px;
 
   background: #FFFFFF;
   /* Neutral/Gray4 */
@@ -90,7 +91,7 @@ body {
 }
 
 .terms {
-  margin-top: 10px;
+  margin-top: 2%;
   padding-top: 0px;
 }
 
@@ -103,7 +104,6 @@ body {
 
 }
 
-
 .terms a {
   color:black
 }
@@ -111,7 +111,7 @@ body {
 .terms-label {
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 100%;
   line-height: 24px;
   margin-left: 30px;
   /* identical to box height, or 150% */
@@ -131,7 +131,7 @@ body {
 
 
 .btn-signup {
-  margin-top: 30px;
+  margin-top: 5%;
   background: #C3272E;
   border-radius: 3px;
   width: 100%;
@@ -147,7 +147,7 @@ body {
   line-height: 23px;
   text-align: center;
   color: #FFFFFF;  
-  height: 48px;
+  height: 40px;
 }
 
 .separator {
@@ -206,14 +206,12 @@ body {
   font-weight: 700;
   font-size: 17px;
   line-height: 23px;
-  height: 48px;
+  height: 40px;
   color: #000000;
-
-  padding: 12px 24px 12px 42px;
 
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
   background-repeat: no-repeat;
-  background-position: 120px 15px;
+  background-position: 25% 50%;
 }
 
 .error-message {

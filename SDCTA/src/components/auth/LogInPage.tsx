@@ -15,37 +15,40 @@ export const LogInPage = () => {
     const [rememberUser,setRememberUser] = useState(false);
     const navigate = useNavigate();
 
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    const [unknownError, setUnknownError] = useState("");
+    let [inputError, setInputError] = useState({
+        emailError: "",
+        passwordError: "",
+        unknownError: ""
+    });
 
     const login = async () => {
         try {
-    
+            inputError = {
+                emailError: "",
+                passwordError: "",
+                unknownError: ""
+            };
+
+            setInputError({
+                emailError: "",
+                passwordError: "",
+                unknownError: ""
+            });
+
             const user = await signInWithEmailAndPassword(
                 auth,
                 loginEmail,
                 loginPassword
             );
-            console.log(user);
             navigate("/");
     
         } catch (error) {
-            setPasswordError("");
-            setEmailError("");
-            setUnknownError("");
 
             if (error instanceof Error) {
-                const errorMessage = await logInErrorHandler(error);
-                if (errorMessage[0] === "email") {
-                    setEmailError(errorMessage[1]);
-                }
-                if (errorMessage[0] === "password") {
-                    setPasswordError(errorMessage[1]);
-                }
-                if (errorMessage[0] === "unknown") {
-                    setUnknownError(errorMessage[1] + " (Reload and try again)");
-                }
+                const errorMessage = logInErrorHandler(error);
+
+                inputError = {...inputError, ...errorMessage};
+                setInputError({...inputError});
             }
             
         }
@@ -95,23 +98,23 @@ export const LogInPage = () => {
                     <h3 className="textbox-label">Email</h3>
                     <input
                         type="email"
-                        className={emailError === "" ? 'text-input':'text-input error'}
+                        className={inputError.emailError === "" ? 'text-input':'text-input error'}
                         onChange={(event) => {
                             setLoginEmail(event.target.value);
                         }}
                     />
-                    {emailError !== "" ? <h3 className="error-message">{emailError}</h3>:''}
+                    {inputError.emailError !== "" ? <p className="error-message">{inputError.emailError}</p>:''}
 
                     <h3 className="textbox-label">Password</h3>
                     <input
                         type="password"
-                        className={passwordError === "" ? 'text-input':'text-input error'}
+                        className={inputError.passwordError === "" ? 'text-input':'text-input error'}
                         onChange={(event) => {
                             setLoginPassword(event.target.value);
                         }}
                     />
 
-                    {passwordError !== "" ? <h3 className="error-message">{passwordError}</h3>:''}
+                    {inputError.passwordError !== "" ? <p className="error-message">{inputError.passwordError}</p>:''}
 
 
                 </div>
@@ -129,7 +132,7 @@ export const LogInPage = () => {
                     </label>
                 </div>
 
-                {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
+                {inputError.unknownError !== "" ? <p className="error-message">{inputError.unknownError}</p>:''}
 
                 <button
                     onClick={login} 

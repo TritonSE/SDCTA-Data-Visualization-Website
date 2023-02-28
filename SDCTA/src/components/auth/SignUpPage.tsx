@@ -20,72 +20,66 @@ export const SignUpPage = () => {
   const [agreedTerms,setAgreedTerms] = useState(false);
   const navigate = useNavigate();
 
-  const [unknownError, setUnknownError] = useState("");
-  const [passwordError,setPasswordError] = useState("");
-  const [confirmError, setConfirmError] = useState("");
-  const [emailError,setEmailError] = useState("");
-  const [nameError,setNameError] = useState("");
+  let [inputError, setInputError] = useState({
+    unknownError: "", 
+    passwordError: "",
+    confirmError: "",
+    emailError: "",
+    nameError: ""
+  });
 
   const register = async () => {
     try {
+      inputError.unknownError= "";
+      inputError.passwordError = "";
+      inputError.confirmError = "";
+      inputError.emailError = "";
+      inputError.nameError = "";
 
-      //make sure display name is set.
+      let error = false;
+      //make sure passwords match.
       if (!(confirmPassword === registerPassword)) {
-        throw Error("no-match");
+        inputError.confirmError =  "Passwords do not match.";
+        error = true;
       }
 
       if (userDisplayName === "") {
-        throw Error("empty-name")
+        inputError.nameError =  "Please enter your full name.";
+        error = true;
       }
 
       if (!(agreedTerms)) {
-        throw Error("no-terms");
+        inputError.unknownError =  "Must agree to the terms and services to register."
+        error = true;
       }
-
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-
-      await updateProfile(userCredential.user, {
-        displayName: userDisplayName
+      
+      setInputError({
+        ...inputError
       });
 
-      await registerUser(userCredential);
+      if (!error) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          registerEmail,
+          registerPassword
+        );
+        
+        await updateProfile(userCredential.user, {
+          displayName: userDisplayName
+        });
 
-      navigate("/");
+        await registerUser(userCredential);
+
+        navigate("/");
+      }
 
     } catch (error) {
 
       if (error instanceof Error) {
-        const errorMessage = await signUpErrorHandler(error);
+        const errorMessage = signUpErrorHandler(error);
 
-        setUnknownError("");
-        setPasswordError("");
-        setConfirmError("");
-        setEmailError("");
-        setNameError("");
-
-        if (errorMessage[0] === "unknown") {
-          if (errorMessage[1].includes("terms")) {
-            setUnknownError(errorMessage[1]);
-          } else {
-            setUnknownError(errorMessage[1]+ " (Reload and try again)");
-          }
-        }
-        if (errorMessage[0] === "password") {
-          setPasswordError(errorMessage[1]);
-        }
-        if (errorMessage[0] === "confirmPassword") {
-          setConfirmError(errorMessage[1]);
-        }
-        if (errorMessage[0] === "email") {
-          setEmailError(errorMessage[1]);
-        }
-        if (errorMessage[0] === "name") {
-          setNameError(errorMessage[1]);
-        }
+        inputError = {...inputError, ...errorMessage};
+        setInputError({...inputError});
       }
 
     }
@@ -213,46 +207,46 @@ export const SignUpPage = () => {
           {/* Name input */}
           <h3 className='textbox-label'>Full Name</h3>
           <input
-            className = {nameError === "" ? 'text-input':'text-input error'}
+            className = {inputError.nameError === "" ? 'text-input':'text-input error'}
             type="fullname"
             onChange={(event) => {
               setUserDisplayName(event.target.value);
             }}
           />
-          {nameError !== "" ? <h3 className="error-message">{nameError}</h3>:''}
+          {inputError.nameError !== "" ? <p className="error-message">{inputError.nameError}</p>:''}
 
           {/* Email input */}
           <h3 className='textbox-label'>Email</h3>
           <input
-            className = {emailError === "" ? 'text-input':'text-input error'}
+            className = {inputError.emailError === "" ? 'text-input':'text-input error'}
             type="email"
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
           />
-          {emailError !== "" ? <h3 className="error-message">{emailError}</h3>:''}
+          {inputError.emailError !== "" ? <p className="error-message">{inputError.emailError}</p>:''}
 
           {/* Password input */}
           <h3 className='textbox-label'>Password</h3>
           <input
-            className = {passwordError === "" ? 'text-input':'text-input error'}
+            className = {inputError.passwordError === "" ? 'text-input':'text-input error'}
             type="password"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
             }}
           />
-          {passwordError !== "" ? <h3 className="error-message">{passwordError}</h3>:''}
+          {inputError.passwordError !== "" ? <p className="error-message">{inputError.passwordError}</p>:''}
 
           {/* Confirm password */}
           <h3 className='textbox-label'>Confirm Password</h3>
           <input
-            className = {confirmError === "" ? 'text-input':'text-input error'}
+            className = {inputError.confirmError === "" ? 'text-input':'text-input error'}
             type="password"
             onChange={(event) => {
               setConfirmPassword(event.target.value);
             }}
           />
-          {confirmError !== "" ? <h3 className="error-message">{confirmError}</h3>:''}
+          {inputError.confirmError !== "" ? <p className="error-message">{inputError.confirmError}</p>:''}
         
         </div>
 
@@ -270,7 +264,7 @@ export const SignUpPage = () => {
           </label>
         </div>
 
-        {unknownError !== "" ? <h3 className="error-message">{unknownError}</h3>:''}
+        {inputError.unknownError !== "" ? <p className="error-message">{inputError.unknownError}</p>:''}
 
         <button onClick={register} className="btn-signup">Sign Up</button>
 
