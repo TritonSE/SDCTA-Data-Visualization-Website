@@ -7,6 +7,8 @@ admin.initializeApp({
   databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
 });
 
+    
+
 function authenticate(req, res, next) {
     getAuth().verifyIdToken(idToken).then((decodedToken) => {
         const uid = decodedToken.uid;
