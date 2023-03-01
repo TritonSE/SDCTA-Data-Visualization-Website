@@ -24,14 +24,15 @@
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "redux-saga": "^1.2.2",
-    "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint-fix": "(eslint --fix --cache --report-unused-disable-directives . || true) && prettier --write .",
+    "lint-check": "eslint --cache --report-unused-disable-directives . && prettier --check ."
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,15 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
-    "@types/react-bootstrap": "^0.32.32"
+    "@types/react-bootstrap": "^0.32.32",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "eslint": "^8.35.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "2.8.4",
+    "typescript": "^4.9.5"
   }
 }

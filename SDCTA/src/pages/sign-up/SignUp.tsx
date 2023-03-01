@@ -1,7 +1,7 @@
-export default function SignUp() {
+export const SignUp: React.FC = () => {
   return (
     <div>
-        <h1>Signup</h1>
+      <h1>Signup</h1>
     </div>
-  )
-}
+  );
+};
