@@ -1,19 +1,13 @@
+import "./App.css";
+import { Routes } from "./components/Routes";
 
-import { LandingPage } from './pages/LandingPage';
-
-import './App.css';
-import { Routes } from './components/Routes';
-
-const App = () => {
+const App: React.FC = () => {
   return (
     <>
       <Routes />
-      <div className="App">
-      </div>
+      <div className="App"></div>
     </>
-
-
   );
-}
+};
 
 export default App;

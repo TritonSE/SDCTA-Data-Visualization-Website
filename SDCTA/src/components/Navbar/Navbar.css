@@ -1,70 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 nav {
-    background-color: white;
-    padding: 2px 10px;
-    display: flex; 
-    align-items: center;
-    flex-direction: row;
-    font-family: "Open Sans", sans-serif;
+  background-color: white;
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-family: "Open Sans", sans-serif;
 }
 
 .links {
-    color: black;
-    text-decoration: none;
-    margin: 10px 20px;
-    vertical-align: middle; 
-    font-size: 18px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    line-height: 25px;
+  color: black;
+  text-decoration: none;
+  margin: 10px 20px;
+  vertical-align: middle;
+  font-size: 18px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  line-height: 25px;
 }
 
 .logo {
-   width: 174px;
-   height: 80px;
-   margin-right: 40px;
+  width: 174px;
+  height: 80px;
+  margin-right: 40px;
 }
 
 .right {
-   margin-left: auto;
+  margin-left: auto;
 }
 
 .navbar-button {
-    background-color: #C3272E;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-right: 20px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 25px;
-    cursor: pointer;
+  background-color: #c3272e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 20px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
 }
 
 #sign-up {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
-
 #login {
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 #subscribe {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 .pfp {
-    margin-right: 20px;
-    margin-left: 10px;
+  margin-right: 20px;
+  margin-left: 10px;
 }
 
 .pfp-subscribe-class {
-    display: flex; 
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
