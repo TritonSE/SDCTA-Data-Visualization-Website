@@ -1,5 +1,4 @@
 import { UserCredential } from 'firebase/auth';
-import React from 'react';
 
 const registerUser = async (userCredential: UserCredential) => {
     const requestOptions = {
