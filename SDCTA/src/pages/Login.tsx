@@ -1,9 +1,9 @@
-import {LogInPage} from "../components/auth/LogInPage"
+import { LogInPage } from "../components/auth/LogInPage";
 
-export default function Login() {
+export const Login: React.FC = () => {
   return (
     <div>
-        <LogInPage/>
+      <LogInPage />
     </div>
-  )
-}
+  );
+};

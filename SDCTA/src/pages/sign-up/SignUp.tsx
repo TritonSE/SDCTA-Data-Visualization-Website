@@ -1,10 +1,10 @@
-import { Sign } from "crypto"
-import {SignUpPage} from "../../components/auth/SignUpPage"
+import { Sign } from "crypto";
+import { SignUpPage } from "../../components/auth/SignUpPage";
 
-export default function SignUp() {
+export const SignUp: React.FC = () => {
   return (
     <div>
-        <SignUpPage/>
+      <SignUpPage />
     </div>
-  )
-}
+  );
+};
