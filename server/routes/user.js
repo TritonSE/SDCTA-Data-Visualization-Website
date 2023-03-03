@@ -7,7 +7,7 @@ module.exports = router;
 const UserModel = require("../models/user");
 const tierServices = require("../services/tier");
 
-//Post Method
+// Post Method
 router.post("/create", async (req, res) => {
   try {
     const tier = await tierServices.getTier(req.body.tier);
@@ -24,7 +24,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//Get all Method
+// Get all Method
 router.get("/getAll", async (req, res) => {
   try {
     const data = await UserModel.find();
@@ -33,7 +33,7 @@ router.get("/getAll", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-//Get by ID Method
+// Get by ID Method
 router.get("/getOne/:id", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
@@ -43,7 +43,7 @@ router.get("/getOne/:id", async (req, res) => {
   }
 });
 
-//Update by ID Method
+// Update by ID Method
 router.patch("/update/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -58,7 +58,7 @@ router.patch("/update/:id", async (req, res) => {
   }
 });
 
-//Delete by ID Method
+// Delete by ID Method
 router.delete("/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
