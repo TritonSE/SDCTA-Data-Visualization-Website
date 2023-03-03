@@ -6,6 +6,7 @@ module.exports = router;
 
 const UserModel = require("../models/user");
 const tierServices = require("../services/tier");
+const Model = require("../models/tier");
 
 // Post Method
 router.post("/create", async (req, res) => {

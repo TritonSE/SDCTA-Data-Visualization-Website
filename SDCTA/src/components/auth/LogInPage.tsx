@@ -1,19 +1,21 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
 import { logInErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
 
-import { GoogleAuthProvider, getAuth } from "firebase/auth";
-import { signInWithRedirect, getRedirectResult } from "firebase/auth";
 import { login } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
-export const LogInPage = () => {
+export const LogInPage: React.FC = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [rememberUser, setRememberUser] = useState(false);
@@ -86,14 +88,14 @@ export const LogInPage = () => {
     getRedirectResult(auth_)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const token = credential.accessToken;
 
         // The signed-in user info.
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const user = result.user;
 
         // IdP data available using getAdditionalUserInfo(result)
@@ -101,7 +103,7 @@ export const LogInPage = () => {
 
         navigate("/");
       })
-      .catch((error) => {}); // end of catch
+      .catch((error) => { }); // end of catch
   };
 
   return (
@@ -186,7 +188,12 @@ export const LogInPage = () => {
 
           <p className="signup-link-text">
             Don't have an account?
-            <a className="clickable-text" onClick={() => navigate("/Signup")}>
+            <a
+              className="clickable-text"
+              onClick={() => {
+                navigate("/Signup");
+              }}
+            >
               {" "}
               Sign up for free
             </a>

@@ -7,7 +7,7 @@ module.exports = {
       const data = await Model.find({ level: tier });
       return data[0];
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      // res.status(500).json({ message: error.message });
       return {};
     }
   },

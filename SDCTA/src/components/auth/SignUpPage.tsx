@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  getRedirectResult,
+} from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
 import { registerUser } from "../../api/auth";
@@ -7,9 +14,6 @@ import { signUpErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
-
-import { GoogleAuthProvider, getAuth } from "firebase/auth";
-import { signInWithRedirect, getRedirectResult } from "firebase/auth";
 
 export const SignUpPage = () => {
   const [userDisplayName, setUserDisplayName] = useState("");
@@ -37,7 +41,7 @@ export const SignUpPage = () => {
       inputError.nameError = "";
 
       let error = false;
-      //make sure passwords match.
+      // make sure passwords match.
       if (!(confirmPassword === registerPassword)) {
         inputError.confirmError = "Passwords do not match.";
         error = true;
@@ -92,14 +96,14 @@ export const SignUpPage = () => {
     getRedirectResult(auth_)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const token = credential.accessToken;
 
         // The signed-in user info.
-        // @ts-ignore: Object is possibly 'null'.
+        // @ts-expect-error: Object is possibly 'null'.
         const user = result.user;
 
         // IdP data available using getAdditionalUserInfo(result)
