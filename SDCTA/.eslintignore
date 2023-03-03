@@ -3,3 +3,4 @@
 /src/react-app-env.d.ts
 /src/app/hooks.ts
 /src/app/store.ts
+/src/firebase-config.js
