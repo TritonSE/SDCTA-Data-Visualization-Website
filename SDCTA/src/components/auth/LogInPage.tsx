@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 export const LogInPage: React.FC = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rememberUser, setRememberUser] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
 
@@ -30,7 +31,7 @@ export const LogInPage: React.FC = () => {
     unknownError: "",
   });
 
-  const loginUser = async () => {
+  const loginUser = async (): Promise<void> => {
     try {
       inputError = {
         emailError: "",
@@ -44,11 +45,11 @@ export const LogInPage: React.FC = () => {
         unknownError: "",
       });
 
-      if (loginPassword == "") {
+      if (loginPassword === "") {
         inputError.passwordError = "Type in a password.";
         setInputError(inputError);
       }
-      const user = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
@@ -66,16 +67,15 @@ export const LogInPage: React.FC = () => {
     }
   };
 
-  const sendReset = () => {
+  const sendReset = (): void => {
     sendPasswordResetEmail(auth, loginEmail)
-      .then(() => {
+      .then((): void => {
         setResetMessage("Reset email sent successfully to: " + loginEmail);
       })
-      .catch((error) => {
-        const errorCode = error.code;
+      .catch((error: Error): void => {
         const errorMessage = error.message;
         setResetMessage(
-          errorMessage + " (Try again, make sure to type email in email box)"
+          `${errorMessage} (Try again, make sure to type email in email box)`
         );
       });
   };
@@ -122,11 +122,13 @@ export const LogInPage: React.FC = () => {
               setLoginEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== "" ? (
+          {inputError.emailError !== ""
+            ? (
             <p className="error-message">{inputError.emailError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
 
           <h3 className="textbox-label">Password</h3>
           <input
@@ -141,11 +143,13 @@ export const LogInPage: React.FC = () => {
             }}
           />
 
-          {inputError.passwordError !== "" ? (
+          {inputError.passwordError !== ""
+            ? (
             <p className="error-message">{inputError.passwordError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
         </div>
         <div className="terms">
           <input
@@ -159,13 +163,15 @@ export const LogInPage: React.FC = () => {
           <label className="terms-label">Remember me?</label>
         </div>
 
-        {inputError.unknownError !== "" ? (
+        {inputError.unknownError !== ""
+          ? (
           <p className="error-message">{inputError.unknownError}</p>
-        ) : (
-          ""
-        )}
+            )
+          : (
+              ""
+            )}
 
-        <button onClick={loginUser} className="btn-signup">
+        <button onClick={async () => { await loginUser() }} className="btn-signup">
           Login
         </button>
 
@@ -187,7 +193,7 @@ export const LogInPage: React.FC = () => {
           {resetMessage !== "" ? <p>{resetMessage}</p> : ""}
 
           <p className="signup-link-text">
-            Don't have an account?
+            Don&apos;t have an account?
             <a
               className="clickable-text"
               onClick={() => {

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
-export const SignUpPage = () => {
+export const SignUpPage: React.FC = () => {
   const [userDisplayName, setUserDisplayName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -32,7 +32,7 @@ export const SignUpPage = () => {
     nameError: "",
   });
 
-  const register = async () => {
+  const register = async (): Promise<void> => {
     try {
       inputError.unknownError = "";
       inputError.passwordError = "";
@@ -194,11 +194,13 @@ export const SignUpPage = () => {
               setUserDisplayName(event.target.value);
             }}
           />
-          {inputError.nameError !== "" ? (
+          {inputError.nameError !== ""
+            ? (
             <p className="error-message">{inputError.nameError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
 
           {/* Email input */}
           <h3 className="textbox-label">Email</h3>
@@ -211,11 +213,13 @@ export const SignUpPage = () => {
               setRegisterEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== "" ? (
+          {inputError.emailError !== ""
+            ? (
             <p className="error-message">{inputError.emailError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
 
           {/* Password input */}
           <h3 className="textbox-label">Password</h3>
@@ -230,11 +234,13 @@ export const SignUpPage = () => {
               setRegisterPassword(event.target.value);
             }}
           />
-          {inputError.passwordError !== "" ? (
+          {inputError.passwordError !== ""
+            ? (
             <p className="error-message">{inputError.passwordError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
 
           {/* Confirm password */}
           <h3 className="textbox-label">Confirm Password</h3>
@@ -247,11 +253,13 @@ export const SignUpPage = () => {
               setConfirmPassword(event.target.value);
             }}
           />
-          {inputError.confirmError !== "" ? (
+          {inputError.confirmError !== ""
+            ? (
             <p className="error-message">{inputError.confirmError}</p>
-          ) : (
-            ""
-          )}
+              )
+            : (
+                ""
+              )}
         </div>
 
         <div className="terms">
@@ -269,13 +277,15 @@ export const SignUpPage = () => {
           </label>
         </div>
 
-        {inputError.unknownError !== "" ? (
+        {inputError.unknownError !== ""
+          ? (
           <p className="error-message">{inputError.unknownError}</p>
-        ) : (
-          ""
-        )}
+            )
+          : (
+              ""
+            )}
 
-        <button onClick={register} className="btn-signup">
+        <button onClick={ register } className="btn-signup">
           Sign Up
         </button>
 
@@ -286,7 +296,7 @@ export const SignUpPage = () => {
         </div>
 
         <div>
-          <button onClick={loginWithGoogle} className="btn google-signup">
+          <button onClick={ loginWithGoogle } className="btn google-signup">
             Sign in with Google
           </button>
         </div>
