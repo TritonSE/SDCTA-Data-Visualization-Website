@@ -49,11 +49,7 @@ export const LogInPage: React.FC = () => {
         inputError.passwordError = "Type in a password.";
         setInputError(inputError);
       }
-      await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
       dispatch(login());
       navigate("/");
@@ -103,7 +99,7 @@ export const LogInPage: React.FC = () => {
 
         navigate("/");
       })
-      .catch((error) => { }); // end of catch
+      .catch((error) => {}); // end of catch
   };
 
   return (
@@ -122,13 +118,11 @@ export const LogInPage: React.FC = () => {
               setLoginEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== ""
-            ? (
+          {inputError.emailError !== "" ? (
             <p className="error-message">{inputError.emailError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           <h3 className="textbox-label">Password</h3>
           <input
@@ -143,13 +137,11 @@ export const LogInPage: React.FC = () => {
             }}
           />
 
-          {inputError.passwordError !== ""
-            ? (
+          {inputError.passwordError !== "" ? (
             <p className="error-message">{inputError.passwordError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
         </div>
         <div className="terms">
           <input
@@ -163,15 +155,18 @@ export const LogInPage: React.FC = () => {
           <label className="terms-label">Remember me?</label>
         </div>
 
-        {inputError.unknownError !== ""
-          ? (
+        {inputError.unknownError !== "" ? (
           <p className="error-message">{inputError.unknownError}</p>
-            )
-          : (
-              ""
-            )}
+        ) : (
+          ""
+        )}
 
-        <button onClick={async () => { await loginUser() }} className="btn-signup">
+        <button
+          onClick={async () => {
+            await loginUser();
+          }}
+          className="btn-signup"
+        >
           Login
         </button>
 

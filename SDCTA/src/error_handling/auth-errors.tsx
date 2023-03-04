@@ -7,8 +7,8 @@ interface inputError {
 const defaultError = {
   emailError: "",
   passwordError: "",
-  unknownError: ""
-}
+  unknownError: "",
+};
 
 const signUpErrorHandler = (error: Error): inputError => {
   const errorMessage = error.message;
@@ -39,7 +39,7 @@ const signUpErrorHandler = (error: Error): inputError => {
   } else {
     return {
       ...defaultError,
-      unknownError: errorMessage
+      unknownError: errorMessage,
     };
   }
 };
@@ -50,7 +50,7 @@ const logInErrorHandler = (error: Error): inputError => {
   if (errorMessage.includes("user-not-found")) {
     return {
       ...defaultError,
-      emailError: "A user has not been found with this email."
+      emailError: "A user has not been found with this email.",
     };
   } else if (errorMessage.includes("invalid-email")) {
     return {
@@ -60,17 +60,18 @@ const logInErrorHandler = (error: Error): inputError => {
   } else if (errorMessage.includes("wrong-password")) {
     return {
       ...defaultError,
-      passwordError: "Wrong password."
+      passwordError: "Wrong password.",
     };
   } else if (errorMessage.includes("internal-error")) {
     return {
       ...defaultError,
-      unknownError: "Internal error. Make sure you have typed a valid password."
+      unknownError:
+        "Internal error. Make sure you have typed a valid password.",
     };
   } else {
     return {
       ...defaultError,
-      unknownError: errorMessage
+      unknownError: errorMessage,
     };
   }
 };
