@@ -4,7 +4,7 @@ import Model from "../models/user.js";
 const router = express.Router();
 
 // Post Method
-router.post("/post", async (req, res) => {
+router.post("/", async (req, res) => {
   const data = new Model({
     username: req.body.username,
     password: req.body.password,

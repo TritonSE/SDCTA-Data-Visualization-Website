@@ -1,5 +1,5 @@
 import Model from "../models/category.js";
-import { ServiceError } from "../errors.js";
+import { InternalError, ServiceError } from "../errors.js";
 
 export async function getCategoryByName(name) {
   const category = await Model.find({ name });
@@ -10,8 +10,12 @@ export async function getCategoryByName(name) {
 }
 
 export async function getAllCategories() {
-  const category = await Model.find();
-  return category;
+  try {
+    const category = await Model.find();
+    return category;
+  } catch (error) {
+    throw InternalError.UNKNOWN;
+  }
 }
 
 export async function createCategory(name, visualizations) {
@@ -28,7 +32,16 @@ export async function createCategory(name, visualizations) {
 
 export async function updateCategory(id, body) {
   try {
+    const options = { new: true };
     return await Model.findByIdAndUpdate(id, body, options);
+  } catch (error) {
+    throw ServiceError.INVALID_CATEGORY_RECEIVED.addContext(error);
+  }
+}
+
+export async function deleteCategory(id, body) {
+  try {
+    return await Model.findByIdAndDelete(id);
   } catch (error) {
     throw ServiceError.INVALID_CATEGORY_RECEIVED.addContext(error);
   }

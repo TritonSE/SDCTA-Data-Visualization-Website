@@ -66,6 +66,8 @@ export class ServiceError extends CustomError {
  */
 const INTERNAL_ERROR_MSG = "An internal server error occured";
 export class InternalError extends CustomError {
+  static UNKNOWN = new InternalError(0);
+
   constructor(code, status, message) {
     super(code, status, message);
     if (!status) this.status = 500;
