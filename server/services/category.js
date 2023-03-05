@@ -1,14 +1,10 @@
-const Model = require('../models/category');
+import Model from "../models/category.js";
+import { ServiceError, InternalError } from "../errors.js";
 
-module.exports = {
-    getCategoryByName: async function getCategoryByName(name) {
-        try{
-            const data = await Model.find({name: name});
-            return data[0];
-        }
-        catch(error){
-            res.status(500).json({message: error.message})
-            return {};
-        }
-    }
-};
+export async function getCategoryByName(name) {
+  const category = await Model.find({ name });
+  if (!category) {
+    throw ServiceError.CATEGORY_NOT_FOUND;
+  }
+  return data[0];
+}

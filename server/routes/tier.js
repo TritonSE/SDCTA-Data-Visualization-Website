@@ -1,10 +1,7 @@
-const express = require("express");
+import express from "express";
+import Model from "../models/tier.js";
 
 const router = express.Router();
-
-module.exports = router;
-
-const Model = require("../models/tier");
 
 // Post Method
 router.post("/post", async (req, res) => {
@@ -65,3 +62,5 @@ router.delete("/delete/:id", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+export default router;

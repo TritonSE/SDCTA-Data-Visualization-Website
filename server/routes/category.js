@@ -1,12 +1,9 @@
-const express = require("express");
+import express from "express";
+import Model from "../models/category.js";
+import { getCategoryByName } from "../services/category.js";
+import { getVisualizationByTitle } from "../services/visualization.js";
 
 const router = express.Router();
-
-module.exports = router;
-
-const Model = require('../models/category');
-const categoryServices = require('../services/category');
-const visualizationServices = require('../services/visualization');
 
 // Post Method
 router.post("/post", async (req, res) => {
@@ -23,42 +20,29 @@ router.post("/post", async (req, res) => {
   }
 });
 
-//Get all Method
-router.get('/getAll', async (req, res) => {
-    try{
-        const data = await Model.find();
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
+// Get all Method
+router.get("/getAll", async (req, res) => {
+  try {
+    const data = await Model.find();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Get by Name Method
-router.get('/getOne/:name', async (req, res) => {
-    try{
-        const data = await categoryServices.getCategoryByName(req.params.name);
-        data["visualizations"] = await Promise.all(data["visualizations"].map(
-            visualizationServices.getVisualizationByTitle
-        ));
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
-
-//Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
-    try{
-        const data = await Model.findById(req.params.id);
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-}
-);
+router.get("/getOne/:name", async (req, res) => {
+  try {
+    const data = await getCategoryByName(req.params.name);
+    data.visualizations = await Promise.all(
+      data.visualizations.map(getVisualizationByTitle)
+    );
+    res.json(data);
+  } catch (e) {
+    console.error(e);
+    return;
+  }
+});
 
 // Update by ID Method
 router.patch("/update/:id", async (req, res) => {
@@ -85,3 +69,5 @@ router.delete("/delete/:id", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+export default router;

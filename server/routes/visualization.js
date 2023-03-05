@@ -1,21 +1,17 @@
-const express = require("express");
+import express from "express";
+import Model from "../models/visualization.js";
+import { getVisualizationByTitle } from "../services/visualization.js";
 
 const router = express.Router();
 
-module.exports = router;
-
-const Model = require('../models/visualization');
-const visualizationServices = require('../services/visualization');
-
-
-//Post Method
-router.post('/post', async (req, res) => {
-    const data = new Model({
-        title: req.body.title,
-        analysis: req.body.analysis,
-        link: req.body.link,
-        csvLink: req.body.csvLink
-    })
+// Post Method
+router.post("/post", async (req, res) => {
+  const data = new Model({
+    title: req.body.title,
+    analysis: req.body.analysis,
+    link: req.body.link,
+    csvLink: req.body.csvLink,
+  });
 
   try {
     const dataToSave = await data.save();
@@ -25,38 +21,35 @@ router.post('/post', async (req, res) => {
   }
 });
 
-//Get all Method
-router.get('/getAll', async (req, res) => {
-    try{
-        const data = await Model.find();
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
+// Get all Method
+router.get("/getAll", async (req, res) => {
+  try {
+    const data = await Model.find();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Get by Title Method
-router.get('/getOne/:title', async (req, res) => {
-    try{
-        const data = await visualizationServices.getVisualizationByTitle(req.params.title);
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
+router.get("/getOne/:title", async (req, res) => {
+  try {
+    const data = await getVisualizationByTitle(req.params.title);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-//Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
-    try{
-        const data = await Model.findById(req.params.id);
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
+// Get by ID Method
+router.get("/getOne/:id", async (req, res) => {
+  try {
+    const data = await Model.findById(req.params.id);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Update by ID Method
 router.patch("/update/:id", async (req, res) => {
@@ -83,3 +76,5 @@ router.delete("/delete/:id", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+export default router;
