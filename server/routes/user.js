@@ -30,7 +30,7 @@ router.get("/getAll", async (req, res) => {
   }
 });
 // Get by ID Method
-router.get("/getOne/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
     res.json(data);
@@ -40,7 +40,7 @@ router.get("/getOne/:id", async (req, res) => {
 });
 
 // Update by ID Method
-router.patch("/update/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -55,7 +55,7 @@ router.patch("/update/:id", async (req, res) => {
 });
 
 // Delete by ID Method
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Model.findByIdAndDelete(id);

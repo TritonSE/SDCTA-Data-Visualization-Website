@@ -5,7 +5,7 @@ import { getVisualizationByTitle } from "../services/visualization.js";
 const router = express.Router();
 
 // Post Method
-router.post("/post", async (req, res) => {
+router.post("/", async (req, res) => {
   const data = new Model({
     title: req.body.title,
     analysis: req.body.analysis,
@@ -32,7 +32,7 @@ router.get("/getAll", async (req, res) => {
 });
 
 // Get by Title Method
-router.get("/getOne/:title", async (req, res) => {
+router.get("/:title", async (req, res) => {
   try {
     const data = await getVisualizationByTitle(req.params.title);
     res.json(data);
@@ -42,7 +42,7 @@ router.get("/getOne/:title", async (req, res) => {
 });
 
 // Get by ID Method
-router.get("/getOne/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
     res.json(data);
@@ -52,7 +52,7 @@ router.get("/getOne/:id", async (req, res) => {
 });
 
 // Update by ID Method
-router.patch("/update/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -67,7 +67,7 @@ router.patch("/update/:id", async (req, res) => {
 });
 
 // Delete by ID Method
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Model.findByIdAndDelete(id);
