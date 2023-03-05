@@ -297,7 +297,8 @@ export const SignUpPage: React.FC = () => {
 
         <div>
           <button onClick={ loginWithGoogle } className="btn google-signup">
-            Sign in with Google
+            <div className="google-logo"></div>
+            <p className="google-text">Sign in with Google</p>
           </button>
         </div>
       </div>

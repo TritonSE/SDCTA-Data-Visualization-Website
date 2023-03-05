@@ -193,7 +193,10 @@ export const LogInPage: React.FC = () => {
         </div>
 
         <div>
-          <button className="btn google-signup">Log in With Google</button>
+          <button className="btn google-signup">
+          <div className="google-logo"></div>
+            <p className="google-text">Log in with Google</p>
+          </button>
         </div>
 
         <div className="bottom-text">
