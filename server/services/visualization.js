@@ -1,11 +1,10 @@
 import Model from "../models/visualization.js";
+import { ServiceError } from "../errors.js";
 
 export async function getVisualizationByTitle(title) {
-  try {
-    const data = await Model.find({ title });
-    return data[0];
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-    return {};
+  const vis = await Model.find({ title });
+  if (!vis) {
+    throw ServiceError.VIS_NOT_FOUND;
   }
+  return vis[0];
 }

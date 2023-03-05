@@ -4,7 +4,7 @@ import Model from "../models/tier.js";
 const router = express.Router();
 
 // Post Method
-router.post("/post", async (req, res) => {
+router.post("/", async (req, res) => {
   const data = new Model({
     name: req.body.name,
     level: req.body.level,
@@ -27,8 +27,9 @@ router.get("/getAll", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 // Get by ID Method
-router.get("/getOne/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
     res.json(data);

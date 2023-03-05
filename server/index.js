@@ -6,6 +6,7 @@ import tierRouter from "./routes/tier.js";
 import userRouter from "./routes/user.js";
 import categoryRouter from "./routes/category.js";
 import visRouter from "./routes/visualization.js";
+import { CustomError, InternalError } from "./errors.js";
 
 dotenv.config();
 
@@ -44,10 +45,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/tier", tierRouter);
-app.use("/api/user", userRouter);
-app.use("/api/category", categoryRouter);
-app.use("/api/visualization", visRouter);
+app.use("/tier", tierRouter);
+app.use("/user", userRouter);
+app.use("/category", categoryRouter);
+app.use("/visualization", visRouter);
 
 app.use(errorHandler);
 

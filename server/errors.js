@@ -44,47 +44,21 @@ export class CustomError {
 }
 
 /**
- * Validation Error contains errors that appear while validating client inputs
- */
-const INVALID_OBJECT_ID_RECEIVED_MSG =
-  "Invalid ID was found, ID must be a string of 12 bytes or a string of 24 hex characters";
-const INVALID_BOOLEAN_VALUE_MSG =
-  "Invalid boolean value was found in the request, expected true/false";
-const USER_NOT_IN_SESSION_MSG = "No user found in session";
-const INVALID_PAGINATION_INPUT = "Incorrect pagination values received";
-export class ValidationError extends CustomError {
-  static INVALID_OBJECT_ID = new ValidationError(
-    0,
-    400,
-    INVALID_OBJECT_ID_RECEIVED_MSG
-  );
-
-  static INVALID_BOOLEAN_VALUE = new ValidationError(
-    1,
-    400,
-    INVALID_BOOLEAN_VALUE_MSG
-  );
-
-  static USER_NOT_IN_SESSION = new ValidationError(
-    2,
-    400,
-    USER_NOT_IN_SESSION_MSG
-  );
-
-  static INVALID_PAGINATION_INPUT = new ValidationError(
-    3,
-    400,
-    INVALID_PAGINATION_INPUT
-  );
-}
-
-/**
  * ServiceError are errors which appear while processing the client's request
  */
-const CATEGORY_NOT_FOUND_MSG = "Category ID you specified does not exist";
+const CATEGORY_NOT_FOUND_MSG = "Category Name you specified does not exist";
+const VIS_NOT_FOUND_MSG = "Visualization Name you specified does not exist";
+const INVALID_CATEGORY_RECEIVED_MSG =
+  "Invalid Category payload received, make sure you have all required fields.";
 
 export class ServiceError extends CustomError {
   static CATEGORY_NOT_FOUND = new ServiceError(1, 404, CATEGORY_NOT_FOUND_MSG);
+  static VIS_NOT_FOUND = new ServiceError(1, 404, VIS_NOT_FOUND_MSG);
+  static INVALID_CATEGORY_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_CATEGORY_RECEIVED_MSG
+  );
 }
 
 /**
@@ -92,20 +66,6 @@ export class ServiceError extends CustomError {
  */
 const INTERNAL_ERROR_MSG = "An internal server error occured";
 export class InternalError extends CustomError {
-  static IMAGE_UPLOAD_ERROR = new InternalError(0);
-
-  static IMAGE_DELETE_ERROR = new InternalError(1);
-
-  static JOB_DELETE_ERROR = new InternalError(2);
-
-  static USER_NOT_FOUND = new InternalError(3, 404);
-
-  static DOCUMENT_UPLOAD_ERROR = new InternalError(4);
-
-  static UNKNOWN = new InternalError(5); // for any unknown error
-
-  static OTHER = new InternalError(6); // for all known errors, not belonging to the above categories
-
   constructor(code, status, message) {
     super(code, status, message);
     if (!status) this.status = 500;
