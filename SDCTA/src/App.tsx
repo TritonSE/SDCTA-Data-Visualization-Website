@@ -1,7 +1,16 @@
 import "./App.css";
 import { Routes } from "./components/Routes";
+import { auth } from "./firebase-config";
+import { login } from "./slices/loginSlice";
+import { useDispatch } from "react-redux";
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+  auth.onAuthStateChanged(user => {
+    if (user != null) {
+      dispatch(login());
+    }
+  });
   return (
     <>
       <Routes />

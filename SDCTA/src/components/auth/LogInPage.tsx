@@ -6,6 +6,8 @@ import {
   getAuth,
   signInWithRedirect,
   getRedirectResult,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
@@ -49,11 +51,20 @@ export const LogInPage: React.FC = () => {
         inputError.passwordError = "Type in a password.";
         setInputError(inputError);
       }
+
       await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
+
+      if (rememberUser) {
+        setPersistence(auth, browserLocalPersistence).then(async () => {
+        }).catch((error: Error) => {
+          const errorMessage = error.message;
+          setInputError({ ...inputError, unknownError: errorMessage });
+        });
+      }
 
       dispatch(login());
       navigate("/");
