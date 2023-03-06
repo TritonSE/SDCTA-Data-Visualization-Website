@@ -48,23 +48,33 @@ export class CustomError {
  */
 const CATEGORY_NOT_FOUND_MSG = "Category Name you specified does not exist";
 const VIS_NOT_FOUND_MSG = "Visualization Name you specified does not exist";
+const TIER_NOT_FOUND_MSG = "The Tier you specified does not exist";
 const INVALID_CATEGORY_RECEIVED_MSG =
   "Invalid Category payload received, make sure you have all required fields.";
 const INVALID_VISUALIZATION_RECEIVED_MSG =
   "Invalid Category payload received, make sure you have all required fields.";
+const INVALID_TIER_RECEIVED_MSG =
+  "Invalid Tier payload received, make sure you have all required fields.";
 
 export class ServiceError extends CustomError {
   static CATEGORY_NOT_FOUND = new ServiceError(1, 404, CATEGORY_NOT_FOUND_MSG);
-  static VIS_NOT_FOUND = new ServiceError(1, 404, VIS_NOT_FOUND_MSG);
   static INVALID_CATEGORY_RECEIVED = new ServiceError(
     0,
     400,
     INVALID_CATEGORY_RECEIVED_MSG
   );
-  static INVALID_CATEGORY_RECEIVED = new ServiceError(
+  static VIS_NOT_FOUND = new ServiceError(1, 404, VIS_NOT_FOUND_MSG);
+
+  static INVALID_VISUALIZATION_RECEIVED = new ServiceError(
     0,
     400,
     INVALID_VISUALIZATION_RECEIVED_MSG
+  );
+  static TIER_NOT_FOUND = new ServiceError(1, 404, TIER_NOT_FOUND_MSG);
+  static INVALID_TIER_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_TIER_RECEIVED_MSG
   );
 }
 

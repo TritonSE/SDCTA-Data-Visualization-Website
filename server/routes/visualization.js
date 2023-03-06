@@ -1,5 +1,4 @@
 import express from "express";
-import Model from "../models/visualization.js";
 import {
   getVisualizationByTitle,
   createVisualization,
