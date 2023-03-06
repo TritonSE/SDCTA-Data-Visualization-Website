@@ -39,7 +39,7 @@ export async function updateCategory(id, body) {
   }
 }
 
-export async function deleteCategory(id, body) {
+export async function deleteCategory(id) {
   try {
     return await Model.findByIdAndDelete(id);
   } catch (error) {

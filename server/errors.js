@@ -50,6 +50,8 @@ const CATEGORY_NOT_FOUND_MSG = "Category Name you specified does not exist";
 const VIS_NOT_FOUND_MSG = "Visualization Name you specified does not exist";
 const INVALID_CATEGORY_RECEIVED_MSG =
   "Invalid Category payload received, make sure you have all required fields.";
+const INVALID_VISUALIZATION_RECEIVED_MSG =
+  "Invalid Category payload received, make sure you have all required fields.";
 
 export class ServiceError extends CustomError {
   static CATEGORY_NOT_FOUND = new ServiceError(1, 404, CATEGORY_NOT_FOUND_MSG);
@@ -58,6 +60,11 @@ export class ServiceError extends CustomError {
     0,
     400,
     INVALID_CATEGORY_RECEIVED_MSG
+  );
+  static INVALID_CATEGORY_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_VISUALIZATION_RECEIVED_MSG
   );
 }
 

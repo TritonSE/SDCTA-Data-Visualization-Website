@@ -8,3 +8,34 @@ export async function getVisualizationByTitle(title) {
   }
   return vis[0];
 }
+
+export async function createVisualization(title, body, link, csvLink) {
+  const data = new Model({
+    title: title,
+    analysis: analysis,
+    link: link,
+    csvLink: csvLink,
+  });
+  try {
+    return await data.save();
+  } catch (error) {
+    throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
+  }
+}
+
+export async function updateVisualization(id, body) {
+  try {
+    const options = { new: true };
+    return await Model.findByIdAndUpdate(id, body, options);
+  } catch (error) {
+    throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
+  }
+}
+
+export async function deleteVisualization(id) {
+  try {
+    return await Model.findByIdAndDelete(id);
+  } catch (error) {
+    throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
+  }
+}
