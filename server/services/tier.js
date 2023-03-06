@@ -11,8 +11,8 @@ export async function getTierByLevel(level) {
 
 export async function createTier(name, level) {
   const data = new Model({
-    name: req.body.name,
-    level: req.body.level,
+    name,
+    level,
   });
   try {
     return await data.save();

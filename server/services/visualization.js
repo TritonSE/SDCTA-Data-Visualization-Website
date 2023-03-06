@@ -9,12 +9,12 @@ export async function getVisualizationByTitle(title) {
   return vis[0];
 }
 
-export async function createVisualization(title, body, link, csvLink) {
+export async function createVisualization(title, analysis, link, csvLink) {
   const data = new Model({
-    title: title,
-    analysis: analysis,
-    link: link,
-    csvLink: csvLink,
+    title,
+    analysis,
+    link,
+    csvLink,
   });
   try {
     return await data.save();

@@ -63,13 +63,14 @@ export class ServiceError extends CustomError {
     400,
     INVALID_CATEGORY_RECEIVED_MSG
   );
-  static VIS_NOT_FOUND = new ServiceError(1, 404, VIS_NOT_FOUND_MSG);
 
+  static VIS_NOT_FOUND = new ServiceError(1, 404, VIS_NOT_FOUND_MSG);
   static INVALID_VISUALIZATION_RECEIVED = new ServiceError(
     0,
     400,
     INVALID_VISUALIZATION_RECEIVED_MSG
   );
+
   static TIER_NOT_FOUND = new ServiceError(1, 404, TIER_NOT_FOUND_MSG);
   static INVALID_TIER_RECEIVED = new ServiceError(
     0,
