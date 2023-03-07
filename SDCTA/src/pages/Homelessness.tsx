@@ -1,7 +1,7 @@
-export const Homelessness = () => {
+export const Homelessness: React.FC = () => {
   return (
     <div>
-        <h1>Homelessness</h1>
+      <h1>Homelessness</h1>
     </div>
-  )
-}
+  );
+};

@@ -1,25 +1,13 @@
+import "./App.css";
+import { Routes } from "./components/Routes";
 
-import { IndividualVisualization } from './pages/IndividualVisualization';
-
-import { LandingPage } from './pages/LandingPage';
-import './App.css';
-import { Municipal } from './pages/Municipal';
-import { Routes } from './components/Routes';
-
-declare global {
-  interface Window {
-    tableau: any,
-  }
-}
-const App = () => {
-
+const App: React.FC = () => {
   return (
     <>
       <Routes />
+      <div className="App"></div>
     </>
-
   );
-}
-
+};
 
 export default App;

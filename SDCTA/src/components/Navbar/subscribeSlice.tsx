@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState,  } from '../../app/store';
+import { createSlice } from "@reduxjs/toolkit";
+import { type RootState } from "../../app/store";
 
 export interface SubscribeState {
   value: boolean;
@@ -10,18 +10,16 @@ const initialState: SubscribeState = {
 };
 
 export const subscribeSlice = createSlice({
-  name: 'subscribe',
+  name: "subscribe",
   initialState,
   reducers: {
     subscribe: (state) => {
-
       state.value = true;
     },
     unsubscribe: (state) => {
       state.value = false;
     },
   },
-
 });
 
 export const { subscribe, unsubscribe } = subscribeSlice.actions;
