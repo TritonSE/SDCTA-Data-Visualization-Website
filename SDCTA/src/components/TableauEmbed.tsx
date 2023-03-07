@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 interface TableauEmbedProp {
 	url: string;
 }
+
 const { tableau } = window;
-function TableauEmbed({ url }: TableauEmbedProp) {
+
+export default function TableauEmbed({ url }: TableauEmbedProp) {
 	//const navigate = useNavigate();
 	let viz;
 	const ref = useRef(null);
@@ -44,4 +46,3 @@ function TableauEmbed({ url }: TableauEmbedProp) {
 
 	)
 }
-export default TableauEmbed;

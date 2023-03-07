@@ -21,7 +21,7 @@ export default function IndividualVisualization({ url, csvlink }: IndividualVisu
                     <p className="download-button">Download <img src={downloadIcon} alt="download icon" /></p>
                 </div>
                 {/* <img className='tableauVisualization' src={tableauVisualization} alt="Tableau Data Visualization"/> */}
-                {/* <TableauEmbed url={url} /> */}
+                <TableauEmbed url={url} />
                 <div className='body-text'>
                     <h2 id="Analysis">Data Analysis</h2>
                     <p className="dscription">
