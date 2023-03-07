@@ -12,4 +12,4 @@ $ cd SDCTA
 $ npm install
 $ npm start
 ```
-Note: You will need a .env file that defines DATABASE_URL.
+Note: You will need a .env file that defines DATABASE_URL. Please see the backend README at server/README.md for further details on the .env file and connecting to and accessing the Mongo database.
