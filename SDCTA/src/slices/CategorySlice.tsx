@@ -11,6 +11,6 @@ export interface CategoryState {
 	Homelessness: TableauViz[]
 }
 
-const initialState: CategoryState = {
+//const initialState: CategoryState = {
 	Education: []
-}
+//}
