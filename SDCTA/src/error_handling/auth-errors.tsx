@@ -1,4 +1,4 @@
-interface inputError {
+interface InputError {
   emailError: string;
   passwordError: string;
   unknownError: string;
@@ -10,7 +10,7 @@ const defaultError = {
   unknownError: ""
 }
 
-const signUpErrorHandler = (error: Error): inputError => {
+const signUpErrorHandler = (error: Error): InputError => {
   const errorMessage = error.message;
 
   if (errorMessage.includes("internal-error")) {
@@ -44,7 +44,7 @@ const signUpErrorHandler = (error: Error): inputError => {
   }
 };
 
-const logInErrorHandler = (error: Error): inputError => {
+const logInErrorHandler = (error: Error): InputError => {
   const errorMessage = error.message;
 
   if (errorMessage.includes("user-not-found")) {
