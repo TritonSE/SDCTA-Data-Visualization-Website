@@ -6,7 +6,8 @@ import {
   signInWithRedirect,
   getRedirectResult,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
+  browserSessionPersistence
 } from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
@@ -20,7 +21,6 @@ import { useDispatch } from "react-redux";
 export const LogInPage: React.FC = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rememberUser, setRememberUser] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
 
@@ -49,7 +49,8 @@ export const LogInPage: React.FC = () => {
 
       if (loginPassword === "") {
         inputError.passwordError = "Type in a password.";
-        setInputError(inputError);
+        setInputError({ ...inputError });
+        return;
       }
 
       await signInWithEmailAndPassword(
@@ -60,6 +61,12 @@ export const LogInPage: React.FC = () => {
 
       if (rememberUser) {
         setPersistence(auth, browserLocalPersistence).then(async () => {
+        }).catch((error: Error) => {
+          const errorMessage = error.message;
+          setInputError({ ...inputError, unknownError: errorMessage });
+        });
+      } else {
+        setPersistence(auth, browserSessionPersistence).then(async () => {
         }).catch((error: Error) => {
           const errorMessage = error.message;
           setInputError({ ...inputError, unknownError: errorMessage });

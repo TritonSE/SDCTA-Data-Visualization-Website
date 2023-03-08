@@ -6,6 +6,9 @@ import {
   getAuth,
   signInWithRedirect,
   getRedirectResult,
+  setPersistence,
+  browserSessionPersistence,
+  deleteUser
 } from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
@@ -69,19 +72,31 @@ export const SignUpPage: React.FC = () => {
           registerPassword
         );
 
+        setPersistence(auth, browserSessionPersistence).then(async () => {
+        }).catch((error: Error) => {
+          const errorMessage = error.message;
+          setInputError({ ...inputError, unknownError: errorMessage });
+        });
+
         await updateProfile(userCredential.user, {
           displayName: userDisplayName,
         });
 
-        await registerUser(userCredential);
+        const response = await registerUser(userCredential);
+        console.log(response);
 
         dispatch(login());
         navigate("/");
       }
     } catch (error) {
       if (error instanceof Error) {
+        if (auth.currentUser != null) {
+          deleteUser(auth.currentUser).then(() => {
+          }).catch((error) => {
+            setInputError({ ...inputError, unknownError: error });
+          });
+        }
         const errorMessage = signUpErrorHandler(error);
-
         inputError = { ...inputError, ...errorMessage };
         setInputError({ ...inputError });
       }
