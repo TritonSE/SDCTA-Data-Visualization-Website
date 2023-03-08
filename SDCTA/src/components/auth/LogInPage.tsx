@@ -79,11 +79,10 @@ export const LogInPage: React.FC = () => {
   const provider = new GoogleAuthProvider();
   const auth_ = getAuth();
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (): Promise<void> => {
     signInWithRedirect(auth_, provider);
     getRedirectResult(auth_)
       .then((result) => {
-
         // This gives you a Google Access Token. You can use it to access Google APIs.
         // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
         if (result !== null) {
@@ -98,7 +97,6 @@ export const LogInPage: React.FC = () => {
           // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
           const user = result.user;
         }
-        
         // IdP data available using getAdditionalUserInfo(result)
         // ...
 

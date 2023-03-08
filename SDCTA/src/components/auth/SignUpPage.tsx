@@ -91,7 +91,7 @@ export const SignUpPage: React.FC = () => {
   const provider = new GoogleAuthProvider();
   const auth_ = getAuth();
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (): Promise<void> => {
     signInWithRedirect(auth_, provider);
     getRedirectResult(auth_)
       .then((result) => {
