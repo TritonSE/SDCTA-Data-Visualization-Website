@@ -65,29 +65,31 @@ export const SignUpPage: React.FC = () => {
         ...inputError,
       });
 
-      if (!error) {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          registerEmail,
-          registerPassword
-        );
-
-        setPersistence(auth, browserSessionPersistence).then(async () => {
-        }).catch((error: Error) => {
-          const errorMessage = error.message;
-          setInputError({ ...inputError, unknownError: errorMessage });
-        });
-
-        await updateProfile(userCredential.user, {
-          displayName: userDisplayName,
-        });
-
-        const response = await registerUser(userCredential);
-        console.log(response);
-
-        dispatch(login());
-        navigate("/");
+      if (error) {
+        return;
       }
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+
+      setPersistence(auth, browserSessionPersistence).then(async () => {
+      }).catch((error: Error) => {
+        const errorMessage = error.message;
+        setInputError({ ...inputError, unknownError: errorMessage });
+      });
+
+      await updateProfile(userCredential.user, {
+        displayName: userDisplayName,
+      });
+
+      const response = await registerUser(userCredential);
+      console.log(response);
+
+      dispatch(login());
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         if (auth.currentUser != null) {
