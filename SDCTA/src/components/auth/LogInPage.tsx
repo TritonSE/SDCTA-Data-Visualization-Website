@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
   GoogleAuthProvider,
   getAuth,
   signInWithRedirect,
@@ -13,6 +12,7 @@ import "./auth.css";
 import { auth } from "../../firebase-config";
 import { logInErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
+import { ResetPasswordModal } from "../modal/resetPassword";
 
 import { login } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ export const LogInPage: React.FC = () => {
   const [loginPassword, setLoginPassword] = useState("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rememberUser, setRememberUser] = useState(false);
-  const [resetMessage, setResetMessage] = useState("");
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,19 +76,6 @@ export const LogInPage: React.FC = () => {
         setInputError({ ...inputError });
       }
     }
-  };
-
-  const sendReset = (): void => {
-    sendPasswordResetEmail(auth, loginEmail)
-      .then((): void => {
-        setResetMessage("Reset email sent successfully to: " + loginEmail);
-      })
-      .catch((error: Error): void => {
-        const errorMessage = error.message;
-        setResetMessage(
-          `${errorMessage} (Try again, make sure to type email in email box)`
-        );
-      });
   };
 
   const provider = new GoogleAuthProvider();
@@ -199,12 +186,16 @@ export const LogInPage: React.FC = () => {
           </button>
         </div>
 
+        <ResetPasswordModal
+          show={showResetModal}
+          setShow={(showChange) => {
+            setShowResetModal(showChange)
+          }}
+        />
         <div className="bottom-text">
-          <p className="clickable-text" onClick={sendReset}>
+          <p className="clickable-text" onClick= { () => { setShowResetModal(true) }}>
             Forgot your password?
           </p>
-
-          {resetMessage !== "" ? <p>{resetMessage}</p> : ""}
 
           <p className="signup-link-text">
             Don&apos;t have an account?
