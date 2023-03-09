@@ -1,5 +1,5 @@
 import Model from "../models/visualization.js";
-import { ServiceError } from "../errors.js";
+import { ServiceError, InternalError } from "../errors.js";
 
 export async function getVisualizationByTitle(title) {
   console.log(title);

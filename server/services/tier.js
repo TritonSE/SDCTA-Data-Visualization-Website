@@ -1,5 +1,5 @@
 import Model from "../models/tier.js";
-import { ServiceError } from "../errors.js";
+import { ServiceError, InternalError } from "../errors.js";
 
 export async function getTierByLevel(level) {
   const tier = await Model.findOne({ level });
