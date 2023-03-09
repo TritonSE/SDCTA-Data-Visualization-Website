@@ -15,9 +15,13 @@ export const Body = () => {
 				<div className="description" >
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				</div>
+<<<<<<< HEAD
 				<div className="imgbox">
                		<img className="center-fit" src={landscape} alt="sd landscape" />
             	</div>
+=======
+				<img src={landscape} alt="sd landscape" />
+>>>>>>> main
 			</div>
 				<div className="image_line" >
 					<div className="first_Visual">
