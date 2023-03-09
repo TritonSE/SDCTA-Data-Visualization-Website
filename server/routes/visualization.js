@@ -1,15 +1,16 @@
 import express from "express";
 import {
-  getVisualizationByTitle,
+  getVisualizationByID,
   createVisualization,
   updateVisualization,
+  getAllVisualizations,
   deleteVisualization,
 } from "../services/visualization.js";
 
 const router = express.Router();
 
 // Post Method
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const vis = await createVisualization(
       req.body.title,
@@ -19,17 +20,27 @@ router.post("/", async (req, res) => {
     );
     res.status(200).json(vis);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
-// Get by Title Method
-router.get("/:title", async (req, res) => {
+// Get all Method
+router.get("/getAll", async (req, res, next) => {
   try {
-    const data = await getVisualizationByTitle(req.params.title);
+    const data = await getAllVisualizations();
     res.json(data);
   } catch (error) {
-    console.error(error);
+    next(error);
+  }
+});
+
+// Get by ID Method
+router.get("/:id", async (req, res, next) => {
+  try {
+    const data = await getVisualizationByID(req.params.id);
+    res.json(data);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -41,18 +52,18 @@ router.patch("/:id", async (req, res) => {
     const result = await updateVisualization(id, updatedData);
     res.send(result);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // Delete by ID Method
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const data = await deleteVisualization(id);
-    res.send(`Document with ${data.title} has been deleted..`);
+    res.send(`Document with ${data.title} has been deleted.`);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 

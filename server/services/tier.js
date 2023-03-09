@@ -2,11 +2,11 @@ import Model from "../models/tier.js";
 import { ServiceError } from "../errors.js";
 
 export async function getTierByLevel(level) {
-  const vis = await Model.find({ level });
-  if (!vis) {
+  const tier = await Model.findOne({ level });
+  if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
-  return vis[0];
+  return tier;
 }
 
 export async function createTier(name, level) {
@@ -18,6 +18,15 @@ export async function createTier(name, level) {
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_TIER_RECEIVED.addContext(error);
+  }
+}
+
+export async function getAllTiers() {
+  try {
+    const tiers = await Model.find();
+    return tiers;
+  } catch (error) {
+    throw InternalError.UNKNOWN;
   }
 }
 

@@ -2,11 +2,21 @@ import Model from "../models/visualization.js";
 import { ServiceError } from "../errors.js";
 
 export async function getVisualizationByTitle(title) {
-  const vis = await Model.find({ title });
+  const vis = await Model.findOne({ title });
+  console.log(vis);
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
-  return vis[0];
+  return vis;
+}
+
+export async function getVisualizationByID(id) {
+  const vis = await Model.findOne({ id });
+  console.log(vis);
+  if (!vis) {
+    throw ServiceError.VIS_NOT_FOUND;
+  }
+  return vis;
 }
 
 export async function createVisualization(title, analysis, link, csvLink) {
@@ -20,6 +30,15 @@ export async function createVisualization(title, analysis, link, csvLink) {
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
+  }
+}
+
+export async function getAllVisualizations() {
+  try {
+    const visualizations = await Model.find();
+    return visualizations;
+  } catch (error) {
+    throw InternalError.UNKNOWN;
   }
 }
 

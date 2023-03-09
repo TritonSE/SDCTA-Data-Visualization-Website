@@ -2,11 +2,11 @@ import Model from "../models/category.js";
 import { InternalError, ServiceError } from "../errors.js";
 
 export async function getCategoryByName(name) {
-  const category = await Model.find({ name });
+  const category = await Model.findOne({ name });
   if (!category) {
     throw ServiceError.CATEGORY_NOT_FOUND;
   }
-  return category[0];
+  return category;
 }
 
 export async function getAllCategories() {

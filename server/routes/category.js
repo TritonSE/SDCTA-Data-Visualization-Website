@@ -11,7 +11,7 @@ import { getVisualizationByTitle } from "../services/visualization.js";
 const router = express.Router();
 
 // Post Method
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const category = await createCategory(
       req.body.name,
@@ -19,22 +19,22 @@ router.post("/", async (req, res) => {
     );
     res.status(200).json(category);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // Get all Method
-router.get("/getAll", async (req, res) => {
+router.get("/getAll", async (req, res, next) => {
   try {
     const data = await getAllCategories();
     res.json(data);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // Get by Name Method
-router.get("/:name", async (req, res) => {
+router.get("/:name", async (req, res, next) => {
   try {
     const data = await getCategoryByName(req.params.name);
     data.visualizations = await Promise.all(
@@ -42,27 +42,27 @@ router.get("/:name", async (req, res) => {
     );
     res.json(data);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // Update by ID Method
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", async (req, res, next) => {
   try {
     const result = await updateCategory(req.params.id, req.body);
     res.send(result);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // Delete by ID Method
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const data = await deleteCategory(req.params.id);
-    res.send(`Document with ${data.name} has been deleted..`);
+    res.send(`Document with ${data.name} has been deleted.`);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
