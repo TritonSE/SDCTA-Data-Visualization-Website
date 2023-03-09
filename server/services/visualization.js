@@ -2,16 +2,8 @@ import Model from "../models/visualization.js";
 import { ServiceError } from "../errors.js";
 
 export async function getVisualizationByTitle(title) {
+  console.log(title);
   const vis = await Model.findOne({ title });
-  console.log(vis);
-  if (!vis) {
-    throw ServiceError.VIS_NOT_FOUND;
-  }
-  return vis;
-}
-
-export async function getVisualizationByID(id) {
-  const vis = await Model.findOne({ id });
   console.log(vis);
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;

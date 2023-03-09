@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  getVisualizationByID,
+  getVisualizationByTitle,
   createVisualization,
   updateVisualization,
   getAllVisualizations,
@@ -35,9 +35,9 @@ router.get("/getAll", async (req, res, next) => {
 });
 
 // Get by ID Method
-router.get("/:id", async (req, res, next) => {
+router.get("/:title", async (req, res, next) => {
   try {
-    const data = await getVisualizationByID(req.params.id);
+    const data = await getVisualizationByTitle(req.params.title);
     res.json(data);
   } catch (error) {
     next(error);
