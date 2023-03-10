@@ -2,70 +2,73 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import { call } from "redux-saga/effects";
 import { RootState, } from "../app/store"
 import TableauEmbed from "../components/TableauEmbed";
+import {Category, Visualization} from "../api/data"
 
-
-interface TableauViz {
-	url: string
-	viz: any
-}
-
-interface TableauCategoryState {
-	vizs: TableauViz[];
-	loading: boolean;
-	error?: string;
+enum CategoryType{
+	Education = "Education",
+	Homelessness = "Homelessness",
+	Municipal = "Municipal"
 }
 
 interface TableauState{
-	currCategory: "Education" | "Municipal" | "Homelessness"
+	currCategory: CategoryType
+
 	categories: {
-		"Education": TableauCategoryState,
-		"Municipal": TableauCategoryState,
-		"Homelessness": TableauCategoryState
+		"Education": Category | null,
+		"Municipal": Category | null,
+		"Homelessness": Category | null
 	}
 }
 
-const initCategoryState: TableauCategoryState = {
-	vizs: [],
-	loading: false,
-	
 
-}
 const initialState: TableauState = {
-	currCategory: "Education",
+	currCategory: CategoryType.Education,
 	categories: {
-		"Education": initCategoryState,
-		"Municipal": initCategoryState,
-		"Homelessness": initCategoryState
+		"Education": null,
+		"Municipal": null,
+		"Homelessness": null
 	}
 }
 
 const TableauSlice = createSlice({
-	name: "tableau",
+	
+	name: "Category",
 	initialState,
 	reducers: {
-		setInitViz(state, action: PayloadAction<TableauViz[]>) {
-			state.categories[state.currCategory].vizs = action.payload;
-		},
-		setInitialVisualizationsError(state, action: PayloadAction<string>) {
-			state.categories[state.currCategory].loading = false;
-			state.categories[state.currCategory].error = action.payload;
-		},
+		/*
+		* Use Effect in Education
+		* Call API Call if Redux State is null
+		 */
+		// setInitViz(state, action: PayloadAction<TableauViz[]>) {
+		// 	state.categories[state.currCategory].vizs = action.payload;
+		// },
+		// setInitialVisualizationsError(state, action: PayloadAction<string>) {
+		// 	state.categories[state.currCategory].loading = false;
+		// 	state.categories[state.currCategory].error = action.payload;
+		// },
 		changeCategory(
 			state,
-			action: PayloadAction<"Education" | "Municipal" | "Homelessness">
+			action: PayloadAction<CategoryType>
 		) {
 			state.currCategory = action.payload;
 		},
+		loadCategory(
+			state,
+			action: PayloadAction<Category>
+		){
+			state.currCategory = action.payload.name as CategoryType;
+			state.categories[action.payload.name as CategoryType] = action.payload;
+		}
 	},
 });
 
-export const {setInitViz, changeCategory} = TableauSlice.actions;
+export const {changeCategory} = TableauSlice.actions;
 
 export default TableauSlice.reducer;
 //getting an error, not recognizing tableau as the name of the slice
-export const getCurrCategory = (state: TableauState) => state.currCategory;
-
-export const getCurrCategoryState =(state : TableauState) => state.categories[state.currCategory]
+export const getCurrCategory = (state: TableauState): string => state.currCategory;
+export const getCategoryValue = (state: TableauState) => state.categories
+// export const getCurrCategoryState = (state : TableauState): string => state.categories[state.currCategory]
 
 /* Implementation 1*/
 // function fetchTableauViz(url: string){

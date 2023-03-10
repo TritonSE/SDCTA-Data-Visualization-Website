@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react"
 import { visitLexicalEnvironment } from "typescript";
 import { useNavigate } from 'react-router-dom';
+import { getCategoryByName } from "../api/consumer";
 
 interface TableauEmbedProp {
 	url: string;
@@ -39,6 +40,8 @@ export default function TableauEmbed({ url }: TableauEmbedProp) {
 
 	useEffect(() => {
 		initViz();
+		getCategoryByName("test");
+		// console.log(getCategoryByName("test"));
 	}, []);
 
 	return (

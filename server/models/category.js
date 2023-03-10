@@ -1,17 +1,18 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const dataSchema = new mongoose.model("Category", 
-    new mongoose.Schema({
-        name: {
-            required: true,
-            unique: true,
-            type: String
-        },
-        visualizations: {
-            required: true,
-            type: Array
-        }
-    })
-)
+const dataSchema = new mongoose.model(
+  "Category",
+  new mongoose.Schema({
+    name: {
+      required: true,
+      unique: true,
+      type: String,
+    },
+    visualizations: {
+      required: true,
+      type: Array,
+    },
+  })
+);
 
-module.exports = dataSchema
+export default dataSchema;

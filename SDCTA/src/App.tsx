@@ -1,21 +1,23 @@
+import "./App.css";
+import { Routes } from "./components/Routes";
+import TableauEmbed from "./components/TableauEmbed";
+import { Education } from "./pages/Education";
 
-import { LandingPage } from './pages/LandingPage';
-
-import './App.css';
-import { Routes } from './components/Routes';
-
-const App = () => {
+declare global{
+	interface Window{
+		tableau: any
+	}
+}
+const App: React.FC = () => {
   return (
     <>
-      <Routes />
+      {/* <Routes /> */}
       <div className="App">
-      </div>
+		<Education />
+	  </div>
     </>
-
-
   );
-}
-
+};
 
 export default App;
 

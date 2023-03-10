@@ -1,29 +1,26 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-<<<<<<< HEAD
-import loginReducer from '../components/Navbar/loginSlice';
-import subscribeReducer from '../components/Navbar/subscribeSlice';
-import createSagaMiddleware from '@redux-saga/core';
-import { tableauReducer } from "../slices/CategorySlice";
-=======
-import loginReducer from '../slices/loginSlice';
-import subscribeReducer from '../slices/subscribeSlice';
-import createSagaMiddleware from 'redux-saga'
+import {
+  configureStore,
+  type ThunkAction,
+  type Action,
+} from "@reduxjs/toolkit";
+import loginReducer from "../slices/loginSlice";
+import subscribeReducer from "../slices/subscribeSlice";
+import createSagaMiddleware from "redux-saga";
+import tableauReducer from "../slices/CategorySlice"
 
 // Create the saga middleware
-const sagaMiddleware = createSagaMiddleware()
-const middleware = [sagaMiddleware]
-
->>>>>>> main
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     login: loginReducer,
-    subscribe: subscribeReducer
+    subscribe: subscribeReducer,
+	changeCategory: tableauReducer,
+
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(middleware),
+    getDefaultMiddleware().concat(middleware),
 });
 
 // Then run the saga

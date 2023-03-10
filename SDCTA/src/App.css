@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 @font-face {
-	font-family: ‘helvetica neue’;
-	src: local(‘Arial’);
+  font-family: ‘helvetica neue’;
+  src: local(‘Arial’);
 }
 
 @font-face {
-	font-family: ‘helvetica neue’;
-	font-weight: bold;
-	src: local(‘Arial’);
+  font-family: ‘helvetica neue’;
+  font-weight: bold;
+  src: local(‘Arial’);
 }
 
 @font-face {
-	font-family: ‘helvetica’;
-	src: local(‘Arial’);
+  font-family: ‘helvetica’;
+  src: local(‘Arial’);
 }
 
 .opensans {
-	font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
