@@ -1,5 +1,6 @@
 import Model from "../models/user.js";
-import { InternalError, ServiceError } from "../errors.js";
+import { ServiceError } from "../errors.js";
+import { getTierByLevel } from "./tier.js";
 
 export async function getUserByEmail(email) {
   const user = await Model.findOne({ email });
@@ -9,9 +10,9 @@ export async function getUserByEmail(email) {
   return user;
 }
 
-export async function createUser(username, email, tier_level) {
-  const tier = await tierServices.getTier(tier_level);
-  const data = new UserModel({
+export async function createUser(username, email, tierLevel) {
+  const tier = await getTierByLevel(tierLevel);
+  const data = new Model({
     username,
     email,
     tier,

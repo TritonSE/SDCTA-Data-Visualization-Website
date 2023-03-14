@@ -80,6 +80,7 @@ export class ServiceError extends CustomError {
     400,
     INVALID_TIER_RECEIVED_MSG
   );
+
   static USER_NOT_FOUND = new ServiceError(1, 404, USER_NOT_FOUND_MSG);
   static INVALID_USER_RECEIVED = new ServiceError(
     0,

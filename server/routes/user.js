@@ -2,14 +2,14 @@ import express from "express";
 import {
   createUser,
   deleteUser,
-  getUserByName,
+  getUserByEmail,
   updateUser,
 } from "../services/user.js";
 
 const router = express.Router();
 
 // Post Method
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const tier = await createUser(req.body.name, req.body.email, req.body.tier);
     res.status(200).json(tier);
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
 // Get by email Method
 router.get("/:email", async (req, res, next) => {
   try {
-    const data = await getUserByName(req.params.email);
+    const data = await getUserByEmail(req.params.email);
     res.json(data);
   } catch (error) {
     next(error);
