@@ -13,7 +13,7 @@ const registerUser = async (
     }),
   };
   const response = await fetch(
-    "http://localhost:3001/api/user/create",
+    "http://localhost:3001/user/",
     requestOptions
   );
   return response;

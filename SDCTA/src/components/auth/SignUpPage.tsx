@@ -15,7 +15,7 @@ import { auth } from "../../firebase-config";
 import { registerUser } from "../../api/auth";
 import { signUpErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../slices/loginSlice";
+import { login, logout } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 export const SignUpPage: React.FC = () => {
@@ -86,7 +86,17 @@ export const SignUpPage: React.FC = () => {
       });
 
       const response = await registerUser(userCredential);
-      console.log(response);
+
+      if (response.status === 400) {
+        if (auth.currentUser != null) {
+          deleteUser(auth.currentUser).then(() => {
+            setInputError({ ...inputError, unknownError: response.statusText });
+          }).catch((error) => {
+            setInputError({ ...inputError, unknownError: error });
+          });
+          return;
+        }
+      }
 
       dispatch(login());
       navigate("/");
@@ -94,6 +104,8 @@ export const SignUpPage: React.FC = () => {
       if (error instanceof Error) {
         if (auth.currentUser != null) {
           deleteUser(auth.currentUser).then(() => {
+            dispatch(logout());
+            navigate("/signup");
           }).catch((error) => {
             setInputError({ ...inputError, unknownError: error });
           });

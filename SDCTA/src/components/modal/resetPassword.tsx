@@ -62,23 +62,20 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
           >
             <CloseIcon />
           </IconButton>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            sx={titleStyle}
-          >
-            Reset Email
-          </Typography>
-          <Typography id="modal-modal-description" sx={textStyle}>
-            Type your email into the field, and we will send an email with a reset link.
-            <input
-                type="email"
-                className="text-input"
-                onChange={(event) => {
-                  setResetEmail(event.target.value);
-                }}
-            />
+          <h1 className="signup-form-title">Forgot Password?</h1>
+
+          <div className="signup-form">
+            <div className="input-boxes"></div>
+            <div className="input-boxes">
+              <h3 className="textbox-label">Email</h3>
+              <input
+                  type="email"
+                  className="text-input"
+                  onChange={(event) => {
+                    setResetEmail(event.target.value);
+                  }}
+              />
+            </div>
             {resetMessage !== ""
               ? (
             <p>{resetMessage}</p>
@@ -86,16 +83,10 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
               : (
                   ""
                 )}
-            </Typography>
-          <Button
-            placeholder="Email"
-            variant="contained"
-            disableElevation
-            sx={buttonStyle}
-            onClick={sendReset}
-            >
-            Send Reset
-          </Button>
+          </div>
+          <button onClick={sendReset} className="btn-signup">
+            Request Password
+          </button>
         </Box>
       </Modal>
     </div>
