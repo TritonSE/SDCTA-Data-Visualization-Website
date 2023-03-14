@@ -23,7 +23,7 @@ interface ModalProps {
 }
 
 export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
-  const [resetMessage, setResetMessage] = useState("Success");
+  const [resetMessage, setResetMessage] = useState("");
   const [resetEmail, setResetEmail] = useState("");
 
   const handleClose = (): void => {
@@ -37,9 +37,12 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
       })
       .catch((error: Error): void => {
         const errorMessage = error.message;
-        setResetMessage(
-          `${errorMessage} (Try again, make sure to type email in email box)`
-        );
+        if (errorMessage.includes("invalid-email")) {
+          setResetMessage("The email is invalid. Type a valid email.");
+        }
+        if (errorMessage.includes("user-not-found")) {
+          setResetMessage("This email is not associated with a user. Sign up with this email or try another.");
+        }
       });
   };
 
@@ -75,7 +78,7 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
                   An email has been sent to your inbox - Follow the instructions on how to reset your password.
                   <br />
                   <br />
-                  If you don’t receive the email within 5 minutes, reload the page
+                  If you don&apos;t receive the email within 5 minutes, reload the page
                   and re-request a password reset.
                 </h3>
               }
@@ -85,14 +88,16 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
                   <h3 className="textbox-label">Email</h3>
                   <input
                       type="email"
-                      className="text-input"
+                      className={
+                        resetMessage === "" || resetMessage === "Success" ? "text-input" : "text-input error"
+                      }
                       onChange={(event) => {
                         setResetEmail(event.target.value);
                       }}
                   />
-                  {resetMessage !== ""
+                  {resetMessage !== "" && resetMessage !== "Success"
                     ? (
-                      <p>{resetMessage}</p>
+                      <p className="reset-error">{resetMessage}</p>
                       )
                     : (
                         ""

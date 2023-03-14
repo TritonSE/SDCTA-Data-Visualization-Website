@@ -5,7 +5,6 @@ const dataSchema = new mongoose.model(
   new mongoose.Schema({
     username: {
       required: true,
-      unique: true,
       type: String,
     },
     email: {
