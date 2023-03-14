@@ -1,9 +1,12 @@
 import Model from "../models/visualization.js";
 import { ServiceError, InternalError } from "../errors.js";
+const http = require('http')
+const fs = require('fs')
+var Binary = mongo.Binary
 
 export async function getVisualizationByTitle(title) {
   console.log(title);
-  const vis = await Model.findOne({ title });
+  const vis = await Model.findOne({ title : title });
   console.log(vis);
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
@@ -11,12 +14,23 @@ export async function getVisualizationByTitle(title) {
   return vis;
 }
 
+export async function downloadCSVFileByTitle(title){
+  console.log(title);
+  const vis = await Model.findOne({ title });
+  if (!vis) {
+    throw ServiceError.VIS_NOT_FOUND;
+  }
+  fs.writeFileSync("./" + title + ".csv", vis.csvFile);
+}
+
 export async function createVisualization(title, analysis, link, csvLink) {
+  csvFile = new Binary(fs.readFileSync(csvLink));
   const data = new Model({
     title,
     analysis,
     link,
     csvLink,
+    csvFile
   });
   try {
     return await data.save();
