@@ -15,7 +15,7 @@ export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
     hideToolbar: true,
     hideTabs: true,
   };
-  function initViz (): void {
+  function initViz(): void {
     viz = window.tableau.VizManager.getVizs()[0];
     if (viz) {
       viz.dispose();
