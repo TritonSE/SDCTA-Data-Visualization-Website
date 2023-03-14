@@ -1,6 +1,5 @@
 import Model from "../models/visualization.js";
 import { ServiceError, InternalError } from "../errors.js";
-const http = require('http')
 const fs = require('fs')
 var Binary = mongo.Binary
 
