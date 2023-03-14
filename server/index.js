@@ -23,17 +23,24 @@ database.once("connected", () => {
 });
 
 const errorHandler = (err, req, res, next) => {
+  console.log(!(err instanceof CustomError));
+  console.log(err);
   if (!err) return;
   if (!(err instanceof CustomError)) {
     // All unhandled errors are marked as unknown internal errors
     const e = InternalError.UNKNOWN.addContext(err.stack);
     res.status(e.statusCode).json({
-      message: e.format(true),
+      message: e.format(false),
       error: true,
     });
   } else if (err instanceof InternalError) {
     // Internal Error Logging
     console.error(err.format(false));
+    res.status(err.statusCode).json({
+      message: err.format(true),
+      error: true,
+    });
+  } else {
     res.status(err.statusCode).json({
       message: err.format(true),
       error: true,

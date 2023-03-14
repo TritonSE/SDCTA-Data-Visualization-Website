@@ -88,7 +88,7 @@ export class InternalError extends CustomError {
 
   constructor(code, status, message) {
     super(code, status, message);
-    if (!status) this.status = 500;
+    if (!status) this.statusCode = 500;
     if (!message) this.message = INTERNAL_ERROR_MSG;
   }
 }
