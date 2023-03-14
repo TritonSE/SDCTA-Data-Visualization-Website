@@ -78,13 +78,12 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
                   An email has been sent to your inbox - Follow the instructions on how to reset your password.
                   <br />
                   <br />
-                  If you don&apos;t receive the email within 5 minutes, reload the page
-                  and re-request a password reset.
+                  If you don&apos;t receive the email within 5 minutes, you can request to reset your password again by clicking the button below!
                 </h3>
               }
 
-              {resetMessage !== "Success" &&
-                <div>
+              {resetMessage !== "Success"
+                ? <div>
                   <h3 className="textbox-label">Email</h3>
                   <input
                       type="email"
@@ -106,6 +105,9 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
                     Request Password
                   </button>
                 </div>
+                : <button onClick={sendReset} className="btn-signup">
+                    Request Password Again
+                </button>
               }
             </div>
           </div>
