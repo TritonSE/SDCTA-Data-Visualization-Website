@@ -52,12 +52,7 @@ export const LogInPage: React.FC = () => {
         setInputError({ ...inputError });
         return;
       }
-
-      await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
       if (rememberUser) {
         setPersistence(auth, browserLocalPersistence).then(async () => {
@@ -88,27 +83,30 @@ export const LogInPage: React.FC = () => {
   const provider = new GoogleAuthProvider();
   const auth_ = getAuth();
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (): Promise<void> => {
     signInWithRedirect(auth_, provider);
     getRedirectResult(auth_)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
-        // @ts-expect-error: Object is possibly 'null'.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
+        if (result !== null) {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        // @ts-expect-error: Object is possibly 'null'.
-        const token = credential.accessToken;
+          // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
+          if (credential !== null) {
+            const token = credential.accessToken;
+          }
 
-        // The signed-in user info.
-        // @ts-expect-error: Object is possibly 'null'.
-        const user = result.user;
-
+          // The signed-in user info.
+          // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
+          const user = result.user;
+        }
         // IdP data available using getAdditionalUserInfo(result)
         // ...
 
         navigate("/");
       })
-      .catch((error) => { }); // end of catch
+      .catch((error) => {}); // end of catch
   };
 
   return (
@@ -176,7 +174,12 @@ export const LogInPage: React.FC = () => {
               ""
             )}
 
-        <button onClick={async () => { await loginUser() }} className="btn-signup">
+        <button
+          onClick={async () => {
+            await loginUser();
+          }}
+          className="btn-signup"
+        >
           Login
         </button>
 
