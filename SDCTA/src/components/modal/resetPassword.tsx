@@ -23,7 +23,7 @@ interface ModalProps {
 }
 
 export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
-  const [resetMessage, setResetMessage] = useState("");
+  const [resetMessage, setResetMessage] = useState("Success");
   const [resetEmail, setResetEmail] = useState("");
 
   const handleClose = (): void => {
@@ -33,7 +33,7 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
   const sendReset = (): void => {
     sendPasswordResetEmail(auth, resetEmail)
       .then((): void => {
-        setResetMessage("Reset email sent successfully to: " + resetEmail);
+        setResetMessage("Success");
       })
       .catch((error: Error): void => {
         const errorMessage = error.message;
@@ -59,32 +59,49 @@ export const ResetPasswordModal: React.FC<ModalProps> = (props: ModalProps) => {
           >
             <CloseIcon />
           </IconButton>
-          <h1 className="reset-title">Forgot Password?</h1>
+          {resetMessage !== "Success"
+            ? <h1 className="reset-title">Forgot Password?</h1>
+            : <h1 className="reset-title">Email Successfully Sent!</h1>
+          }
 
           <div className="signup-form reset-form">
             <div className="input-boxes">
-              <h3 className="reset-desc">
-                Please enter your email below, and you will be
-                emailed a link on how to reset your password.
-              </h3>
-              <h3 className="textbox-label">Email</h3>
-              <input
-                  type="email"
-                  className="text-input"
-                  onChange={(event) => {
-                    setResetEmail(event.target.value);
-                  }}
-              />
-              {resetMessage !== ""
-                ? (
-                  <p>{resetMessage}</p>
-                  )
-                : (
-                    ""
-                  )}
-              <button onClick={sendReset} className="btn-signup">
-                Request Password
-              </button>
+              {resetMessage !== "Success"
+                ? <h3 className="reset-desc">
+                    Please enter your email below, and you will be
+                    emailed a link on how to reset your password.
+                  </h3>
+                : <h3 className="reset-desc">
+                  An email has been sent to your inbox - Follow the instructions on how to reset your password.
+                  <br />
+                  <br />
+                  If you don’t receive the email within 5 minutes, reload the page
+                  and re-request a password reset.
+                </h3>
+              }
+
+              {resetMessage !== "Success" &&
+                <div>
+                  <h3 className="textbox-label">Email</h3>
+                  <input
+                      type="email"
+                      className="text-input"
+                      onChange={(event) => {
+                        setResetEmail(event.target.value);
+                      }}
+                  />
+                  {resetMessage !== ""
+                    ? (
+                      <p>{resetMessage}</p>
+                      )
+                    : (
+                        ""
+                      )}
+                  <button onClick={sendReset} className="btn-signup">
+                    Request Password
+                  </button>
+                </div>
+              }
             </div>
           </div>
         </Box>

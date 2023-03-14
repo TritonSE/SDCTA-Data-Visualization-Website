@@ -11,7 +11,7 @@ const router = express.Router();
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
-    const tier = await createUser(req.body.name, req.body.email, req.body.tier);
+    const tier = await createUser(req.body.username, req.body.email, req.body.tier);
     res.status(200).json(tier);
   } catch (error) {
     next(error);
