@@ -2,14 +2,14 @@ import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 
-import TableauEmbed from "../components/TableauEmbed";
+import { TableauEmbed } from "../components/TableauEmbed";
 
 interface IndividualVisualizationProp {
   url: string;
   csvlink: string;
 }
 
-export const IndividualVisualization: React.FC = ({
+export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
   url,
   csvlink,
 }: IndividualVisualizationProp) => {

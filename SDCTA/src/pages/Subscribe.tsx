@@ -5,4 +5,3 @@ export const Subscribe: React.FC = () => {
     </div>
   );
 };
-

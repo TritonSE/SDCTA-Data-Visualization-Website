@@ -5,15 +5,17 @@ interface TableauEmbedProp {
   url: string;
 }
 const { tableau } = window;
-export const TableauEmbed: React.FC = (url : TableauEmbedProp) => {
+export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
   let viz;
   const ref = useRef(null);
   console.log(ref);
 
   const options = {
     device: "desktop",
+    hideToolbar: true,
+    hideTabs: true,
   };
-  function initViz() {
+  function initViz (): void {
     viz = window.tableau.VizManager.getVizs()[0];
     if (viz) {
       viz.dispose();
@@ -30,4 +32,4 @@ export const TableauEmbed: React.FC = (url : TableauEmbedProp) => {
       {" "}
     </div>
   );
-}
+};

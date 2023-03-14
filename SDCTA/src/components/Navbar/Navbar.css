@@ -69,7 +69,7 @@ nav {
 }
 
 .pfp-subscribe-class {
-    display: flex; 
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }

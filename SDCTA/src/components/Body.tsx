@@ -5,7 +5,7 @@ import EducationVis from "../Images/Education_Standin.png";
 import HomelessnessVis from "../Images/Homelessness_Standin.png";
 import MunicipalVis from "../Images/Municipal_Standin.png";
 
-export const Body : React.FC = () => {
+export const Body: React.FC = () => {
   return (
     <>
       <div>
