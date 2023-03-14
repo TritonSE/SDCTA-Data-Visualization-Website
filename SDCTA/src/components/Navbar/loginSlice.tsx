@@ -24,6 +24,6 @@ export const loginSlice = createSlice({
 
 export const { login, logout } = loginSlice.actions;
 
-export const selectLogin = (state: RootState) => state.login.value;
+export const selectLogin = (state: RootState): boolean => state.login.value;
 
 export default loginSlice.reducer;
