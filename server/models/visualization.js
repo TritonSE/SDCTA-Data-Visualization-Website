@@ -22,6 +22,11 @@ const dataSchema = new mongoose.model(
       unique: true,
       type: String,
     },
+    csvFile: {
+      required: false,
+      unique: true,
+      type: Buffer
+    }
   })
 );
 
