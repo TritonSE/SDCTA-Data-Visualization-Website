@@ -16,7 +16,7 @@ import { IndividualVisualization } from "../pages/IndividualVisualization";
 
 export const Routes: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/SDCTA-Data-Visualization-Website">
       <Navbar />
       <ReactRoutes>
         <Route path="/" element={<LandingPage />} />
