@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import { visitLexicalEnvironment } from "typescript";
 
 interface TableauEmbedProp {
   url: string;
