@@ -1,22 +1,20 @@
 import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
-
 import { TableauEmbed } from "../components/TableauEmbed";
+import { useNavigate } from "react-router-dom";
 
-interface IndividualVisualizationProp {
-  url: string;
-  csvlink: string;
-}
-
-export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
-  url,
-  csvlink,
-}: IndividualVisualizationProp) => {
+export const IndividualVisualization: React.FC = () => {
+  const nav = useNavigate();
   return (
     <div>
       <div>
-        <p className="IV-back-button">
+        <button
+          className="IV-back-button"
+          onClick={() => {
+            nav("/Education");
+          }}
+        >
           {" "}
           <img
             style={{ paddingLeft: "3px" }}
@@ -24,7 +22,7 @@ export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
             alt="back arrow icon"
           />{" "}
           Back to Education Data
-        </p>
+        </button>
       </div>
       <div className="body">
         <div className="IV-Top-row">
@@ -34,7 +32,11 @@ export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
           </p>
         </div>
 
-        <TableauEmbed url={url} />
+        <TableauEmbed
+          url={
+            " https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1"
+          }
+        />
         <div className="body-text">
           <h2 id="Analysis">Data Analysis</h2>
           <p className="IV-description">
