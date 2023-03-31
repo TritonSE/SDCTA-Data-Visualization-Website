@@ -1,10 +1,16 @@
 import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface TableauEmbedProp {
   url: string;
+  interactive: boolean;
 }
 const { tableau } = window;
-export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
+export const TableauEmbed: React.FC<TableauEmbedProp> = ({
+  url,
+  interactive,
+}) => {
+  //const navigate = useNavigate();
   let viz;
   const ref = useRef(null);
   console.log(ref);
@@ -14,8 +20,12 @@ export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
     hideToolbar: true,
     hideTabs: true,
   };
-  function initViz(): void {
-    viz = window.tableau.VizManager.getVizs()[0];
+  function initViz() {
+    viz = window.tableau.VizManager.getVizs().find(
+      (viz: { getUrl: () => string }) => {
+        return viz.getUrl() == url;
+      }
+    );
     if (viz) {
       viz.dispose();
     }
@@ -27,8 +37,16 @@ export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
   }, []);
 
   return (
-    <div ref={ref} style={{ width: "100%", margin: "auto" }}>
+    <div
+      ref={ref}
+      style={{
+        width: "70%",
+        margin: "auto",
+        pointerEvents: interactive ? "all" : "none",
+      }}
+    >
       {" "}
     </div>
   );
 };
+export default TableauEmbed;

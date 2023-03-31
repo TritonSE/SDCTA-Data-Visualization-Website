@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-
+@import url("https://fonts.googleapis.com/css?family=Inter");
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
 .heading {
   padding-left: 120px;
   padding-top: 47px;
-  font-family: "Helvetica Neue";
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
@@ -69,7 +69,7 @@ body {
 
 .image_line-heading {
   color: #7f1922;
-  font-family: "Helvetica Neue";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;

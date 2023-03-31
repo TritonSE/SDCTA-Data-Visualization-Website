@@ -36,6 +36,7 @@ export const IndividualVisualization: React.FC = () => {
           url={
             " https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1"
           }
+          interactive={true}
         />
         <div className="body-text">
           <h2 id="Analysis">Data Analysis</h2>

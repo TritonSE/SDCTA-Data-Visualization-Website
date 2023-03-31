@@ -28,7 +28,7 @@ export const Routes: React.FC = () => {
         <Route path="/Subscribe" element={<Subscribe />} />
         <Route path="/Profile" element={<Profile />} />
         <Route
-          path="/Data-visualization"
+          path="/Data-Visualization"
           element={<IndividualVisualization />}
         />
       </ReactRoutes>
