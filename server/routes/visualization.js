@@ -34,7 +34,7 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
-// Get by ID Method
+// Get by Title Method
 router.get("/:title", async (req, res, next) => {
   try {
     const data = await getVisualizationByTitle(req.params.title);
