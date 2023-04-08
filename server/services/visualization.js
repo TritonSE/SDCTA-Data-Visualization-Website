@@ -20,18 +20,19 @@ export async function downloadCSVFileByTitle(title) {
     throw ServiceError.VIS_NOT_FOUND;
   }
   fs.writeFileSync("./" + title + ".csv", vis.csvFile);
+  return "./" + title + ".csv";
 }
 
-export async function createVisualization(title, analysis, link, csvLink) {
-  csvFile = new Binary(fs.readFileSync(csvLink));
+export async function createVisualization(title, analysis, link, csvFile) {
+  // const fileStr = fs.readFileSync(csvFile, {encoding:'utf8', flag:'r'});
   const data = new VisModel({
     title,
     analysis,
     link,
-    csvLink,
-    csvFile,
   });
+  const file = new FileModel({ title, csvFile });
   try {
+    await file.save();
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
