@@ -4,9 +4,7 @@ import { ServiceError, InternalError } from "../errors.js";
 import fs from "fs";
 
 export async function getVisualizationByTitle(title) {
-  console.log(title);
   const vis = await VisModel.findOne({ title: title });
-  console.log(vis);
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
@@ -14,7 +12,6 @@ export async function getVisualizationByTitle(title) {
 }
 
 export async function downloadCSVFileByTitle(title) {
-  console.log(title);
   const vis = await FileModel.findOne({ title });
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
@@ -24,15 +21,17 @@ export async function downloadCSVFileByTitle(title) {
 }
 
 export async function createVisualization(title, analysis, link, csvFile) {
-  // const fileStr = fs.readFileSync(csvFile, {encoding:'utf8', flag:'r'});
   const data = new VisModel({
     title,
     analysis,
     link,
+    hasCSV: csvFile !== undefined,
   });
-  const file = new FileModel({ title, csvFile });
   try {
-    await file.save();
+    if (csvFile) {
+      const file = new FileModel({ title, csvFile });
+      await file.save();
+    }
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);

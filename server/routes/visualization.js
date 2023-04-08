@@ -13,12 +13,16 @@ const router = express.Router();
 
 // Post Method
 router.post("/", upload().any(), async (req, res, next) => {
+  var csvFile = undefined;
+  if (req.files.length) {
+    csvFile = req.files[0].buffer;
+  }
   try {
     const vis = await createVisualization(
       req.body.title,
       req.body.analysis,
       req.body.link,
-      req.files[0].buffer
+      csvFile
     );
     res.status(200).json(vis);
   } catch (error) {

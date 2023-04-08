@@ -17,6 +17,10 @@ const dataSchema = new mongoose.model(
       unique: true,
       type: String,
     },
+    hasCSV: {
+      required: true,
+      type: Boolean,
+    },
   })
 );
 
