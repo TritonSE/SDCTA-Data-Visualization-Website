@@ -50,9 +50,9 @@ const CATEGORY_NOT_FOUND_MSG = "Category Name you specified does not exist";
 const VIS_NOT_FOUND_MSG = "Visualization Name you specified does not exist";
 const TIER_NOT_FOUND_MSG = "The Tier you specified does not exist";
 const INVALID_CATEGORY_RECEIVED_MSG =
-  "Invalid Visualization payload received, make sure you have all required fields.";
-const INVALID_VISUALIZATION_RECEIVED_MSG =
   "Invalid Category payload received, make sure you have all required fields.";
+const INVALID_VISUALIZATION_RECEIVED_MSG =
+  "Invalid Visualization payload received, make sure you have all required fields.";
 const INVALID_TIER_RECEIVED_MSG =
   "Invalid Tier payload received, make sure you have all required fields.";
 
