@@ -1,19 +1,13 @@
 import express from "express";
-import Model from "../models/user.js";
+import UserModel from "../models/user.js";
+import { getTier } from "../services/tier.js";
 
 const router = express.Router();
 
 // Post Method
 router.post("/", async (req, res) => {
-  const data = new Model({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    tier: req.body.tier,
-  });
-
   try {
-    const tier = await tierServices.getTier(req.body.tier);
+    const tier = await getTier(req.body.tier);
     const data = new UserModel({
       username: req.body.username,
       email: req.body.email,
@@ -39,7 +33,7 @@ router.get("/getAll", async (req, res) => {
 // Get by ID Method
 router.get("/:id", async (req, res) => {
   try {
-    const data = await Model.findById(req.params.id);
+    const data = await UserModel.findById(req.params.id);
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -53,7 +47,7 @@ router.patch("/:id", async (req, res) => {
     const updatedData = req.body;
     const options = { new: true };
 
-    const result = await Model.findByIdAndUpdate(id, updatedData, options);
+    const result = await UserModel.findByIdAndUpdate(id, updatedData, options);
 
     res.send(result);
   } catch (error) {
@@ -65,7 +59,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const data = await Model.findByIdAndDelete(id);
+    const data = await UserModel.findByIdAndDelete(id);
     res.send(`Document with ${data.username} has been deleted..`);
   } catch (error) {
     res.status(400).json({ message: error.message });

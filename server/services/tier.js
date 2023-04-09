@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-const Model = require("../models/tier");
-
-module.exports = {
-  getTier: async function getTier(tier) {
-    // Get by ID Method
-    try {
-      const data = await Model.find({ level: tier });
-      return data[0];
-    } catch (error) {
-      // res.status(500).json({ message: error.message });
-      return {};
-    }
-  },
-};
-=======
 import Model from "../models/tier.js";
 import { ServiceError, InternalError } from "../errors.js";
 
@@ -62,4 +46,3 @@ export async function deleteTier(id) {
     throw ServiceError.INVALID_TIER_RECEIVED.addContext(error);
   }
 }
->>>>>>> main
