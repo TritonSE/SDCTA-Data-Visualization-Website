@@ -3,4 +3,8 @@
 /src/react-app-env.d.ts
 /src/app/hooks.ts
 /src/app/store.ts
+<<<<<<< HEAD
 /src/firebase-config.js
+=======
+/src/components/TableauEmbed.tsx
+>>>>>>> main

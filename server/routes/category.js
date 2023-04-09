@@ -1,67 +1,69 @@
-const express = require("express");
+import express from "express";
+import {
+  getCategoryByName,
+  createCategory,
+  getAllCategories,
+  updateCategory,
+  deleteCategory,
+} from "../services/category.js";
+import { getVisualizationByTitle } from "../services/visualization.js";
 
 const router = express.Router();
 
-module.exports = router;
-
-const Model = require("../models/category");
-
 // Post Method
-router.post("/post", async (req, res) => {
-  const data = new Model({
-    name: req.body.name,
-    visualizations: req.body.visualizations,
-  });
-
+router.post("/", async (req, res, next) => {
   try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
+    const category = await createCategory(
+      req.body.name,
+      req.body.visualizations
+    );
+    res.status(200).json(category);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 });
 
 // Get all Method
-router.get("/getAll", async (req, res) => {
+router.get("/getAll", async (req, res, next) => {
   try {
-    const data = await Model.find();
+    const data = await getAllCategories();
     res.json(data);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
-// Get by ID Method
-router.get("/getOne/:id", async (req, res) => {
+
+// Get by Name Method
+router.get("/:name", async (req, res, next) => {
   try {
-    const data = await Model.findById(req.params.id);
+    const data = await getCategoryByName(req.params.name);
+    data.visualizations = await Promise.all(
+      data.visualizations.map(getVisualizationByTitle)
+    );
     res.json(data);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 // Update by ID Method
-router.patch("/update/:id", async (req, res) => {
+router.patch("/:id", async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const updatedData = req.body;
-    const options = { new: true };
-
-    const result = await Model.findByIdAndUpdate(id, updatedData, options);
-
+    const result = await updateCategory(req.params.id, req.body);
     res.send(result);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 });
 
 // Delete by ID Method
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const data = await Model.findByIdAndDelete(id);
-    res.send(`Document with ${data.name} has been deleted..`);
+    const data = await deleteCategory(req.params.id);
+    res.send(`Document with ${data.name} has been deleted.`);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 });
+
+export default router;

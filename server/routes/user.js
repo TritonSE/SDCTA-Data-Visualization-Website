@@ -1,15 +1,17 @@
-const express = require("express");
+import express from "express";
+import Model from "../models/user.js";
 
 const router = express.Router();
 
-module.exports = router;
-
-const UserModel = require("../models/user");
-const tierServices = require("../services/tier");
-const Model = require("../models/tier");
-
 // Post Method
-router.post("/create", async (req, res) => {
+router.post("/", async (req, res) => {
+  const data = new Model({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    tier: req.body.tier,
+  });
+
   try {
     const tier = await tierServices.getTier(req.body.tier);
     const data = new UserModel({
@@ -35,7 +37,7 @@ router.get("/getAll", async (req, res) => {
   }
 });
 // Get by ID Method
-router.get("/getOne/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
     res.json(data);
@@ -45,7 +47,7 @@ router.get("/getOne/:id", async (req, res) => {
 });
 
 // Update by ID Method
-router.patch("/update/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -60,7 +62,7 @@ router.patch("/update/:id", async (req, res) => {
 });
 
 // Delete by ID Method
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Model.findByIdAndDelete(id);
@@ -69,3 +71,5 @@ router.delete("/delete/:id", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+export default router;

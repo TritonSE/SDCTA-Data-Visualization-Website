@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const dataSchema = new mongoose.model(
   "Visualization",
@@ -17,7 +17,12 @@ const dataSchema = new mongoose.model(
       unique: true,
       type: String,
     },
+    csvLink: {
+      required: false,
+      unique: true,
+      type: String,
+    },
   })
 );
 
-module.exports = dataSchema;
+export default dataSchema;

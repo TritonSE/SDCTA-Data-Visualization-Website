@@ -1,0 +1,64 @@
+/* Footer Styling */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-end; */
+  padding: 40px;
+
+  /* padding-bottom: 50px; */
+
+  background-color: #7f1922;
+  font-size: 18px;
+}
+
+.footer-left {
+  width: 55%;
+}
+
+.footer-left h3 {
+  margin: 0;
+  color: white;
+  font-weight: 700;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer-left p {
+  margin: 10px 0 0 0;
+  font-weight: 400;
+  color: white;
+}
+
+.footer-right {
+  width: 20%;
+  text-align: right;
+}
+
+.address {
+  margin-bottom: 20px;
+}
+
+.address p {
+  margin: 0;
+  text-indent: 10px;
+  line-height: 27px;
+  text-align: left;
+  color: white;
+}
+
+.social-icons {
+  margin-top: -5px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.social-icons a {
+  margin-left: 12px;
+  color: #7f1922;
+  text-decoration: none;
+}
+
+.social-icons .icon {
+  font-size: 20px;
+  color: white;
+}
