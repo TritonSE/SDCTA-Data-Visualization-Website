@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Post Method
 router.post("/", upload().any(), async (req, res, next) => {
-  var csvFile = undefined;
+  let csvFile;
   if (req.files.length) {
     csvFile = req.files[0].buffer;
   }

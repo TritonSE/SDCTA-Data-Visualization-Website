@@ -4,7 +4,7 @@ import { ServiceError, InternalError } from "../errors.js";
 import fs from "fs";
 
 export async function getVisualizationByTitle(title) {
-  const vis = await VisModel.findOne({ title: title });
+  const vis = await VisModel.findOne({ title });
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
