@@ -52,10 +52,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-<<<<<<< HEAD
-app.listen(3001, () => {
-  console.log(`Server Started at ${process.env.PORT}`);
-=======
 app.use("/tier", tierRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
@@ -65,5 +61,4 @@ app.use(errorHandler);
 
 app.listen(3001, () => {
   console.log(`Server Started at ${3001}`);
->>>>>>> main
 });
