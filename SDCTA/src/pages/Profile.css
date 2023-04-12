@@ -1,0 +1,26 @@
+.profile-info {
+    margin-left: 120px;
+    margin-right: 804px;
+    width: 516px;
+}
+
+.long-input {
+    width: 516px;
+    height: 20px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.short-input {
+    width: 156px;
+    height: 20px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    display: grid;
+}
+
+.label-short{
+    display: inline;
+    
+    
+}
