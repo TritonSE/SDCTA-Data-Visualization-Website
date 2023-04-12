@@ -33,19 +33,27 @@ export const Profile: React.FC = () => {
           <label className = "label">Mailing Address
             <input className="long-input"/>
           </label>
-          <label className = "label-short">City
-            <input className="short-input"/>
-          </label>
-          <label className = "label-short">State
-            <select className="short-input">
-              <option>
-                -- Select State --
-              </option>
-            </select>
-          </label>
-          <label className = "label-short">Zip Code
-            <input className="short-input"/>
-          </label>
+          <div className = "threeInOne">
+            <div className = "cityDiv">
+              <label className = "label-short">City
+                <input className="short-input"/>
+              </label>
+            </div>
+            <div className = "threeBlockDiv">
+              <label className = "label-short">State
+                <select className="stateDrop">
+                  <option>
+                    -- Select State --
+                  </option>
+                </select>
+              </label>
+            </div>
+            <div className = "threeBlockDiv">
+              <label className = "label-short">Zip Code
+                <input className="short-input"/>
+              </label>
+            </div>
+          </div>
           <label className = "label">Country
             <select className="long-input">
                 <option>

@@ -9,6 +9,7 @@
     height: 20px;
     margin-bottom: 15px;
     margin-top: 5px;
+    box-sizing:border-box
 }
 
 .short-input {
@@ -16,11 +17,33 @@
     height: 20px;
     margin-bottom: 15px;
     margin-top: 5px;
-    display: grid;
+    box-sizing:border-box
+    
+}
+.stateDrop { 
+    width: 156px;
+    height: 20px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    box-sizing:border-box
 }
 
 .label-short{
-    display: inline;
+    display: inline;    
     
-    
+}
+
+.threeInOne { 
+    width: 514px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cityDiv { 
+    width: 30%;
+}
+
+.threeBlockDiv { 
+    width: 30%;
 }
