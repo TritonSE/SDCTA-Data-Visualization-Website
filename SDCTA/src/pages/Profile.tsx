@@ -2,6 +2,9 @@ import { Footer } from "../components/Footer"
 import landscape from ".//../Images/Landing_Image.jpg";
 import React from "react"
 import "./Profile.css";
+import stateList from "../constants/state-list.json"
+import countryList from "../constants/country-list.json"
+import languageList from "../constants/language-list.json"
 
 export const Profile: React.FC = () => {
   const handleSubmit = (event: any): void => {
@@ -11,7 +14,7 @@ export const Profile: React.FC = () => {
 
   return (
     <div>
-      <img src={landscape} alt="sd landscape" />
+      <img className = "header" src={landscape} alt="sd landscape" />
       <div className = "profile-info">
         <h2>Profile Information</h2>
         <form onSubmit={handleSubmit}>
@@ -42,9 +45,9 @@ export const Profile: React.FC = () => {
             <div className = "threeBlockDiv">
               <label className = "label-short">State
                 <select className="stateDrop">
-                  <option>
-                    -- Select State --
-                  </option>
+                  {stateList.state.map((state) => {
+                    return <option key={state.id} value={state.id}>{state.name}</option>
+                  })}
                 </select>
               </label>
             </div>
@@ -56,16 +59,16 @@ export const Profile: React.FC = () => {
           </div>
           <label className = "label">Country
             <select className="long-input">
-                <option>
-                  -- Select Country --
-                </option>
+              {countryList.country.map((country) => {
+                return <option key={country.code} value={country.code}>{country.name}</option>
+              })}
               </select>
           </label>
           <label className = "label">Preferred Language
             <select className="long-input">
-              <option>
-                -- Select Language --
-              </option>
+              {languageList.language.map((language) => {
+                return <option key={language.code} value={language.code}>{language.name}</option>
+              })}
             </select>
           </label>
           <input type="submit" />
