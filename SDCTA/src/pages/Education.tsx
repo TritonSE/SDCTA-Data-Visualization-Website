@@ -1,7 +1,6 @@
 import downloadIcon from "../Images/Icon.png";
-import { Footer } from "../components/Footer";
 import "./Pages.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";
 
 export const Education: React.FC = () => {
@@ -12,8 +11,8 @@ export const Education: React.FC = () => {
       <div className="heading">Education</div>
       <div className="top-row">
         {/* <div>
-					<TabViz title="Title" link= "https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1" description="ndjkfkwf"></TabViz>
-				</div> */}
+        <TabViz title="Title" link= "https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1" description="ndjkfkwf"></TabViz>
+        </div> */}
         <div className="subheading"> Data Subcategory Title</div>
 
         <div className="download-button">

@@ -10,11 +10,9 @@ export const Body: React.FC = () => {
       <div>
         <div className="heading">SDTEF Data Museum</div>
         <div className="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          Welcome to the San Diego Taxpayers Educational Foundation data museum! This is SDTEF&aposs repository for data on all things local public administration. Here you&aposll find a comprehensive quantitative picture of funding for important local public goods, such as homelessness services and education!
+          Each data exhibit includes details on the appropriate uses and limitations of the data. If you have any questions about our data, you can contact us at info@sdcta.org.
+          Click <a href="https://sdtef.org/"> here </a> to learn more about SDTEF and opportunities for involvement.
         </div>
         <div className="imgbox">
           <img className="center-fit" src={landscape} alt="sd landscape" />
