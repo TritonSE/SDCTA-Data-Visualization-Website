@@ -23,6 +23,30 @@ body {
   margin-top: 4%;
 }
 
+.details_title {
+  width: 40%;
+}
+
+.details_form {
+  width: 36%;
+}
+
+.address-info {
+  display: table;
+}
+
+.info-item {
+  display: table-cell;
+}
+
+.middle-item {
+  padding: 4px;
+}
+
+.btn-details {
+  width: 10%;
+}
+
 .input-boxes {
   margin-top: -2%;
   height: 5%;

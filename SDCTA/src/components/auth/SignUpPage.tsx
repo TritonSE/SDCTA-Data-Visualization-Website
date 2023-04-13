@@ -99,7 +99,7 @@ export const SignUpPage: React.FC = () => {
       }
 
       dispatch(login());
-      navigate("/");
+      navigate("/signupdetails");
     } catch (error) {
       if (error instanceof Error) {
         if (auth.currentUser != null) {
