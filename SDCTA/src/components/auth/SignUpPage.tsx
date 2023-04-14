@@ -107,7 +107,7 @@ export const SignUpPage: React.FC = () => {
         }
       })
       .catch((error) => {
-        // console.error(error);
+        console.error(error); /* ----- TEMPORARY ----- */
 
         // const errorCode = error.code;
         // const errorMessage = error.message;

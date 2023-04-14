@@ -95,7 +95,7 @@ export const LogInPage: React.FC = () => {
       })
       .catch((error) => {
         console.error(error);
-      }); 
+      });
   };
 
   return (
