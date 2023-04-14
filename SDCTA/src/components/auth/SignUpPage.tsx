@@ -103,8 +103,11 @@ export const SignUpPage: React.FC = () => {
             const token = credential.accessToken;
           }
 
-          // The signed-in user info.
           const user = result.user;
+
+
+
+
         }
 
         // IdP data available using getAdditionalUserInfo(result)
@@ -113,6 +116,8 @@ export const SignUpPage: React.FC = () => {
         navigate("/");
       })
       .catch((error) => {
+        // console.error(error);
+
         // const errorCode = error.code;
         // const errorMessage = error.message;
         // // The email of the user's account used.
