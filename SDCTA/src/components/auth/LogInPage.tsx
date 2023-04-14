@@ -84,11 +84,6 @@ export const LogInPage: React.FC = () => {
     await getRedirectResult(auth_)
       .then((result) => {
         if (result !== null) {
-          // const credential = GoogleAuthProvider.credentialFromResult(result);
-          // if (credential !== null) {
-          //   const token = credential.accessToken;
-          // }
-          // const user = result.user;
           dispatch(login());
           navigate("/");
         }

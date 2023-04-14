@@ -96,11 +96,6 @@ export const SignUpPage: React.FC = () => {
     await getRedirectResult(auth_)
       .then(async (result) => {
         if (result !== null) {
-          // const credential = GoogleAuthProvider.credentialFromResult(result);
-          // if (credential !== null) {
-          //   const token = credential.accessToken;
-          // }
-          // const user = result.user;
           await registerUser(result);
           dispatch(login());
           navigate("/");
