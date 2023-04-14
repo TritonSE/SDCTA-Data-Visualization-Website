@@ -30,33 +30,39 @@ const updateUserDetails = async (
 ): Promise<Response> => {
   const idRequestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    email: emailIn
+    headers: { "Content-Type": "application/json" }
   }
-  console.log(emailIn);
-  const response = await fetch(
-    "http://localhost:3001/user/:email",
+  let response = await fetch(
+    "http://localhost:3001/user/" + emailIn,
     idRequestOptions
   )
-  console.log(response);
+
+  response.json().then(async (result) => {
+    const updateRequestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone: phoneIn,
+        address: addressIn,
+        city: cityIn,
+        state: stateIn,
+        zipCode: zipCodeIn,
+        country: countryIn
+      }),
+    }
+    const id = result._id;
+    const requestLink = "http://localhost:3001/user/"
+    response = await fetch(
+      requestLink.concat(id),
+      updateRequestOptions
+    );
+
+    return response;
+  }).catch((error) => {
+    return error;
+  })
+
   return response;
-  // const updateRequestOptions = {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   id: currentUser.userId
-  //   body: JSON.stringify({
-  //     phone: phoneIn,
-  //     address: addressIn,
-  //     city: cityIn,
-  //     state: stateIn,
-  //     zipCode: zipCodeIn,
-  //     country: countryIn
-  //   }),
-  // }
-  // const response = await fetch(
-  //   "http://localhost:3001/user/",
-  //   requestOptions
-  // );
   // return response;
 }
 
