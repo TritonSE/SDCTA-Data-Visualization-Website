@@ -94,25 +94,18 @@ export const SignUpPage: React.FC = () => {
   const loginWithGoogle = async (): Promise<void> => {
     await signInWithRedirect(auth_, provider);
     await getRedirectResult(auth_)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
+      .then(async (result) => {
         if (result !== null) {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
+          // const credential = GoogleAuthProvider.credentialFromResult(result);
+          // if (credential !== null) {
+          //   const token = credential.accessToken;
+          // }
+          // const user = result.user;
 
-          if (credential !== null) {
-            const token = credential.accessToken;
-          }
-
-          const user = result.user;
-
-
-
-
+          await registerUser(result);
         }
 
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-
+        dispatch(login());
         navigate("/");
       })
       .catch((error) => {

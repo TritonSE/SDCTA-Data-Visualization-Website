@@ -1,8 +1,6 @@
 import type { UserCredential } from "firebase/auth";
 
-const registerUser = async (
-  userCredential: UserCredential
-): Promise<Response> => {
+const registerUser = async (userCredential: UserCredential): Promise<Response> => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
