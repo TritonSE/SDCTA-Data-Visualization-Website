@@ -186,7 +186,11 @@ export const LogInPage: React.FC = () => {
         </div>
 
         <div>
-          <button className="btn google-signup">Log in With Google</button>
+          <button onClick={async () => {
+            await loginWithGoogle();
+          }} className="btn google-signup">
+            Log in With Google
+          </button>
         </div>
 
         <div className="bottom-text">
