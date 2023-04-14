@@ -83,21 +83,19 @@ export const LogInPage: React.FC = () => {
     await signInWithRedirect(auth_, provider);
     await getRedirectResult(auth_)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
         if (result !== null) {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          if (credential !== null) {
-            const token = credential.accessToken;
-          }
-          const user = result.user;
+          // const credential = GoogleAuthProvider.credentialFromResult(result);
+          // if (credential !== null) {
+          //   const token = credential.accessToken;
+          // }
+          // const user = result.user;
+          dispatch(login());
+          navigate("/");
         }
-
-        dispatch(login());
-        navigate("/");
       })
       .catch((error) => {
         console.error(error);
-      }); // end of catch
+      }); 
   };
 
   return (

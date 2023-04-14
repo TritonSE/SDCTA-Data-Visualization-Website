@@ -101,12 +101,10 @@ export const SignUpPage: React.FC = () => {
           //   const token = credential.accessToken;
           // }
           // const user = result.user;
-
           await registerUser(result);
+          dispatch(login());
+          navigate("/");
         }
-
-        dispatch(login());
-        navigate("/");
       })
       .catch((error) => {
         // console.error(error);
