@@ -1,3 +1,7 @@
+.profile-page {
+    color: #F9F9F9;
+}
+
 .parent_box{ 
 
     /* background-color: antiquewhite;
@@ -9,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 140px;
   
 }
 #parent_box > .child {
@@ -41,7 +46,8 @@
 
     /* Neutral/Gray5 */
 
-    color: #6C6C6C;
+    /* color: #6C6C6C; */
+
 }
 
 .payment_info { 
@@ -116,8 +122,6 @@
 
 
     /* Neutral/Gray5 */
-
-    color: #6C6C6C; 
     
 }
 
@@ -203,5 +207,34 @@
 
     /* Neutral/Gray5 */
 
-    color: #6C6C6C;
+    /* color: #6C6C6C; */
+}
+
+.save-button {
+    height: 40px;
+    width: 73px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #C3272E;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    position: absolute;
+    top: 400px;
+    margin-left: 86%;
+    cursor: pointer;
+
+}
+
+.cancel-button {
+    height: 40px;
+    width: 80px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-left: 79%;
+    color: #C3272E;
+    border: solid #C3272E;
+    position: absolute;
+    top: 400px;
+    cursor: pointer;
 }

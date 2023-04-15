@@ -7,18 +7,23 @@ import countryList from "../constants/country-list.json"
 import languageList from "../constants/language-list.json"
 
 export const Profile: React.FC = () => {
-  const handleSubmit = (event: any): void => {
+  const handleSave = (event: any): void => {
     event.preventDefault();
-    alert('You have submitted the form.')
+    alert('You have saved the form.')
+  }
+
+  const handleCancel = (event: any): void => {
+    event.preventDefault();
+    alert('You have cancelled the form.')
   }
 
   return (
-    <div>
+    <div className="Profile-Page">
       <img className = "header" src={landscape} alt="sd landscape" />
+      <form onSubmit={handleSave}>
       <div className = "parent_box">
         <div className = "profile-info">
           <h2>Profile Information</h2>
-          <form onSubmit={handleSubmit}>
             <label className = "label">Affiliated Company
               <input className="long-input"/>
             </label>
@@ -72,12 +77,9 @@ export const Profile: React.FC = () => {
                 })}
               </select>
             </label>
-            <input type="submit" />
-          </form>
         </div>
         <div className = "payment_info">
           <h2>Payment Information</h2>
-          <form onSubmit={handleSubmit}>
             <label className = "label">Card Holder Name
               <input className="long-input"/>
             </label>
@@ -132,11 +134,11 @@ export const Profile: React.FC = () => {
                 })}
                 </select>
             </label>
-
-            <input type="submit" />
-          </form>
+          </div>
         </div>
-        </div>
+        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
+        <button className="save-button" onClick={handleSave}>Save</button>
+      </form>
       <Footer />
     </div>
 
