@@ -186,13 +186,11 @@ export const SignUpPage: React.FC = () => {
               setUserDisplayName(event.target.value);
             }}
           />
-          {inputError.nameError !== ""
-            ? (
+          {inputError.nameError !== "" ? (
             <p className="error-message">{inputError.nameError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Email input */}
           <h3 className="textbox-label">Email</h3>
@@ -205,13 +203,11 @@ export const SignUpPage: React.FC = () => {
               setRegisterEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== ""
-            ? (
+          {inputError.emailError !== "" ? (
             <p className="error-message">{inputError.emailError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Password input */}
           <h3 className="textbox-label">Password</h3>
@@ -226,13 +222,11 @@ export const SignUpPage: React.FC = () => {
               setRegisterPassword(event.target.value);
             }}
           />
-          {inputError.passwordError !== ""
-            ? (
+          {inputError.passwordError !== "" ? (
             <p className="error-message">{inputError.passwordError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Confirm password */}
           <h3 className="textbox-label">Confirm Password</h3>
@@ -245,13 +239,11 @@ export const SignUpPage: React.FC = () => {
               setConfirmPassword(event.target.value);
             }}
           />
-          {inputError.confirmError !== ""
-            ? (
+          {inputError.confirmError !== "" ? (
             <p className="error-message">{inputError.confirmError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="terms">
@@ -269,13 +261,11 @@ export const SignUpPage: React.FC = () => {
           </label>
         </div>
 
-        {inputError.unknownError !== ""
-          ? (
+        {inputError.unknownError !== "" ? (
           <p className="error-message">{inputError.unknownError}</p>
-            )
-          : (
-              ""
-            )}
+        ) : (
+          ""
+        )}
 
         <button onClick={register} className="btn-signup">
           Sign Up
