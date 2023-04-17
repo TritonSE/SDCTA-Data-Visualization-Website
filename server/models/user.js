@@ -5,7 +5,7 @@ const dataSchema = new mongoose.model(
   new mongoose.Schema({
     username: {
       required: true,
-      unique: true,
+      unique: false,
       type: String,
     },
     email: {
@@ -18,6 +18,24 @@ const dataSchema = new mongoose.model(
       type: mongoose.Types.ObjectId,
       ref: "Tier",
     },
+    phone: {
+      type: String
+    },
+    address: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    state: {
+      type: String
+    },
+    zipCode: {
+      type: String
+    },
+    country: {
+      type: String
+    }
   })
 );
 
