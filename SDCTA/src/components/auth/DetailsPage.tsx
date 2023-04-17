@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { updateUserDetails } from "../../api/auth";
+import { updateUserDetails } from "../../api/consumer";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 export const DetailsPage: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -9,7 +10,7 @@ export const DetailsPage: React.FC = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("United States");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -47,7 +48,6 @@ export const DetailsPage: React.FC = () => {
         <div>
             <h1 className="signup-form-title details_title">
                 Additional Profile Information
-                (Optional)
             </h1>
             <div className="signup-form details_form">
                 <div className="input-boxes">
@@ -79,12 +79,16 @@ export const DetailsPage: React.FC = () => {
                         </div>
                         <div className="info-item middle-item">
                             <h3 className="textbox-label">State</h3>
-                            <input
-                                className="text-input"
-                                placeholder="i.e. California"
-                                onChange={(event) => {
-                                  setState(event.target.value);
-                                }}
+
+                            <RegionDropdown
+                            // @ts-expect-error Since using custom component, it gives an error
+                            // when passing the className, but otherwise works.
+                              className="text-input"
+                              country="United States"
+                              value={state}
+                              onChange={(state: string) => {
+                                setState(state);
+                              }}
                             />
                         </div>
                         <div className="info-item">
@@ -98,12 +102,18 @@ export const DetailsPage: React.FC = () => {
                         </div>
                     </div>
                     <h3 className="textbox-label">Country</h3>
-                    <input
-                        className="text-input"
-                        onChange={(event) => {
-                          setCountry(event.target.value);
-                        }}
-                    />
+                    <div className="dropdown">
+                            <CountryDropdown
+                            // @ts-expect-error Since using custom component, it gives an error
+                            // when passing the className, but otherwise works.
+                              className="text-input"
+                              onChange={(country: string) => {
+                                setCountry(country);
+                              }
+                              }
+                              value={country}
+                            />
+                    </div>
                     <button
                         onClick={async () => {
                           await updateDetails();
@@ -114,6 +124,13 @@ export const DetailsPage: React.FC = () => {
                     </button>
                 </div>
             </div>
+            {errorMessage !== ""
+              ? (
+          <p className="error-message">{errorMessage}</p>
+                )
+              : (
+                  ""
+                )}
         </div>
   );
 }
