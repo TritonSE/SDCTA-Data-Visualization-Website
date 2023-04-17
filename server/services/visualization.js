@@ -16,8 +16,8 @@ export async function downloadCSVFileByTitle(title) {
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
-  fs.writeFileSync("./" + title + ".csv", vis.csvFile);
-  return "./" + title + ".csv";
+  fs.writeFileSync(`./${title}.csv`, vis.csvFile);
+  return `./${title}.csv`;
 }
 
 export async function createVisualization(title, analysis, link, csvFile) {
@@ -58,7 +58,9 @@ export async function updateVisualization(id, body) {
 
 export async function deleteVisualization(id) {
   try {
-    return await VisModel.findByIdAndDelete(id);
+    data = await VisModel.findByIdAndDelete(id);
+    await FileModel.findOneAndDelete({ title: data.title });
+    return data;
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
   }
