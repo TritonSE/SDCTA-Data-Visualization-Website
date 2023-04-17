@@ -58,7 +58,7 @@ export async function updateVisualization(id, body) {
 
 export async function deleteVisualization(id) {
   try {
-    data = await VisModel.findByIdAndDelete(id);
+    const data = await VisModel.findByIdAndDelete(id);
     await FileModel.findOneAndDelete({ title: data.title });
     return data;
   } catch (error) {
