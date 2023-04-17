@@ -1,7 +1,9 @@
+import { SignUpPage } from "../../components/auth/SignUpPage";
+
 export const SignUp: React.FC = () => {
   return (
     <div>
-      <h1>Signup</h1>
+      <SignUpPage />
     </div>
   );
 };

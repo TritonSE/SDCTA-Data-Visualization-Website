@@ -25,6 +25,7 @@
           "requireLast": true
         }
       }
-    ]
+    ],
+    "@typescript-eslint/no-misused-promises": 0
   }
 }
