@@ -12,6 +12,7 @@ import { Homelessness } from "../pages/Homelessness";
 import { Municipal } from "../pages/Municipal";
 import { Subscribe } from "../pages/Subscribe";
 import { Profile } from "../pages/Profile";
+import { IndividualVisualization } from "../pages/IndividualVisualization";
 
 export const Routes: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ export const Routes: React.FC = () => {
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/Subscribe" element={<Subscribe />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/IndivVis" element={<IndividualVisualization />} />
       </ReactRoutes>
     </Router>
   );

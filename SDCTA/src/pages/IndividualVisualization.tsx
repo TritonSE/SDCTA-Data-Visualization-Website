@@ -2,19 +2,48 @@ import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";
+import { getVisByTitle } from "../api/consumer"
+import { setUISelectionRaw } from "@testing-library/user-event/dist/types/document/UI";
+import {VisualizationObject} from "../api/data"
 
-interface IndividualVisualizationProp {
-  url: string;
-  csvlink: string;
+const initialState: VisualizationObject = {
+  title: "",
+  analysis: "",
+  link: "",
+  hasCSV: false,
 }
 
-export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
-  url,
-  csvlink,
-}: IndividualVisualizationProp) => {
-  return (
-    <div>
+export  const  IndividualVisualization: React.FC = () => {
+
+  const [searchParams] = useSearchParams();
+  const [title] = useState(searchParams.get('title'));
+  const [visObj, setVisObj] = useState(initialState);
+
+  if (!title) {
+    console.log("title empty")
+    //navigate away
+    return;
+  }
+
+  useEffect(()=> {
+    getVisByTitle(title).then((response) => {
+      if (response === null) {
+        console.log("couldn't get url");
+        //navigate away
+        return;
+      }
+      setVisObj(response);
+    })
+  }, [])
+
+  console.log("visobje")
+  console.log(visObj);
+  return (    
+  <div>
+      <h1>{visObj.link}</h1>
       <div>
         <p className="IV-back-button">
           {" "}
@@ -34,7 +63,10 @@ export const IndividualVisualization: React.FC<IndividualVisualizationProp> = ({
           </p>
         </div>
 
-        <TableauEmbed url={url} />
+        {/* <TableauEmbed url={"https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1?:language=en-US&:display_count=n&:origin=viz_share_link"} /> */}
+        {/* <TableauEmbed url={"https://public.tableau.com/app/profile/julian.del.castillo/viz/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1"} /> */}
+        <TableauEmbed url={visObj.link} />
+        
         <div className="body-text">
           <h2 id="Analysis">Data Analysis</h2>
           <p className="IV-description">
