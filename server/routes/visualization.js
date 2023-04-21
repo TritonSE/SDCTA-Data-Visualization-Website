@@ -1,22 +1,28 @@
 import express from "express";
+import upload from "multer";
 import {
   getVisualizationByTitle,
   createVisualization,
   updateVisualization,
   getAllVisualizations,
   deleteVisualization,
+  downloadCSVFileByTitle,
 } from "../services/visualization.js";
 
 const router = express.Router();
 
 // Post Method
-router.post("/", async (req, res, next) => {
+router.post("/", upload().any(), async (req, res, next) => {
+  let csvFile;
+  if (req.files.length) {
+    csvFile = req.files[0].buffer;
+  }
   try {
     const vis = await createVisualization(
       req.body.title,
       req.body.analysis,
       req.body.link,
-      req.body.csvLink
+      csvFile
     );
     res.status(200).json(vis);
   } catch (error) {
@@ -34,7 +40,17 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
-// Get by ID Method
+// Get all Method
+router.get("/download/:title", async (req, res, next) => {
+  try {
+    const path = await downloadCSVFileByTitle(req.params.title);
+    res.download(path);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get by Title Method
 router.get("/:title", async (req, res, next) => {
   try {
     const data = await getVisualizationByTitle(req.params.title);
