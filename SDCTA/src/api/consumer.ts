@@ -7,6 +7,7 @@ const updateUserDetails = async (
   countryIn: string,
   emailIn: string
 ): Promise<Response> => {
+  console.log(emailIn);
   const idRequestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
@@ -17,6 +18,7 @@ const updateUserDetails = async (
   )
 
   response.json().then(async (result) => {
+    console.log(result);
     const updateRequestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

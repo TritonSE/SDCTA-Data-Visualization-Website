@@ -1,13 +1,13 @@
 import express from "express";
 import UserModel from "../models/user.js";
-import { getTier } from "../services/tier.js";
+import { getTierByLevel } from "../services/tier.js";
 
 const router = express.Router();
 
 // Post Method
 router.post("/", async (req, res) => {
   try {
-    const tier = await getTier(req.body.tier);
+    const tier = await getTierByLevel(req.body.tier);
     const data = new UserModel({
       username: req.body.username,
       email: req.body.email,
