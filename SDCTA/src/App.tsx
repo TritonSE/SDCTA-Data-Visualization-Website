@@ -4,6 +4,12 @@ import { auth } from "./firebase-config";
 import { login, logout } from "./slices/loginSlice";
 import { useDispatch } from "react-redux";
 
+declare global {
+  interface Window {
+    tableau: any;
+  }
+}
+
 const App: React.FC = () => {
   const dispatch = useDispatch();
   auth.onAuthStateChanged(user => {

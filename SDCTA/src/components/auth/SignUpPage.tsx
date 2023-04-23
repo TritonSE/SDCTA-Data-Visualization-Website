@@ -121,30 +121,18 @@ export const SignUpPage: React.FC = () => {
   const auth_ = getAuth();
 
   const loginWithGoogle = async (): Promise<void> => {
-    signInWithRedirect(auth_, provider);
-    getRedirectResult(auth_)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
+    await signInWithRedirect(auth_, provider);
+    await getRedirectResult(auth_)
+      .then(async (result) => {
         if (result !== null) {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-
-          // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
-          if (credential !== null) {
-            const token = credential.accessToken;
-          }
-
-          // The signed-in user info.
-          // @/ts-expect-error: Object is possibly 'null'. (remove / to suppress error)
-          const user = result.user;
+          await registerUser(result);
+          dispatch(login());
+          navigate("/");
         }
-
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-
-        navigate("/");
       })
       .catch((error) => {
+        console.error(error); /* ----- TEMPORARY ----- */
+
         // const errorCode = error.code;
         // const errorMessage = error.message;
         // // The email of the user's account used.

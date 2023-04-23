@@ -1,24 +1,37 @@
-import Model from "../models/visualization.js";
+import VisModel from "../models/visualization.js";
+import FileModel from "../models/files.js";
 import { ServiceError, InternalError } from "../errors.js";
+import fs from "fs";
 
 export async function getVisualizationByTitle(title) {
-  console.log(title);
-  const vis = await Model.findOne({ title });
-  console.log(vis);
+  const vis = await VisModel.findOne({ title });
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
   return vis;
 }
 
-export async function createVisualization(title, analysis, link, csvLink) {
-  const data = new Model({
+export async function downloadCSVFileByTitle(title) {
+  const vis = await FileModel.findOne({ title });
+  if (!vis) {
+    throw ServiceError.VIS_NOT_FOUND;
+  }
+  fs.writeFileSync(`./${title}.csv`, vis.csvFile);
+  return `./${title}.csv`;
+}
+
+export async function createVisualization(title, analysis, link, csvFile) {
+  const data = new VisModel({
     title,
     analysis,
     link,
-    csvLink,
+    hasCSV: csvFile !== undefined,
   });
   try {
+    if (csvFile) {
+      const file = new FileModel({ title, csvFile });
+      await file.save();
+    }
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
@@ -27,7 +40,7 @@ export async function createVisualization(title, analysis, link, csvLink) {
 
 export async function getAllVisualizations() {
   try {
-    const visualizations = await Model.find();
+    const visualizations = await VisModel.find();
     return visualizations;
   } catch (error) {
     throw InternalError.UNKNOWN;
@@ -37,7 +50,7 @@ export async function getAllVisualizations() {
 export async function updateVisualization(id, body) {
   try {
     const options = { new: true };
-    return await Model.findByIdAndUpdate(id, body, options);
+    return await VisModel.findByIdAndUpdate(id, body, options);
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
   }
@@ -45,7 +58,9 @@ export async function updateVisualization(id, body) {
 
 export async function deleteVisualization(id) {
   try {
-    return await Model.findByIdAndDelete(id);
+    const data = await VisModel.findByIdAndDelete(id);
+    await FileModel.findOneAndDelete({ title: data.title });
+    return data;
   } catch (error) {
     throw ServiceError.INVALID_VISUALIZATION_RECEIVED.addContext(error);
   }
