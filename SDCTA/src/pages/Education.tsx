@@ -1,4 +1,3 @@
-import downloadIcon from "../Images/Icon.png";
 import "./Pages.css";
 import { useNavigate } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";
@@ -8,16 +7,12 @@ export const Education: React.FC = () => {
   return (
     <div>
       {/* <Navbar /> */}
-      <div className="heading">Education</div>
+      <div className="heading">TEST</div>
       <div className="top-row">
         {/* <div>
         <TabViz title="Title" link= "https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1" description="ndjkfkwf"></TabViz>
         </div> */}
         <div className="subheading"> Data Subcategory Title</div>
-
-        <div className="download-button">
-          Download <img src={downloadIcon} alt="download icon" />
-        </div>
       </div>
       <div
         onClick={() => { nav("/Data-Visualization"); }}
