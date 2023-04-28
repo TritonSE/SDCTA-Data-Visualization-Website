@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+  background-color: #f5f5f5;
+  font-family: "Open Sans", sans-serif;
+}
+
+.h1-404 {
+  /* font-family: "Helvetica Neue"; */
+  font-style: normal;
+  text-align: center;
+  color: #7f1922;
+  font-weight: 700;
+  font-size: 96px;
+  margin-bottom: 0;
+}
+
+.h2-404pagenotfound {
+  /* font-family: "Helvetica Neue"; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 0;
+  text-align: center;
+  color: #000000;
+}
+
+.p-404text {
+  text-align: center;
+  color: #000000;
+}
+
+.back-to-home {
+  background: #c3272e;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 18px;
+  padding: 11.5px 52.5px;
+  margin: 0 auto;
+
+}
+
+.container {
+  margin-top: 64px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.back-to-home:hover {
+  cursor: pointer;
+}

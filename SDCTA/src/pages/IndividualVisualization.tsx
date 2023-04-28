@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";
 import { getVisByTitle } from "../api/consumer"
-import { setUISelectionRaw } from "@testing-library/user-event/dist/types/document/UI";
 import {VisualizationObject} from "../api/data"
-
+import ErrorBoundary from "../components/ErrorBoundary";
+import { Error404} from "../components/404"
 const initialState: VisualizationObject = {
   title: "",
   analysis: "",
@@ -17,79 +17,62 @@ const initialState: VisualizationObject = {
 }
 
 export  const  IndividualVisualization: React.FC = () => {
-
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get('title'));
   const [visObj, setVisObj] = useState(initialState);
 
   if (!title) {
-    console.log("title empty")
-    //navigate away
-    return;
+    return <Error404/>;
   }
 
   useEffect(()=> {
     getVisByTitle(title).then((response) => {
-      if (response === null) {
-        console.log("couldn't get url");
-        //navigate away
-        return;
+      console.log("individual vis")
+      console.log(response)
+      console.log(response == null)
+      if (response == null) {
+        console.log("in if") // shown in console
+        return <Error404/>;
+        console.log("nothing") // not shown in console
       }
+
+      console.log("skip if")
       setVisObj(response);
     })
   }, [])
 
-  console.log("visobje")
-  console.log(visObj);
-  return (    
+  return (   
+  <ErrorBoundary>   
   <div>
-      <h1>{visObj.link}</h1>
       <div>
         <p className="IV-back-button">
-          {" "}
           <img
             style={{ paddingLeft: "3px" }}
             src={backIcon}
             alt="back arrow icon"
-          />{" "}
+          />
           Back to Education Data
         </p>
       </div>
       <div className="body">
         <div className="IV-Top-row">
-          <h2>Data Subcategory Title</h2>
+          <h2>{visObj.title}</h2>
           <p className="download-button">
             Download <img src={downloadIcon} alt="download icon" />
           </p>
         </div>
-
-        {/* <TableauEmbed url={"https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1?:language=en-US&:display_count=n&:origin=viz_share_link"} /> */}
-        {/* <TableauEmbed url={"https://public.tableau.com/app/profile/julian.del.castillo/viz/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1"} /> */}
-        <TableauEmbed url={visObj.link} />
         
+        {visObj.link != "" && <TableauEmbed url={visObj.link}/>}
+
+
         <div className="body-text">
           <h2 id="Analysis">Data Analysis</h2>
           <p className="IV-description">
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam, sed. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
-            </span>
-
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam, sed. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna.
-            </span>
+            {visObj.analysis}
           </p>
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
