@@ -1,10 +1,11 @@
 import { Footer } from "../components/Footer"
 import landscape from ".//../Images/Landing_Image.jpg";
-import React from "react"
+import React, { useState } from "react"
 import "./Profile.css";
 import stateList from "../constants/state-list.json"
 import countryList from "../constants/country-list.json"
 import languageList from "../constants/language-list.json"
+import membershipPic from "../Images/membership-status.png"
 
 export const Profile: React.FC = () => {
   const handleSave = (event: any): void => {
@@ -17,6 +18,22 @@ export const Profile: React.FC = () => {
     alert('You have cancelled the form.')
   }
 
+  const handleMembership = (event: any): void => {
+    event.preventDefault();
+    alert('You want to change your membership.')
+  }
+
+  const [readMore, setReadMore] = useState(false);
+
+  const extraContent =
+    <text>
+      <li>Participate in the <b>Issues Sub-Committee</b></li>
+      <li>Receive major <b>event ticket discountsevent ticket discounts</b>, invitations to <b>VIP events</b>, and invitations to <b>friendraisers</b>at Board Members’ houses</li>
+      <li><b>Chair events</b> and membership committees</li>
+      <li>Eligibility to be nominated to serve on the <b>Board of Directors</b> and the <b>Executive or Rules Committee</b></li>
+    </text>
+
+  const linkName = readMore ? 'See less benefits' : 'See more benefits'
   return (
     <div className="Profile-Page">
       <img className = "header" src={landscape} alt="sd landscape" />
@@ -139,6 +156,28 @@ export const Profile: React.FC = () => {
         <button className="cancel-button" onClick={handleCancel}>Cancel</button>
         <button className="save-button" onClick={handleSave}>Save</button>
       </form>
+
+      <div className = "membership">
+        <h1>
+          <b>Membership Information</b>
+        </h1>
+        <p>Membership Level: <span style={ { color: "#7F1922" } }>Free</span> <br /> Organization Type: N/A</p>
+        <img src = {membershipPic} alt="membership-graph" width="814.8px" height="120px"/>
+        <h2>
+          <b>Why should I upgrade my membership?</b>
+        </h2>
+        <ul>
+          <li>Access to <b>exclusive data visualizations</b></li>
+          <li>Serve on the <b>Oversight Committee</b></li>
+          <li>Access to <b>Watchdog Alerts</b></li>
+          <li>Eligibility to be featured in the <b>members-only newsletter</b></li>
+
+        {readMore && extraContent}
+        </ul>
+        <a className = "read-more-link" onClick={ () => { setReadMore(!readMore) } }><u style = { { color: "#C3272E" } }>{linkName}</u></a>
+
+        <button className = "change-membership" onClick={handleMembership}>Change Membership</button>
+      </div>
       <Footer />
     </div>
 
