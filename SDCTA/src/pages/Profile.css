@@ -1,7 +1,3 @@
-.profile-page {
-    color: #F9F9F9;
-}
-
 .parent_box{ 
 
     /* background-color: antiquewhite;
@@ -237,6 +233,7 @@
     position: absolute;
     top: 400px;
     cursor: pointer;
+    background-color: #F9F9F9;
 }
 
 .expander {

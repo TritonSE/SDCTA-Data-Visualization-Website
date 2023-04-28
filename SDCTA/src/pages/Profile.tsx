@@ -1,6 +1,6 @@
 import { Footer } from "../components/Footer"
 import landscape from ".//../Images/Landing_Image.jpg";
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import stateList from "../constants/state-list.json"
 import countryList from "../constants/country-list.json"
@@ -8,6 +8,8 @@ import languageList from "../constants/language-list.json"
 import membershipPic from "../Images/membership-status.png"
 
 export const Profile: React.FC = () => {
+  useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
+
   const handleSave = (event: any): void => {
     event.preventDefault();
     alert('You have saved the form.')
@@ -174,7 +176,7 @@ export const Profile: React.FC = () => {
 
         {readMore && extraContent}
         </ul>
-        <a className = "read-more-link" onClick={ () => { setReadMore(!readMore) } }><u style = { { color: "#C3272E" } }>{linkName}</u></a>
+        <a className = "read-more-link" onClick={ () => { setReadMore(!readMore) } }><u style = { { color: "#C3272E" } }>{linkName}</u><br/></a>
 
         <button className = "change-membership" onClick={handleMembership}>Change Membership</button>
       </div>
