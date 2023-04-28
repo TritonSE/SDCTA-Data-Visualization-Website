@@ -238,3 +238,10 @@
     top: 400px;
     cursor: pointer;
 }
+
+.expander {
+    text-decoration: underline;
+    height: 1em;
+    overflow: hidden;
+    cursor: pointer;
+}
