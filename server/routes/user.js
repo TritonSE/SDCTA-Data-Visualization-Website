@@ -11,11 +11,7 @@ const router = express.Router();
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
-    const user = await createUser(
-      req.body.username,
-      req.body.email,
-      req.body.tierLevel
-    );
+    const user = await createUser(req.body);
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -37,10 +33,7 @@ router.patch("/:email", async (req, res, next) => {
   try {
     const email = req.params.email;
     const updatedData = req.body;
-    console.log(email);
-    console.log(updatedData);
     const result = await updateUser(email, updatedData);
-    console.log(result);
     res.send(result);
   } catch (error) {
     next(error);

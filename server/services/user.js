@@ -10,14 +10,12 @@ export async function getUserByEmail(email) {
   return user;
 }
 
-export async function createUser(username, email, tierLevel) {
-  const tier = await getTierByLevel(tierLevel);
-  const data = new Model({
-    username,
-    email,
-    tier,
-  });
+export async function createUser(body) {
   try {
+    console.log(body);
+    const tier = await getTierByLevel(body.tierLevel);
+    const data = new Model(body);
+    data["tier"] = tier;
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
@@ -27,7 +25,10 @@ export async function createUser(username, email, tierLevel) {
 export async function updateUser(email, body) {
   try {
     const options = { new: true, returnNewDocument: true };
-    return await Model.findOneAndUpdate(email, body, options);
+    if (body.tierLevel) {
+      const tier = await getTierByLevel(body.tierLevel);
+    }
+    return await Model.findOneAndUpdate({ email }, body, options);
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
   }
