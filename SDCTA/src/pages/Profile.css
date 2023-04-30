@@ -24,25 +24,31 @@
     margin-left: 120px;
     
     width: 30%;
-
     
+}
 
+.fullName { 
+    width: 512px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
 
-    
+}
+
+.half-input { 
+    width: 99%;
+    height: 40px;
+
 }
 
 .label{ 
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    /* identical to box height */
 
-
-    /* Neutral/Gray5 */
-
-    /* color: #6C6C6C; */
 
 }
 
@@ -111,7 +117,7 @@
     display: inline;   
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     /* identical to box height */
@@ -195,7 +201,7 @@
     width: 258px;
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     /* identical to box height */
@@ -242,3 +248,50 @@
     overflow: hidden;
     cursor: pointer;
 }
+
+.membership { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.4;
+    
+}
+
+ul { 
+    list-style: inside;
+
+    align-items:start
+    
+}
+
+li {
+    position: relative;
+    margin-left: 0px;
+}
+
+.change-membership { 
+    margin-top: 32px;
+    margin-bottom: 64px;
+    width: 228px;
+height: 48px;
+background: #C3272E;
+
+border-radius: 4px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+align-items: center;
+text-align: center;
+
+/* Neutral/White */
+
+color: #FFFFFF;
+}
+
+

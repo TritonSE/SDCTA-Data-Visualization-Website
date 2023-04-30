@@ -43,32 +43,37 @@ export const Profile: React.FC = () => {
       <div className = "parent_box">
         <div className = "profile-info">
           <h2>Profile Information</h2>
-            <label className = "label">Affiliated Company
+            <label className = "label">Affiliated Company<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label>
-            <label className = "label">Full Name
-              <input className="long-input"/>
-            </label >
-            <label className = "label">Email Address
+            <div className = "fullName">
+              <label className = "label">First Name<span style={ { color: "red" } }>*</span>
+                <input className="half-input"/>
+              </label >
+              <label className = "label">Last Name<span style={ { color: "red" } }>*</span>
+                <input className="half-input"/>
+              </label >
+            </div>
+            <label className = "label">Email Address<span style={ { color: "red" } }>*</span>
                 <input className="long-input"/>
             </label >
-            <label className = "label">Password
+            <label className = "label">Password<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label>
-            <label className = "label">Phone Number
+            <label className = "label">Phone Number<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label>
-            <label className = "label">Mailing Address
+            <label className = "label">Mailing Address<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label>
             <div className = "threeInOne">
               <div className = "cityDiv">
-                <label className = "label-short">City
+                <label className = "label-short">City<span style={ { color: "red" } }>*</span>
                   <input className="short-input"/>
                 </label>
               </div>
               <div className = "threeBlockDiv">
-                <label className = "label-short">State
+                <label className = "label-short">State<span style={ { color: "red" } }>*</span>
                   <select className="stateDrop">
                     {stateList.state.map((state) => {
                       return <option key={state.id} value={state.id}>{state.name}</option>
@@ -77,62 +82,63 @@ export const Profile: React.FC = () => {
                 </label>
               </div>
               <div className = "threeBlockDiv">
-                <label className = "label-short">Zip Code
+                <label className = "label-short">Zip Code<span style={ { color: "red" } }>*</span>
                   <input className="short-input"/>
                 </label>
               </div>
             </div>
-            <label className = "label">Country
+            <label className = "label">Country<span style={ { color: "red" } }>*</span>
               <select className="long-input">
                 {countryList.country.map((country) => {
                   return <option key={country.code} value={country.code}>{country.name}</option>
                 })}
                 </select>
             </label>
-            <label className = "label">Preferred Language
+            <label className = "label">Preferred Language<span style={ { color: "red" } }>*</span>
               <select className="long-input">
                 {languageList.language.map((language) => {
                   return <option key={language.code} value={language.code}>{language.name}</option>
                 })}
               </select>
             </label>
+            <label className = "reqLabel"><span style={ { color: "red" } }>*</span>Required Fields</label>
         </div>
         <div className = "payment_info">
           <h2>Payment Information</h2>
-            <label className = "label">Card Holder Name
+            <label className = "label">Card Holder Name<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label>
-            <label className = "label">Full Name
+            <label className = "label">Full Name<span style={ { color: "red" } }>*</span>
               <input className="long-input"/>
             </label >
             <div className = "threeInOne">
               <div className = "cardDiv">
-                <label className = "card-label">Card Number
+                <label className = "card-label">Card Number<span style={ { color: "red" } }>*</span>
                   <input className="card-input"/>
                 </label>
               </div>
               <div className = "twoDiv">
-                  <label className = "label-short">Exp Date
+                  <label className = "label-short">Exp Date<span style={ { color: "red" } }>*</span>
                     <input className="shorter-input"/>
                   </label>
               </div>
               <div className = "twoDiv">
-                <label className = "label-short">CVC
+                <label className = "label-short">CVC<span style={ { color: "red" } }>*</span>
                   <input className="shorter-input"/>
                 </label>
               </div>
             </div>
-            <label className = "label">Billing Address
+            <label className = "label">Billing Address<span style={ { color: "red" } }>*</span>
                 <input className="long-input"/>
             </label >
             <div className = "threeInOne">
               <div className = "cityDiv">
-                <label className = "label-short">City
+                <label className = "label-short">City<span style={ { color: "red" } }>*</span>
                   <input className="short-input"/>
                 </label>
               </div>
               <div className = "threeBlockDiv">
-                <label className = "label-short">State
+                <label className = "label-short">State<span style={ { color: "red" } }>*</span>
                   <select className="stateDrop">
                     {stateList.state.map((state) => {
                       return <option key={state.id} value={state.id}>{state.name}</option>
@@ -141,12 +147,12 @@ export const Profile: React.FC = () => {
                 </label>
               </div>
               <div className = "threeBlockDiv">
-                <label className = "label-short">Zip Code
+                <label className = "label-short">Zip Code<span style={ { color: "red" } }>*</span>
                   <input className="short-input"/>
                 </label>
               </div>
             </div>
-            <label className = "label">Country
+            <label className = "label">Country<span style={ { color: "red" } }>*</span>
               <select className="long-input">
                 {countryList.country.map((country) => {
                   return <option key={country.code} value={country.code}>{country.name}</option>
@@ -158,7 +164,6 @@ export const Profile: React.FC = () => {
         <button className="cancel-button" onClick={handleCancel}>Cancel</button>
         <button className="save-button" onClick={handleSave}>Save</button>
       </form>
-
       <div className = "membership">
         <h1>
           <b>Membership Information</b>
