@@ -26,7 +26,7 @@ const registerUser = async (
     body: JSON.stringify({
       username: userCredential.user.displayName,
       email: userCredential.user.email,
-      tier: 1,
+      tierLevel: 1,
     }),
   };
   const response = await fetch(

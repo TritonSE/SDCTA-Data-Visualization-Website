@@ -37,7 +37,10 @@ router.patch("/:email", async (req, res, next) => {
   try {
     const email = req.params.email;
     const updatedData = req.body;
+    console.log(email);
+    console.log(updatedData);
     const result = await updateUser(email, updatedData);
+    console.log(result);
     res.send(result);
   } catch (error) {
     next(error);

@@ -27,15 +27,18 @@ export const DetailsPage: React.FC = () => {
         navigate("/Signup");
         return;
       } else {
-        await updateUserDetails(
-          phoneNumber,
-          address,
-          city,
-          state,
-          zipCode,
-          country,
-          email
+        const response = await updateUserDetails(
+          email,
+          {
+            phoneIn: phoneNumber,
+            addressIn: address,
+            cityIn: city,
+            stateIn: state,
+            zipCodeIn: zipCode,
+            countryIn: country
+          }
         );
+        console.log(response);
         navigate("/");
       }
     } catch (error) {
@@ -114,14 +117,26 @@ export const DetailsPage: React.FC = () => {
                               value={country}
                             />
                     </div>
-                    <button
-                        onClick={async () => {
-                          await updateDetails();
-                        }}
-                        className="btn-details btn-signup"
-                    >
-                    Continue
-                    </button>
+                    <div className="address-info">
+                      <div className="info-item">
+                        <button
+                          onClick={() => { navigate("/") }}
+                          className=""
+                        >
+                          Skip For Now
+                        </button>
+                      </div>
+                      <div className="info-item">
+                        <button
+                            onClick={async () => {
+                              await updateDetails();
+                            }}
+                            className="btn-details btn-signup"
+                        >
+                        Continue
+                        </button>
+                      </div>
+                    </div>
                 </div>
             </div>
             {errorMessage !== ""
