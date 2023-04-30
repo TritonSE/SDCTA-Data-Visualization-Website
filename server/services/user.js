@@ -24,10 +24,10 @@ export async function createUser(username, email, tierLevel) {
   }
 }
 
-export async function updateUser(id, body) {
+export async function updateUser(email, body) {
   try {
-    const options = { new: true };
-    return await Model.findByIdAndUpdate(id, body, options);
+    const options = { new: true, returnNewDocument: true };
+    return await Model.findOneAndUpdate(email, body, options);
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
   }
