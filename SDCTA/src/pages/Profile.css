@@ -250,24 +250,28 @@
 }
 
 .membership { 
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0.4;
+    /* opacity: 0.4; */
     
 }
 
 ul { 
     list-style: inside;
 
-    align-items:start
+    align-items:start;
+    width: 520px;
+    list-style-position: outside;
     
 }
 
 li {
     position: relative;
     margin-left: 0px;
+    text-overflow:ellipsis;
 }
 
 .change-membership { 

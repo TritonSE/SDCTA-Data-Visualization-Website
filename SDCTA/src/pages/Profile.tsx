@@ -30,7 +30,7 @@ export const Profile: React.FC = () => {
   const extraContent =
     <text>
       <li>Participate in the <b>Issues Sub-Committee</b></li>
-      <li>Receive major <b>event ticket discountsevent ticket discounts</b>, invitations to <b>VIP events</b>, and invitations to <b>friendraisers</b>at Board Members’ houses</li>
+      <li>Receive major <b>event ticket discounts</b>, invitations to <b>VIP events</b>, and invitations to <b>friendraisers</b> at Board Members’ houses</li>
       <li><b>Chair events</b> and membership committees</li>
       <li>Eligibility to be nominated to serve on the <b>Board of Directors</b> and the <b>Executive or Rules Committee</b></li>
     </text>
