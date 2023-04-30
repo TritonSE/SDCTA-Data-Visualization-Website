@@ -15,7 +15,9 @@ export const Education: React.FC = () => {
         <div className="subheading"> Data Subcategory Title</div>
       </div>
       <div
-        onClick={() => { nav("/Data-Visualization"); }}
+        onClick={() => {
+          nav("/Data-Visualization");
+        }}
         style={{ cursor: "pointer" }}
       >
         <TableauEmbed
@@ -32,7 +34,12 @@ export const Education: React.FC = () => {
         veniam, sed do eiusmod tempor incididunt ut labore et dolore magna
         aliqua. Ut enim ad minim veniam, sed.{" "}
       </div>
-      <button className="learn-more" onClick={() => { nav("/Data-Visualization"); }}>
+      <button
+        className="learn-more"
+        onClick={() => {
+          nav("/Data-Visualization");
+        }}
+      >
         {" "}
         Learn more
       </button>

@@ -8,58 +8,63 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { style, textStyle } from "./styleObjects/signupStyle";
 import {
-    exitButtonStyle,
-    titleStyle,
-    buttonStyle,
+  exitButtonStyle,
+  titleStyle,
+  buttonStyle,
 } from "./styleObjects/modals";
 
 interface ModalProps {
-    show: boolean;
-    setShow: (show: boolean) => void;
+  show: boolean;
+  setShow: (show: boolean) => void;
 }
 
 export const DisclaimerModal: React.FC<ModalProps> = (props: ModalProps) => {
-    const handleOpen = (): void => {
-        props.setShow(true);
-    };
-    const handleClose = (): void => {
-        props.setShow(false);
-    };
+  const handleOpen = (): void => {
+    props.setShow(true);
+  };
+  const handleClose = (): void => {
+    props.setShow(false);
+  };
 
-    return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
-            <Modal
-                open={props.show}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <IconButton
-                        aria-label="delete"
-                        onClick={handleClose}
-                        sx={exitButtonStyle}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                    <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                        sx={titleStyle}
-                    >
-                        Disclaimer
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={textStyle}>
-                        Create an account and subscribe to get exclusive access to
-                        statistical documents, resources, and data visualizations!
-                    </Typography>
-                    <Button variant="contained" disableElevation sx={buttonStyle} onClick={handleClose}>
-                        I understand
-                    </Button>
-                </Box>
-            </Modal>
-        </div>
-    );
+  return (
+    <div>
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={props.show}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <IconButton
+            aria-label="delete"
+            onClick={handleClose}
+            sx={exitButtonStyle}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={titleStyle}
+          >
+            Disclaimer
+          </Typography>
+          <Typography id="modal-modal-description" sx={textStyle}>
+            Create an account and subscribe to get exclusive access to
+            statistical documents, resources, and data visualizations!
+          </Typography>
+          <Button
+            variant="contained"
+            disableElevation
+            sx={buttonStyle}
+            onClick={handleClose}
+          >
+            I understand
+          </Button>
+        </Box>
+      </Modal>
+    </div>
+  );
 };
