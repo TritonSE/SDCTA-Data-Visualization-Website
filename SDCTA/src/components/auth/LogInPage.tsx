@@ -7,7 +7,7 @@ import {
   getRedirectResult,
   setPersistence,
   browserLocalPersistence,
-  browserSessionPersistence
+  browserSessionPersistence,
 } from "firebase/auth";
 
 import "./auth.css";
@@ -56,17 +56,19 @@ export const LogInPage: React.FC = () => {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
       if (rememberUser) {
-        setPersistence(auth, browserLocalPersistence).then(async () => {
-        }).catch((error: Error) => {
-          const errorMessage = error.message;
-          setInputError({ ...inputError, unknownError: errorMessage });
-        });
+        setPersistence(auth, browserLocalPersistence)
+          .then(async () => {})
+          .catch((error: Error) => {
+            const errorMessage = error.message;
+            setInputError({ ...inputError, unknownError: errorMessage });
+          });
       } else {
-        setPersistence(auth, browserSessionPersistence).then(async () => {
-        }).catch((error: Error) => {
-          const errorMessage = error.message;
-          setInputError({ ...inputError, unknownError: errorMessage });
-        });
+        setPersistence(auth, browserSessionPersistence)
+          .then(async () => {})
+          .catch((error: Error) => {
+            const errorMessage = error.message;
+            setInputError({ ...inputError, unknownError: errorMessage });
+          });
       }
 
       dispatch(login());
@@ -115,13 +117,11 @@ export const LogInPage: React.FC = () => {
               setLoginEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== ""
-            ? (
+          {inputError.emailError !== "" ? (
             <p className="error-message">{inputError.emailError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           <h3 className="textbox-label">Password</h3>
           <input
@@ -136,13 +136,11 @@ export const LogInPage: React.FC = () => {
             }}
           />
 
-          {inputError.passwordError !== ""
-            ? (
+          {inputError.passwordError !== "" ? (
             <p className="error-message">{inputError.passwordError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
         </div>
         <div className="terms">
           <input
@@ -156,13 +154,11 @@ export const LogInPage: React.FC = () => {
           <label className="terms-label">Remember me?</label>
         </div>
 
-        {inputError.unknownError !== ""
-          ? (
+        {inputError.unknownError !== "" ? (
           <p className="error-message">{inputError.unknownError}</p>
-            )
-          : (
-              ""
-            )}
+        ) : (
+          ""
+        )}
 
         <button
           onClick={async () => {
@@ -189,11 +185,16 @@ export const LogInPage: React.FC = () => {
         <ResetPasswordModal
           show={showResetModal}
           setShow={(showChange) => {
-            setShowResetModal(showChange)
+            setShowResetModal(showChange);
           }}
         />
         <div className="bottom-text">
-          <p className="clickable-text" onClick= { () => { setShowResetModal(true) }}>
+          <p
+            className="clickable-text"
+            onClick={() => {
+              setShowResetModal(true);
+            }}
+          >
             Forgot your password?
           </p>
 

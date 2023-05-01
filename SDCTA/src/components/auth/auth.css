@@ -1,5 +1,5 @@
 body {
-  background: #E5E5E5;
+  background: #e5e5e5;
 }
 
 .signup-form {
@@ -30,7 +30,6 @@ body {
 .details_form {
   width: 36%;
 }
-
 
 .info-item {
   display: inline-block;
@@ -315,7 +314,7 @@ CountryDropdown {
   text-align: center;
   color: #000000;
   height: 40px;
-  background: #E5E5E5;
+  background: #e5e5e5;
 }
 
 .btn-spacer {

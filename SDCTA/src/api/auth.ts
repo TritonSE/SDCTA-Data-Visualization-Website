@@ -4,7 +4,7 @@ import {
   updateProfile,
   setPersistence,
   browserSessionPersistence,
-  deleteUser
+  deleteUser,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { signUpErrorHandler } from "../error_handling/auth-errors";
@@ -29,10 +29,7 @@ const registerUser = async (
       tierLevel: 1,
     }),
   };
-  const response = await fetch(
-    "http://localhost:3001/user/",
-    requestOptions
-  );
+  const response = await fetch("http://localhost:3001/user/", requestOptions);
   return response;
 };
 
@@ -84,11 +81,12 @@ const register = async (
       registerPassword
     );
 
-    setPersistence(auth, browserSessionPersistence).then(async () => {
-    }).catch((error: Error) => {
-      const errorMessage = error.message;
-      setInputError({ ...inputError, unknownError: errorMessage });
-    });
+    setPersistence(auth, browserSessionPersistence)
+      .then(async () => {})
+      .catch((error: Error) => {
+        const errorMessage = error.message;
+        setInputError({ ...inputError, unknownError: errorMessage });
+      });
 
     await updateProfile(userCredential.user, {
       displayName: userDisplayName,
@@ -98,11 +96,13 @@ const register = async (
 
     if (response.status === 400) {
       if (auth.currentUser != null) {
-        deleteUser(auth.currentUser).then(() => {
-          setInputError({ ...inputError, unknownError: response.statusText });
-        }).catch((error) => {
-          setInputError({ ...inputError, unknownError: error });
-        });
+        deleteUser(auth.currentUser)
+          .then(() => {
+            setInputError({ ...inputError, unknownError: response.statusText });
+          })
+          .catch((error) => {
+            setInputError({ ...inputError, unknownError: error });
+          });
         return;
       }
     }

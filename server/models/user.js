@@ -19,23 +19,23 @@ const dataSchema = new mongoose.model(
       ref: "Tier",
     },
     phone: {
-      type: String
+      type: String,
     },
     address: {
-      type: String
+      type: String,
     },
     city: {
-      type: String
+      type: String,
     },
     state: {
-      type: String
+      type: String,
     },
     zipCode: {
-      type: String
+      type: String,
     },
     country: {
-      type: String
-    }
+      type: String,
+    },
   })
 );
 

@@ -1,7 +1,4 @@
-
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-
-
 
 /*
 const fetchUser = () => {};
@@ -18,9 +15,7 @@ function* mySaga() {
 */
 
 function* registerSaga() {
-    try {
-        yield
-    } catch (error) {
-
-    }
+  try {
+    yield;
+  } catch (error) {}
 }

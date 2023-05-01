@@ -8,7 +8,7 @@ import {
   getRedirectResult,
   setPersistence,
   browserSessionPersistence,
-  deleteUser
+  deleteUser,
 } from "firebase/auth";
 import "./auth.css";
 import { auth } from "../../firebase-config";
@@ -75,11 +75,12 @@ export const SignUpPage: React.FC = () => {
         registerPassword
       );
 
-      setPersistence(auth, browserSessionPersistence).then(async () => {
-      }).catch((error: Error) => {
-        const errorMessage = error.message;
-        setInputError({ ...inputError, unknownError: errorMessage });
-      });
+      setPersistence(auth, browserSessionPersistence)
+        .then(async () => {})
+        .catch((error: Error) => {
+          const errorMessage = error.message;
+          setInputError({ ...inputError, unknownError: errorMessage });
+        });
 
       await updateProfile(userCredential.user, {
         displayName: userDisplayName,
@@ -89,11 +90,16 @@ export const SignUpPage: React.FC = () => {
 
       if (response.status === 400) {
         if (auth.currentUser != null) {
-          deleteUser(auth.currentUser).then(() => {
-            setInputError({ ...inputError, unknownError: response.statusText });
-          }).catch((error) => {
-            setInputError({ ...inputError, unknownError: error });
-          });
+          deleteUser(auth.currentUser)
+            .then(() => {
+              setInputError({
+                ...inputError,
+                unknownError: response.statusText,
+              });
+            })
+            .catch((error) => {
+              setInputError({ ...inputError, unknownError: error });
+            });
           return;
         }
       }
@@ -103,12 +109,14 @@ export const SignUpPage: React.FC = () => {
     } catch (error) {
       if (error instanceof Error) {
         if (auth.currentUser != null) {
-          deleteUser(auth.currentUser).then(() => {
-            dispatch(logout());
-            navigate("/signup");
-          }).catch((error) => {
-            setInputError({ ...inputError, unknownError: error });
-          });
+          deleteUser(auth.currentUser)
+            .then(() => {
+              dispatch(logout());
+              navigate("/signup");
+            })
+            .catch((error) => {
+              setInputError({ ...inputError, unknownError: error });
+            });
         }
         const errorMessage = signUpErrorHandler(error);
         inputError = { ...inputError, ...errorMessage };
@@ -215,13 +223,11 @@ export const SignUpPage: React.FC = () => {
               setUserDisplayName(event.target.value);
             }}
           />
-          {inputError.nameError !== ""
-            ? (
+          {inputError.nameError !== "" ? (
             <p className="error-message">{inputError.nameError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Email input */}
           <h3 className="textbox-label">Email</h3>
@@ -234,13 +240,11 @@ export const SignUpPage: React.FC = () => {
               setRegisterEmail(event.target.value);
             }}
           />
-          {inputError.emailError !== ""
-            ? (
+          {inputError.emailError !== "" ? (
             <p className="error-message">{inputError.emailError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Password input */}
           <h3 className="textbox-label">Password</h3>
@@ -255,13 +259,11 @@ export const SignUpPage: React.FC = () => {
               setRegisterPassword(event.target.value);
             }}
           />
-          {inputError.passwordError !== ""
-            ? (
+          {inputError.passwordError !== "" ? (
             <p className="error-message">{inputError.passwordError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
 
           {/* Confirm password */}
           <h3 className="textbox-label">Confirm Password</h3>
@@ -274,13 +276,11 @@ export const SignUpPage: React.FC = () => {
               setConfirmPassword(event.target.value);
             }}
           />
-          {inputError.confirmError !== ""
-            ? (
+          {inputError.confirmError !== "" ? (
             <p className="error-message">{inputError.confirmError}</p>
-              )
-            : (
-                ""
-              )}
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="terms">
@@ -298,13 +298,11 @@ export const SignUpPage: React.FC = () => {
           </label>
         </div>
 
-        {inputError.unknownError !== ""
-          ? (
+        {inputError.unknownError !== "" ? (
           <p className="error-message">{inputError.unknownError}</p>
-            )
-          : (
-              ""
-            )}
+        ) : (
+          ""
+        )}
 
         <button onClick={register} className="btn-signup">
           Sign Up
@@ -317,7 +315,7 @@ export const SignUpPage: React.FC = () => {
         </div>
 
         <div>
-          <button onClick={ loginWithGoogle } className="btn google-signup">
+          <button onClick={loginWithGoogle} className="btn google-signup">
             <div className="google-logo"></div>
             <p className="google-text">Sign in with Google</p>
           </button>

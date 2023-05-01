@@ -12,7 +12,7 @@ declare global {
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  auth.onAuthStateChanged(user => {
+  auth.onAuthStateChanged((user) => {
     if (user != null) {
       dispatch(login());
     } else {
