@@ -15,7 +15,7 @@ export async function createUser(body) {
     console.log(body);
     const tier = await getTierByLevel(body.tierLevel);
     const data = new Model(body);
-    data["tier"] = tier;
+    data.tier = tier;
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);

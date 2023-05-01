@@ -70,40 +70,38 @@ export const DetailsPage: React.FC = () => {
                           setAddress(event.target.value);
                         }}
                     />
-                    <div className="address-info">
-                        <div className="info-item">
-                            <h3 className="textbox-label">City</h3>
-                            <input
-                                className="text-input"
-                                onChange={(event) => {
-                                  setCity(event.target.value);
-                                }}
-                            />
-                        </div>
-                        <div className="info-item middle-item">
-                            <h3 className="textbox-label">State</h3>
-
-                            <RegionDropdown
-                            // @ts-expect-error Since using custom component, it gives an error
-                            // when passing the className, but otherwise works.
+                      <div className="info-item">
+                          <h3 className="textbox-label info-label">City</h3>
+                          <input
                               className="text-input"
-                              country="United States"
-                              value={state}
-                              onChange={(state: string) => {
-                                setState(state);
+                              onChange={(event) => {
+                                setCity(event.target.value);
                               }}
-                            />
-                        </div>
-                        <div className="info-item">
-                            <h3 className="textbox-label">Zip Code</h3>
-                            <input
-                                className="text-input"
-                                onChange={(event) => {
-                                  setZipCode(event.target.value);
-                                }}
-                            />
-                        </div>
-                    </div>
+                          />
+                      </div>
+                      <div className="info-item middle-item">
+                          <h3 className="textbox-label info-label">State</h3>
+
+                          <RegionDropdown
+                          // @ts-expect-error Since using custom component, it gives an error
+                          // when passing the className, but otherwise works.
+                            className="text-input"
+                            country="United States"
+                            value={state}
+                            onChange={(state: string) => {
+                              setState(state);
+                            }}
+                          />
+                      </div>
+                      <div className="info-item">
+                          <h3 className="textbox-label info-label">Zip Code</h3>
+                          <input
+                              className="text-input"
+                              onChange={(event) => {
+                                setZipCode(event.target.value);
+                              }}
+                          />
+                      </div>
                     <h3 className="textbox-label">Country</h3>
                     <div className="dropdown">
                             <CountryDropdown
@@ -117,25 +115,24 @@ export const DetailsPage: React.FC = () => {
                               value={country}
                             />
                     </div>
-                    <div className="address-info">
-                      <div className="info-item">
-                        <button
-                          onClick={() => { navigate("/") }}
-                          className=""
-                        >
-                          Skip For Now
-                        </button>
-                      </div>
-                      <div className="info-item">
-                        <button
-                            onClick={async () => {
-                              await updateDetails();
-                            }}
-                            className="btn-details btn-signup"
-                        >
-                        Continue
-                        </button>
-                      </div>
+                    <div className="info-button">
+                      <button
+                        onClick={() => { navigate("/") }}
+                        className="btn-skip"
+                      >
+                        Skip For Now
+                      </button>
+                    </div>
+                    <div className="btn-spacer"></div>
+                    <div className="info-button">
+                      <button
+                          onClick={async () => {
+                            await updateDetails();
+                          }}
+                          className="btn-signup btn-continue"
+                      >
+                      Continue
+                      </button>
                     </div>
                 </div>
             </div>
