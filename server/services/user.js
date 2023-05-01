@@ -27,12 +27,8 @@ export async function updateUser(email, body) {
     const options = { new: true, returnNewDocument: true };
     const data = await Model.findOneAndUpdate({ email }, body, options);
     if (body.tierLevel) {
-<<<<<<< Updated upstream
-      await getTierByLevel(body.tierLevel);
-=======
       const tier = await getTierByLevel(body.tierLevel);
-      data["tier"] = tier;
->>>>>>> Stashed changes
+      data.tier = tier;
     }
     return data;
   } catch (error) {

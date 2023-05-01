@@ -5,9 +5,7 @@ import {
   getUserByEmail,
   deleteUser,
 } from "../services/user.js";
-
 const router = express.Router();
-
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
@@ -17,7 +15,6 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-
 // Get by email Method
 router.get("/:email", async (req, res, next) => {
   try {
@@ -27,7 +24,6 @@ router.get("/:email", async (req, res, next) => {
     next(error);
   }
 });
-
 // Update by email Method
 router.patch("/:email", async (req, res, next) => {
   try {
@@ -39,7 +35,6 @@ router.patch("/:email", async (req, res, next) => {
     next(error);
   }
 });
-
 // Delete by ID Method
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -50,5 +45,4 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
 export default router;
