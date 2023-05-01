@@ -26,7 +26,7 @@ export async function updateUser(email, body) {
   try {
     const options = { new: true, returnNewDocument: true };
     if (body.tierLevel) {
-      const tier = await getTierByLevel(body.tierLevel);
+      await getTierByLevel(body.tierLevel);
     }
     return await Model.findOneAndUpdate({ email }, body, options);
   } catch (error) {
