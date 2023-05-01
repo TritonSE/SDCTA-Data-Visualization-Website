@@ -25,10 +25,12 @@ export async function createUser(body) {
 export async function updateUser(email, body) {
   try {
     const options = { new: true, returnNewDocument: true };
+    const data = await Model.findOneAndUpdate({ email }, body, options);
     if (body.tierLevel) {
-      await getTierByLevel(body.tierLevel);
+      const tier = await getTierByLevel(body.tierLevel);
+      data.tier = tier;
     }
-    return await Model.findOneAndUpdate({ email }, body, options);
+    return data;
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
   }
