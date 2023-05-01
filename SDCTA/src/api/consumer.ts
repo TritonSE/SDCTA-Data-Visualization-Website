@@ -19,14 +19,14 @@ const updateUserDetails = async (
       city: userDetails.cityIn,
       state: userDetails.stateIn,
       zipCode: userDetails.zipCodeIn,
-      country: userDetails.countryIn
+      country: userDetails.countryIn,
     }),
-  }
-  const requestLink = "http://localhost:3001/user/"
+  };
+  const requestLink = "http://localhost:3001/user/";
   const response = await fetch(
     requestLink.concat(emailIn),
     updateRequestOptions
   );
   return response;
-}
+};
 export { updateUserDetails };
