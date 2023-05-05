@@ -1,7 +1,6 @@
 import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
-
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";

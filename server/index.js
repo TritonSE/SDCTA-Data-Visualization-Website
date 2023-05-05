@@ -23,7 +23,6 @@ database.once("connected", () => {
 });
 
 const errorHandler = (err, req, res, next) => {
-  console.log(!(err instanceof CustomError));
   console.log(err);
   if (!err) return;
   if (!(err instanceof CustomError)) {
