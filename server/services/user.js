@@ -28,7 +28,7 @@ export async function updateUser(email, body) {
     const data = await Model.findOneAndUpdate({ email }, body, options);
     if (body.tierLevel) {
       const tier = await getTierByLevel(body.tierLevel);
-      data["tier"] = tier;
+      data.tier = tier;
     }
     return data;
   } catch (error) {
