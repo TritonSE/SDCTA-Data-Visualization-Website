@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SDCTA-Data-Visualization-Website/static/css/main.ca0b70a8.css",
-    "main.js": "/SDCTA-Data-Visualization-Website/static/js/main.b833ca07.js",
+    "main.js": "/SDCTA-Data-Visualization-Website/static/js/main.7deebcb8.js",
     "static/js/787.28cb0dcd.chunk.js": "/SDCTA-Data-Visualization-Website/static/js/787.28cb0dcd.chunk.js",
     "static/media/Landing_Image.jpg": "/SDCTA-Data-Visualization-Website/static/media/Landing_Image.49bca369e8d04ce3916a.jpg",
     "static/media/SDTEF Logo Transparent Background 1.svg": "/SDCTA-Data-Visualization-Website/static/media/SDTEF Logo Transparent Background 1.2f292535eea708d3b57168ac4d92aba3.svg",
@@ -9,15 +9,14 @@
     "static/media/Education_Standin.png": "/SDCTA-Data-Visualization-Website/static/media/Education_Standin.fe4fecbd9375388897fa.png",
     "static/media/Municipal_Standin.png": "/SDCTA-Data-Visualization-Website/static/media/Municipal_Standin.00d7362c6871370110f0.png",
     "static/media/Profile Picture.svg": "/SDCTA-Data-Visualization-Website/static/media/Profile Picture.d4716a5fe85ab0bc3530e4b326be8d76.svg",
-    "static/media/downloadIcon.svg": "/SDCTA-Data-Visualization-Website/static/media/downloadIcon.dedc9fffc93fedce2d9d712e2b2c67bc.svg",
     "index.html": "/SDCTA-Data-Visualization-Website/index.html",
     "static/media/backIcon.svg": "/SDCTA-Data-Visualization-Website/static/media/backIcon.cea29d2eee22c1e7d1728ec7008b9b4d.svg",
     "main.ca0b70a8.css.map": "/SDCTA-Data-Visualization-Website/static/css/main.ca0b70a8.css.map",
-    "main.b833ca07.js.map": "/SDCTA-Data-Visualization-Website/static/js/main.b833ca07.js.map",
+    "main.7deebcb8.js.map": "/SDCTA-Data-Visualization-Website/static/js/main.7deebcb8.js.map",
     "787.28cb0dcd.chunk.js.map": "/SDCTA-Data-Visualization-Website/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ca0b70a8.css",
-    "static/js/main.b833ca07.js"
+    "static/js/main.7deebcb8.js"
   ]
 }
