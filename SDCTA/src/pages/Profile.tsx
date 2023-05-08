@@ -113,57 +113,6 @@ export const Profile: React.FC = () => {
               <p className="textDisplay"> {formData.lang} </p>
             </label>
           </div>
-          <div className="payment_info">
-            <h2>Payment Information</h2>
-            <label className="label">Card Holder Name
-              <p className="textDisplay"> Name </p>
-            </label>
-            <div className="threeInOne">
-              <div className="cardDiv">
-                <label className="card-label">Card Number
-                <p className="textDisplay">
-                  {/* {formData.password.substring(0, 1) +
-                    "XXXXXXXXXXX" +
-                    formData.password.substring(12, 16)} */}
-                    Card Number
-                </p>
-                </label>
-              </div>
-              <div className="twoDiv">
-                <label className="label-short">Exp Date
-                  <p className="shorter-display"> EXP Date </p>
-                </label>
-              </div>
-              <div className="twoDiv">
-                <label className="label-short">CVC
-                  <p className="shorter-display"> *** </p>
-                </label>
-              </div>
-            </div>
-            <label className="label">Billing Address
-            <p className="textDisplay"> Billing Address </p>
-            </label >
-            <div className="threeInOne">
-              <div className="cityDiv">
-                <label className="label-short">City
-                  <p className="short-display"> City </p>
-                </label>
-              </div>
-              <div className="threeBlockDiv">
-                <label className="label-short">State
-                  <p className="short-display"> State </p>
-                </label>
-              </div>
-              <div className="threeBlockDiv">
-                <label className="label-short">Zip Code
-                <p className="short-display"> Zip </p>
-                </label>
-              </div>
-            </div>
-            <label className="label">Country
-              <p className="textDisplay"> Country </p>
-            </label>
-          </div>
         </div>
         <Membership />
         <Footer />
