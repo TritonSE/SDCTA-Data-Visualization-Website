@@ -81,7 +81,7 @@
 }
 .edit-button-parent { 
 
-    width: 1200px;
+    width: 80px;
     margin: 0 auto;
     text-align: right;
     height: 60px;
@@ -114,7 +114,6 @@
 
     border: none;
     background: none;
-    padding: 0;
     cursor: pointer;
     top: 400px
 }
