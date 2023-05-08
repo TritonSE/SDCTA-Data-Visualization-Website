@@ -1,8 +1,9 @@
 import "./App.css";
 import { Routes } from "./components/Routes";
 import { auth } from "./firebase-config";
-import { login, logout } from "./slices/loginSlice";
+import { login, logout, storeUser } from "./slices/loginSlice";
 import { useDispatch } from "react-redux";
+import { getUser } from "./api/auth"
 
 declare global {
   interface Window {
@@ -12,9 +13,13 @@ declare global {
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged(async (user) => {
     if (user != null) {
       dispatch(login());
+      console.log(user.email);
+      await getUser(user.email).then((mongoUser) => {
+        dispatch(storeUser(mongoUser));
+      });
     } else {
       dispatch(logout());
     }

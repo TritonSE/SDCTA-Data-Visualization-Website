@@ -66,7 +66,6 @@ const loginUser = async (
           // setInputError({ ...inputError, unknownError: errorMessage });
         });
     }
-
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = logInErrorHandler(error);
@@ -77,4 +76,20 @@ const loginUser = async (
   }
 };
 
-export { registerUser, loginUser };
+const getUser = async (
+  email: any
+): Promise<Response> => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  };
+
+  const requestLink = "http://localhost:3001/user/"
+  const response = await fetch(
+    requestLink.concat(email),
+    requestOptions
+  );
+  return await response.json();
+}
+
+export { registerUser, getUser, loginUser };
