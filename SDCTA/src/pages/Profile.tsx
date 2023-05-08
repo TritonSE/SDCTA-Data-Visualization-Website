@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer"
 import landscape from ".//../Images/Landing_Image.jpg";
+import edit from ".//../Images/Edit.png";
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import stateList from "../constants/state-list.json"
@@ -57,103 +58,196 @@ export const Profile: React.FC = () => {
 
   if (submitted) {
     return (
-      <div>
-        <button onClick={handleEdit}>Edit</button>
-        <p>Company Name {formData.compName}</p>
-        <p>First Name {formData.fName}</p>
-        <p>Last Name {formData.lName}</p>
-        <p>Email {formData.email}</p>
-        <p>Password {formData.password}</p>
-        <p>Phone Number {formData.phone}</p>
-        <p>Mailing Address {formData.mailing}</p>
-        <p>City {formData.city}</p>
-        <p>State {formData.state}</p>
-        <p>Zip Code {formData.zip}</p>
-        <p>Country {formData.country}</p>
-        <p>Preferred Language {formData.lang}</p>
-      <Membership />
-      <Footer/>
+      <div className = "Profile-Page">
+        <img className="header" src={landscape} alt="sd landscape" />
+        <div className="edit-button-parent">
+          <button className="edit-button" onClick={handleEdit}>edit <img className="edit-img" src={edit} alt="edit image" /></button>
+        </div>
+        <div className = "parent_box_display">
+          <div className="profile-info">
+            <h2>Profile Information</h2>
+            <label className="label">Company Name
+              <p className="textDisplay"> {formData.compName} </p>
+            </label>
+            <div className="fullNameDisplay">
+              <label className="label">First Name
+                <p className="half-display"> {formData.fName} </p>
+              </label >
+              <label className="label">Last Name
+                <p className="half-display"> {formData.lName} </p>
+              </label>
+            </div>
+            <label className="label">Email
+              <p className="textDisplay"> {formData.email} </p>
+            </label>
+            <label className="label">Password
+              <p className="textDisplay"> {formData.password.replace(/./g, "*")}</p>
+            </label>
+            <label className="label">Phone Number
+              <p className="textDisplay"> {formData.phone} </p>
+            </label>
+            <label className="label">Mailing Address
+              <p className="textDisplay"> {formData.mailing} </p>
+            </label>
+            <div className="threeInOne">
+              <div className="cityDiv">
+                <label className="label-short">City
+                  <p className="short-display"> {formData.city} </p>
+                </label>
+              </div>
+              <div className="threeBlockDiv">
+                <label className="label-short">State
+                  <p className="short-display"> {formData.state} </p>
+                </label>
+              </div>
+              <div className="threeBlockDiv">
+                <label className="label-short">Zip Code
+                  <p className="short-display"> {formData.zip} </p>
+                </label>
+              </div>
+            </div>
+            <label className="label">Country
+              <p className="textDisplay"> {formData.country} </p>
+            </label>
+            <label className="label">Preferred Language
+              <p className="textDisplay"> {formData.lang} </p>
+            </label>
+          </div>
+          <div className="payment_info">
+            <h2>Payment Information</h2>
+            <label className="label">Card Holder Name
+              <p className="textDisplay"> Name </p>
+            </label>
+            <div className="threeInOne">
+              <div className="cardDiv">
+                <label className="card-label">Card Number
+                <p className="textDisplay">
+                  {/* {formData.password.substring(0, 1) +
+                    "XXXXXXXXXXX" +
+                    formData.password.substring(12, 16)} */}
+                    Card Number
+                </p>
+                </label>
+              </div>
+              <div className="twoDiv">
+                <label className="label-short">Exp Date
+                  <p className="shorter-display"> EXP Date </p>
+                </label>
+              </div>
+              <div className="twoDiv">
+                <label className="label-short">CVC
+                  <p className="shorter-display"> *** </p>
+                </label>
+              </div>
+            </div>
+            <label className="label">Billing Address
+            <p className="textDisplay"> Billing Address </p>
+            </label >
+            <div className="threeInOne">
+              <div className="cityDiv">
+                <label className="label-short">City
+                  <p className="short-display"> City </p>
+                </label>
+              </div>
+              <div className="threeBlockDiv">
+                <label className="label-short">State
+                  <p className="short-display"> State </p>
+                </label>
+              </div>
+              <div className="threeBlockDiv">
+                <label className="label-short">Zip Code
+                <p className="short-display"> Zip </p>
+                </label>
+              </div>
+            </div>
+            <label className="label">Country
+              <p className="textDisplay"> Country </p>
+            </label>
+          </div>
+        </div>
+        <Membership />
+        <Footer />
       </div>
     );
   } else {
     return (
       <>
-      <div className="Profile-Page">
-        <img className = "header" src={landscape} alt="sd landscape" />
-        <form onSubmit={handleSave}>
-        <div className = "parent_box">
-          <div className = "profile-info">
-            <h2>Profile Information</h2>
-              <label className = "label">Affiliated Company<span style={ { color: "red" } }>*</span>
-                <input className="long-input" type="text" value = {formData.compName} name="compName" onChange={(e) => { handleChange(e) }}/>
-              </label>
-              <div className = "fullName">
-                <label className = "label">First Name<span style={ { color: "red" } }>*</span>
-                  <input className="half-input" type="text" value = {formData.fName} name="fName" onChange={(e) => { handleChange(e) }}/>
+        <div className="Profile-Page">
+          <img className="header" src={landscape} alt="sd landscape" />
+          <form onSubmit={handleSave}>
+            <div className="parent_box">
+              <div className="profile-info">
+                <h2>Profile Information</h2>
+                <label className="label">Company Name<span style={{ color: "red" }}>*</span>
+                  <input className="long-input" type="text" value={formData.compName} name="compName" onChange={(e) => { handleChange(e) }} />
+                </label>
+                <div className="fullName">
+                  <label className="label">First Name<span style={{ color: "red" }}>*</span>
+                    <input className="half-input" type="text" value={formData.fName} name="fName" onChange={(e) => { handleChange(e) }} />
+                  </label >
+                  <label className="label">Last Name<span style={{ color: "red" }}>*</span>
+                    <input className="half-input" type="text" value={formData.lName} name="lName" onChange={(e) => { handleChange(e) }} />
+                  </label >
+                </div>
+                <label className="label">Email Address<span style={{ color: "red" }}>*</span>
+                  <input className="long-input" type="text" value={formData.email} name="email" onChange={(e) => { handleChange(e,) }} />
                 </label >
-                <label className = "label">Last Name<span style={ { color: "red" } }>*</span>
-                  <input className="half-input" type="text" value = {formData.lName} name="lName" onChange={(e) => { handleChange(e) }}/>
-                </label >
-              </div>
-              <label className = "label">Email Address<span style={ { color: "red" } }>*</span>
-                  <input className="long-input" type="text" value = {formData.email} name="email" onChange={(e) => { handleChange(e,) }}/>
-              </label >
-              <label className = "label">Password<span style={ { color: "red" } }>*</span>
-                <input className="long-input" type="text" value = {formData.password} name="password" onChange={(e) => { handleChange(e) }}/>
-              </label>
-              <label className = "label">Phone Number<span style={ { color: "red" } }>*</span>
-                <input className="long-input" type="text" value = {formData.phone} name="phone" onChange={(e) => { handleChange(e) }}/>
-              </label>
-              <label className = "label">Mailing Address<span style={ { color: "red" } }>*</span>
-                <input className="long-input" type="text" value = {formData.mailing} name="mailing" onChange={(e) => { handleChange(e) }}/>
-              </label>
-              <div className = "threeInOne">
-                <div className = "cityDiv">
-                  <label className = "label-short">City<span style={ { color: "red" } }>*</span>
-                    <input className="short-input" type="text" value = {formData.city} name="city" onChange={(e) => { handleChange(e) }}/>
-                  </label>
+                <label className="label">Password<span style={{ color: "red" }}>*</span>
+                  <input className="long-input" type="text" value={formData.password} name="password" onChange={(e) => { handleChange(e) }} />
+                </label>
+                <label className="label">Phone Number<span style={{ color: "red" }}>*</span>
+                  <input className="long-input" type="text" value={formData.phone} name="phone" onChange={(e) => { handleChange(e) }} />
+                </label>
+                <label className="label">Mailing Address<span style={{ color: "red" }}>*</span>
+                  <input className="long-input" type="text" value={formData.mailing} name="mailing" onChange={(e) => { handleChange(e) }} />
+                </label>
+                <div className="threeInOne">
+                  <div className="cityDiv">
+                    <label className="label-short">City<span style={{ color: "red" }}>*</span>
+                      <input className="short-input" type="text" value={formData.city} name="city" onChange={(e) => { handleChange(e) }} />
+                    </label>
+                  </div>
+                  <div className="threeBlockDiv">
+                    <label className="label-short">State<span style={{ color: "red" }}>*</span>
+                      <select className="stateDrop" name="state" value={formData.state} onChange={(e) => { handleChange(e) }}>
+                        {stateList.state.map((state) => {
+                          return <option key={state.id} value={state.name}>{state.name}</option>
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="threeBlockDiv">
+                    <label className="label-short">Zip Code<span style={{ color: "red" }}>*</span>
+                      <input className="short-input" type="text" value={formData.zip} name="zip" onChange={(e) => { handleChange(e) }} />
+                    </label>
+                  </div>
                 </div>
-                <div className = "threeBlockDiv">
-                  <label className = "label-short">State<span style={ { color: "red" } }>*</span>
-                    <select className="stateDrop" name="state" value = {formData.state} onChange={(e) => { handleChange(e) }}>
-                      {stateList.state.map((state) => {
-                        return <option key={state.id} value={state.name}>{state.name}</option>
-                      })}
-                    </select>
-                  </label>
-                </div>
-                <div className = "threeBlockDiv">
-                  <label className = "label-short">Zip Code<span style={ { color: "red" } }>*</span>
-                    <input className="short-input" type="text" value = {formData.zip} name="zip" onChange={(e) => { handleChange(e) }}/>
-                  </label>
-                </div>
-              </div>
-              <label className = "label">Country<span style={ { color: "red" } }>*</span>
-                <select className="long-input" name="country" value = {formData.country} onChange={(e) => { handleChange(e) }}>
-                  {countryList.country.map((country) => {
-                    return <option key={country.code} value={country.name}>{country.name}</option>
-                  })}
+                <label className="label">Country<span style={{ color: "red" }}>*</span>
+                  <select className="long-input" name="country" value={formData.country} onChange={(e) => { handleChange(e) }}>
+                    {countryList.country.map((country) => {
+                      return <option key={country.code} value={country.name}>{country.name}</option>
+                    })}
                   </select>
-              </label>
-              <label className = "label">Preferred Language<span style={ { color: "red" } }>*</span>
-                <select className="long-input" name="lang" value = {formData.lang} onChange={(e) => { handleChange(e) }}>
-                  {languageList.language.map((language) => {
-                    return <option key={language.code} value={language.name}>{language.name}</option>
-                  })}
-                </select>
-              </label>
-              <label className = "reqLabel"><span style={ { color: "red" } }>*</span>Required Fields</label>
+                </label>
+                <label className="label">Preferred Language<span style={{ color: "red" }}>*</span>
+                  <select className="long-input" name="lang" value={formData.lang} onChange={(e) => { handleChange(e) }}>
+                    {languageList.language.map((language) => {
+                      return <option key={language.code} value={language.name}>{language.name}</option>
+                    })}
+                  </select>
+                </label>
+                <label className="reqLabel"><span style={{ color: "red" }}>*</span>Required Fields</label>
+              </div>
             </div>
-          </div>
-        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
-        <button className="save-button" onClick={handleSave}>Save</button>
-        </form>
+            <button className="cancel-button" onClick={handleCancel}>Cancel</button>
+            <button className="save-button" onClick={handleSave}>Save</button>
+          </form>
         </div>
-        <div style={ { opacity: 0.4 } }>
-          <Membership/>
+        <div style={{ opacity: 0.4 }}>
+          <Membership />
         </div>
-        <Footer/>
-        </>
+        <Footer />
+      </>
     );
   }
 }

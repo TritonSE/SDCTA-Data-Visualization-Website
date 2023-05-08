@@ -12,6 +12,18 @@
   margin-top: 140px;
   
 }
+.parent_box_display { 
+        /* background-color: antiquewhite;
+    text-align: center;
+    position:relative; */
+    width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
 #parent_box > .child {
     flex: 1;
   margin: 0 10px; /* adjust this value as needed to change the spacing */
@@ -35,11 +47,82 @@
     margin-bottom: 15px;
 
 }
+.fullNameDisplay { 
+
+    width: 512px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+}
+.half-display { 
+    width: 99%;
+    height: 30px;
+    font-family: 'Open Sans';
+    font-style: normal;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
+}
+.short-display {
+    width: 156px;
+    height: 30px;
+    font-family: 'Open Sans';
+    font-style: normal;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    
+    
+}
+.edit-button-parent { 
+
+    width: 1200px;
+    margin: 0 auto;
+    text-align: right;
+    height: 60px;
+    display: flex; 
+    align-items: center;
+}
+.edit-button { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #C3272E;
+
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    margin-left: auto;
+}
+.edit-img { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #C3272E;
+
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    top: 400px
+}
+
 
 .half-input { 
     width: 99%;
     height: 40px;
-
 }
 
 .label{ 
@@ -48,9 +131,17 @@
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-
-
 }
+
+.textDisplay { 
+    font-family: 'Open Sans';
+    font-style: normal;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
 
 .payment_info { 
     margin-right: 190px;
@@ -177,7 +268,6 @@
     border-radius: 4px;
     
 }
-
 .shorter-input { 
     width: 100%;
     height: 40px;
@@ -192,8 +282,20 @@
 
     border: 1px solid #6C6C6C;
     border-radius: 4px;
+}
+
+.shorter-display { 
+    width: 100%;
+    height: 30px;
 
 
+    font-family: 'Open Sans';
+    font-style: normal;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    
 }
 
 .card-label { 
