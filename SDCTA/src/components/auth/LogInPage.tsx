@@ -37,7 +37,6 @@ export const LogInPage: React.FC = () => {
         loginEmail
       }
     });
-
     navigate("/");
   };
 
