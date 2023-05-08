@@ -2,7 +2,7 @@
     "country": [
     { "code": "NULL", "name": "--Select Country--"},
     { "code": "AD", "name": "Andorra" },
-    { "code": "AE", "name": "United Arab Emirates" },
+    { "code": "AE", "name": "Arab Emirates" },
     { "code": "AF", "name": "Afghanistan" },
     { "code": "AG", "name": "Antigua and Barbuda" },
     { "code": "AI", "name": "Anguilla" },
