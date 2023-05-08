@@ -21,13 +21,13 @@ export const loginSlice = createSlice({
     logout: (state) => {
       state.value = false;
     },
-    storeUser: (state,action) => {
-      state.user = true;
+    storeUser: (state, action) => {
+      state.user = action.payload;
     }
   },
 });
 
-export const { login, logout } = loginSlice.actions;
+export const { login, logout, storeUser } = loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
 
