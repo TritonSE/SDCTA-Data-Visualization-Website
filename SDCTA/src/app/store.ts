@@ -6,6 +6,7 @@ import {
 import loginReducer from "../slices/loginSlice";
 import subscribeReducer from "../slices/subscribeSlice";
 import createSagaMiddleware from "redux-saga";
+import registerSaga from "../sagas/authSaga"
 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -22,13 +23,13 @@ export const store = configureStore({
 
 // Then run the saga
 // uncomment when root saga is made
-// sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(registerSaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+ReturnType,
+RootState,
+unknown,
+Action<string>
 >;

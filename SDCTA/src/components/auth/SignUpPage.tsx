@@ -86,26 +86,22 @@ export const SignUpPage: React.FC = () => {
         displayName: userDisplayName,
       });
 
-      const response = await registerUser(userCredential);
-
-      if (response.status === 400) {
+      await registerUser(userCredential).then((response) => {
+        navigate("/signupdetails");
+      }).catch((error) => {
         if (auth.currentUser != null) {
           deleteUser(auth.currentUser)
             .then(() => {
               setInputError({
                 ...inputError,
-                unknownError: response.statusText,
+                unknownError: error.message,
               });
             })
             .catch((error) => {
               setInputError({ ...inputError, unknownError: error });
             });
-          return;
         }
-      }
-
-      dispatch(login());
-      navigate("/signupdetails");
+      })
     } catch (error) {
       if (error instanceof Error) {
         if (auth.currentUser != null) {

@@ -1,18 +1,12 @@
 import { useState } from "react";
 import {
-  signInWithEmailAndPassword,
   GoogleAuthProvider,
   getAuth,
   signInWithRedirect,
   getRedirectResult,
-  setPersistence,
-  browserLocalPersistence,
-  browserSessionPersistence,
 } from "firebase/auth";
 
 import "./auth.css";
-import { auth } from "../../firebase-config";
-import { logInErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
 import { ResetPasswordModal } from "../modal/resetPassword";
 
@@ -28,59 +22,23 @@ export const LogInPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let [inputError, setInputError] = useState({
+  const [inputError, setInputError] = useState({
     emailError: "",
     passwordError: "",
     unknownError: "",
   });
 
-  const loginUser = async (): Promise<void> => {
-    try {
-      inputError = {
-        emailError: "",
-        passwordError: "",
-        unknownError: "",
-      };
-
-      setInputError({
-        emailError: "",
-        passwordError: "",
-        unknownError: "",
-      });
-
-      if (loginPassword === "") {
-        inputError.passwordError = "Type in a password.";
-        setInputError({ ...inputError });
-        return;
+  const callLoginUser = (): void => {
+    dispatch({
+      type: 'LOGIN_USER',
+      payload: {
+        loginPassword,
+        rememberUser,
+        loginEmail
       }
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+    });
 
-      if (rememberUser) {
-        setPersistence(auth, browserLocalPersistence)
-          .then(async () => {})
-          .catch((error: Error) => {
-            const errorMessage = error.message;
-            setInputError({ ...inputError, unknownError: errorMessage });
-          });
-      } else {
-        setPersistence(auth, browserSessionPersistence)
-          .then(async () => {})
-          .catch((error: Error) => {
-            const errorMessage = error.message;
-            setInputError({ ...inputError, unknownError: errorMessage });
-          });
-      }
-
-      dispatch(login());
-      navigate("/");
-    } catch (error) {
-      if (error instanceof Error) {
-        const errorMessage = logInErrorHandler(error);
-
-        inputError = { ...inputError, ...errorMessage };
-        setInputError({ ...inputError });
-      }
-    }
+    navigate("/");
   };
 
   const provider = new GoogleAuthProvider();
@@ -162,7 +120,7 @@ export const LogInPage: React.FC = () => {
 
         <button
           onClick={async () => {
-            await loginUser();
+            callLoginUser();
           }}
           className="btn-signup"
         >

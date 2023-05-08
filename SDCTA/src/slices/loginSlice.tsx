@@ -3,10 +3,12 @@ import { type RootState } from "../app/store";
 
 export interface LoginState {
   value: boolean;
+  user: unknown;
 }
 
 const initialState: LoginState = {
   value: false,
+  user: null,
 };
 
 export const loginSlice = createSlice({
@@ -18,11 +20,15 @@ export const loginSlice = createSlice({
     },
     logout: (state) => {
       state.value = false;
+      state.user = null;
     },
+    storeUser: (state, action) => {
+      state.user = action.payload;
+    }
   },
 });
 
-export const { login, logout } = loginSlice.actions;
+export const { login, logout, storeUser } = loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
 

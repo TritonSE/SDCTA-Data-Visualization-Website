@@ -28,12 +28,12 @@ export const DetailsPage: React.FC = () => {
         return;
       } else {
         const response = await updateUserDetails(email, {
-          phoneIn: phoneNumber,
-          addressIn: address,
-          cityIn: city,
-          stateIn: state,
-          zipCodeIn: zipCode,
-          countryIn: country,
+          phone: phoneNumber,
+          address: address,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          country: country,
         });
         console.log(response);
         navigate("/");

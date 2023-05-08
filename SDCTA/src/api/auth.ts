@@ -1,21 +1,13 @@
 import type { UserCredential } from "firebase/auth";
 import {
-  createUserWithEmailAndPassword,
-  updateProfile,
+  signInWithEmailAndPassword,
   setPersistence,
+  browserLocalPersistence,
   browserSessionPersistence,
-  deleteUser,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
-import { signUpErrorHandler } from "../error_handling/auth-errors";
 
-interface InputError {
-  emailError: string;
-  passwordError: string;
-  unknownError: string;
-  confirmError: string;
-  nameError: string;
-}
+import { auth } from "../firebase-config";
+import { logInErrorHandler } from "../error_handling/auth-errors";
 
 const registerUser = async (
   userCredential: UserCredential
@@ -33,86 +25,56 @@ const registerUser = async (
   return response;
 };
 
-const register = async (
-  inputError: InputError,
-  setInputError: (a: InputError) => void,
-  confirmPassword: string,
-  registerPassword: string,
-  registerEmail: string,
-  userDisplayName: string,
-  agreedTerms: boolean
-): Promise<void> => {
+const loginUser = async (
+  loginPassword: string,
+  rememberUser: boolean,
+  loginEmail: string): Promise<void> => {
+  console.log("made it");
   try {
-    inputError.unknownError = "";
-    inputError.passwordError = "";
-    inputError.confirmError = "";
-    inputError.emailError = "";
-    inputError.nameError = "";
+    // inputError = {
+    //   emailError: "",
+    //   passwordError: "",
+    //   unknownError: "",
+    // };
 
-    let error = false;
-    // make sure passwords match.
-    if (!(confirmPassword === registerPassword)) {
-      inputError.confirmError = "Passwords do not match.";
-      error = true;
-    }
-
-    if (userDisplayName === "") {
-      inputError.nameError = "Please enter your full name.";
-      error = true;
-    }
-
-    if (!agreedTerms) {
-      inputError.unknownError =
-        "Must agree to the terms and services to register.";
-      error = true;
-    }
-
-    setInputError({
-      ...inputError,
-    });
-
-    if (error) {
+    // setInputError({
+    //   emailError: "",
+    //   passwordError: "",
+    //   unknownError: "",
+    // });
+    console.log("sign in");
+    if (loginPassword === "") {
+      // inputError.passwordError = "Type in a password.";
+      // setInputError({ ...inputError });
       return;
     }
+    console.log("sign in");
+    await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail,
-      registerPassword
-    );
-
-    setPersistence(auth, browserSessionPersistence)
-      .then(async () => {})
-      .catch((error: Error) => {
-        const errorMessage = error.message;
-        setInputError({ ...inputError, unknownError: errorMessage });
-      });
-
-    await updateProfile(userCredential.user, {
-      displayName: userDisplayName,
-    });
-
-    const response = await registerUser(userCredential);
-
-    if (response.status === 400) {
-      if (auth.currentUser != null) {
-        deleteUser(auth.currentUser)
-          .then(() => {
-            setInputError({ ...inputError, unknownError: response.statusText });
-          })
-          .catch((error) => {
-            setInputError({ ...inputError, unknownError: error });
-          });
-        return;
-      }
+    if (rememberUser) {
+      setPersistence(auth, browserLocalPersistence)
+        .then(async () => {})
+        .catch((error: Error) => {
+          const errorMessage = error.message;
+          // setInputError({ ...inputError, unknownError: errorMessage });
+        });
+    } else {
+      setPersistence(auth, browserSessionPersistence)
+        .then(async () => {})
+        .catch((error: Error) => {
+          const errorMessage = error.message;
+          // setInputError({ ...inputError, unknownError: errorMessage });
+        });
     }
+
   } catch (error) {
     if (error instanceof Error) {
-      const errorMessage = signUpErrorHandler(error);
-      inputError = { ...inputError, ...errorMessage };
-      setInputError({ ...inputError });
+      const errorMessage = logInErrorHandler(error);
+
+      // inputError = { ...inputError, ...errorMessage };
+      // setInputError({ ...inputError });
     }
   }
 };
 
-export { registerUser };
+export { registerUser, loginUser };
