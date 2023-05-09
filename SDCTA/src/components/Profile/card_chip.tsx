@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardMedia from "@mui/material/CardMedia";
 import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
 
 interface CardProps {
@@ -10,6 +11,8 @@ interface CardProps {
   cardNumber: string;
   type: string;
   date: string;
+  isMain: boolean;
+  delete: () => void;
 }
 
 const CardTypes = new Map<string, string>([
@@ -23,7 +26,6 @@ export const CardChip: React.FC<CardProps> = (props: CardProps) => {
   return (
     <div>
       <Card
-        raised={false}
         sx={{
           backgroundColor: "#EBEBEB",
           boxShadow: "none",
@@ -32,6 +34,7 @@ export const CardChip: React.FC<CardProps> = (props: CardProps) => {
           margin: "10px",
           borderRadius: "16px",
           alignItems: "center",
+          border: props.isMain ? "2px solid #B43721" : "",
         }}
       >
         <Grid
@@ -57,14 +60,21 @@ export const CardChip: React.FC<CardProps> = (props: CardProps) => {
           </Grid>
           <Grid item textAlign="center" xs={4}></Grid>
           <Grid item textAlign="right" xs={4}>
-            <DeleteIcon
-              color="error"
-              sx={{
-                marginTop: "14px",
-                marginRight: "20px",
-                marginBottom: "15px",
-              }}
-            />
+            {!props.isMain && (
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+                onClick={props.delete}
+                sx={{
+                  marginTop: "5px",
+                  marginRight: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <DeleteIcon color="error" onClick={props.delete} />
+              </IconButton>
+            )}
           </Grid>
           <Grid item xs={4}>
             <Typography
