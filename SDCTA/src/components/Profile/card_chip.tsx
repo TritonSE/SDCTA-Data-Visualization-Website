@@ -16,10 +16,10 @@ interface CardProps {
 }
 
 const CardTypes = new Map<string, string>([
-  ["MasterCard", "./MasterCard.png"],
-  ["Discover", "./Discover.png"],
-  ["Visa", "./Visa.jpeg"],
-  ["American Express", "./AmericanExpress.png"],
+  ["MasterCard", "./cards/MasterCard.png"],
+  ["Discover", "./cards/Discover.png"],
+  ["Visa", "./cards/Visa.jpeg"],
+  ["American Express", "./cards/AmericanExpress.png"],
 ]);
 
 export const CardChip: React.FC<CardProps> = (props: CardProps) => {

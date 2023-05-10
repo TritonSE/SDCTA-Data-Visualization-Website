@@ -1,6 +1,7 @@
-import downloadIcon from "../Images/Icon.png";
 import { Footer } from "../components/Footer";
 import "./Pages.css";
+
+const downloadIcon = "./Images/Icon.png";
 
 export const Education: React.FC = () => {
   return (
