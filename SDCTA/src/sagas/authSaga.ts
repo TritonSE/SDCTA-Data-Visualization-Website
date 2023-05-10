@@ -1,6 +1,8 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { loginUser, getUser } from "../api/auth"
-import { login, storeUser } from "../slices/loginSlice"
+import { login, storeUser, setLoginError } from "../slices/loginSlice"
+import { logInErrorHandler } from "../error_handling/auth-errors";
+import { useNavigate } from "react-router-dom";
 /*
 const fetchUser = () => {};
 
@@ -20,18 +22,24 @@ function * setUser ({ payload }: any): Generator<any> {
 
     yield put(storeUser(user));
     yield put(login());
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
   }
 }
 
 function * authenticateUser ({ payload }: any): Generator<any> {
+  const navigate = useNavigate();
   try {
     yield call(loginUser, payload.loginPassword, payload.rememberUser, payload.loginEmail);
 
     yield put(login());
+    navigate("/");
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      const errorMessage = yield call(logInErrorHandler, error);
+
+      yield put(setLoginError(errorMessage));
+    }
   }
 }
 

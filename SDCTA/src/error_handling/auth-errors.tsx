@@ -1,76 +1,92 @@
-interface InputError {
+export interface LoginError {
   emailError: string;
   passwordError: string;
   unknownError: string;
 }
 
-const defaultError = {
+export interface SignUpError {
+  unknownError: string;
+  passwordError: string;
+  confirmError: string;
+  emailError: string;
+  nameError: string;
+}
+
+const defaultLoginError = {
   emailError: "",
   passwordError: "",
   unknownError: "",
 };
 
-const signUpErrorHandler = (error: Error): InputError => {
+const defaultSignUpError = {
+  unknownError: "",
+  passwordError: "",
+  confirmError: "",
+  emailError: "",
+  nameError: "",
+}
+
+const signUpErrorHandler = (error: Error): SignUpError => {
   const errorMessage = error.message;
 
   if (errorMessage.includes("internal-error")) {
     return {
-      ...defaultError,
+      ...defaultSignUpError,
       unknownError:
         "Internal error. Make sure you have typed a valid password.",
     };
   } else if (errorMessage.includes("invalid-email")) {
     return {
-      ...defaultError,
+      ...defaultSignUpError,
       emailError: "The email is invalid. Try again with a valid email.",
     };
   } else if (errorMessage.includes("weak-password")) {
     return {
-      ...defaultError,
+      ...defaultSignUpError,
       passwordError:
         "The password is invalid. It should be at least 6 characters.",
     };
   } else if (errorMessage.includes("email-already-in-use")) {
     return {
-      ...defaultError,
+      ...defaultSignUpError,
       emailError:
         "This email is already in use. Try signing in or using a different email.",
     };
   } else {
     return {
-      ...defaultError,
+      ...defaultSignUpError,
       unknownError: errorMessage,
     };
   }
 };
 
-const logInErrorHandler = (error: Error): InputError => {
+const logInErrorHandler = (error: Error): LoginError => {
   const errorMessage = error.message;
 
   if (errorMessage.includes("user-not-found")) {
     return {
-      ...defaultError,
+      ...defaultLoginError,
       emailError: "A user has not been found with this email.",
     };
   } else if (errorMessage.includes("invalid-email")) {
     return {
-      ...defaultError,
+      ...defaultLoginError,
       emailError: "The email is invalid. Try again with a valid email.",
     };
   } else if (errorMessage.includes("wrong-password")) {
     return {
-      ...defaultError,
+      ...defaultLoginError,
       passwordError: "Wrong password.",
     };
   } else if (errorMessage.includes("internal-error")) {
     return {
-      ...defaultError,
+      ...defaultLoginError,
       unknownError:
         "Internal error. Make sure you have typed a valid password.",
     };
   } else {
     return {
-      ...defaultError,
+      ...defaultLoginError,
       unknownError: errorMessage,
     };
   }

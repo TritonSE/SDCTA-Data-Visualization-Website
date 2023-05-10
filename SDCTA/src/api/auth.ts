@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../firebase-config";
-import { logInErrorHandler } from "../error_handling/auth-errors";
 
 const registerUser = async (
   userCredential: UserCredential
@@ -31,22 +30,10 @@ const loginUser = async (
   loginEmail: string): Promise<void> => {
   console.log("made it");
   try {
-    // inputError = {
-    //   emailError: "",
-    //   passwordError: "",
-    //   unknownError: "",
-    // };
-
-    // setInputError({
-    //   emailError: "",
-    //   passwordError: "",
-    //   unknownError: "",
-    // });
-    console.log("sign in");
     if (loginPassword === "") {
       // inputError.passwordError = "Type in a password.";
       // setInputError({ ...inputError });
-      return;
+      throw Error("Type in a password.");
     }
     console.log("sign in");
     await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
@@ -55,23 +42,18 @@ const loginUser = async (
       setPersistence(auth, browserLocalPersistence)
         .then(async () => {})
         .catch((error: Error) => {
-          const errorMessage = error.message;
-          // setInputError({ ...inputError, unknownError: errorMessage });
+          throw error;
         });
     } else {
       setPersistence(auth, browserSessionPersistence)
         .then(async () => {})
         .catch((error: Error) => {
-          const errorMessage = error.message;
-          // setInputError({ ...inputError, unknownError: errorMessage });
+          throw error;
         });
     }
   } catch (error) {
     if (error instanceof Error) {
-      const errorMessage = logInErrorHandler(error);
-
-      // inputError = { ...inputError, ...errorMessage };
-      // setInputError({ ...inputError });
+      throw error;
     }
   }
 };
