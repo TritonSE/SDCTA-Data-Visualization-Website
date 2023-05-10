@@ -1,9 +1,11 @@
 import { useState } from "react";
 
+import { useAppSelector } from "../../app/hooks";
 import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import { ResetPasswordModal } from "../modal/resetPassword";
 
+import { selectLoginError} from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 export const LogInPage: React.FC = () => {
@@ -15,23 +17,7 @@ export const LogInPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [inputError, setInputError] = useState({
-    emailError: "",
-    passwordError: "",
-    unknownError: "",
-  });
-
-  const callLoginUser = (): void => {
-    dispatch({
-      type: 'LOGIN_USER',
-      payload: {
-        loginPassword,
-        rememberUser,
-        loginEmail
-      }
-    });
-    navigate("/");
-  };
+  const inputError = useAppSelector(selectLoginError);
 
   const callLoginWithGoogle = (): void => {
     dispatch({
@@ -100,8 +86,15 @@ export const LogInPage: React.FC = () => {
         )}
 
         <button
-          onClick={async () => {
-            callLoginUser();
+          onClick={() => {
+            dispatch({
+              type: 'LOGIN_USER',
+              payload: {
+                loginPassword,
+                rememberUser,
+                loginEmail
+              }
+            });
           }}
           className="btn-signup"
         >

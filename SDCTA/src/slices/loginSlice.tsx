@@ -1,14 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type RootState } from "../app/store";
+import { type LoginError } from "../error_handling/auth-errors"
 
 export interface LoginState {
   value: boolean;
   user: any;
+  loginError: LoginError;
 }
 
 const initialState: LoginState = {
   value: false,
-  user: null
+  user: null,
+  loginError: {
+    emailError: "",
+    passwordError: "",
+    unknownError: ""
+  }
 };
 
 export const loginSlice = createSlice({
@@ -24,14 +31,19 @@ export const loginSlice = createSlice({
     },
     storeUser: (state, action) => {
       state.user = action.payload;
+    },
+    setLoginError: (state, action) => {
+      state.loginError = action.payload;
     }
   },
 });
 
-export const { login, logout, storeUser } = loginSlice.actions;
+export const { login, logout, storeUser, setLoginError } = loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
 
-export const getUser = (state: RootState): any => state.login.user;
+export const selectLoginError = (state: RootState): LoginError => state.login.loginError;
+
+export const selectUser = (state: RootState): any => state.login.user;
 
 export default loginSlice.reducer;
