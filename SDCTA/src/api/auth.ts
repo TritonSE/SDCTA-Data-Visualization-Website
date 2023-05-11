@@ -56,6 +56,7 @@ const register = async (
 const registerUser = async (
   userCredential: UserCredential
 ): Promise<Response> => {
+  console.log(userCredential);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

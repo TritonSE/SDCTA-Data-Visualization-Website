@@ -21,7 +21,6 @@ export const SignUpPage: React.FC = () => {
       type: 'SIGNUP_GOOGLE_USER',
       payload: { navigate }
     });
-    navigate("/");
   };
 
   return (
