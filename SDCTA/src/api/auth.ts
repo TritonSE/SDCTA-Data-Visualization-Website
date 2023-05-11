@@ -12,7 +12,6 @@ import {
   getRedirectResult,
 } from "firebase/auth";
 import { redirect } from "react-router-dom";
-import { login } from "../slices/loginSlice";
 // import { useDispatch } from "react-redux";
 
 import { auth } from "../firebase-config";
