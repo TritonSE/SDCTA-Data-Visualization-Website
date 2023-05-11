@@ -11,7 +11,7 @@ import {
   signInWithRedirect,
   getRedirectResult,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { login } from "../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
@@ -116,7 +116,6 @@ const getUser = async (
 
 const provider = new GoogleAuthProvider();
 const auth_ = getAuth();
-const navigate = useNavigate();
 const dispatch = useDispatch();
 
 const signupWithGoogle = async (): Promise<void> => {
@@ -126,7 +125,7 @@ const signupWithGoogle = async (): Promise<void> => {
       if (result !== null) {
         await registerUser(result);
         dispatch(login());
-        navigate("/");
+        redirect("/");
       }
     })
     .catch((error) => {
@@ -203,7 +202,7 @@ const loginWithGoogle = async (): Promise<void> => {
     .then((result) => {
       if (result !== null) {
         dispatch(login());
-        navigate("/");
+        redirect("/");
       }
     })
     .catch((error) => {
