@@ -14,7 +14,6 @@ import {
 import { redirect } from "react-router-dom";
 import { login } from "../slices/loginSlice";
 import { useDispatch } from "react-redux";
-
 import { auth } from "../firebase-config";
 
 const register = async (
