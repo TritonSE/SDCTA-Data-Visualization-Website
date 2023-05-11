@@ -1,16 +1,11 @@
 import { useState } from "react";
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
+
 import { useAppSelector } from "../../app/hooks";
 import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import { ResetPasswordModal } from "../modal/resetPassword";
 
-import { selectLoginError, login } from "../../slices/loginSlice";
+import { selectLoginError} from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 export const LogInPage: React.FC = () => {
@@ -24,22 +19,11 @@ export const LogInPage: React.FC = () => {
 
   const inputError = useAppSelector(selectLoginError);
 
-  const provider = new GoogleAuthProvider();
-  const auth_ = getAuth();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const loginWithGoogle = async (): Promise<void> => {
-    await signInWithRedirect(auth_, provider);
-    await getRedirectResult(auth_)
-      .then((result) => {
-        if (result !== null) {
-          dispatch(login());
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const callLoginWithGoogle = (): void => {
+    dispatch({
+      type: 'LOGIN_GOOGLE_USER',
+    });
+    navigate("/");
   };
 
   return (
@@ -124,7 +108,7 @@ export const LogInPage: React.FC = () => {
         </div>
 
         <div>
-          <button onClick={loginWithGoogle} className="btn google-signup">
+          <button onClick={callLoginWithGoogle} className="btn google-signup">
             <div className="google-logo"></div>
             <p className="google-text">Log in with Google</p>
           </button>
