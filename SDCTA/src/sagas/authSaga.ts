@@ -54,7 +54,7 @@ function * registerUser ({ payload }: any): Generator<any> {
       payload.confirmPassword
     );
     yield put({ type: "STORE_USER", payload: payload.registerEmail });
-    payload.navigate("/");
+    payload.navigate("/signupdetails");
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(signUpErrorHandler, error);
