@@ -125,7 +125,6 @@ const signupWithGoogle = async (): Promise<void> => {
       if (result !== null) {
         await registerUser(result);
         // dispatch(login());
-        redirect("/");
       }
     })
     .catch((error: Error) => {
@@ -203,7 +202,6 @@ const loginWithGoogle = async (): Promise<void> => {
     .then((result) => {
       if (result !== null) {
         // dispatch(login());
-        redirect("/");
       }
     })
     .catch((error: Error) => {
