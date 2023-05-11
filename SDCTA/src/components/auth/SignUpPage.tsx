@@ -1,22 +1,15 @@
 import { useState } from "react";
 import {
-  createUserWithEmailAndPassword,
-  updateProfile,
   GoogleAuthProvider,
   getAuth,
   signInWithRedirect,
-  getRedirectResult,
-  setPersistence,
-  browserSessionPersistence,
-  deleteUser,
+  getRedirectResult
 } from "firebase/auth";
 import "./auth.css";
-import { auth } from "../../firebase-config";
-import { registerUser } from "../../api/auth";
-import { signUpErrorHandler } from "../../error_handling/auth-errors";
 import { useNavigate } from "react-router-dom";
-import { login, logout } from "../../slices/loginSlice";
+import { selectSignUpError, login } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 
 export const SignUpPage: React.FC = () => {
   const [userDisplayName, setUserDisplayName] = useState("");
@@ -27,99 +20,7 @@ export const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let [inputError, setInputError] = useState({
-    unknownError: "",
-    passwordError: "",
-    confirmError: "",
-    emailError: "",
-    nameError: "",
-  });
-
-  const register = async (): Promise<void> => {
-    try {
-      inputError.unknownError = "";
-      inputError.passwordError = "";
-      inputError.confirmError = "";
-      inputError.emailError = "";
-      inputError.nameError = "";
-
-      let error = false;
-      // make sure passwords match.
-      if (!(confirmPassword === registerPassword)) {
-        inputError.confirmError = "Passwords do not match.";
-        error = true;
-      }
-
-      if (userDisplayName === "") {
-        inputError.nameError = "Please enter your full name.";
-        error = true;
-      }
-
-      if (!agreedTerms) {
-        inputError.unknownError =
-          "Must agree to the terms and services to register.";
-        error = true;
-      }
-
-      setInputError({
-        ...inputError,
-      });
-
-      if (error) {
-        return;
-      }
-
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-
-      setPersistence(auth, browserSessionPersistence)
-        .then(async () => {})
-        .catch((error: Error) => {
-          const errorMessage = error.message;
-          setInputError({ ...inputError, unknownError: errorMessage });
-        });
-
-      await updateProfile(userCredential.user, {
-        displayName: userDisplayName,
-      });
-
-      await registerUser(userCredential).then((response) => {
-        navigate("/signupdetails");
-      }).catch((error) => {
-        if (auth.currentUser != null) {
-          deleteUser(auth.currentUser)
-            .then(() => {
-              setInputError({
-                ...inputError,
-                unknownError: error.message,
-              });
-            })
-            .catch((error) => {
-              setInputError({ ...inputError, unknownError: error });
-            });
-        }
-      })
-    } catch (error) {
-      if (error instanceof Error) {
-        if (auth.currentUser != null) {
-          deleteUser(auth.currentUser)
-            .then(() => {
-              dispatch(logout());
-              navigate("/signup");
-            })
-            .catch((error) => {
-              setInputError({ ...inputError, unknownError: error });
-            });
-        }
-        const errorMessage = signUpErrorHandler(error);
-        inputError = { ...inputError, ...errorMessage };
-        setInputError({ ...inputError });
-      }
-    }
-  };
+  const inputError = useAppSelector(selectSignUpError);
 
   const provider = new GoogleAuthProvider();
   const auth_ = getAuth();
@@ -129,7 +30,7 @@ export const SignUpPage: React.FC = () => {
     await getRedirectResult(auth_)
       .then(async (result) => {
         if (result !== null) {
-          await registerUser(result);
+          // await registerUser(result);
           dispatch(login());
           navigate("/");
         }
@@ -300,7 +201,19 @@ export const SignUpPage: React.FC = () => {
           ""
         )}
 
-        <button onClick={register} className="btn-signup">
+        <button onClick={() => {
+          dispatch({
+            type: 'REGISTER_USER',
+            payload: {
+              userDisplayName,
+              registerEmail,
+              agreedTerms,
+              registerPassword,
+              confirmPassword
+            }
+          });
+        }
+        } className="btn-signup">
           Sign Up
         </button>
 

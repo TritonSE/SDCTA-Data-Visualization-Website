@@ -1,20 +1,10 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { loginUser, getUser } from "../api/auth"
-import { login, storeUser, setLoginError } from "../slices/loginSlice"
-import { logInErrorHandler } from "../error_handling/auth-errors";
-import { useNavigate } from "react-router-dom";
-/*
-const fetchUser = () => {};
-
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-
-function* mySaga() {
-    yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
-  }
-
-  export default mySaga;
-*/
+import { loginUser, getUser, register } from "../api/auth"
+import { login, storeUser, setLoginError, setSignUpError, logout } from "../slices/loginSlice"
+import { logInErrorHandler, signUpErrorHandler } from "../error_handling/auth-errors";
+import { auth } from "../firebase-config";
+import { deleteUser } from "firebase/auth";
+import { redirect } from "react-router-dom";
 
 function * setUser ({ payload }: any): Generator<any> {
   try {
@@ -28,12 +18,11 @@ function * setUser ({ payload }: any): Generator<any> {
 }
 
 function * authenticateUser ({ payload }: any): Generator<any> {
-  const navigate = useNavigate();
   try {
     yield call(loginUser, payload.loginPassword, payload.rememberUser, payload.loginEmail);
 
     yield put(login());
-    navigate("/");
+    redirect("/");
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(logInErrorHandler, error);
@@ -43,9 +32,34 @@ function * authenticateUser ({ payload }: any): Generator<any> {
   }
 }
 
+function * registerUser ({ payload }: any): Generator<any> {
+  try {
+    yield call(
+      register,
+      payload.userDisplayName,
+      payload.registerEmail,
+      payload.agreedTerms,
+      payload.registerPassword,
+      payload.confirmPassword
+    );
+    yield put({ type: "STORE_USER", payload: payload.registerEmail });
+    redirect("/");
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = yield call(signUpErrorHandler, error);
+      if (auth.currentUser != null) {
+        yield call(deleteUser, auth.currentUser);
+        yield put(logout());
+      }
+      yield put(setSignUpError(errorMessage));
+    }
+  }
+}
+
 function * registerSaga (): Generator<any> {
   yield takeEvery("LOGIN_USER", authenticateUser);
   yield takeEvery("STORE_USER", setUser);
+  yield takeEvery("REGISTER_USER", registerUser);
 }
 
 export default registerSaga;
