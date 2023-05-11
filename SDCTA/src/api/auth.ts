@@ -129,7 +129,7 @@ const signupWithGoogle = async (): Promise<void> => {
       }
     })
     .catch((error: Error) => {
-      console.error(error); 
+      console.error(error);
       throw error;
 
       // const errorCode = error.code;

@@ -3,7 +3,6 @@ import { login, storeUser, setLoginError, setSignUpError, logout } from "../slic
 import { logInErrorHandler, signUpErrorHandler } from "../error_handling/auth-errors";
 import { auth } from "../firebase-config";
 import { deleteUser } from "firebase/auth";
-import { redirect } from "react-router-dom";
 import { register, loginUser, getUser, signupWithGoogle, loginWithGoogle } from "../api/auth"
 /*
 const fetchUser = () => {};
@@ -34,7 +33,7 @@ function * authenticateUser ({ payload }: any): Generator<any> {
     yield call(loginUser, payload.loginPassword, payload.rememberUser, payload.loginEmail);
 
     yield put(login());
-    redirect("/");
+    payload.navigate("/");
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(logInErrorHandler, error);
@@ -55,7 +54,7 @@ function * registerUser ({ payload }: any): Generator<any> {
       payload.confirmPassword
     );
     yield put({ type: "STORE_USER", payload: payload.registerEmail });
-    redirect("/");
+    payload.navigate("/");
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(signUpErrorHandler, error);

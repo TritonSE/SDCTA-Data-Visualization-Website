@@ -129,7 +129,8 @@ export const SignUpPage: React.FC = () => {
               registerEmail,
               agreedTerms,
               registerPassword,
-              confirmPassword
+              confirmPassword,
+              navigate
             }
           });
         }

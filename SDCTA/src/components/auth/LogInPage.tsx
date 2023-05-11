@@ -92,7 +92,8 @@ export const LogInPage: React.FC = () => {
               payload: {
                 loginPassword,
                 rememberUser,
-                loginEmail
+                loginEmail,
+                navigate
               }
             });
           }}
