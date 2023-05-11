@@ -5,7 +5,7 @@ import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import { ResetPasswordModal } from "../modal/resetPassword";
 
-import { selectLoginError} from "../../slices/loginSlice";
+import { selectLoginError } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 export const LogInPage: React.FC = () => {

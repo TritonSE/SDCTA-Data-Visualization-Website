@@ -211,5 +211,4 @@ const loginWithGoogle = async (): Promise<void> => {
     });
 };
 
-
-export { register, registerUser, getUser, loginUser, signupWithGoogle, loginWithGoogle};
+export { register, registerUser, getUser, loginUser, signupWithGoogle, loginWithGoogle };
