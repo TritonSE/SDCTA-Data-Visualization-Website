@@ -67,17 +67,19 @@ function * registerUser ({ payload }: any): Generator<any> {
   }
 }
 
-function * signupGoogleUserGenerator (): Generator<any> {
+function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
     yield call(signupWithGoogle);
+    payload.navigate("/");
   } catch (error) {
     console.log(error);
   }
 }
 
-function * loginGoogleUserGenerator (): Generator<any> {
+function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
     yield call(loginWithGoogle);
+    payload.navigate("/");
   } catch (error) {
     console.log(error);
   }

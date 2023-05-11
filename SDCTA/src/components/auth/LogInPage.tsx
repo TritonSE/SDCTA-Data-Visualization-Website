@@ -22,6 +22,7 @@ export const LogInPage: React.FC = () => {
   const callLoginWithGoogle = (): void => {
     dispatch({
       type: 'LOGIN_GOOGLE_USER',
+      payload: { navigate }
     });
     navigate("/");
   };
