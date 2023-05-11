@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { redirect } from "react-router-dom";
 import { login } from "../slices/loginSlice";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 import { auth } from "../firebase-config";
 
@@ -116,7 +116,7 @@ const getUser = async (
 
 const provider = new GoogleAuthProvider();
 const auth_ = getAuth();
-const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
 const signupWithGoogle = async (): Promise<void> => {
   await signInWithRedirect(auth_, provider);
@@ -124,12 +124,13 @@ const signupWithGoogle = async (): Promise<void> => {
     .then(async (result) => {
       if (result !== null) {
         await registerUser(result);
-        dispatch(login());
+        // dispatch(login());
         redirect("/");
       }
     })
-    .catch((error) => {
-      console.error(error); /* ----- TEMPORARY ----- */
+    .catch((error: Error) => {
+      console.error(error); 
+      throw error;
 
       // const errorCode = error.code;
       // const errorMessage = error.message;
@@ -201,12 +202,13 @@ const loginWithGoogle = async (): Promise<void> => {
   await getRedirectResult(auth_)
     .then((result) => {
       if (result !== null) {
-        dispatch(login());
+        // dispatch(login());
         redirect("/");
       }
     })
-    .catch((error) => {
+    .catch((error: Error) => {
       console.error(error);
+      throw error;
     });
 };
 
