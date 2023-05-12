@@ -1,5 +1,7 @@
+import React from "react";
 import "./App.css";
 import { Education } from "./pages/Education";
+import { LandingPage } from "./pages/LandingPage";
 
 declare global{
   interface Window {
@@ -11,8 +13,9 @@ const App: React.FC = () => {
     <>
       {/* <Routes /> */}
       <div className="App">
-        <Education />
-        </div>
+		{/*<Education />*/}
+    <LandingPage /> 
+	  </div>
     </>
   );
 };

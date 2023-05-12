@@ -12,6 +12,7 @@ import { Homelessness } from "../pages/Homelessness";
 import { Municipal } from "../pages/Municipal";
 import { Subscribe } from "../pages/Subscribe";
 import { Profile } from "../pages/Profile";
+import React from "react";
 
 
 export const Routes = () => {

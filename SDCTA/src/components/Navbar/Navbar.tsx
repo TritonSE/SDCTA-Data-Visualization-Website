@@ -7,6 +7,7 @@ import "./Navbar.css";
 import logo from "./SDTEF Logo Transparent Background 1.svg";
 import {selectLogin} from "./loginSlice"
 import { selectSubscribe } from './subscribeSlice';
+import React from "react";
 export const Navbar = () => {
    const isLoggedIn = useAppSelector(selectLogin);
    const isSubscribed = useAppSelector(selectSubscribe);
