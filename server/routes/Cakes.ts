@@ -40,10 +40,10 @@ const Category = bake ({
     visualizations: array(any),
 });
 
-/* Files */
-const Files = bake ({
-    title: string,
-    csvFile: /* ?? */,
-});
+// /* Files */
+// const Files = bake ({
+//     title: string,
+//     csvFile: /* ?? */,
+// });
 
 
