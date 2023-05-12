@@ -1,51 +1,35 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect } from "react";
 import { visitLexicalEnvironment } from "typescript";
-import { useNavigate } from 'react-router-dom';
-import { getCategoryByName } from "../api/consumer";
 
 interface TableauEmbedProp {
-	url: string;
+  url: string;
 }
-
 const { tableau } = window;
+export const TableauEmbed: React.FC<TableauEmbedProp> = ({ url }) => {
+  let viz;
+  const ref = useRef(null);
+  console.log(ref);
 
-export default function TableauEmbed({ url }: TableauEmbedProp) {
-	//const navigate = useNavigate();
-	let viz;
-	const ref = useRef(null);
-	console.log(ref);
+  const options = {
+    device: "desktop",
+    hideToolbar: true,
+    hideTabs: true,
+  };
+  function initViz(): void {
+    viz = window.tableau.VizManager.getVizs()[0];
+    if (viz) {
+      viz.dispose();
+    }
+    viz = new tableau.Viz(ref.current, url, options);
+  }
 
-	const options = {
-		device: "desktop",
-		hideToolbar: true,
-		hideTabs: true,
-	};
-	function initViz() {
-		let vizUrl = window.tableau.VizManager.getVizs()[0]?.getUrl();
-		let myUrl = url.substring(0, url.indexOf("?"));
-		console.log("VIZ URL IS " + vizUrl)
-		console.log("MY URL IS " + url)
-		console.log(vizUrl == myUrl)
+  useEffect(() => {
+    initViz();
+  }, []);
 
-		viz = window.tableau.VizManager.getVizs().find((viz: { getUrl: () => string; }) => { return viz.getUrl() == url });
-		if (viz) {
-			viz.dispose()
-		}
-		viz = new tableau.Viz(ref.current, url, options);
-		viz.addEventListener("firstinteractive", () => { console.log("CLICKED") })
-
-	}
-
-
-
-	useEffect(() => {
-		initViz();
-		getCategoryByName("test");
-		// console.log(getCategoryByName("test"));
-	}, []);
-
-	return (
-		<div ref={ref} style={{ width: '70%', margin: 'auto', pointerEvents: "none" }}> </div>
-
-	)
-}
+  return (
+    <div ref={ref} style={{ width: "100%", margin: "auto" }}>
+      {" "}
+    </div>
+  );
+};

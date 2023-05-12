@@ -9,7 +9,7 @@ body {
 }
 
 .heading {
-  padding-left: 84px;
+  padding-left: 120px;
   padding-top: 47px;
   font-family: "Helvetica Neue";
   font-style: normal;
@@ -20,8 +20,8 @@ body {
 
 .description {
   padding-top: 12px;
-  padding-left: 84px;
-  padding-right: 156px;
+  padding-left: 120px;
+  padding-right: 120px;
   padding-bottom: 47px;
   font-family: "Open Sans";
   font-style: normal;
