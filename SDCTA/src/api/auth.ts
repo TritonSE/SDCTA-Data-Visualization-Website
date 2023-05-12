@@ -123,7 +123,11 @@ const signupWithGoogle = async (): Promise<void> => {
   await getRedirectResult(auth_)
     .then(async (result) => {
       if (result !== null) {
-        await registerUser(result);
+        // await registerUser(result);
+        await registerUser(result).then((response) => {
+        }).catch((error) => {
+          throw error;
+        })
         // dispatch(login());
       }
     })
