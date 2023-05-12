@@ -10,7 +10,7 @@ enum CategoryType{
 	Municipal = "Municipal"
 }
 
-interface TableauState{
+export interface TableauState{
 	currCategory: CategoryType
 
 	categories: {
@@ -69,6 +69,7 @@ export default TableauSlice.reducer;
 export const getCurrCategory = (state: TableauState): string => state.currCategory;
 export const getCategoryValue = (state: TableauState) => state.categories
 // export const getCurrCategoryState = (state : TableauState): string => state.categories[state.currCategory]
+
 
 /* Implementation 1*/
 // function fetchTableauViz(url: string){

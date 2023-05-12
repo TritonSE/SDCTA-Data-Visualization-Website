@@ -2,16 +2,16 @@ import downloadIcon from "../Images/Icon.png"
 import { Footer } from '../components/Footer';
 import './Pages.css';
 import TableauEmbed from "../components/TableauEmbed";
-import { useNavigation } from "react-router-dom";
-import { Navbar } from "../components/Navbar/Navbar";
-import { TabViz } from "../components/TabViz";
+// import { useNavigation } from "react-router-dom";
+// import { Navbar } from "../components/Navbar/Navbar";
+// import { TabViz } from "../components/TabViz";
 
 export const Education = () => {
-	//const navigate = useNavigation()
-	return (
-		<div>
-			{/* <Navbar /> */}
-			<div className="heading">Education</div>
+//const navigate = useNavigation()
+  return (
+  <div>
+	{/* <Navbar /> */}
+		<div className="heading">Education</div>
 			<div className="top-row">
 				{/* <div>
 					<TabViz title="Title" link= "https://public.tableau.com/views/ofSD-CarlsbadHousingPermitsfrom2010-2022/Sheet1" description="ndjkfkwf"></TabViz>

@@ -1,4 +1,6 @@
 import express from "express";
+import { string } from "caketype";
+
 import {
   getVisualizationByTitle,
   createVisualization,
@@ -37,7 +39,10 @@ router.get("/getAll", async (req, res, next) => {
 // Get by ID Method
 router.get("/:title", async (req, res, next) => {
   try {
-    const data = await getVisualizationByTitle(req.params.title);
+    const StringCake = string;
+    const title = StringCake.as(req.params.title);
+
+    const data = await getVisualizationByTitle(title);
     res.json(data);
   } catch (error) {
     next(error);

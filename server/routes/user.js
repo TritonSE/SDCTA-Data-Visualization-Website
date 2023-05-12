@@ -1,5 +1,6 @@
 import express from "express";
 import Model from "../models/user.js";
+import { string } from "caketype";
 
 const router = express.Router();
 
@@ -32,7 +33,10 @@ router.get("/getAll", async (req, res) => {
 // Get by ID Method
 router.get("/:id", async (req, res) => {
   try {
-    const data = await Model.findById(req.params.id);
+    const StringCake = string;
+    const id = StringCake.as(req.params.id);
+
+    const data = await Model.findById(id);
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,4 +1,7 @@
 import express from "express";
+import { string } from "caketype";
+
+
 import {
   getCategoryByName,
   createCategory,
@@ -36,7 +39,10 @@ router.get("/getAll", async (req, res, next) => {
 // Get by Name Method
 router.get("/:name", async (req, res, next) => {
   try {
-    const data = await getCategoryByName(req.params.name);
+    const StringCake = string;
+    const name = StringCake.as(req.params.name);
+
+    const data = await getCategoryByName(name);
     data.visualizations = await Promise.all(
       data.visualizations.map(getVisualizationByTitle)
     );

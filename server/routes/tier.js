@@ -1,4 +1,6 @@
 import express from "express";
+import { number } from "caketype";
+
 import {
   createTier,
   deleteTier,
@@ -32,7 +34,10 @@ router.get("/getAll", async (req, res, next) => {
 // Get by ID Method
 router.get("/:level", async (req, res, next) => {
   try {
-    const data = await getTierByLevel(req.params.level);
+    const NumericCake = number;
+    const level = NumericCake.as(req.params.level);
+
+    const data = await getTierByLevel(level);
     res.json(data);
   } catch (error) {
     next(error);
