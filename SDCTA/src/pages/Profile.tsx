@@ -7,22 +7,15 @@ import stateList from "../constants/state-list.json"
 import countryList from "../constants/country-list.json"
 import languageList from "../constants/language-list.json"
 import { Membership } from "../components/Membership";
-<<<<<<< HEAD
 import { selectLogin } from "../slices/loginSlice";
 import { selectSubscribe } from "../slices/subscribeSlice";
 import { useAppSelector } from "../app/hooks";
-=======
->>>>>>> 2923cf400eb452262be8b1463343eb7a2ec4b7b6
-
 export const Profile: React.FC = () => {
   useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
 
-<<<<<<< HEAD
   const isLoggedIn = useAppSelector(selectLogin);
   const isSubscribed = useAppSelector(selectSubscribe);
 
-=======
->>>>>>> 2923cf400eb452262be8b1463343eb7a2ec4b7b6
   const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
