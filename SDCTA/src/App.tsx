@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes } from "./components/Routes";
 import { auth } from "./firebase-config";
-import { logout } from "./slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 declare global {
@@ -18,8 +17,6 @@ const App: React.FC = () => {
         type: 'STORE_USER',
         payload: user.email
       });
-    } else {
-      dispatch(logout());
     }
   });
   return (
