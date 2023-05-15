@@ -37,7 +37,7 @@ const Visualization = bake ({
 /* Category */
 const Category = bake ({
     name: string,
-    visualizations: array(any),
+    visualizations: array(Visualization),
 });
 
 // /* Files */
