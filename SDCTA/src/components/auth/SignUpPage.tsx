@@ -19,7 +19,9 @@ export const SignUpPage: React.FC = () => {
   const callSignupWithGoogle = (): void => {
     dispatch({
       type: 'SIGNUP_GOOGLE_USER',
-      payload: { navigate }
+      payload: {
+        filler: ""
+      }
     });
   };
 

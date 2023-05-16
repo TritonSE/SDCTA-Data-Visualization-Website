@@ -9,7 +9,9 @@ const router = express.Router();
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
+    console.log("here");
     const user = await createUser(req.body);
+    console.log(user);
     res.status(200).json(user);
   } catch (error) {
     next(error);

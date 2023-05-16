@@ -70,9 +70,11 @@ function * registerUser ({ payload }: any): Generator<any> {
 function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
     yield call(signupWithGoogle);
-    payload.navigate("/");
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      const errorMessage = yield call(signUpErrorHandler, error);
+      yield put(setSignUpError(errorMessage));
+    }
   }
 }
 
