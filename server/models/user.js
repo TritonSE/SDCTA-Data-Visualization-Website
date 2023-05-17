@@ -5,7 +5,7 @@ const dataSchema = new mongoose.model(
   new mongoose.Schema({
     username: {
       required: true,
-      unique: true,
+      unique: false,
       type: String,
     },
     email: {
@@ -18,9 +18,12 @@ const dataSchema = new mongoose.model(
       type: mongoose.Types.ObjectId,
       ref: "Tier",
     },
+<<<<<<< HEAD
     stripe_id: {
       type: String,
     },
+=======
+>>>>>>> main
     phone: {
       type: String,
     },

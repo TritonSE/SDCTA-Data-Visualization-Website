@@ -58,6 +58,6 @@ app.use("/visualization", visRouter);
 
 app.use(errorHandler);
 
-app.listen(3001, () => {
-  console.log(`Server Started at ${3001}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server Started at ${process.env.PORT}`);
 });

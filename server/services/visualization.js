@@ -1,7 +1,6 @@
 import VisModel from "../models/visualization.js";
 import FileModel from "../models/files.js";
 import { ServiceError, InternalError } from "../errors.js";
-import fs from "fs";
 
 export async function getVisualizationByTitle(title) {
   const vis = await VisModel.findOne({ title });
@@ -16,8 +15,7 @@ export async function downloadCSVFileByTitle(title) {
   if (!vis) {
     throw ServiceError.VIS_NOT_FOUND;
   }
-  fs.writeFileSync(`./${title}.csv`, vis.csvFile);
-  return `./${title}.csv`;
+  return Buffer.from(vis.csvFile);
 }
 
 export async function createVisualization(title, analysis, link, csvFile) {

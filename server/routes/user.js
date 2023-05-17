@@ -1,41 +1,20 @@
 import express from "express";
 import {
   createUser,
-  createStripeUser,
-  deleteUser,
-  getUserByEmail,
   updateUser,
+  getUserByEmail,
+  deleteUser,
 } from "../services/user.js";
-
 const router = express.Router();
-
-router.post("/stripe", async (req, res, next) => {
-  try {
-    const tier = await createUser(
-      req.body.username,
-      req.body.email,
-      req.body.tier
-    );
-    res.status(200).json(tier);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
-    const tier = await createUser(
-      req.body.username,
-      req.body.email,
-      req.body.tier
-    );
-    res.status(200).json(tier);
+    const user = await createUser(req.body);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 });
-
 // Get by email Method
 router.get("/:email", async (req, res, next) => {
   try {
@@ -45,28 +24,25 @@ router.get("/:email", async (req, res, next) => {
     next(error);
   }
 });
-
-// Update by ID Method
-router.patch("/:id", async (req, res, next) => {
+// Update by email Method
+router.patch("/:email", async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const email = req.params.email;
     const updatedData = req.body;
-    const result = await updateUser(id, updatedData);
+    const result = await updateUser(email, updatedData);
     res.send(result);
   } catch (error) {
     next(error);
   }
 });
-
 // Delete by ID Method
 router.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const data = await deleteUser(id);
-    res.send(`Document with ${data.title} has been deleted.`);
+    res.send(`Document with ${data.username} has been deleted..`);
   } catch (error) {
     next(error);
   }
 });
-
 export default router;
