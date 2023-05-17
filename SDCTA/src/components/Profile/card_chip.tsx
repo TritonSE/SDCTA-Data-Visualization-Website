@@ -9,17 +9,24 @@ import { Typography } from "@mui/material";
 interface CardProps {
   name: string;
   cardNumber: string;
-  type: string;
+  type: CardTypes;
   date: string;
   isMain: boolean;
   delete: () => void;
 }
 
-const CardTypes = new Map<string, string>([
-  ["MasterCard", "./cards/MasterCard.png"],
-  ["Discover", "./cards/Discover.png"],
-  ["Visa", "./cards/Visa.jpeg"],
-  ["American Express", "./cards/AmericanExpress.png"],
+export enum CardTypes {
+  MasterCard,
+  Discover,
+  Visa,
+  AmericanExpress,
+}
+
+const CardMap = new Map<CardTypes, string>([
+  [CardTypes.MasterCard, "./cards/MasterCard.png"],
+  [CardTypes.Discover, "./cards/Discover.png"],
+  [CardTypes.Visa, "./cards/Visa.jpeg"],
+  [CardTypes.AmericanExpress, "./cards/AmericanExpress.png"],
 ]);
 
 export const CardChip: React.FC<CardProps> = (props: CardProps) => {
@@ -54,7 +61,7 @@ export const CardChip: React.FC<CardProps> = (props: CardProps) => {
                 marginTop: "15px",
                 marginLeft: "22px",
               }}
-              image={CardTypes.get(props.type)}
+              image={CardMap.get(props.type)}
               alt="MasterCard"
             />
           </Grid>
