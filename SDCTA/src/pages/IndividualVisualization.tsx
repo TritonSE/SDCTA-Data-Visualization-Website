@@ -22,7 +22,7 @@ export const IndividualVisualization: React.FC = () => {
     initialState
   );
 
-  if (title === "" || title === null) {
+  if (!title) {
     return <Error404 />;
   }
 
