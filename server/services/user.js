@@ -19,7 +19,7 @@ async function createStripeUser(name, email) {
   try {
     return await stripe.customers.create({
       name,
-      email
+      email,
     });
   } catch (error) {
     console.log(error);
@@ -76,13 +76,15 @@ export async function addStripeCard(body) {
         number: body.number,
         exp_month: body.exp_month,
         exp_year: body.exp_year,
-        cvc: body.cvc
-      }
+        cvc: body.cvc,
+      },
     });
 
     const currentUser = await getUserByEmail(body.email);
 
-    return await stripe.paymentMethods.attach(paymentMethod.id, { customer: currentUser.stripe_id });
+    return await stripe.paymentMethods.attach(paymentMethod.id, {
+      customer: currentUser.stripe_id,
+    });
   } catch (error) {
     throw ServiceError.INVALID_CARD_RECIEVED.addContext(error);
   }
