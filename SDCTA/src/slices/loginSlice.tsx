@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type RootState } from "../app/store";
 
+import {User, Tier} from "../api/data";
+
 export interface LoginState {
   value: boolean;
-  user: any;
+  user: User | null;
 }
 
 const initialState: LoginState = {
@@ -31,6 +33,6 @@ export const { login, logout, storeUser } = loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
 
-export const getUser = (state: RootState): any => state.login.user;
+export const getUser = (state: RootState): User|null => state.login.user;
 
 export default loginSlice.reducer;
