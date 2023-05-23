@@ -22,19 +22,16 @@ async function createStripeUser(name, email) {
       email,
     });
   } catch (error) {
-    console.log(error);
     throw ServiceError.STRIPE_FAILURE.addContext(error);
   }
 }
 
 export async function createUser(body) {
   try {
-    console.log(body);
     const fullName = `${body.firstName} ${body.lastName}`;
 
     const customer = await createStripeUser(fullName, body.email);
 
-    console.log(body);
     const tier = await getTierByLevel(body.tierLevel);
     const data = new UserModel(body);
     data.stripe_id = customer.id;
