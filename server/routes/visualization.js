@@ -12,23 +12,27 @@ import {
 const router = express.Router();
 
 // Post Method
-router.post("/", upload().any(), async (req, res, next) => {
-  let csvFile;
-  if (req.files.length) {
-    csvFile = req.files[0].buffer;
+router.post(
+  "/",
+  upload({ limits: { fileSize: 1000000 } }).any(),
+  async (req, res, next) => {
+    let csvFile;
+    if (req.files.length) {
+      csvFile = req.files[0].buffer;
+    }
+    try {
+      const vis = await createVisualization(
+        req.body.title,
+        req.body.analysis,
+        req.body.link,
+        csvFile
+      );
+      res.status(200).json(vis);
+    } catch (error) {
+      next(error);
+    }
   }
-  try {
-    const vis = await createVisualization(
-      req.body.title,
-      req.body.analysis,
-      req.body.link,
-      csvFile
-    );
-    res.status(200).json(vis);
-  } catch (error) {
-    next(error);
-  }
-});
+);
 
 // Get all Method
 router.get("/getAll", async (req, res, next) => {
@@ -40,11 +44,11 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
-// Get all Method
+// Download Method
 router.get("/download/:title", async (req, res, next) => {
   try {
-    const path = await downloadCSVFileByTitle(req.params.title);
-    res.download(path);
+    const buffer = await downloadCSVFileByTitle(req.params.title);
+    res.send(buffer);
   } catch (error) {
     next(error);
   }
