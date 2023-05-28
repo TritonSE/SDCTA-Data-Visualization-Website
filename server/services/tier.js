@@ -1,18 +1,19 @@
 import Model from "../models/tier.js";
 import { ServiceError, InternalError } from "../errors.js";
 
-export async function getTierByLevel(level) {
-  const tier = await Model.findOne({ level });
+export async function getTierByName(name) {
+  const tier = await Model.findOne({ name });
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
   return tier;
 }
 
-export async function createTier(name, level) {
+export async function createTier(name, type, level) {
   const data = new Model({
     name,
-    level,
+    type,
+    level
   });
   try {
     return await data.save();

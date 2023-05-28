@@ -5,6 +5,7 @@ import {
   getUserByEmail,
   deleteUser,
   addStripeCard,
+  chargeUser
 } from "../services/user.js";
 const router = express.Router();
 
@@ -13,6 +14,16 @@ router.post("/addCard", async (req, res, next) => {
   try {
     const card = await addStripeCard(req.body);
     res.status(200).json(card);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Charge Card Post Method
+router.post("/chargeuser", async (req, res, next) => {
+  try {
+    const charge = await chargeUser(req.body);
+    res.status(200).json(charge);
   } catch (error) {
     next(error);
   }

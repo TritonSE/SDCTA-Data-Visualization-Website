@@ -3,7 +3,7 @@ import {
   createTier,
   deleteTier,
   getAllTiers,
-  getTierByLevel,
+  getTierByName,
   updateTier,
 } from "../services/tier.js";
 
@@ -12,7 +12,7 @@ const router = express.Router();
 // Post Method
 router.post("/", async (req, res, next) => {
   try {
-    const tier = await createTier(req.body.name, req.body.level);
+    const tier = await createTier(req.body.name, req.body.type, req.body.level);
     res.status(200).json(tier);
   } catch (error) {
     next(error);
@@ -30,9 +30,9 @@ router.get("/getAll", async (req, res, next) => {
 });
 
 // Get by ID Method
-router.get("/:level", async (req, res, next) => {
+router.get("/:name", async (req, res, next) => {
   try {
-    const data = await getTierByLevel(req.params.level);
+    const data = await getTierByName(req.params.name);
     res.json(data);
   } catch (error) {
     next(error);

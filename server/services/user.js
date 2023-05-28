@@ -1,6 +1,6 @@
 import UserModel from "../models/user.js";
 import { ServiceError } from "../errors.js";
-import { getTierByLevel } from "./tier.js";
+import { getTierByName } from "./tier.js";
 import stripeSetup from "stripe";
 import dotenv from "dotenv";
 dotenv.config();
@@ -32,7 +32,7 @@ export async function createUser(body) {
 
     const customer = await createStripeUser(fullName, body.email);
 
-    const tier = await getTierByLevel(body.tierLevel);
+    const tier = await getTierByName(body.tierName);
     const data = new UserModel(body);
     data.stripe_id = customer.id;
     data.tier = tier;
@@ -48,7 +48,7 @@ export async function updateUser(email, body) {
     const options = { new: true, returnNewDocument: true };
     const data = await UserModel.findOneAndUpdate({ email }, body, options);
     if (body.tierLevel) {
-      const tier = await getTierByLevel(body.tierLevel);
+      const tier = await getTierByName(body.tierName);
       data.tier = tier;
     }
     return data;
@@ -79,10 +79,35 @@ export async function addStripeCard(body) {
 
     const currentUser = await getUserByEmail(body.email);
 
-    return await stripe.paymentMethods.attach(paymentMethod.id, {
+    const payment = await stripe.paymentMethods.attach(paymentMethod.id, {
       customer: currentUser.stripe_id,
     });
+
+    await stripe.customers.update(
+      currentUser.stripe_id,
+      { invoice_settings: { default_payment_method: paymentMethod.id } }
+    );
+
+    return payment;
   } catch (error) {
     throw ServiceError.INVALID_CARD_RECIEVED.addContext(error);
+  }
+}
+
+export async function chargeUser(body) {
+  try {
+    const tier = await getTierByName(body.tierName);
+    const user = await getUserByEmail(body.email);
+
+    return await stripe.subscriptions.create({
+      customer: user.stripe_id,
+      items: [
+        {
+          price: tier.priceId
+        },
+      ]
+    });
+  } catch (error) {
+    throw ServiceError.INVALID_CHARGE_RECEIVED.addContext(error);
   }
 }

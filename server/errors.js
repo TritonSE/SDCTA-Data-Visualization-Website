@@ -60,6 +60,8 @@ const INVALID_USER_RECEIVED_MSG =
 const STRIPE_FAILURE_MSG = "Stripe failed registering the user.";
 const INVALID_CARD_RECEIVED_MSG =
   "Invalid Card payload received, make sure you have all required fields.";
+const INVALID_CHARGE_RECEIVED_MSG =
+  "Invalid Charge payload received, make sure you have all required fields.";
 
 export class ServiceError extends CustomError {
   static CATEGORY_NOT_FOUND = new ServiceError(1, 404, CATEGORY_NOT_FOUND_MSG);
@@ -95,6 +97,12 @@ export class ServiceError extends CustomError {
     0,
     400,
     INVALID_CARD_RECEIVED_MSG
+  );
+
+  static INVALID_CHARGE_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_CHARGE_RECEIVED_MSG
   );
 }
 
