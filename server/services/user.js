@@ -31,8 +31,17 @@ export async function createUser(body) {
     const fullName = `${body.firstName} ${body.lastName}`;
 
     const customer = await createStripeUser(fullName, body.email);
+    const tier = await getTierByName("Free");
 
-    const tier = await getTierByName(body.tierName);
+    await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [
+        {
+          price: tier.priceId
+        }
+      ]
+    });
+
     const data = new UserModel(body);
     data.stripe_id = customer.id;
     data.tier = tier;
@@ -99,10 +108,15 @@ export async function chargeUser(body) {
     const tier = await getTierByName(body.tierName);
     const user = await getUserByEmail(body.email);
 
-    return await stripe.subscriptions.create({
-      customer: user.stripe_id,
+    const subscriptions = await stripe.subscriptions.list({ customer: user.stripe_id });
+    const currentSubscription = subscriptions.data[0];
+
+    return await stripe.subscriptions.update(currentSubscription.id, {
+      cancel_at_period_end: false,
+      proration_behavior: 'always_invoice',
       items: [
         {
+          id: currentSubscription.items.data[0].id,
           price: tier.priceId
         },
       ]
