@@ -1,6 +1,6 @@
 import UserModel from "../models/user.js";
 import { ServiceError } from "../errors.js";
-import { getTierByName } from "./tier.js";
+import { getTierByName, getTierByPriceId } from "./tier.js";
 import stripeSetup from "stripe";
 import dotenv from "dotenv";
 dotenv.config();
@@ -12,7 +12,23 @@ export async function getUserByEmail(email) {
   if (!user) {
     throw ServiceError.USER_NOT_FOUND;
   }
-  return user;
+  try {
+    const subscriptions = await stripe.subscriptions.list({ customer: user.stripe_id });
+    const currentSubscription = subscriptions.data[0];
+    let newTier;
+
+    if (currentSubscription == null) {
+      newTier = await getTierByName("Free");
+    } else {
+      newTier = await getTierByPriceId(currentSubscription.plan.id);
+    }
+
+    await updateUser(email, { tier: newTier });
+
+    return user;
+  } catch (error) {
+    throw ServiceError.STRIPE_FAILURE.addContext(error);
+  }
 }
 
 async function createStripeUser(name, email) {
@@ -33,15 +49,6 @@ export async function createUser(body) {
     const customer = await createStripeUser(fullName, body.email);
     const tier = await getTierByName("Free");
 
-    await stripe.subscriptions.create({
-      customer: customer.id,
-      items: [
-        {
-          price: tier.priceId
-        }
-      ]
-    });
-
     const data = new UserModel(body);
     data.stripe_id = customer.id;
     data.tier = tier;
@@ -55,11 +62,12 @@ export async function createUser(body) {
 export async function updateUser(email, body) {
   try {
     const options = { new: true, returnNewDocument: true };
-    const data = await UserModel.findOneAndUpdate({ email }, body, options);
-    if (body.tierLevel) {
+
+    if (body.tierName) {
       const tier = await getTierByName(body.tierName);
-      data.tier = tier;
+      body.tier = tier;
     }
+    const data = await UserModel.findOneAndUpdate({ email }, body, options);
     return data;
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
@@ -99,7 +107,7 @@ export async function addStripeCard(body) {
 
     return payment;
   } catch (error) {
-    throw ServiceError.INVALID_CARD_RECIEVED.addContext(error);
+    throw ServiceError.INVALID_CARD_RECEIVED.addContext(error);
   }
 }
 
@@ -110,17 +118,36 @@ export async function chargeUser(body) {
 
     const subscriptions = await stripe.subscriptions.list({ customer: user.stripe_id });
     const currentSubscription = subscriptions.data[0];
+    let subscription = null;
 
-    return await stripe.subscriptions.update(currentSubscription.id, {
-      cancel_at_period_end: false,
-      proration_behavior: 'always_invoice',
-      items: [
-        {
-          id: currentSubscription.items.data[0].id,
-          price: tier.priceId
-        },
-      ]
-    });
+    if (currentSubscription == null) {
+      subscription = await stripe.subscriptions.create({
+        customer: user.stripe_id,
+        cancel_at_period_end: false,
+        proration_behavior: 'always_invoice',
+        payment_behavior: "error_if_incomplete",
+        items: [
+          {
+            price: tier.priceId
+          },
+        ]
+      });
+    } else {
+      subscription = await stripe.subscriptions.update(currentSubscription.id, {
+        cancel_at_period_end: false,
+        proration_behavior: 'always_invoice',
+        payment_behavior: "error_if_incomplete",
+        items: [
+          {
+            id: currentSubscription.items.data[0].id,
+            price: tier.priceId
+          },
+        ]
+      });
+    }
+    await updateUser(body.email, { tierName: body.tierName });
+
+    return subscription;
   } catch (error) {
     throw ServiceError.INVALID_CHARGE_RECEIVED.addContext(error);
   }

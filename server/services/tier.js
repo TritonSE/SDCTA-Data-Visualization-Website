@@ -9,6 +9,14 @@ export async function getTierByName(name) {
   return tier;
 }
 
+export async function getTierByPriceId(priceId) {
+  const tier = await Model.findOne({ priceId });
+  if (!tier) {
+    throw ServiceError.TIER_NOT_FOUND;
+  }
+  return tier;
+}
+
 export async function createTier(name, type, level) {
   const data = new Model({
     name,
