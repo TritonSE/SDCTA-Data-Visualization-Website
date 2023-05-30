@@ -7,9 +7,7 @@ import {
   updateProfile,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithRedirect,
-  signInWithPopup,
-  getRedirectResult
+  signInWithPopup
 } from "firebase/auth";
 // import { useDispatch } from "react-redux";
 
@@ -130,18 +128,4 @@ const signupWithGoogle = async (): Promise<string> => {
   return "existing user";
 }
 
-const loginWithGoogle = async (): Promise<void> => {
-  await signInWithRedirect(auth, provider);
-  await getRedirectResult(auth)
-    .then((result) => {
-      if (result !== null) {
-        // dispatch(login());
-      }
-    })
-    .catch((error: Error) => {
-      console.error(error);
-      throw error;
-    });
-};
-
-export { register, registerUser, getUser, loginUser, signupWithGoogle, loginWithGoogle };
+export { register, registerUser, getUser, loginUser, signupWithGoogle };

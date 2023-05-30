@@ -3,7 +3,7 @@ import { login, storeUser, setLoginError, setSignUpError, logout } from "../slic
 import { logInErrorHandler, signUpErrorHandler } from "../error_handling/auth-errors";
 import { auth } from "../firebase-config";
 import { deleteUser } from "firebase/auth";
-import { register, loginUser, getUser, signupWithGoogle, loginWithGoogle } from "../api/auth"
+import { register, loginUser, getUser, signupWithGoogle } from "../api/auth"
 /*
 const fetchUser = () => {};
 
@@ -86,8 +86,13 @@ function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
 
 function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
-    yield call(loginWithGoogle);
-    payload.navigate("/");
+    const result = yield call(signupWithGoogle);
+    console.log(result);
+    if (result === "new user") {
+      payload.navigate("/signupdetails");
+    } else {
+      payload.navigate("/");
+    }
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(logInErrorHandler, error);
