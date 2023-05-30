@@ -9,9 +9,13 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from "firebase/auth";
-// import { useDispatch } from "react-redux";
 
 import { auth } from "../firebase-config";
+
+export interface GoogleLogInReturn {
+  type: string;
+  email: string;
+}
 
 const register = async (
   userDisplayName: string,
@@ -107,25 +111,30 @@ const getUser = async (
   };
 
   const requestLink = "http://localhost:3001/user/"
-  return await fetch(
+  const response = await fetch(
     requestLink.concat(email),
     requestOptions
-  ).then((result) => {
-    return result;
-  });
+  );
+  if (response.status === 404) {
+    return null;
+  }
+  return await response.json();
 }
 
 const provider = new GoogleAuthProvider();
 
-const signupWithGoogle = async (): Promise<string> => {
+const signupWithGoogle = async (): Promise<GoogleLogInReturn> => {
   const userCredential = await signInWithPopup(auth, provider);
+  if (userCredential.user.email == null) {
+    throw new Error("Firebase failed");
+  }
   const user = await getUser(userCredential.user.email);
   console.log(user);
-  if (user == null) {
+  if (user === null) {
     await registerUser(userCredential);
-    return "new user";
+    return { type: "new user", email: userCredential.user.email };
   }
-  return "existing user";
+  return { type: "existing user", email: userCredential.user.email };
 }
 
 export { register, registerUser, getUser, loginUser, signupWithGoogle };

@@ -3,7 +3,7 @@ import { login, storeUser, setLoginError, setSignUpError, logout } from "../slic
 import { logInErrorHandler, signUpErrorHandler } from "../error_handling/auth-errors";
 import { auth } from "../firebase-config";
 import { deleteUser } from "firebase/auth";
-import { register, loginUser, getUser, signupWithGoogle } from "../api/auth"
+import { register, loginUser, getUser, signupWithGoogle, type GoogleLogInReturn } from "../api/auth"
 /*
 const fetchUser = () => {};
 
@@ -18,13 +18,13 @@ function* mySaga() {
 */
 
 function * setUser ({ payload }: any): Generator<any> {
-  try {
-    const user = yield call(getUser, payload);
-
+  const user = yield call(getUser, payload);
+  console.log(user);
+  if (user === null) {
+    yield put(logout());
+  } else {
     yield put(storeUser(user));
     yield put(login());
-  } catch (error: any) {
-    console.log(error);
   }
 }
 
@@ -69,9 +69,9 @@ function * registerUser ({ payload }: any): Generator<any> {
 
 function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
-    const result = yield call(signupWithGoogle);
-    console.log(result);
-    if (result === "new user") {
+    const result: GoogleLogInReturn = (yield call(signupWithGoogle)) as GoogleLogInReturn;
+    yield put({ type: "STORE_USER", payload: result.email });
+    if (result.type === "new user") {
       payload.navigate("/signupdetails");
     } else {
       payload.navigate("/");
@@ -86,9 +86,9 @@ function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
 
 function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
-    const result = yield call(signupWithGoogle);
-    console.log(result);
-    if (result === "new user") {
+    const result: GoogleLogInReturn = (yield call(signupWithGoogle)) as GoogleLogInReturn;
+    yield put({ type: "STORE_USER", payload: result.email });
+    if (result.type === "new user") {
       payload.navigate("/signupdetails");
     } else {
       payload.navigate("/");
