@@ -115,7 +115,6 @@ export const LogInPage: React.FC = () => {
             <p className="google-text">Log in with Google</p>
           </button>
         </div>
-
         <ResetPasswordModal
           show={showResetModal}
           setShow={(showChange) => {

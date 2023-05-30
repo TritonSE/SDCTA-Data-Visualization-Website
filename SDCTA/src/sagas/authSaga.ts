@@ -69,7 +69,13 @@ function * registerUser ({ payload }: any): Generator<any> {
 
 function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
-    yield call(signupWithGoogle);
+    const result = yield call(signupWithGoogle);
+    console.log(result);
+    if (result === "new user") {
+      payload.navigate("/signupdetails");
+    } else {
+      payload.navigate("/");
+    }
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = yield call(signUpErrorHandler, error);
@@ -83,7 +89,10 @@ function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
     yield call(loginWithGoogle);
     payload.navigate("/");
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      const errorMessage = yield call(logInErrorHandler, error);
+      yield put(setLoginError(errorMessage));
+    }
   }
 }
 

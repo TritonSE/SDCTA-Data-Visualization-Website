@@ -7,7 +7,6 @@ import {
   updateProfile,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  getAuth,
   signInWithRedirect,
   signInWithPopup,
   getRedirectResult
@@ -59,7 +58,7 @@ const registerUser = async (
   if (userCredential == null) {
     throw new Error("firebase failed");
   }
-  console.log(userCredential);
+
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -103,36 +102,37 @@ const loginUser = async (
 
 const getUser = async (
   email: any
-): Promise<Response> => {
+): Promise<any> => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
   };
 
   const requestLink = "http://localhost:3001/user/"
-  const response = await fetch(
+  return await fetch(
     requestLink.concat(email),
     requestOptions
-  );
-  return await response.json();
+  ).then((result) => {
+    return result;
+  });
 }
 
 const provider = new GoogleAuthProvider();
-const auth_ = getAuth();
-// const dispatch = useDispatch();
 
-const signupWithGoogle = async (): Promise<void> => {
-  await signInWithPopup(auth_, provider);
-  await getRedirectResult(auth_).then(async (result) => {
-    await registerUser(result);
-  }).catch((error) => {
-    throw error;
-  })
-};
+const signupWithGoogle = async (): Promise<string> => {
+  const userCredential = await signInWithPopup(auth, provider);
+  const user = await getUser(userCredential.user.email);
+  console.log(user);
+  if (user == null) {
+    await registerUser(userCredential);
+    return "new user";
+  }
+  return "existing user";
+}
 
 const loginWithGoogle = async (): Promise<void> => {
-  await signInWithRedirect(auth_, provider);
-  await getRedirectResult(auth_)
+  await signInWithRedirect(auth, provider);
+  await getRedirectResult(auth)
     .then((result) => {
       if (result !== null) {
         // dispatch(login());

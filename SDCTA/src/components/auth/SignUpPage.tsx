@@ -20,7 +20,7 @@ export const SignUpPage: React.FC = () => {
     dispatch({
       type: 'SIGNUP_GOOGLE_USER',
       payload: {
-        filler: ""
+        navigate
       }
     });
   };
