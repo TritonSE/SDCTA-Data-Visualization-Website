@@ -78,13 +78,12 @@ const loginUser = async (
   loginPassword: string,
   rememberUser: boolean,
   loginEmail: string): Promise<void> => {
-  console.log("made it");
   if (loginPassword === "") {
     // inputError.passwordError = "Type in a password.";
     // setInputError({ ...inputError });
     throw Error("Type in a password.");
   }
-  console.log("sign in");
+
   await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
   if (rememberUser) {
@@ -129,7 +128,7 @@ const signupWithGoogle = async (): Promise<GoogleLogInReturn> => {
     throw new Error("Firebase failed");
   }
   const user = await getUser(userCredential.user.email);
-  console.log(user);
+
   if (user === null) {
     await registerUser(userCredential);
     return { type: "new user", email: userCredential.user.email };

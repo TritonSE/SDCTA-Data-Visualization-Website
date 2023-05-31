@@ -19,7 +19,7 @@ function* mySaga() {
 
 function * setUser ({ payload }: any): Generator<any> {
   const user = yield call(getUser, payload);
-  console.log(user);
+
   if (user === null) {
     yield put(logout());
   } else {
