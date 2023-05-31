@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes } from "./components/Routes";
 import TableauEmbed from "./components/TableauEmbed";
 import { Education } from "./pages/Education";
+import { LandingPage } from "./pages/LandingPage";
 
 declare global{
 	interface Window{
@@ -11,10 +12,11 @@ declare global{
 const App: React.FC = () => {
   return (
     <>
-      {/* <Routes /> */}
-      <div className="App">
+      <Routes />
+	  {/* <LandingPage /> */}
+      {/* <div className="App">
 		<Education />
-	  </div>
+	  </div> */}
     </>
   );
 };

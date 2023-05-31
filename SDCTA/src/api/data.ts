@@ -10,3 +10,8 @@ export interface Visualization{
 	analysis: string;
 	link: string;
 }
+
+export interface changeCategoryPayload {
+	oldCategory: Category;
+	newCategory: Category;
+}

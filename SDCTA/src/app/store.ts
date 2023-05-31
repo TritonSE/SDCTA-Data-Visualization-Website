@@ -7,6 +7,7 @@ import loginReducer from "../slices/loginSlice";
 import subscribeReducer from "../slices/subscribeSlice";
 import createSagaMiddleware from "redux-saga";
 import tableauReducer from "../slices/CategorySlice"
+import categorySaga from "../Sagas/CategorySagas";
 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -25,7 +26,7 @@ export const store = configureStore({
 
 // Then run the saga
 // uncomment when root saga is made
-// sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(categorySaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

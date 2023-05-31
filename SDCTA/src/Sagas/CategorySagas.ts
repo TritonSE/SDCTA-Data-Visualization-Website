@@ -1,37 +1,32 @@
 import {call , put, takeEvery, takeLatest} from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {setInitViz, changeCategory} from '../slices/CategorySlice';
-import {TableauState, fetchTableauViz, setInitialVizualizationError} from "../slices/CategorySlice"
+import {changeCategory, loadCategory, CategoryType} from '../slices/CategorySlice';
+import { Category, Visualization} from '../api/data';
 
 
-/* Helper Functions */
-function* loadInitData(){
+ 
+
+
+
+function* watchChangeCategory(action: PayloadAction<Category>){
 	try{
-		const vizs = yield call(fetchTableauViz);
-		yield put(setInitViz(vizs));
-	}catch(error){
-		yield put(setInitialVizualizationsError(error.message))
+		const visualizations: Array<Visualization> = yield call(fetch, "http://localhost:3001/category/" + action.payload);
+		console.log(action.payload);
+		console.log("http://localhost:3001/category/"+ action.payload);
+		const newCategory: Category = {...action.payload, visualizations};
+
+		yield put(loadCategory(newCategory));
+	}catch(e){
+		console.log(e);
+		console.log(action.payload._id);
 	}
 }
 
-function* watchChangeCategory(){
-	yield takeLatest(changeCategory.type, function* (action : PayloadAction<"Education" | "Municipal" | "Homnelessness">){
-		const currCategoryState = yield select((state: TableauState) => state.categories[action.payload])
-		if(!currCategoryState.vizs.length){
-			yield put(loadInitData());
-		}
-		yield put(setCurrentCategory(action.payload));
-	});
+function* watchLoadCategory(){
+	yield takeLatest(changeCategory.type, watchChangeCategory);
 }
 
-//Sagas items
-
-export function* tableauSagas(){
-	yield watchChangeCategory();
+export default function* categorySaga(){
+	yield watchLoadCategory();
 }
-
-export function* initialLoadSaga(){
-	yield call(loadInitData);
-}
-
 
