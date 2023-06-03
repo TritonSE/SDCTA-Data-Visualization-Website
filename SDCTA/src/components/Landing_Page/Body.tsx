@@ -1,8 +1,9 @@
-import landscape from "./../../Images/Landing_Image.jpg";
 import "./body.css";
-import EducationVis from "./../../Images/Education_Standin.png";
-import HomelessnessVis from "./../../Images/Homelessness_Standin.png";
-import MunicipalVis from "./../../Images/Municipal_Standin.png";
+
+const landscape = "./Images/Landing_Image.jpg";
+const EducationVis = "./Images/Education_Standin.png";
+const HomelessnessVis = "./Images/Homelessness_Standin.png";
+const MunicipalVis = "./Images/Municipal_Standin.png";
 
 export const Body: React.FC = () => {
   return (

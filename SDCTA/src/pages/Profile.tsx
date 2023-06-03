@@ -10,6 +10,9 @@ import { Membership } from "../components/Membership";
 import { selectLogin } from "../slices/loginSlice";
 import { selectSubscribe } from "../slices/subscribeSlice";
 import { useAppSelector } from "../app/hooks";
+import { CardChip } from "../components/Profile/card_chip";
+import Box from "@mui/material/Box";
+
 export const Profile: React.FC = () => {
   useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
 
