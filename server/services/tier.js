@@ -1,19 +1,37 @@
 import Model from "../models/tier.js";
 import { ServiceError, InternalError } from "../errors.js";
+import stripeSetup from "stripe";
+import dotenv from "dotenv";
+dotenv.config();
+
+const stripe = stripeSetup(process.env.STRIPE_SECRET_KEY);
+
+export async function getPriceOfTier(name) {
+  let tier = await Model.findOne({ name });
+  const price = await stripe.prices.retrieve(tier.priceId);
+  if (!tier) {
+    throw ServiceError.TIER_NOT_FOUND;
+  }
+  return price.unit_amount;
+}
 
 export async function getTierByName(name) {
   const tier = await Model.findOne({ name });
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
-  return tier;
+  return price.unit_amount;
 }
 
 export async function getTierByPriceId(priceId) {
   const tier = await Model.findOne({ priceId });
+
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
+  console.log(tier);
+  console.log(price);
+  // updateTier(tier.)
   return tier;
 }
 
@@ -21,7 +39,7 @@ export async function createTier(name, type, level) {
   const data = new Model({
     name,
     type,
-    level
+    level,
   });
   try {
     return await data.save();
@@ -32,8 +50,20 @@ export async function createTier(name, type, level) {
 
 export async function getAllTiers() {
   try {
-    const tiers = await Model.find();
-    return tiers;
+    const products = await stripe.products.list({ active: true });
+    const prices = await stripe.prices.list({ active: true });
+    console.log(prices);
+    const relevantInfo = await Promise.all(
+      products.data.map(async (item) => {
+        const price = await stripe.prices.retrieve(item.default_price);
+        const productDetails = {
+          name: item.name,
+          price: price.unit_amount,
+        };
+        return productDetails;
+      })
+    );
+    return relevantInfo;
   } catch (error) {
     throw InternalError.UNKNOWN;
   }

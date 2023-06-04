@@ -7,7 +7,9 @@ import {
   addStripeCard,
   chargeUser,
   getCardsByEmail,
-  getDefaultCardByEmail
+  getDefaultCardByEmail,
+  removeCardByEmail,
+  setDefaultCardByEmail,
 } from "../services/user.js";
 const router = express.Router();
 
@@ -21,7 +23,7 @@ router.get("/getdefaultcard/:email", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 // All Cards Get Method
 router.get("/getcards/:email", async (req, res, next) => {
@@ -47,6 +49,36 @@ router.post("/addCard", async (req, res, next) => {
 router.post("/chargeuser", async (req, res, next) => {
   try {
     const result = await chargeUser(req.body);
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Update Card Post Method
+router.post("/updateDefault", async (req, res, next) => {
+  try {
+    const result = await setDefaultCardByEmail(req.body);
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Delete Card Post Method
+router.post("/deleteCard", async (req, res, next) => {
+  try {
+    const result = await removeCardByEmail(req.body);
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Delete Card Post Method
+router.post("/deleteCard", async (req, res, next) => {
+  try {
+    const result = await removeCardByEmail(req.body);
     res.send(result);
   } catch (error) {
     next(error);

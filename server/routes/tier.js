@@ -3,6 +3,7 @@ import {
   createTier,
   deleteTier,
   getAllTiers,
+  getPriceOfTier,
   getTierByName,
   updateTier,
 } from "../services/tier.js";
@@ -23,6 +24,16 @@ router.post("/", async (req, res, next) => {
 router.get("/getAll", async (req, res, next) => {
   try {
     const data = await getAllTiers();
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get by ID Method
+router.get("/getPrice/:name", async (req, res, next) => {
+  try {
+    const data = await getPriceOfTier(req.params.name);
     res.json(data);
   } catch (error) {
     next(error);

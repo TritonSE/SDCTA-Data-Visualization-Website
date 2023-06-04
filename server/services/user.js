@@ -13,7 +13,9 @@ export async function getUserByEmail(email) {
     throw ServiceError.USER_NOT_FOUND;
   }
   try {
-    const subscriptions = await stripe.subscriptions.list({ customer: user.stripe_id });
+    const subscriptions = await stripe.subscriptions.list({
+      customer: user.stripe_id,
+    });
     const currentSubscription = subscriptions.data[0];
     let newTier;
 
@@ -90,11 +92,11 @@ export async function addStripeCard(body) {
         address: {
           city: body.city,
           country: body.country,
-          postal_code: body.postal_code
+          postal_code: body.postal_code,
         },
         email: body.email,
         name: body.name,
-        phone: body.phone
+        phone: body.phone,
       },
       card: {
         number: body.number,
@@ -110,10 +112,9 @@ export async function addStripeCard(body) {
       customer: currentUser.stripe_id,
     });
 
-    await stripe.customers.update(
-      currentUser.stripe_id,
-      { invoice_settings: { default_payment_method: paymentMethod.id } }
-    );
+    await stripe.customers.update(currentUser.stripe_id, {
+      invoice_settings: { default_payment_method: paymentMethod.id },
+    });
 
     return "Success";
   } catch (error) {
@@ -126,32 +127,34 @@ export async function chargeUser(body) {
     const tier = await getTierByName(body.tierName);
     const user = await getUserByEmail(body.email);
 
-    const subscriptions = await stripe.subscriptions.list({ customer: user.stripe_id });
+    const subscriptions = await stripe.subscriptions.list({
+      customer: user.stripe_id,
+    });
     const currentSubscription = subscriptions.data[0];
 
     if (currentSubscription == null) {
       await stripe.subscriptions.create({
         customer: user.stripe_id,
         cancel_at_period_end: false,
-        proration_behavior: 'always_invoice',
+        proration_behavior: "always_invoice",
         payment_behavior: "error_if_incomplete",
         items: [
           {
-            price: tier.priceId
+            price: tier.priceId,
           },
-        ]
+        ],
       });
     } else {
       await stripe.subscriptions.update(currentSubscription.id, {
         cancel_at_period_end: false,
-        proration_behavior: 'always_invoice',
+        proration_behavior: "always_invoice",
         payment_behavior: "error_if_incomplete",
         items: [
           {
             id: currentSubscription.items.data[0].id,
-            price: tier.priceId
+            price: tier.priceId,
           },
-        ]
+        ],
       });
     }
     await updateUser(body.email, { tierName: body.tierName });
@@ -168,7 +171,7 @@ export async function getCardsByEmail(email) {
 
     const paymentMethods = await stripe.customers.listPaymentMethods(
       user.stripe_id,
-      { type: 'card', limit: 5 }
+      { type: "card" }
     );
 
     const relevantInfo = paymentMethods.data.map((item) => {
@@ -177,8 +180,8 @@ export async function getCardsByEmail(email) {
         brand: item.card.brand,
         last4: item.card.last4,
         exp_month: item.card.exp_month,
-        exp_year: item.card.exp_year
-      }
+        exp_year: item.card.exp_year,
+      };
       return cardDetails;
     });
 
@@ -189,13 +192,81 @@ export async function getCardsByEmail(email) {
 }
 
 export async function getDefaultCardByEmail(email) {
-  const user = await getUserByEmail(email);
+  try {
+    const user = await getUserByEmail(email);
 
-  const customer = await stripe.customers.retrieve(user.stripe_id);
+    const customer = await stripe.customers.retrieve(user.stripe_id);
 
-  const paymentMethod = await stripe.paymentMethods.retrieve(
-    customer.invoice_settings.default_payment_method
-  );
+    const paymentMethod = await stripe.paymentMethods.retrieve(
+      customer.invoice_settings.default_payment_method
+    );
 
-  return paymentMethod.card.last4;
+    return paymentMethod.card.last4;
+  } catch (error) {
+    throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
+  }
+}
+
+export async function setDefaultCardByEmail(email, card) {
+  try {
+    const user = await getUserByEmail(email);
+
+    const customer = await stripe.customers.retrieve(user.stripe_id);
+
+    const paymentMethods = await stripe.customers.listPaymentMethods(
+      user.stripe_id,
+      { type: "card" }
+    );
+
+    const matchedCards = paymentMethods.data.filter((item) => {
+      const cardDetails = {
+        name: item.billing_details.name,
+        brand: item.card.brand,
+        last4: item.card.last4,
+        exp_month: item.card.exp_month,
+        exp_year: item.card.exp_year,
+      };
+      return card === cardDetails;
+    });
+
+    await stripe.customers.update(customer.stripe_id, {
+      invoice_settings: { default_payment_method: matchedCards[0].id },
+    });
+
+    return "Updated Card Successfully!";
+  } catch (error) {
+    throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
+  }
+}
+
+export async function removeCardByEmail(email, card) {
+  try {
+    const user = await getUserByEmail(email);
+
+    const customer = await stripe.customers.retrieve(user.stripe_id);
+
+    const paymentMethods = await stripe.customers.listPaymentMethods(
+      user.stripe_id,
+      { type: "card" }
+    );
+
+    const matchedCards = paymentMethods.data.filter((item) => {
+      const cardDetails = {
+        name: item.billing_details.name,
+        brand: item.card.brand,
+        last4: item.card.last4,
+        exp_month: item.card.exp_month,
+        exp_year: item.card.exp_year,
+      };
+      return card === cardDetails;
+    });
+
+    await stripe.paymentMethods.detach(matchedCards[0].id, {
+      customer: customer.stripe_id,
+    });
+
+    return "Successfully deleted card.";
+  } catch (error) {
+    throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
+  }
 }
