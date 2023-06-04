@@ -5,3 +5,4 @@
 /src/app/store.ts
 /src/firebase-config.js
 /src/components/TableauEmbed.tsx
+/src/components/ErrorBoundary.jsx

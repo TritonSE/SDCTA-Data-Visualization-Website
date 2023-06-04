@@ -14,6 +14,7 @@ import { Subscribe } from "../pages/Subscribe";
 import { Profile } from "../pages/Profile";
 import { IndividualVisualization } from "../pages/IndividualVisualization";
 import { Error404 } from "../components/404";
+import { MembershipTiers } from "../pages/MembershipTiers";
 
 export const Routes: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ export const Routes: React.FC = () => {
           path="/IndividualVisualization"
           element={<IndividualVisualization />}
         />
+        <Route path="/MembershipTiers" element={<MembershipTiers/>} />
         <Route path="*" element={<Error404 />} />
       </ReactRoutes>
     </Router>

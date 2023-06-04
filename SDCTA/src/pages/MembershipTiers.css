@@ -1,0 +1,93 @@
+body {
+   font-family: 'Open Sans"';
+}
+
+.pricingTable {
+   border: 1px solid #909090;
+
+   /* TODO: Rounded Corners for Table 
+      border-collapse: collapse; does not work with
+      border-radius
+   */
+}
+
+.pricingTable > th,td {
+   border: 1px solid #909090;
+   text-align: center;
+   font-weight: 600;
+   font-size: 16px;
+}
+
+.pricingTable > tr {
+   height: 40px
+}
+
+.tableHeader {
+   background-color: #EBEBEB;
+   font-size: 18px;
+}
+
+.pricingCategory {
+   color: #7F1922;
+}
+
+.mem-plan-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   
+ /*   position: absolute; */
+   left: 0;
+   top: 0;
+   width: 50%; /* Adjust this value to control the width of the mem-plan-header */
+   padding: 20px; /* Adjust this value as per your requirements */
+ }
+ 
+ .mem-plan-header h2 {
+   flex-grow: 1;
+   margin-right: auto;
+ }
+ 
+ .mem-plan-header button {
+   margin-left: auto;
+ }
+ 
+ .mem-plan-org {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   
+   left: 0;
+   top: 0;
+   width: 50%; /* Adjust this value to control the width of the mem-plan-header */
+   padding: 20px; /* Adjust this value as per your requirements */
+ }
+ 
+ .mem-plan-org p {
+   flex-grow: 1;
+   margin-right: auto;
+ }
+ 
+ .mem-plan-org select {
+   margin-left: auto;
+ }
+ 
+ .mem-plan-lvl {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   
+   left: 0;
+   top: 0;
+   width: 50%; /* Adjust this value to control the width of the mem-plan-header */
+   padding: 20px; /* Adjust this value as per your requirements */
+ }
+ 
+ .mem-plan-lvl p {
+   flex-grow: 1;
+   margin-right: auto;
+ }
+ 
+ .mem-plan-lvl select {
+   margin-left: auto;
+ }
