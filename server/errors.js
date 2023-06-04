@@ -55,6 +55,11 @@ const INVALID_VISUALIZATION_RECEIVED_MSG =
   "Invalid Visualization payload received, make sure you have all required fields.";
 const INVALID_TIER_RECEIVED_MSG =
   "Invalid Tier payload received, make sure you have all required fields.";
+const INVALID_USER_RECEIVED_MSG =
+  "Invalid User payload received, make sure you have all required fields.";
+const STRIPE_FAILURE_MSG = "Stripe failed registering the user.";
+const INVALID_CARD_RECEIVED_MSG =
+  "Invalid Card payload received, make sure you have all required fields.";
 
 export class ServiceError extends CustomError {
   static CATEGORY_NOT_FOUND = new ServiceError(1, 404, CATEGORY_NOT_FOUND_MSG);
@@ -76,6 +81,20 @@ export class ServiceError extends CustomError {
     0,
     400,
     INVALID_TIER_RECEIVED_MSG
+  );
+
+  static INVALID_USER_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_USER_RECEIVED_MSG
+  );
+
+  static STRIPE_FAILURE = new ServiceError(0, 500, STRIPE_FAILURE_MSG);
+
+  static INVALID_CARD_RECEIVED = new ServiceError(
+    0,
+    400,
+    INVALID_CARD_RECEIVED_MSG
   );
 }
 

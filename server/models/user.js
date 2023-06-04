@@ -18,6 +18,9 @@ const dataSchema = new mongoose.model(
       type: mongoose.Types.ObjectId,
       ref: "Tier",
     },
+    stripe_id: {
+      type: String,
+    },
     phone: {
       type: String,
     },
