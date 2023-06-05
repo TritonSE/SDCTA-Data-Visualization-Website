@@ -60,14 +60,24 @@ const registerUser = async (
   if (userCredential == null) {
     throw new Error("firebase failed");
   }
-
+  let firstName = "";
+  let lastName = "";
+  const displayName = userCredential.user.displayName;
+  if (displayName != null) {
+    if (displayName.includes(" ")) {
+      firstName = displayName.substring(0, displayName.indexOf(' '));
+      lastName = displayName.substring(displayName.indexOf(' ') + 1);
+    } else {
+      firstName = displayName;
+    }
+  }
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      username: userCredential.user.displayName,
-      email: userCredential.user.email,
-      tierLevel: 1,
+      firstName,
+      lastName,
+      email: userCredential.user.email
     }),
   };
   const response = await fetch("http://localhost:3001/user/", requestOptions);
