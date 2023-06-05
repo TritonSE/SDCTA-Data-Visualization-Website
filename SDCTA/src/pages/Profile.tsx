@@ -1,44 +1,38 @@
 import { Footer } from "../components/Footer"
-import landscape from ".//../Images/Landing_Image.jpg";
-import edit from ".//../Images/Edit.png";
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import stateList from "../constants/state-list.json"
 import countryList from "../constants/country-list.json"
 import languageList from "../constants/language-list.json"
 import { Membership } from "../components/Membership";
-import { selectLogin } from "../slices/loginSlice";
-import { selectSubscribe } from "../slices/subscribeSlice";
+import { getUser } from "../slices/loginSlice";
 import { useAppSelector } from "../app/hooks";
-import { CardChip } from "../components/Profile/card_chip";
-import Box from "@mui/material/Box";
+// import { CardChip } from "../components/Profile/card_chip";
+// import Box from "@mui/material/Box";
+
+const landscape = "/Images/Landing_Image.jpg";
+const edit = "/Images/Edit.png";
 
 export const Profile: React.FC = () => {
   useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
 
-  const isLoggedIn = useAppSelector(selectLogin);
-  const isSubscribed = useAppSelector(selectSubscribe);
+  const User = useAppSelector(getUser);
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(true);
 
   const [formData, setFormData] = useState({
-    compName: '',
-    fName: '',
-    lName: '',
-    email: '',
+    compName: User != null ? User.compName : '',
+    username: User != null ? User.username : '',
+    email: User != null ? User.email : '',
     password: '',
-    phone: '',
-    mailing: '',
-    city: '',
-    state: '',
-    zip: '',
-    country: '',
+    phone: User != null ? User.phone : '',
+    address: User != null ? User.address : '',
+    city: User != null ? User.city : '',
+    state: User != null ? User.state : '',
+    zipCode: User != null ? User.zipCode : '',
+    country: User != null ? User.country : '',
     lang: '',
   });
-
-  // const currentSave = {
-  //  ...formData
-  // }
 
   const handleChange = (e: any): void => {
     const updatedSave = {
@@ -78,12 +72,9 @@ export const Profile: React.FC = () => {
               <p className="textDisplay"> {formData.compName} </p>
             </label>
             <div className="fullNameDisplay">
-              <label className="label">First Name
-                <p className="half-display"> {formData.fName} </p>
+              <label className="label">Username
+                <p className="half-display"> {formData.username} </p>
               </label >
-              <label className="label">Last Name
-                <p className="half-display"> {formData.lName} </p>
-              </label>
             </div>
             <label className="label">Email
               <p className="textDisplay"> {formData.email} </p>
@@ -95,7 +86,7 @@ export const Profile: React.FC = () => {
               <p className="textDisplay"> {formData.phone} </p>
             </label>
             <label className="label">Mailing Address
-              <p className="textDisplay"> {formData.mailing} </p>
+              <p className="textDisplay"> {formData.address} </p>
             </label>
             <div className="threeInOne">
               <div className="cityDiv">
@@ -110,7 +101,7 @@ export const Profile: React.FC = () => {
               </div>
               <div className="threeBlockDiv">
                 <label className="label-short">Zip Code
-                  <p className="short-display"> {formData.zip} </p>
+                  <p className="short-display"> {formData.zipCode} </p>
                 </label>
               </div>
             </div>
@@ -140,10 +131,7 @@ export const Profile: React.FC = () => {
                 </label>
                 <div className="fullName">
                   <label className="label">First Name<span style={{ color: "red" }}>*</span>
-                    <input className="half-input" type="text" value={formData.fName} name="fName" onChange={(e) => { handleChange(e) }} />
-                  </label >
-                  <label className="label">Last Name<span style={{ color: "red" }}>*</span>
-                    <input className="half-input" type="text" value={formData.lName} name="lName" onChange={(e) => { handleChange(e) }} />
+                    <input className="half-input" type="text" value={formData.username} name="fName" onChange={(e) => { handleChange(e) }} />
                   </label >
                 </div>
                 <label className="label">Email Address<span style={{ color: "red" }}>*</span>
@@ -156,7 +144,7 @@ export const Profile: React.FC = () => {
                   <input className="long-input" type="text" value={formData.phone} name="phone" onChange={(e) => { handleChange(e) }} />
                 </label>
                 <label className="label">Mailing Address<span style={{ color: "red" }}>*</span>
-                  <input className="long-input" type="text" value={formData.mailing} name="mailing" onChange={(e) => { handleChange(e) }} />
+                  <input className="long-input" type="text" value={formData.address} name="mailing" onChange={(e) => { handleChange(e) }} />
                 </label>
                 <div className="threeInOne">
                   <div className="cityDiv">
@@ -175,7 +163,7 @@ export const Profile: React.FC = () => {
                   </div>
                   <div className="threeBlockDiv">
                     <label className="label-short">Zip Code<span style={{ color: "red" }}>*</span>
-                      <input className="short-input" type="text" value={formData.zip} name="zip" onChange={(e) => { handleChange(e) }} />
+                      <input className="short-input" type="text" value={formData.zipCode} name="zip" onChange={(e) => { handleChange(e) }} />
                     </label>
                   </div>
                 </div>

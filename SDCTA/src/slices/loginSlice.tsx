@@ -1,7 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type RootState } from "../app/store";
 
-import {User, Tier} from "../api/data";
+export interface User {
+  username: string;
+  email: string;
+  compName?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+}
 
 export interface LoginState {
   value: boolean;
@@ -33,6 +43,6 @@ export const { login, logout, storeUser } = loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
 
-export const getUser = (state: RootState): User|null => state.login.user;
+export const getUser = (state: RootState): User | null => state.login.user;
 
 export default loginSlice.reducer;

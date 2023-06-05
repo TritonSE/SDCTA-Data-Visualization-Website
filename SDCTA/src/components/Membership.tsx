@@ -1,5 +1,6 @@
-import membershipPic from "../Images/membership-status.png"
 import React, { useState } from "react";
+
+const membershipPic = "/Images/membership-status.png";
 
 export const Membership: React.FC = () => {
   const [readMore, setReadMore] = useState(false);
