@@ -29,11 +29,11 @@ export const DetailsPage: React.FC = () => {
       } else {
         const response = await updateUserDetails(email, {
           phone: phoneNumber,
-          address: address,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          country: country,
+          address,
+          city,
+          state,
+          zipCode,
+          country,
         });
         console.log(response);
         navigate("/");
