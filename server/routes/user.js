@@ -4,9 +4,21 @@ import {
   updateUser,
   getUserByEmail,
   deleteUser,
+  addStripeCard,
 } from "../services/user.js";
 const router = express.Router();
-// Post Method
+
+// Add Card Post Method
+router.post("/addCard", async (req, res, next) => {
+  try {
+    const card = await addStripeCard(req.body);
+    res.status(200).json(card);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Create User Post Method
 router.post("/", async (req, res, next) => {
   try {
     console.log("here");
@@ -17,6 +29,7 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
 // Get by email Method
 router.get("/:email", async (req, res, next) => {
   try {
@@ -47,4 +60,5 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
 export default router;
