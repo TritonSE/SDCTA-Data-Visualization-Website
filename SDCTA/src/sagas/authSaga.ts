@@ -32,7 +32,7 @@ function* mySaga() {
   export default mySaga;
 */
 
-function* setUser({ payload }: any): Generator<any> {
+function * setUser ({ payload }: any): Generator<any> {
   const user = yield call(getUser, payload);
 
   if (user === null) {
@@ -43,7 +43,7 @@ function* setUser({ payload }: any): Generator<any> {
   }
 }
 
-function* authenticateUser({ payload }: any): Generator<any> {
+function * authenticateUser ({ payload }: any): Generator<any> {
   try {
     yield call(
       loginUser,
@@ -64,7 +64,7 @@ function* authenticateUser({ payload }: any): Generator<any> {
   }
 }
 
-function* registerUser({ payload }: any): Generator<any> {
+function * registerUser ({ payload }: any): Generator<any> {
   try {
     yield call(
       register,
@@ -89,7 +89,7 @@ function* registerUser({ payload }: any): Generator<any> {
   }
 }
 
-function* signupGoogleUserGenerator({ payload }: any): Generator<any> {
+function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
     const result: GoogleLogInReturn = (yield call(
       signupWithGoogle
@@ -109,7 +109,7 @@ function* signupGoogleUserGenerator({ payload }: any): Generator<any> {
   }
 }
 
-function* loginGoogleUserGenerator({ payload }: any): Generator<any> {
+function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
   try {
     const result: GoogleLogInReturn = (yield call(
       signupWithGoogle
@@ -129,7 +129,7 @@ function* loginGoogleUserGenerator({ payload }: any): Generator<any> {
   }
 }
 
-function* registerSaga(): Generator<any> {
+function * registerSaga (): Generator<any> {
   yield takeEvery("LOGIN_USER", authenticateUser);
   yield takeEvery("STORE_USER", setUser);
   yield takeEvery("REGISTER_USER", registerUser);
