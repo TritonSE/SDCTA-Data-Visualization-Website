@@ -18,10 +18,10 @@ export const SignUpPage: React.FC = () => {
 
   const callSignupWithGoogle = (): void => {
     dispatch({
-      type: 'SIGNUP_GOOGLE_USER',
+      type: "SIGNUP_GOOGLE_USER",
       payload: {
-        navigate
-      }
+        navigate,
+      },
     });
   };
 
@@ -123,20 +123,22 @@ export const SignUpPage: React.FC = () => {
           ""
         )}
 
-        <button onClick={() => {
-          dispatch({
-            type: 'REGISTER_USER',
-            payload: {
-              userDisplayName,
-              registerEmail,
-              agreedTerms,
-              registerPassword,
-              confirmPassword,
-              navigate
-            }
-          });
-        }
-        } className="btn-signup">
+        <button
+          onClick={() => {
+            dispatch({
+              type: "REGISTER_USER",
+              payload: {
+                userDisplayName,
+                registerEmail,
+                agreedTerms,
+                registerPassword,
+                confirmPassword,
+                navigate,
+              },
+            });
+          }}
+          className="btn-signup"
+        >
           Sign Up
         </button>
 

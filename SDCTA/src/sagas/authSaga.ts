@@ -1,9 +1,24 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { login, storeUser, setLoginError, setSignUpError, logout } from "../slices/loginSlice"
-import { logInErrorHandler, signUpErrorHandler } from "../error_handling/auth-errors";
+import {
+  login,
+  storeUser,
+  setLoginError,
+  setSignUpError,
+  logout,
+} from "../slices/loginSlice";
+import {
+  logInErrorHandler,
+  signUpErrorHandler,
+} from "../error_handling/auth-errors";
 import { auth } from "../firebase-config";
 import { deleteUser } from "firebase/auth";
-import { register, loginUser, getUser, signupWithGoogle, type GoogleLogInReturn } from "../api/auth"
+import {
+  register,
+  loginUser,
+  getUser,
+  signupWithGoogle,
+  type GoogleLogInReturn,
+} from "../api/auth";
 /*
 const fetchUser = () => {};
 
@@ -17,7 +32,7 @@ function* mySaga() {
   export default mySaga;
 */
 
-function * setUser ({ payload }: any): Generator<any> {
+function* setUser({ payload }: any): Generator<any> {
   const user = yield call(getUser, payload);
 
   if (user === null) {
@@ -28,9 +43,14 @@ function * setUser ({ payload }: any): Generator<any> {
   }
 }
 
-function * authenticateUser ({ payload }: any): Generator<any> {
+function* authenticateUser({ payload }: any): Generator<any> {
   try {
-    yield call(loginUser, payload.loginPassword, payload.rememberUser, payload.loginEmail);
+    yield call(
+      loginUser,
+      payload.loginPassword,
+      payload.rememberUser,
+      payload.loginEmail
+    );
 
     yield put(login());
     payload.navigate("/");
@@ -39,11 +59,12 @@ function * authenticateUser ({ payload }: any): Generator<any> {
       const errorMessage = yield call(logInErrorHandler, error);
 
       yield put(setLoginError(errorMessage));
+      payload.navigate("/login");
     }
   }
 }
 
-function * registerUser ({ payload }: any): Generator<any> {
+function* registerUser({ payload }: any): Generator<any> {
   try {
     yield call(
       register,
@@ -63,13 +84,16 @@ function * registerUser ({ payload }: any): Generator<any> {
         yield put(logout());
       }
       yield put(setSignUpError(errorMessage));
+      payload.navigate("/signup");
     }
   }
 }
 
-function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
+function* signupGoogleUserGenerator({ payload }: any): Generator<any> {
   try {
-    const result: GoogleLogInReturn = (yield call(signupWithGoogle)) as GoogleLogInReturn;
+    const result: GoogleLogInReturn = (yield call(
+      signupWithGoogle
+    )) as GoogleLogInReturn;
     yield put({ type: "STORE_USER", payload: result.email });
     if (result.type === "new user") {
       payload.navigate("/signupdetails");
@@ -80,13 +104,16 @@ function * signupGoogleUserGenerator ({ payload }: any): Generator<any> {
     if (error instanceof Error) {
       const errorMessage = yield call(signUpErrorHandler, error);
       yield put(setSignUpError(errorMessage));
+      payload.navigate("/signup");
     }
   }
 }
 
-function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
+function* loginGoogleUserGenerator({ payload }: any): Generator<any> {
   try {
-    const result: GoogleLogInReturn = (yield call(signupWithGoogle)) as GoogleLogInReturn;
+    const result: GoogleLogInReturn = (yield call(
+      signupWithGoogle
+    )) as GoogleLogInReturn;
     yield put({ type: "STORE_USER", payload: result.email });
     if (result.type === "new user") {
       payload.navigate("/signupdetails");
@@ -97,11 +124,12 @@ function * loginGoogleUserGenerator ({ payload }: any): Generator<any> {
     if (error instanceof Error) {
       const errorMessage = yield call(logInErrorHandler, error);
       yield put(setLoginError(errorMessage));
+      payload.navigate("/login");
     }
   }
 }
 
-function * registerSaga (): Generator<any> {
+function* registerSaga(): Generator<any> {
   yield takeEvery("LOGIN_USER", authenticateUser);
   yield takeEvery("STORE_USER", setUser);
   yield takeEvery("REGISTER_USER", registerUser);

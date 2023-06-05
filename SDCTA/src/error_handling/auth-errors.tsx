@@ -24,7 +24,7 @@ const defaultSignUpError = {
   confirmError: "",
   emailError: "",
   nameError: "",
-}
+};
 
 const signUpErrorHandler = (error: Error): SignUpError => {
   const errorMessage = error.message;

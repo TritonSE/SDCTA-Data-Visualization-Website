@@ -14,8 +14,8 @@ const App: React.FC = () => {
   auth.onAuthStateChanged(async (user) => {
     if (user != null) {
       dispatch({
-        type: 'STORE_USER',
-        payload: user.email
+        type: "STORE_USER",
+        payload: user.email,
       });
     }
   });

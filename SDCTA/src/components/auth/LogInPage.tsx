@@ -21,8 +21,8 @@ export const LogInPage: React.FC = () => {
 
   const callLoginWithGoogle = (): void => {
     dispatch({
-      type: 'LOGIN_GOOGLE_USER',
-      payload: { navigate }
+      type: "LOGIN_GOOGLE_USER",
+      payload: { navigate },
     });
     navigate("/");
   };
@@ -89,13 +89,13 @@ export const LogInPage: React.FC = () => {
         <button
           onClick={() => {
             dispatch({
-              type: 'LOGIN_USER',
+              type: "LOGIN_USER",
               payload: {
                 loginPassword,
                 rememberUser,
                 loginEmail,
-                navigate
-              }
+                navigate,
+              },
             });
           }}
           className="btn-signup"

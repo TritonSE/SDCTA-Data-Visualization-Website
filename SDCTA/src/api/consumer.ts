@@ -1,4 +1,6 @@
 import { type VisualizationObject } from "./data";
+import { useDispatch } from "react-redux";
+
 export const API_URL = process.env.REACT_APP_API_URL;
 export const GET_VIS = `${API_URL ?? "http://localhost:3001"}/visualization`;
 export const getVisByTitle = async (
@@ -44,6 +46,12 @@ const updateUserDetails = async (
     requestLink.concat(emailIn),
     updateRequestOptions
   );
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: "STORE_USER",
+    payload: emailIn,
+  });
 
   return response;
 };

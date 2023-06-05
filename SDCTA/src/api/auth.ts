@@ -7,7 +7,7 @@ import {
   updateProfile,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
 } from "firebase/auth";
 
 import { auth } from "../firebase-config";
@@ -22,7 +22,8 @@ const register = async (
   registerEmail: string,
   agreedTerms: boolean,
   registerPassword: string,
-  confirmPassword: string,): Promise<void> => {
+  confirmPassword: string
+): Promise<void> => {
   // make sure passwords match.
   if (!(confirmPassword === registerPassword)) {
     throw Error("Passwords do not match.");
@@ -48,10 +49,11 @@ const register = async (
     displayName: userDisplayName,
   });
 
-  await registerUser(userCredential).then((response) => {
-  }).catch((error) => {
-    throw error;
-  })
+  await registerUser(userCredential)
+    .then((response) => {})
+    .catch((error) => {
+      throw error;
+    });
 };
 
 const registerUser = async (
@@ -65,8 +67,8 @@ const registerUser = async (
   const displayName = userCredential.user.displayName;
   if (displayName != null) {
     if (displayName.includes(" ")) {
-      firstName = displayName.substring(0, displayName.indexOf(' '));
-      lastName = displayName.substring(displayName.indexOf(' ') + 1);
+      firstName = displayName.substring(0, displayName.indexOf(" "));
+      lastName = displayName.substring(displayName.indexOf(" ") + 1);
     } else {
       firstName = displayName;
     }
@@ -77,7 +79,7 @@ const registerUser = async (
     body: JSON.stringify({
       firstName,
       lastName,
-      email: userCredential.user.email
+      email: userCredential.user.email,
     }),
   };
   const response = await fetch("http://localhost:3001/user/", requestOptions);
@@ -87,7 +89,8 @@ const registerUser = async (
 const loginUser = async (
   loginPassword: string,
   rememberUser: boolean,
-  loginEmail: string): Promise<void> => {
+  loginEmail: string
+): Promise<void> => {
   if (loginPassword === "") {
     // inputError.passwordError = "Type in a password.";
     // setInputError({ ...inputError });
@@ -111,24 +114,19 @@ const loginUser = async (
   }
 };
 
-const getUser = async (
-  email: any
-): Promise<any> => {
+const getUser = async (email: any): Promise<any> => {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
   };
 
-  const requestLink = "http://localhost:3001/user/"
-  const response = await fetch(
-    requestLink.concat(email),
-    requestOptions
-  );
+  const requestLink = "http://localhost:3001/user/";
+  const response = await fetch(requestLink.concat(email), requestOptions);
   if (response.status === 404) {
     return null;
   }
   return await response.json();
-}
+};
 
 const provider = new GoogleAuthProvider();
 
@@ -144,6 +142,6 @@ const signupWithGoogle = async (): Promise<GoogleLogInReturn> => {
     return { type: "new user", email: userCredential.user.email };
   }
   return { type: "existing user", email: userCredential.user.email };
-}
+};
 
 export { register, registerUser, getUser, loginUser, signupWithGoogle };
