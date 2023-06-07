@@ -17,8 +17,8 @@ const dataSchema = new mongoose.model(
     },
     priceId: {
       required: true,
-      type: String
-    }
+      type: String,
+    },
   })
 );
 

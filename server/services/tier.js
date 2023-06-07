@@ -7,7 +7,7 @@ dotenv.config();
 const stripe = stripeSetup(process.env.STRIPE_SECRET_KEY);
 
 export async function getPriceOfTier(name) {
-  let tier = await Model.findOne({ name });
+  const tier = await Model.findOne({ name });
   const price = await stripe.prices.retrieve(tier.priceId);
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
