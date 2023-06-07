@@ -14,7 +14,7 @@ import {
 const router = express.Router();
 
 // Get Default Card Get Method
-router.get("/getdefaultcard/:email", async (req, res, next) => {
+router.get("/getDefaultCard/:email", async (req, res, next) => {
   try {
     const data = await getDefaultCardByEmail(req.params.email);
     res.json(data);
@@ -24,7 +24,7 @@ router.get("/getdefaultcard/:email", async (req, res, next) => {
 });
 
 // All Cards Get Method
-router.get("/getcards/:email", async (req, res, next) => {
+router.get("/getCards/:email", async (req, res, next) => {
   try {
     const data = await getCardsByEmail(req.params.email);
     res.json(data);
@@ -34,9 +34,9 @@ router.get("/getcards/:email", async (req, res, next) => {
 });
 
 // Add Card Post Method
-router.post("/addCard", async (req, res, next) => {
+router.post("/addCard/:email", async (req, res, next) => {
   try {
-    const result = await addStripeCard(req.body);
+    const result = await addStripeCard(req.params.email,req.body);
     res.send(result);
   } catch (error) {
     next(error);
@@ -44,9 +44,9 @@ router.post("/addCard", async (req, res, next) => {
 });
 
 // Charge Card Post Method
-router.post("/chargeuser", async (req, res, next) => {
+router.post("/chargeUser/:email", async (req, res, next) => {
   try {
-    const result = await chargeUser(req.body);
+    const result = await chargeUser(req.params.email,req.body);
     res.send(result);
   } catch (error) {
     next(error);
@@ -54,9 +54,9 @@ router.post("/chargeuser", async (req, res, next) => {
 });
 
 // Update Card Post Method
-router.post("/updateDefault", async (req, res, next) => {
+router.post("/setDefaultCard/:email", async (req, res, next) => {
   try {
-    const result = await setDefaultCardByEmail(req.body);
+    const result = await setDefaultCardByEmail(req.params.email, req.body.id);
     res.send(result);
   } catch (error) {
     next(error);
@@ -64,19 +64,9 @@ router.post("/updateDefault", async (req, res, next) => {
 });
 
 // Delete Card Post Method
-router.post("/deleteCard", async (req, res, next) => {
+router.post("/deleteCard/:email", async (req, res, next) => {
   try {
-    const result = await removeCardByEmail(req.body);
-    res.send(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Delete Card Post Method
-router.post("/deleteCard", async (req, res, next) => {
-  try {
-    const result = await removeCardByEmail(req.body);
+    const result = await removeCardByEmail(req.params.email,req.body.id);
     res.send(result);
   } catch (error) {
     next(error);

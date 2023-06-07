@@ -29,6 +29,7 @@ export async function getUserByEmail(email) {
 
     return user;
   } catch (error) {
+    console.log(error);
     throw ServiceError.STRIPE_FAILURE.addContext(error);
   }
 }
@@ -84,7 +85,7 @@ export async function deleteUser(id) {
   }
 }
 
-export async function addStripeCard(body) {
+export async function addStripeCard(email, body) {
   try {
     const paymentMethod = await stripe.paymentMethods.create({
       type: "card",
@@ -94,7 +95,7 @@ export async function addStripeCard(body) {
           country: body.country,
           postal_code: body.postal_code,
         },
-        email: body.email,
+        email,
         name: body.name,
         phone: body.phone,
       },
@@ -106,7 +107,7 @@ export async function addStripeCard(body) {
       },
     });
 
-    const currentUser = await getUserByEmail(body.email);
+    const currentUser = await getUserByEmail(email);
 
     await stripe.paymentMethods.attach(paymentMethod.id, {
       customer: currentUser.stripe_id,
@@ -122,10 +123,10 @@ export async function addStripeCard(body) {
   }
 }
 
-export async function chargeUser(body) {
+export async function chargeUser(email, body) {
   try {
     const tier = await getTierByName(body.tierName);
-    const user = await getUserByEmail(body.email);
+    const user = await getUserByEmail(email);
 
     const subscriptions = await stripe.subscriptions.list({
       customer: user.stripe_id,
@@ -157,7 +158,7 @@ export async function chargeUser(body) {
         ],
       });
     }
-    await updateUser(body.email, { tierName: body.tierName });
+    await updateUser(email, { tierName: body.tierName });
 
     return "Success";
   } catch (error) {
@@ -181,6 +182,7 @@ export async function getCardsByEmail(email) {
         last4: item.card.last4,
         exp_month: item.card.exp_month,
         exp_year: item.card.exp_year,
+        id: item.id
       };
       return cardDetails;
     });
@@ -201,36 +203,26 @@ export async function getDefaultCardByEmail(email) {
       customer.invoice_settings.default_payment_method
     );
 
-    return paymentMethod.card.last4;
+    const cardDetails = {
+      name: paymentMethod.billing_details.name,
+      brand: paymentMethod.card.brand,
+      last4: paymentMethod.card.last4,
+      exp_month: paymentMethod.card.exp_month,
+      exp_year: paymentMethod.card.exp_year,
+      id: paymentMethod.id
+    };
+    return cardDetails;
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
   }
 }
 
-export async function setDefaultCardByEmail(email, card) {
+export async function setDefaultCardByEmail(email, id) {
   try {
     const user = await getUserByEmail(email);
 
-    const customer = await stripe.customers.retrieve(user.stripe_id);
-
-    const paymentMethods = await stripe.customers.listPaymentMethods(
-      user.stripe_id,
-      { type: "card" }
-    );
-
-    const matchedCards = paymentMethods.data.filter((item) => {
-      const cardDetails = {
-        name: item.billing_details.name,
-        brand: item.card.brand,
-        last4: item.card.last4,
-        exp_month: item.card.exp_month,
-        exp_year: item.card.exp_year,
-      };
-      return card === cardDetails;
-    });
-
-    await stripe.customers.update(customer.stripe_id, {
-      invoice_settings: { default_payment_method: matchedCards[0].id },
+    await stripe.customers.update(user.stripe_id, {
+      invoice_settings: { default_payment_method: id },
     });
 
     return "Updated Card Successfully!";
@@ -239,31 +231,9 @@ export async function setDefaultCardByEmail(email, card) {
   }
 }
 
-export async function removeCardByEmail(email, card) {
+export async function removeCardByEmail(email, id) {
   try {
-    const user = await getUserByEmail(email);
-
-    const customer = await stripe.customers.retrieve(user.stripe_id);
-
-    const paymentMethods = await stripe.customers.listPaymentMethods(
-      user.stripe_id,
-      { type: "card" }
-    );
-
-    const matchedCards = paymentMethods.data.filter((item) => {
-      const cardDetails = {
-        name: item.billing_details.name,
-        brand: item.card.brand,
-        last4: item.card.last4,
-        exp_month: item.card.exp_month,
-        exp_year: item.card.exp_year,
-      };
-      return card === cardDetails;
-    });
-
-    await stripe.paymentMethods.detach(matchedCards[0].id, {
-      customer: customer.stripe_id,
-    });
+    await stripe.paymentMethods.detach(id);
 
     return "Successfully deleted card.";
   } catch (error) {

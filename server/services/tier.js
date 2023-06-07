@@ -29,8 +29,6 @@ export async function getTierByPriceId(priceId) {
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
-  console.log(tier);
-  console.log(price);
   // updateTier(tier.)
   return tier;
 }
