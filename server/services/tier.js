@@ -12,7 +12,7 @@ export async function getPriceOfTier(name) {
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
-  return price.unit_amount;
+  return price.unit_amount / 100;
 }
 
 export async function getTierByName(name) {
@@ -20,7 +20,7 @@ export async function getTierByName(name) {
   if (!tier) {
     throw ServiceError.TIER_NOT_FOUND;
   }
-  return price.unit_amount;
+  return tier;
 }
 
 export async function getTierByPriceId(priceId) {
@@ -50,15 +50,15 @@ export async function createTier(name, type, level) {
 
 export async function getAllTiers() {
   try {
-    const products = await stripe.products.list({ active: true });
-    const prices = await stripe.prices.list({ active: true });
+    const products = await stripe.products.list({ active: true, limit: 20 });
+    const prices = await stripe.prices.list({ active: true, limit: 20 });
     console.log(prices);
     const relevantInfo = await Promise.all(
       products.data.map(async (item) => {
         const price = await stripe.prices.retrieve(item.default_price);
         const productDetails = {
           name: item.name,
-          price: price.unit_amount,
+          price: price.unit_amount / 100,
         };
         return productDetails;
       })

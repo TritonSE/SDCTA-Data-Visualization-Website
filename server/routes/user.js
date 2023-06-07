@@ -13,8 +13,6 @@ import {
 } from "../services/user.js";
 const router = express.Router();
 
-// Set Default Card Post Method
-
 // Get Default Card Get Method
 router.get("/getdefaultcard/:email", async (req, res, next) => {
   try {
