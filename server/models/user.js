@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const dataSchema = new mongoose.model(
   "User",
   new mongoose.Schema({
-    username: {
+    firstName: {
+      required: true,
+      unique: false,
+      type: String,
+    },
+    lastName: {
       required: true,
       unique: false,
       type: String,
@@ -19,6 +24,24 @@ const dataSchema = new mongoose.model(
       ref: "Tier",
     },
     stripe_id: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    zipCode: {
+      type: String,
+    },
+    country: {
       type: String,
     },
   })
