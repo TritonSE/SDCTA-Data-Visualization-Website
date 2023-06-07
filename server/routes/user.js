@@ -10,6 +10,7 @@ import {
   getDefaultCardByEmail,
   removeCardByEmail,
   setDefaultCardByEmail,
+  removeSubscriptionByEmail,
 } from "../services/user.js";
 const router = express.Router();
 
@@ -36,7 +37,7 @@ router.get("/getCards/:email", async (req, res, next) => {
 // Add Card Post Method
 router.post("/addCard/:email", async (req, res, next) => {
   try {
-    const result = await addStripeCard(req.params.email,req.body);
+    const result = await addStripeCard(req.params.email, req.body);
     res.send(result);
   } catch (error) {
     next(error);
@@ -46,7 +47,7 @@ router.post("/addCard/:email", async (req, res, next) => {
 // Charge Card Post Method
 router.post("/chargeUser/:email", async (req, res, next) => {
   try {
-    const result = await chargeUser(req.params.email,req.body);
+    const result = await chargeUser(req.params.email, req.body);
     res.send(result);
   } catch (error) {
     next(error);
@@ -57,16 +58,6 @@ router.post("/chargeUser/:email", async (req, res, next) => {
 router.post("/setDefaultCard/:email", async (req, res, next) => {
   try {
     const result = await setDefaultCardByEmail(req.params.email, req.body.id);
-    res.send(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Delete Card Post Method
-router.post("/deleteCard/:email", async (req, res, next) => {
-  try {
-    const result = await removeCardByEmail(req.params.email,req.body.id);
     res.send(result);
   } catch (error) {
     next(error);
@@ -106,6 +97,27 @@ router.patch("/:email", async (req, res, next) => {
     next(error);
   }
 });
+
+// Delete Card Post Method
+router.delete("/deleteCard/:email", async (req, res, next) => {
+  try {
+    const result = await removeCardByEmail(req.params.email, req.body.id);
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Delete Card Post Method
+router.delete("/cancelSubscription/:email", async (req, res, next) => {
+  try {
+    const result = await removeSubscriptionByEmail(req.params.email);
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Delete by ID Method
 router.delete("/:id", async (req, res, next) => {
   try {

@@ -182,7 +182,7 @@ export async function getCardsByEmail(email) {
         last4: item.card.last4,
         exp_month: item.card.exp_month,
         exp_year: item.card.exp_year,
-        id: item.id
+        id: item.id,
       };
       return cardDetails;
     });
@@ -209,7 +209,7 @@ export async function getDefaultCardByEmail(email) {
       last4: paymentMethod.card.last4,
       exp_month: paymentMethod.card.exp_month,
       exp_year: paymentMethod.card.exp_year,
-      id: paymentMethod.id
+      id: paymentMethod.id,
     };
     return cardDetails;
   } catch (error) {
@@ -234,6 +234,25 @@ export async function setDefaultCardByEmail(email, id) {
 export async function removeCardByEmail(email, id) {
   try {
     await stripe.paymentMethods.detach(id);
+
+    return "Successfully deleted card.";
+  } catch (error) {
+    throw ServiceError.INVALID_USER_RECEIVED.addContext(error);
+  }
+}
+
+export async function removeSubscriptionByEmail(email) {
+  try {
+    const user = await getUserByEmail(email);
+
+    const subscriptions = await stripe.subscriptions.list({
+      customer: user.stripe_id,
+    });
+    const currentSubscription = subscriptions.data[0];
+
+    await stripe.subscriptions.update(currentSubscription.id, {
+      cancel_at_period_end: true,
+    });
 
     return "Successfully deleted card.";
   } catch (error) {
