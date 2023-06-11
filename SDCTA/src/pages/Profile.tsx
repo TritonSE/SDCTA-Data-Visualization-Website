@@ -1,4 +1,4 @@
-import { CardChip } from "../components/Profile/card_chip";
+import { CardChip, CardTypes } from "../components/Profile/card_chip";
 import Box from "@mui/material/Box";
 
 export const Profile: React.FC = () => {
@@ -9,7 +9,7 @@ export const Profile: React.FC = () => {
         <CardChip
           name="Joe Smith"
           cardNumber="••1234"
-          type="MasterCard"
+          type={CardTypes.MasterCard}
           date="11/27"
           isMain={true}
           delete={() => {}}
@@ -17,7 +17,7 @@ export const Profile: React.FC = () => {
         <CardChip
           name="Joe Smith"
           cardNumber="••2345"
-          type="Visa"
+          type={CardTypes.Visa}
           date="11/27"
           isMain={false}
           delete={() => {}}
@@ -25,7 +25,7 @@ export const Profile: React.FC = () => {
         <CardChip
           name="Joe Smith"
           cardNumber="••2345"
-          type="American Express"
+          type={CardTypes.AmericanExpress}
           date="11/27"
           isMain={false}
           delete={() => {}}
@@ -33,7 +33,7 @@ export const Profile: React.FC = () => {
         <CardChip
           name="Joe Smith"
           cardNumber="••2345"
-          type="Discover"
+          type={CardTypes.Discover}
           date="11/27"
           isMain={false}
           delete={() => {}}
