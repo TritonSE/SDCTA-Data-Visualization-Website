@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const dataSchema = new mongoose.model(
   "User",
   new mongoose.Schema({
-    username: {
+    firstName: {
+      required: true,
+      unique: false,
+      type: String,
+    },
+    lastName: {
       required: true,
       unique: false,
       type: String,

@@ -7,9 +7,17 @@ const dataSchema = new mongoose.model(
       required: true,
       type: String,
     },
+    type: {
+      required: true,
+      type: String,
+    },
     level: {
       required: true,
       type: Number,
+    },
+    priceId: {
+      required: true,
+      type: String,
     },
   })
 );
