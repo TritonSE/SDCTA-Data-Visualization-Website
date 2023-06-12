@@ -4,10 +4,11 @@ import "./IndividualVisualization.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TableauEmbed } from "../components/TableauEmbed";
-import { getVisByTitle } from "../api/consumer";
+import { getVisByTitle, getCsvByTitle } from "../api/consumer";
 import { type VisualizationObject } from "../api/data";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { Error404 } from "../components/404";
+
 const initialState: VisualizationObject = {
   title: "",
   analysis: "",
@@ -37,6 +38,11 @@ export const IndividualVisualization: React.FC = () => {
     );
   }, []);
 
+  const handleDownloadClick = (e: { preventDefault: () => void }): void => {
+    e.preventDefault();
+    void getCsvByTitle(title);
+  };
+
   if (visObj === null) {
     return <Error404 />;
   }
@@ -57,13 +63,14 @@ export const IndividualVisualization: React.FC = () => {
         <div className="body">
           <div className="IV-Top-row">
             <h2>{visObj.title}</h2>
-            <p className="download-button">
-              Download <img src={downloadIcon} alt="download icon" />
-            </p>
+            {visObj.hasCSV && (
+              <button className="download-button" onClick={handleDownloadClick}>
+                Download <img src={downloadIcon} alt="download icon" />
+              </button>
+            )}
           </div>
 
           {visObj.link !== "" && <TableauEmbed url={visObj.link} />}
-
           <div className="body-text">
             <h2 id="Analysis">Data Analysis</h2>
             <p className="IV-description">{visObj.analysis}</p>
