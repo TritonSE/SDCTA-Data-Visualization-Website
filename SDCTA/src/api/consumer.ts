@@ -67,9 +67,7 @@ const updateUserDetails = async (
     requestLink.concat(emailIn),
     updateRequestOptions
   );
-  const 
-  
-  = useDispatch();
+  const dispatch = useDispatch();
 
   dispatch({
     type: "STORE_USER",
