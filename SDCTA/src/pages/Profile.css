@@ -102,6 +102,9 @@
     padding: 0;
     cursor: pointer;
     margin-left: auto;
+    display: flex;
+    justify-content: space-between; /* Added */
+    align-items: center;
 }
 .edit-img { 
     font-family: 'Open Sans';
@@ -109,13 +112,11 @@
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-
     color: #C3272E;
 
     border: none;
     background: none;
     cursor: pointer;
-    top: 400px
 }
 
 

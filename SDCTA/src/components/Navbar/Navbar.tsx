@@ -9,6 +9,7 @@ import { selectLogin } from "../../slices/loginSlice";
 import { selectSubscribe } from "../../slices/subscribeSlice";
 export const Navbar: React.FC = () => {
   const isLoggedIn = useAppSelector(selectLogin);
+  console.log("LOGGED IN " + isLoggedIn)
   const isSubscribed = useAppSelector(selectSubscribe);
   const links = [
     {

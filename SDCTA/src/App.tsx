@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes } from "./components/Routes";
-import { auth } from "./firebase-config";
+import { auth } from "./firebase-config"
 import { login, logout, storeUser } from "./slices/loginSlice";
 import { useDispatch } from "react-redux";
 import { getUser } from "./api/auth"

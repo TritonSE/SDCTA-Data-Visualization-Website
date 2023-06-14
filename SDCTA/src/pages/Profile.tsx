@@ -17,6 +17,7 @@ export const Profile: React.FC = () => {
   useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
 
   const User = useAppSelector(getUser);
+  console.log("USER " + User)
 
   const [submitted, setSubmitted] = useState(true);
 
