@@ -13,10 +13,26 @@ const registerUser = async (
     }),
   };
   const response = await fetch(
-    "http://localhost:3001/api/user/create",
+    "http://localhost:3001/user/create",
     requestOptions
   );
   return response;
 };
 
-export { registerUser };
+const getUser = async (
+  email: any
+): Promise<Response> => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  };
+
+  const requestLink = "http://localhost:3001/user/"
+  const response = await fetch(
+    requestLink.concat(email),
+    requestOptions
+  );
+  return await response.json();
+}
+
+export { registerUser, getUser };
