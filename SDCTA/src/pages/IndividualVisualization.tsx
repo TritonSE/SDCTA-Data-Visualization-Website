@@ -3,13 +3,13 @@ import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { TableauEmbed } from "../components/TableauEmbed";
+import TableauEmbed from "../components/TableauEmbed";
 import { getVisByTitle, getCsvByTitle } from "../api/consumer";
-import { type VisualizationObject } from "../api/data";
+import { type Visualization } from "../api/data";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { Error404 } from "../components/404";
 
-const initialState: VisualizationObject = {
+const initialState: Visualization = {
   title: "",
   analysis: "",
   link: "",
@@ -19,7 +19,7 @@ const initialState: VisualizationObject = {
 export const IndividualVisualization: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get("title"));
-  const [visObj, setVisObj] = useState<VisualizationObject | null>(
+  const [visObj, setVisObj] = useState<Visualization | null>(
     initialState
   );
 

@@ -1,10 +1,11 @@
-import { type VisualizationObject } from "./data";
+import { type Visualization, type Category } from "./data";
 export const API_URL = process.env.REACT_APP_API_URL ?? "";
 export const GET_VIS = `${API_URL}/visualization`;
+export const CATEGORY_PREFIX = `${API_URL}/category`;
 
 export const getVisByTitle = async (
   title: string
-): Promise<VisualizationObject | null> => {
+): Promise<Visualization | null> => {
   try {
     const url = `${GET_VIS}/${encodeURIComponent(title)}`;
     const response = await fetch(url);
@@ -12,7 +13,7 @@ export const getVisByTitle = async (
       throw new Error(`${response.status} Failed Fetch `);
     }
     let data = await response.json();
-    data = data as VisualizationObject;
+    data = data as Visualization;
     return data;
   } catch (err) {
     console.error("Exception", err);
@@ -68,5 +69,21 @@ const updateUserDetails = async (
 
   return response;
 };
+
+export const getCategoryByName = async(categoryName: string) : Promise<Category | null> => {
+	try {
+		const url = `${CATEGORY_PREFIX}/${categoryName}`;
+		const response = await fetch(url);
+		let data = await response.json();
+		console.log((data as Category))
+		
+		return (data as Category);
+		
+	}
+	
+	catch {
+		return null;
+	}
+}
 
 export { updateUserDetails };
