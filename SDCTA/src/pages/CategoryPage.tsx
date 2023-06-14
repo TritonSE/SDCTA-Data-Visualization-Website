@@ -7,7 +7,7 @@ import { RootState } from '../app/store';
 import { CategoryType } from "../slices/categorySlice";
 import { useEffect } from 'react';
 import { useAppSelector } from "../app/hooks";
-
+import "./Pages.css";
 const downloadIcon = "./Images/Icon.png";
 
 
@@ -19,10 +19,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({ category }) => {
     const dispatch = useDispatch();
     const currCategory = useAppSelector(getCategoryValue)[category]
     useEffect(() => {
-        console.log("IN EFFECT")
-        console.log(currCategory)
         if (currCategory === null) {
-            console.log("DISPATCHING")
             dispatch(loadCategory(category));
         } else {
             dispatch(changeCategory(category))

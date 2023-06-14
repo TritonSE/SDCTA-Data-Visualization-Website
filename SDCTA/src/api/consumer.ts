@@ -74,9 +74,7 @@ export const getCategoryByName = async(categoryName: string) : Promise<Category 
 	try {
 		const url = `${CATEGORY_PREFIX}/${categoryName}`;
 		const response = await fetch(url);
-		let data = await response.json();
-		console.log((data as Category))
-		
+		let data = await response.json();		
 		return (data as Category);
 		
 	}

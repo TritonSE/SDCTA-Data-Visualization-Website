@@ -36,6 +36,7 @@ router.get("/getAll", async (req, res, next) => {
 // Get by Name Method
 router.get("/:name", async (req, res, next) => {
   try {
+    console.log("IN CATEGORY NAME ROUTE")
     const data = await getCategoryByName(req.params.name);
     data.visualizations = await Promise.all(
       data.visualizations.map(getVisualizationByTitle)

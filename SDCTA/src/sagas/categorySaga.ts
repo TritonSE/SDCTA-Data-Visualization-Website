@@ -6,10 +6,7 @@ import { getCategoryByName } from '../api/consumer';
 
 function* loadCategorySaga(action: PayloadAction<CategoryType>){
 	try{
-		console.log("IN SAGA")
-		console.log(action)
 		const newCategory: Category = yield call(getCategoryByName, action.payload);
-		console.log(newCategory)
 		yield put(updateCategory(newCategory));
 	}catch(e){
 		console.log(e);
