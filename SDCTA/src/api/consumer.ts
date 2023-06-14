@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 export const API_URL = process.env.REACT_APP_API_URL;
 export const GET_VIS = `${API_URL ?? "http://localhost:3001"}/visualization`;
+
 export const getVisByTitle = async (
   title: string
 ): Promise<VisualizationObject | null> => {
@@ -16,8 +17,28 @@ export const getVisByTitle = async (
     data = data as VisualizationObject;
     return data;
   } catch (err) {
-    console.log("Exception", err);
+    console.error("Exception", err);
     return null;
+  }
+};
+
+export const getCsvByTitle = async (title: string): Promise<void> => {
+  try {
+    const url = `${GET_VIS}/download/${encodeURIComponent(title)}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`${response.status} Failed Fetch `);
+    }
+
+    const blob = await response.blob();
+    const fileUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = fileUrl;
+    link.download = `${title}.csv`;
+    link.click();
+  } catch (err) {
+    console.error("Exception", err);
   }
 };
 
@@ -46,7 +67,9 @@ const updateUserDetails = async (
     requestLink.concat(emailIn),
     updateRequestOptions
   );
-  const dispatch = useDispatch();
+  const 
+  
+  = useDispatch();
 
   dispatch({
     type: "STORE_USER",
