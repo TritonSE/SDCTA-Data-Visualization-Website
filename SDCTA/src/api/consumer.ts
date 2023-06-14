@@ -9,7 +9,9 @@ export const getCategoryByName = async(categoryName: string) : Promise<Category 
 		
 		return (data as Category);
 		
-	}catch {
+	}
+	
+	catch {
 		return null;
 	}
 }

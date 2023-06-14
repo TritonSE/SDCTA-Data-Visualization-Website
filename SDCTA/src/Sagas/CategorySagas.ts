@@ -1,29 +1,23 @@
 import {call , put, takeEvery, takeLatest} from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {changeCategory, loadCategory, CategoryType} from '../slices/CategorySlice';
+import {loadCategory, updateCategory, CategoryType} from '../slices/CategorySlice';
 import { Category, Visualization} from '../api/data';
+import { getCategoryByName } from '../api/consumer';
 
-
- 
-
-
-
-function* watchChangeCategory(action: PayloadAction<Category>){
+function* loadCategorySaga(action: PayloadAction<CategoryType>){
 	try{
-		const visualizations: Array<Visualization> = yield call(fetch, "http://localhost:3001/category/" + action.payload);
-		console.log(action.payload);
-		console.log("http://localhost:3001/category/"+ action.payload);
-		const newCategory: Category = {...action.payload, visualizations};
-
-		yield put(loadCategory(newCategory));
+		console.log("IN SAGA")
+		console.log(action)
+		const newCategory: Category = yield call(getCategoryByName, action.payload);
+		console.log(newCategory)
+		yield put(updateCategory(newCategory));
 	}catch(e){
 		console.log(e);
-		console.log(action.payload._id);
 	}
 }
 
 function* watchLoadCategory(){
-	yield takeLatest(changeCategory.type, watchChangeCategory);
+	yield takeLatest(loadCategory.type, loadCategorySaga);
 }
 
 export default function* categorySaga(){

@@ -7,7 +7,7 @@ import loginReducer from "../slices/loginSlice";
 import subscribeReducer from "../slices/subscribeSlice";
 import createSagaMiddleware from "redux-saga";
 import tableauReducer from "../slices/CategorySlice"
-import categorySaga from "../Sagas/CategorySagas";
+import categorySaga from "../sagas/CategorySagas";
 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
