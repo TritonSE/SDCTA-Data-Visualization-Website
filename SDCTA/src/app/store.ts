@@ -8,6 +8,7 @@ import subscribeReducer from "../slices/subscribeSlice";
 import createSagaMiddleware from "redux-saga";
 import categoryReducer from "../slices/categorySlice";
 import rootSaga from "../sagas/rootSaga";
+import registerSaga from "../sagas/authSaga";
 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();

@@ -1,4 +1,5 @@
 import { type Visualization, type Category } from "./data";
+import { useDispatch } from "react-redux";
 export const API_URL = process.env.REACT_APP_API_URL ?? "";
 export const GET_VIS = `${API_URL}/visualization`;
 export const CATEGORY_PREFIX = `${API_URL}/category`;
@@ -66,6 +67,12 @@ const updateUserDetails = async (
     requestLink.concat(emailIn),
     updateRequestOptions
   );
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: "STORE_USER",
+    payload: emailIn,
+  });
 
   return response;
 };

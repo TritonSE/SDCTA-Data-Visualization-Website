@@ -1,5 +1,5 @@
 body {
-  background-color: #e5e5e5;
+  background: #e5e5e5;
 }
 
 .signup-form {
@@ -21,6 +21,30 @@ body {
   margin-right: auto;
   width: 30%;
   margin-top: 4%;
+}
+
+.details_title {
+  width: 40%;
+}
+
+.details_form {
+  width: 36%;
+}
+
+.info-item {
+  display: inline-block;
+  width: 32%;
+}
+
+.info-button {
+  margin-top: 10px;
+  display: inline-block;
+  width: 46%;
+}
+
+.middle-item {
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .input-boxes {
@@ -48,6 +72,24 @@ body {
   order: 0;
   flex-grow: 0;
   margin-bottom: 2%;
+}
+
+CountryDropdown {
+  width: 100%;
+  height: 38px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.info-label {
+  margin-bottom: 5%;
 }
 
 .text-input {
@@ -138,7 +180,6 @@ body {
   font-weight: 700;
   font-size: 17px;
   line-height: 23px;
-  text-align: center;
   color: #ffffff;
   height: 40px;
 }
@@ -201,10 +242,26 @@ body {
   line-height: 23px;
   height: 40px;
   color: #000000;
+  text-align: center;
+  display: flex;
+  white-space: nowrap;
+}
 
+.google-logo {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
   background-repeat: no-repeat;
-  background-position: 20% 50%;
+  width: 10%;
+  height: 100%;
+  margin-top: 8px;
+  margin-left: 4%;
+  display: inline-block;
+  position: absolute;
+}
+
+.google-text {
+  display: inline-block;
+  position: relative;
+  margin: auto;
 }
 
 .error-message {
@@ -239,4 +296,29 @@ body {
   text-align: center;
 
   color: #c3272e;
+}
+
+.btn-skip {
+  margin-top: 5%;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+
+  /* Text styling */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+  color: #000000;
+  height: 40px;
+  background: #e5e5e5;
+}
+
+.btn-spacer {
+  display: inline-block;
+  padding-right: 4%;
+  padding-left: 4%;
 }

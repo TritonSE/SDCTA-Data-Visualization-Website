@@ -9,6 +9,7 @@ import { SignUp } from "../pages/sign-up/SignUp";
 import { LandingPage } from "../pages/LandingPage";
 import { Subscribe } from "../pages/Subscribe";
 import { Profile } from "../pages/Profile";
+import { SignUpDetails } from "../pages/SignUpDetails";
 import { IndividualVisualization } from "../pages/IndividualVisualization";
 import { Error404 } from "../components/404";
 import { CategoryType } from "../slices/categorySlice";
@@ -27,6 +28,7 @@ export const Routes: React.FC = () => {
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/Subscribe" element={<Subscribe />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/signupdetails" element={<SignUpDetails />} />
         <Route
           path="/IndividualVisualization"
           element={<IndividualVisualization />}

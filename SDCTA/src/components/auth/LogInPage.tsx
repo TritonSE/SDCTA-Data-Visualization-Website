@@ -1,96 +1,30 @@
 import { useState } from "react";
-import {
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  GoogleAuthProvider,
-  getAuth,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
-import "./auth.css";
-import { auth } from "../../firebase-config";
-import { logInErrorHandler } from "../../error_handling/auth-errors";
-import { useNavigate } from "react-router-dom";
 
-import { login } from "../../slices/loginSlice";
+import { useAppSelector } from "../../app/hooks";
+import "./auth.css";
+import { useNavigate } from "react-router-dom";
+import { ResetPasswordModal } from "../modal/resetPassword";
+
+import { selectLoginError } from "../../slices/loginSlice";
 import { useDispatch } from "react-redux";
 
 export const LogInPage: React.FC = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rememberUser, setRememberUser] = useState(false);
-  const [resetMessage, setResetMessage] = useState("");
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let [inputError, setInputError] = useState({
-    emailError: "",
-    passwordError: "",
-    unknownError: "",
-  });
+  const inputError = useAppSelector(selectLoginError);
 
-  const loginUser = async (): Promise<void> => {
-    try {
-      inputError = {
-        emailError: "",
-        passwordError: "",
-        unknownError: "",
-      };
-
-      setInputError({
-        emailError: "",
-        passwordError: "",
-        unknownError: "",
-      });
-
-      if (loginPassword === "") {
-        inputError.passwordError = "Type in a password.";
-        setInputError(inputError);
-      }
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-
-      dispatch(login());
-      navigate("/");
-    } catch (error) {
-      if (error instanceof Error) {
-        const errorMessage = logInErrorHandler(error);
-
-        inputError = { ...inputError, ...errorMessage };
-        setInputError({ ...inputError });
-      }
-    }
-  };
-
-  const sendReset = (): void => {
-    sendPasswordResetEmail(auth, loginEmail)
-      .then((): void => {
-        setResetMessage("Reset email sent successfully to: " + loginEmail);
-      })
-      .catch((error: Error): void => {
-        const errorMessage = error.message;
-        setResetMessage(
-          `${errorMessage} (Try again, make sure to type email in email box)`
-        );
-      });
-  };
-
-  const provider = new GoogleAuthProvider();
-  const auth_ = getAuth();
-
-  const loginWithGoogle = async (): Promise<void> => {
-    await signInWithRedirect(auth_, provider);
-    await getRedirectResult(auth_)
-      .then((result) => {
-        if (result !== null) {
-          dispatch(login());
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const callLoginWithGoogle = (): void => {
+    dispatch({
+      type: "LOGIN_GOOGLE_USER",
+      payload: { navigate },
+    });
+    navigate("/");
   };
 
   return (
@@ -153,8 +87,16 @@ export const LogInPage: React.FC = () => {
         )}
 
         <button
-          onClick={async () => {
-            await loginUser();
+          onClick={() => {
+            dispatch({
+              type: "LOGIN_USER",
+              payload: {
+                loginPassword,
+                rememberUser,
+                loginEmail,
+                navigate,
+              },
+            });
           }}
           className="btn-signup"
         >
@@ -168,22 +110,26 @@ export const LogInPage: React.FC = () => {
         </div>
 
         <div>
-          <button
-            onClick={async () => {
-              await loginWithGoogle();
-            }}
-            className="btn google-signup"
-          >
-            Log in With Google
+          <button onClick={callLoginWithGoogle} className="btn google-signup">
+            <div className="google-logo"></div>
+            <p className="google-text">Log in with Google</p>
           </button>
         </div>
-
+        <ResetPasswordModal
+          show={showResetModal}
+          setShow={(showChange) => {
+            setShowResetModal(showChange);
+          }}
+        />
         <div className="bottom-text">
-          <p className="clickable-text" onClick={sendReset}>
+          <p
+            className="clickable-text"
+            onClick={() => {
+              setShowResetModal(true);
+            }}
+          >
             Forgot your password?
           </p>
-
-          {resetMessage !== "" ? <p>{resetMessage}</p> : ""}
 
           <p className="signup-link-text">
             Don&apos;t have an account?
