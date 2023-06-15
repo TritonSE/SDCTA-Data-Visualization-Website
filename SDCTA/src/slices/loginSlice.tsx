@@ -1,31 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { type RootState } from "../app/store";
 import {
   type LoginError,
   type SignUpError,
 } from "../error_handling/auth-errors";
 
-export interface User {
-  username: string;
-  email: string;
-  compName?: string;
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  country?: string;
-}
+import { type User } from "../api/data"
 
 export interface LoginState {
   value: boolean;
-  user: any;
+  loadingUser: boolean;
+  user: User | null;
   loginError: LoginError;
   signUpError: SignUpError;
 }
 
 const initialState: LoginState = {
   value: false,
+  loadingUser: true,
   user: null,
   loginError: {
     emailError: "",
@@ -52,8 +44,11 @@ export const loginSlice = createSlice({
       state.value = false;
       state.user = null;
     },
-    storeUser: (state, action) => {
+    storeUser: (state, action: PayloadAction<User>) => {
+      console.log("IN REDUCER " + action.payload)
       state.user = action.payload;
+      state.loadingUser = false;
+      console.log(state.user)
     },
     setLoginError: (state, action) => {
       state.loginError = action.payload;
@@ -68,6 +63,7 @@ export const { login, logout, storeUser, setLoginError, setSignUpError } =
   loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;
+export const selectLoadingUser = (state: RootState): boolean => state.login.loadingUser;
 
 export const selectLoginError = (state: RootState): LoginError =>
   state.login.loginError;
@@ -75,6 +71,7 @@ export const selectLoginError = (state: RootState): LoginError =>
 export const selectSignUpError = (state: RootState): SignUpError =>
   state.login.signUpError;
 
-export const selectUser = (state: RootState): any => state.login.user;
+export const selectUser = (state: RootState): User | null => state.login.user;
+
 
 export default loginSlice.reducer;

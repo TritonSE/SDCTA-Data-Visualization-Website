@@ -28,10 +28,6 @@ export const Navbar: React.FC = () => {
       name: "Municipal",
       route: "/Municipal",
     },
-    {
-      name: "Profile",
-      route: "/Profile",
-    },
   ];
   return (
     <nav>

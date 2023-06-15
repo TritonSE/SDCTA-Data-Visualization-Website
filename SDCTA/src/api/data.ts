@@ -10,3 +10,16 @@ export interface Category {
 	name: string;
 	visualizations: Array<Visualization>;
 }
+
+
+export interface User {
+  username: string;
+  email: string;
+  compName?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+}

@@ -2,7 +2,7 @@ import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import TableauEmbed from "../components/TableauEmbed";
 import { getVisByTitle, getCsvByTitle } from "../api/consumer";
 import { type Visualization } from "../api/data";
@@ -19,7 +19,6 @@ const initialState: Visualization = {
 export const IndividualVisualization: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get("title"));
-  console.log("TITLE " + title)
   const [visObj, setVisObj] = useState<Visualization | null>(
     initialState
   );
@@ -51,16 +50,16 @@ export const IndividualVisualization: React.FC = () => {
   return (
     <ErrorBoundary>
       <div>
-        <div>
+        {/* <div>
           <p className="IV-back-button">
             <img
               style={{ paddingLeft: "3px" }}
               src={backIcon}
               alt="back arrow icon"
             />
-            Back to Education Data
+            Back to  Data
           </p>
-        </div>
+        </div> */}
         <div className="body">
           <div className="IV-Top-row">
             <h2>{visObj.title}</h2>

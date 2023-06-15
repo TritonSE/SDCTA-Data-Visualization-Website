@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   login,
   storeUser,
@@ -19,6 +19,8 @@ import {
   signupWithGoogle,
   type GoogleLogInReturn,
 } from "../api/auth";
+import { PayloadAction } from '@reduxjs/toolkit';
+import { type User } from "../api/data";
 /*
 const fetchUser = () => {};
 
@@ -32,9 +34,8 @@ function* mySaga() {
   export default mySaga;
 */
 
-function* setUser({ payload }: any): Generator<any> {
-  const user = yield call(getUser, payload);
-
+function* setUser(action : PayloadAction<string>) {
+  const user: User | null = yield call(getUser, action.payload);
   if (user === null) {
     yield put(logout());
   } else {
@@ -130,11 +131,11 @@ function* loginGoogleUserGenerator({ payload }: any): Generator<any> {
 }
 
 function* registerSaga(): Generator<any> {
-  yield takeEvery("LOGIN_USER", authenticateUser);
+  yield takeLatest("LOGIN_USER", authenticateUser);
   yield takeEvery("STORE_USER", setUser);
   yield takeEvery("REGISTER_USER", registerUser);
   yield takeEvery("SIGNUP_GOOGLE_USER", signupGoogleUserGenerator);
-  yield takeEvery("LOGIN_GOOGLE_USER", loginGoogleUserGenerator);
+  yield takeLatest("LOGIN_GOOGLE_USER", loginGoogleUserGenerator);
 }
 
 export default registerSaga;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const membershipPic = "/Images/membership-status.png";
 
 export const Membership: React.FC = () => {
   const [readMore, setReadMore] = useState(false);
+  const navigate = useNavigate();
 
   const extraContent =
     <text>
@@ -17,18 +18,18 @@ export const Membership: React.FC = () => {
 
   const handleMembership = (event: any): void => {
     event.preventDefault();
-    alert('You want to change your membership.')
+    navigate("/Subscribe");
   }
 
   // const [isDisabled, setIsDisabled] = useState(false);
 
   return (
-    <div className = "membership">
+    <div className="membership">
       <h1>
         <b>Membership Information</b>
       </h1>
-      <p>Membership Level: <span style={ { color: "#7F1922" } }>Free</span> <br /> Organization Type: N/A</p>
-      <img src = {membershipPic} alt="membership-graph" width="814.8px" height="120px"/>
+      <p>Membership Level: <span style={{ color: "#7F1922" }}>Free</span> <br /> Organization Type: N/A</p>
+      <img src={membershipPic} alt="membership-graph" width="814.8px" height="120px" />
       <h2>
         <b>Why should I upgrade my membership?</b>
       </h2>
@@ -40,9 +41,9 @@ export const Membership: React.FC = () => {
 
         {readMore && extraContent}
       </ul>
-      <a className = "read-more-link" onClick={ () => { setReadMore(!readMore) } }><u style = { { color: "#C3272E" } }>{linkName}</u><br/></a>
+      <a className="read-more-link" onClick={() => { setReadMore(!readMore) }}><u style={{ color: "#C3272E", cursor: "pointer" }}>{linkName}</u><br /></a>
 
-      <button className = "change-membership" onClick={handleMembership}>Change Membership</button>
+      <button className="change-membership" onClick={handleMembership}>Change Membership</button>
     </div>
   );
 };

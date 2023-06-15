@@ -28,15 +28,17 @@ async function createStripeUser(name, email) {
 
 export async function createUser(body) {
   try {
-    const fullName = `${body.firstName} ${body.lastName}`;
+   // const fullName = `${body.firstName} ${body.lastName}`;
 
-    const customer = await createStripeUser(fullName, body.email);
-
+    // const customer = await createStripeUser(fullName, body.email);
     const tier = await getTierByLevel(0);
+    console.log("USER MODEL IS " + UserModel)
     const data = new UserModel(body);
-    data.stripe_id = customer.id;
+    data.email = body.email;
+    data.firstName = body.firstName;
+    data.lastName = body.lastName;
+    console.log("DATA IS " + data);
     data.tier = tier;
-
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);

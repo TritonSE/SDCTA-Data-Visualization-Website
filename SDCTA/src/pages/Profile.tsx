@@ -4,34 +4,38 @@ import "./Profile.css";
 import stateList from "../constants/state-list.json"
 import countryList from "../constants/country-list.json"
 import languageList from "../constants/language-list.json"
+import { useDispatch } from "react-redux";
 import { Membership } from "../components/Membership";
-import { getUser } from "../slices/loginSlice";
+import { selectLoadingUser, selectUser } from "../slices/loginSlice";
 import { useAppSelector } from "../app/hooks";
+import { User } from '../api/data';
+import { auth } from "../firebase-config";
+
 // import { CardChip } from "../components/Profile/card_chip";
 // import Box from "@mui/material/Box";
 
 const landscape = "/Images/Landing_Image.jpg";
 const edit = "/Images/Edit.png";
 
+// Edit button is disabled
 export const Profile: React.FC = () => {
-  useEffect(() => { document.body.style.backgroundColor = "#F9F9F9" }, [])
-
-  const User = useAppSelector(getUser);
-  console.log("USER " + User)
+  const dispatch = useDispatch();
+  let userData: User | null = useAppSelector(selectUser);
 
   const [submitted, setSubmitted] = useState(true);
 
+  // Form data should not be used, use userData (redux state) only
   const [formData, setFormData] = useState({
-    compName: User != null ? User.compName : '',
-    username: User != null ? User.username : '',
-    email: User != null ? User.email : '',
+    compName: userData != null ? userData.compName : '',
+    username: userData != null ? userData.username : '',
+    email: userData != null ? userData.email : '',
     password: '',
-    phone: User != null ? User.phone : '',
-    address: User != null ? User.address : '',
-    city: User != null ? User.city : '',
-    state: User != null ? User.state : '',
-    zipCode: User != null ? User.zipCode : '',
-    country: User != null ? User.country : '',
+    phone: userData != null ? userData.phone : '',
+    address: userData != null ? userData.address : '',
+    city: userData != null ? userData.city : '',
+    state: userData != null ? userData.state : '',
+    zipCode: userData != null ? userData.zipCode : '',
+    country: userData != null ? userData.country : '',
     lang: '',
   });
 
@@ -59,59 +63,51 @@ export const Profile: React.FC = () => {
     setSubmitted(false);
   }
 
-  if (submitted) {
+  if (submitted && userData) {
     return (
       <div className="Profile-Page">
         <img className="header" src={landscape} alt="sd landscape" />
-        <div className="edit-button-parent">
+        {/* <div className="edit-button-parent">
           <button className="edit-button" onClick={handleEdit}>edit <img className="edit-img" src={edit} alt="edit image" /></button>
-        </div>
+        </div> */}
         <div className="parent_box_display">
           <div className="profile-info">
             <h2>Profile Information</h2>
-            <label className="label">Company Name
-              <p className="textDisplay"> {formData.compName} </p>
-            </label>
-            <div className="fullNameDisplay">
-              <label className="label">Username
-                <p className="half-display"> {formData.username} </p>
-              </label >
-            </div>
             <label className="label">Email
-              <p className="textDisplay"> {formData.email} </p>
+              <p className="textDisplay"> {userData.email} </p>
             </label>
-            <label className="label">Password
-              <p className="textDisplay"> {formData.password.replace(/./g, "*")}</p>
-            </label>
+            {/* <label className="label">Password
+              <p className="textDisplay"> {userData.password.replace(/./g, "*")}</p>
+            </label> */}
             <label className="label">Phone Number
-              <p className="textDisplay"> {formData.phone} </p>
+              <p className="textDisplay"> {userData.phone} </p>
             </label>
             <label className="label">Mailing Address
-              <p className="textDisplay"> {formData.address} </p>
+              <p className="textDisplay"> {userData.address} </p>
             </label>
             <div className="threeInOne">
               <div className="cityDiv">
                 <label className="label-short">City
-                  <p className="short-display"> {formData.city} </p>
+                  <p className="short-display"> {userData.city} </p>
                 </label>
               </div>
               <div className="threeBlockDiv">
                 <label className="label-short">State
-                  <p className="short-display"> {formData.state} </p>
+                  <p className="short-display"> {userData.state} </p>
                 </label>
               </div>
               <div className="threeBlockDiv">
                 <label className="label-short">Zip Code
-                  <p className="short-display"> {formData.zipCode} </p>
+                  <p className="short-display"> {userData.zipCode} </p>
                 </label>
               </div>
             </div>
             <label className="label">Country
-              <p className="textDisplay"> {formData.country} </p>
+              <p className="textDisplay"> {userData.country} </p>
             </label>
-            <label className="label">Preferred Language
-              <p className="textDisplay"> {formData.lang} </p>
-            </label>
+            {/* <label className="label">Preferred Language
+              <p className="textDisplay"> {userData.lang} </p>
+            </label> */}
           </div>
         </div>
         <Membership />

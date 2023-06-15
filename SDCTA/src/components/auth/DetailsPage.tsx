@@ -18,13 +18,11 @@ export const DetailsPage: React.FC = () => {
     try {
       let email;
       if (auth.currentUser == null) {
-        navigate("/Signup");
         return;
       } else {
         email = auth.currentUser.email;
       }
       if (email == null) {
-        navigate("/Signup");
         return;
       } else {
         const response = await updateUserDetails(email, {
@@ -36,7 +34,6 @@ export const DetailsPage: React.FC = () => {
           country,
         });
         console.log(response);
-        navigate("/");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -44,6 +41,7 @@ export const DetailsPage: React.FC = () => {
       }
     }
   };
+
   return (
     <div>
       <h1 className="signup-form-title details_title">
@@ -126,6 +124,7 @@ export const DetailsPage: React.FC = () => {
             <button
               onClick={async () => {
                 await updateDetails();
+                navigate("/");
               }}
               className="btn-signup btn-continue"
             >
