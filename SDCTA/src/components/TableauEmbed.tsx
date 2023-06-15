@@ -3,11 +3,12 @@ import { visitLexicalEnvironment } from "typescript";
 import { useNavigate } from 'react-router-dom';
 interface TableauEmbedProp {
 	url: string;
+	interactive: boolean; // should tableau component be interactive?
 }
 
 const { tableau } = window;
 
-export default function TableauEmbed({ url }: TableauEmbedProp) {
+export default function TableauEmbed({ url, interactive }: TableauEmbedProp) {
 	//const navigate = useNavigate();
 	let viz;
 	const ref = useRef(null);
@@ -29,7 +30,7 @@ export default function TableauEmbed({ url }: TableauEmbedProp) {
 	}, []);
 
 	return (
-		<div ref={ref} style={{ width: '70%', margin: 'auto', pointerEvents: "none" }}> </div>
+		<div ref={ref} style={{ width: '70%', margin: 'auto', pointerEvents: interactive ? "auto" : "none" }}> </div>
 
 	)
 }

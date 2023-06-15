@@ -19,6 +19,7 @@ const initialState: Visualization = {
 export const IndividualVisualization: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get("title"));
+  console.log("TITLE " + title)
   const [visObj, setVisObj] = useState<Visualization | null>(
     initialState
   );
@@ -70,7 +71,7 @@ export const IndividualVisualization: React.FC = () => {
             )}
           </div>
 
-          {visObj.link !== "" && <TableauEmbed url={visObj.link} />}
+          {visObj.link !== "" && <TableauEmbed url={visObj.link} interactive />}
           <div className="body-text">
             <h2 id="Analysis">Data Analysis</h2>
             <p className="IV-description">{visObj.analysis}</p>

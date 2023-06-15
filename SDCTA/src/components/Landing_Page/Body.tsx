@@ -1,4 +1,6 @@
 import "./body.css";
+import { useNavigate } from "react-router-dom";
+
 
 const landscape = "./Images/Landing_Image.jpg";
 const EducationVis = "./Images/Education_Standin.png";
@@ -6,6 +8,7 @@ const HomelessnessVis = "./Images/Homelessness_Standin.png";
 const MunicipalVis = "./Images/Municipal_Standin.png";
 
 export const Body: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div>
@@ -26,7 +29,7 @@ export const Body: React.FC = () => {
           <div className="img">
             <img src={EducationVis} alt="Education Visualization"></img>
           </div>
-          <div className="image_line-heading">Education</div>
+          <div onClick={() => navigate("/Education")} className="image_line-heading">Education</div>
           <div className="image_line-description">
             Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut labore et
@@ -36,7 +39,7 @@ export const Body: React.FC = () => {
           <div className="img">
             <img src={HomelessnessVis} alt="Homelessness Visualization"></img>
           </div>
-          <div className="image_line-heading">Homelessness</div>
+          <div onClick={() => navigate("/Homelessness")} className="image_line-heading">Homelessness</div>
           <div className="image_line-description">
             Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut labore et
@@ -46,7 +49,7 @@ export const Body: React.FC = () => {
           <div className="img">
             <img src={MunicipalVis} alt="Municipal Visualization"></img>
           </div>
-          <div className="image_line-heading">Municipal</div>
+          <div onClick={() => navigate("/Municipal")} className="image_line-heading">Municipal</div>
           <div className="image_line-description">
             Lorem ipsum dolor sit amet, sed do consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut labore et

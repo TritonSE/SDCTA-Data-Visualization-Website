@@ -1,13 +1,13 @@
 import { Footer } from '../components/Footer';
 import TableauEmbed from '../components/TableauEmbed';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loadCategory, getCategoryValue, changeCategory } from "../slices/categorySlice";
 import { Visualization } from '../api/data';
-import { RootState } from '../app/store';
+import { useNavigate } from "react-router-dom";
 import { CategoryType } from "../slices/categorySlice";
 import { useEffect } from 'react';
 import { useAppSelector } from "../app/hooks";
-import "./Pages.css";
+import "./CategoryPage.css";
 const downloadIcon = "./Images/Icon.png";
 
 
@@ -17,6 +17,7 @@ interface CategoryPageProps {
 
 export const CategoryPage: React.FC<CategoryPageProps> = ({ category }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const currCategory = useAppSelector(getCategoryValue)[category]
     useEffect(() => {
         if (currCategory === null) {
@@ -25,6 +26,10 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({ category }) => {
             dispatch(changeCategory(category))
         }
     }, [category]);
+
+    const navigateToViz = (title: string) => {
+        navigate({ pathname: "/IndividualVisualization", search: `?title=${encodeURIComponent(title)}` })
+    }
 
     const vizs = currCategory?.visualizations ?? [];
     return (
@@ -35,21 +40,22 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({ category }) => {
                     <div className="top-row">
                         <div className="subheading">{viz.title}</div>
 
-                        <div className="download-button">
+                        {/* <div className="download-button">
                             Download <img src={downloadIcon} alt="download icon" />
-                        </div>
+                        </div> */}
                     </div>
-                    <div onClick={() => console.log("HERE")}>
+                    <div onClick={() => navigateToViz(viz.title)}>
                         <TableauEmbed
                             url={
                                 viz.link
                             }
+                            interactive={false}
                         />
                     </div>
                     <div className="description">
                         {viz.analysis}
                     </div>
-                    <div className="learn-more"> Learn more</div>
+                    <div onClick={() => navigateToViz(viz.title)} className="learn-more"> Learn more</div>
                 </>
             ))}
             <Footer />

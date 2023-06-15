@@ -49,8 +49,8 @@
   color: #7f1922;
   font-weight: 600;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-left: auto;
 }
 
