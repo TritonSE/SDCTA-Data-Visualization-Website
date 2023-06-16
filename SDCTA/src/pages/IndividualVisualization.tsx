@@ -1,15 +1,14 @@
-import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { TableauEmbed } from "../components/TableauEmbed";
+import TableauEmbed from "../components/TableauEmbed";
 import { getVisByTitle, getCsvByTitle } from "../api/consumer";
-import { type VisualizationObject } from "../api/data";
+import { type Visualization } from "../api/data";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { Error404 } from "../components/404";
 
-const initialState: VisualizationObject = {
+const initialState: Visualization = {
   title: "",
   analysis: "",
   link: "",
@@ -19,9 +18,7 @@ const initialState: VisualizationObject = {
 export const IndividualVisualization: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get("title"));
-  const [visObj, setVisObj] = useState<VisualizationObject | null>(
-    initialState
-  );
+  const [visObj, setVisObj] = useState<Visualization | null>(initialState);
 
   if (title === "" || title === null) {
     return <Error404 />;
@@ -50,16 +47,16 @@ export const IndividualVisualization: React.FC = () => {
   return (
     <ErrorBoundary>
       <div>
-        <div>
+        {/* <div>
           <p className="IV-back-button">
             <img
               style={{ paddingLeft: "3px" }}
               src={backIcon}
               alt="back arrow icon"
             />
-            Back to Education Data
+            Back to  Data
           </p>
-        </div>
+        </div> */}
         <div className="body">
           <div className="IV-Top-row">
             <h2>{visObj.title}</h2>
@@ -70,7 +67,7 @@ export const IndividualVisualization: React.FC = () => {
             )}
           </div>
 
-          {visObj.link !== "" && <TableauEmbed url={visObj.link} />}
+          {visObj.link !== "" && <TableauEmbed url={visObj.link} interactive />}
           <div className="body-text">
             <h2 id="Analysis">Data Analysis</h2>
             <p className="IV-description">{visObj.analysis}</p>

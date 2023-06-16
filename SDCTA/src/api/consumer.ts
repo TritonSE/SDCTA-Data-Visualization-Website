@@ -1,12 +1,12 @@
-import { type VisualizationObject } from "./data";
-import { useDispatch } from "react-redux";
-
-export const API_URL = process.env.REACT_APP_API_URL;
-export const GET_VIS = `${API_URL ?? "http://localhost:3001"}/visualization`;
+import { type Visualization, type Category, type UserDetails } from "./data";
+export const API_URL = process.env.REACT_APP_API_URL ?? "";
+export const GET_VIS = `${API_URL}/visualization`;
+export const CATEGORY_PREFIX = `${API_URL}/category`;
+export const USER_PREFIX = `${API_URL}/user`;
 
 export const getVisByTitle = async (
   title: string
-): Promise<VisualizationObject | null> => {
+): Promise<Visualization | null> => {
   try {
     const url = `${GET_VIS}/${encodeURIComponent(title)}`;
     const response = await fetch(url);
@@ -14,7 +14,7 @@ export const getVisByTitle = async (
       throw new Error(`${response.status} Failed Fetch `);
     }
     let data = await response.json();
-    data = data as VisualizationObject;
+    data = data as Visualization;
     return data;
   } catch (err) {
     console.error("Exception", err);
@@ -42,39 +42,40 @@ export const getCsvByTitle = async (title: string): Promise<void> => {
   }
 };
 
-interface userDetails {
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  country?: string;
-}
-
 const updateUserDetails = async (
   emailIn: string,
-  userDetails: userDetails
+  userDetails: UserDetails
 ): Promise<Response> => {
   const updateRequestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userDetails),
   };
-
-  const requestLink = "http://localhost:3001/user/";
-
   const response = await fetch(
-    requestLink.concat(emailIn),
+    `${USER_PREFIX}/${emailIn}`,
     updateRequestOptions
   );
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  dispatch({
-    type: "STORE_USER",
-    payload: emailIn,
-  });
+  // dispatch({
+  //   type: "STORE_USER",
+  //   payload: emailIn,
+  // });
 
   return response;
+};
+
+export const getCategoryByName = async (
+  categoryName: string
+): Promise<Category | null> => {
+  try {
+    const url = `${CATEGORY_PREFIX}/${categoryName}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data as Category;
+  } catch {
+    return null;
+  }
 };
 
 export { updateUserDetails };

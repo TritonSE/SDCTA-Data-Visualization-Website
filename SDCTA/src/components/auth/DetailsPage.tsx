@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { updateUserDetails } from "../../api/consumer";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
+import { useDispatch } from "react-redux";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 export const DetailsPage: React.FC = () => {
+  const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -18,26 +19,34 @@ export const DetailsPage: React.FC = () => {
     try {
       let email;
       if (auth.currentUser == null) {
-        navigate("/Signup");
         return;
       } else {
         email = auth.currentUser.email;
       }
       if (email == null) {
-        navigate("/Signup");
         return;
       } else {
-        const response = await updateUserDetails(email, {
-          phone: phoneNumber,
-          address,
-          city,
-          state,
-          zipCode,
-          country,
+        dispatch({
+          type: "SAVE_USER",
+          payload: {
+            email,
+            phone: phoneNumber,
+            address,
+            city,
+            state,
+            zipCode,
+            country,
+          },
         });
-        console.log(response);
-        navigate("/");
       }
+      //     const response = await updateUserDetails(email, {
+      //   phone: phoneNumber,
+      //   address,
+      //   city,
+      //   state,
+      //   zipCode,
+      //   country,
+      // });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -126,6 +135,7 @@ export const DetailsPage: React.FC = () => {
             <button
               onClick={async () => {
                 await updateDetails();
+                navigate("/");
               }}
               className="btn-signup btn-continue"
             >

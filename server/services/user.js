@@ -15,28 +15,28 @@ export async function getUserByEmail(email) {
   return user;
 }
 
-async function createStripeUser(name, email) {
-  try {
-    return await stripe.customers.create({
-      name,
-      email,
-    });
-  } catch (error) {
-    throw ServiceError.STRIPE_FAILURE.addContext(error);
-  }
-}
+// async function createStripeUser(name, email) {
+//   try {
+//     return await stripe.customers.create({
+//       name,
+//       email,
+//     });
+//   } catch (error) {
+//     throw ServiceError.STRIPE_FAILURE.addContext(error);
+//   }
+// }
 
 export async function createUser(body) {
   try {
-    const fullName = `${body.firstName} ${body.lastName}`;
+    // const fullName = `${body.firstName} ${body.lastName}`;
 
-    const customer = await createStripeUser(fullName, body.email);
-
+    // const customer = await createStripeUser(fullName, body.email);
     const tier = await getTierByLevel(0);
     const data = new UserModel(body);
-    data.stripe_id = customer.id;
+    data.email = body.email;
+    data.firstName = body.firstName;
+    data.lastName = body.lastName;
     data.tier = tier;
-
     return await data.save();
   } catch (error) {
     throw ServiceError.INVALID_USER_RECEIVED.addContext(error);

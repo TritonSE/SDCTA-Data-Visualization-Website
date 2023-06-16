@@ -1,4 +1,5 @@
 import type { UserCredential } from "firebase/auth";
+import { type User } from "./data";
 import {
   signInWithEmailAndPassword,
   setPersistence,
@@ -114,7 +115,7 @@ const loginUser = async (
   }
 };
 
-const getUser = async (email: any): Promise<any> => {
+const getUser = async (email: string): Promise<User | null> => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -125,7 +126,7 @@ const getUser = async (email: any): Promise<any> => {
   if (response.status === 404) {
     return null;
   }
-  return await response.json();
+  return (await response.json()) as User;
 };
 
 const provider = new GoogleAuthProvider();
