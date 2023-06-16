@@ -47,6 +47,7 @@ const errorHandler = (err, req, res, next) => {
   }
 };
 
+const path = require("path")
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -55,8 +56,14 @@ app.use("/tier", tierRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
 app.use("/visualization", visRouter);
+app.use(express.static(path.join(__dirname, "client", "build")))
+
 
 app.use(errorHandler);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server Started at ${process.env.PORT}`);
