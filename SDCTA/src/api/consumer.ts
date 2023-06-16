@@ -1,8 +1,4 @@
-import {
-  type Visualization,
-  type Category,
-  type UserDetails,
-} from "./data";
+import { type Visualization, type Category, type UserDetails } from "./data";
 export const API_URL = process.env.REACT_APP_API_URL ?? "";
 export const GET_VIS = `${API_URL}/visualization`;
 export const CATEGORY_PREFIX = `${API_URL}/category`;

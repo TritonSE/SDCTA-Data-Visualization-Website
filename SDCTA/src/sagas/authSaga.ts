@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { type Effect } from "redux-saga/effects"
+import { type Effect } from "redux-saga/effects";
 import {
   login,
   storeUser,

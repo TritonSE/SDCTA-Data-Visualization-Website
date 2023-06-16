@@ -53,7 +53,9 @@ export default categorySlice.reducer;
 // getting an error, not recognizing tableau as the name of the slice
 export const getCurrCategory = (state: RootState): string =>
   state.category.currCategory;
-export const getCategoryValue = (state: RootState): {
+export const getCategoryValue = (
+  state: RootState
+): {
   Education: Category | null;
   Municipal: Category | null;
   Homelessness: Category | null;

@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { type Effect, type ForkEffect } from "redux-saga/effects"
+import { type Effect, type ForkEffect } from "redux-saga/effects";
 import { type PayloadAction } from "@reduxjs/toolkit";
 import {
   loadCategory,
@@ -9,7 +9,9 @@ import {
 import { type Category } from "../api/data";
 import { getCategoryByName } from "../api/consumer";
 
-function* loadCategorySaga(action: PayloadAction<CategoryType>): Generator<Effect, void, any> {
+function* loadCategorySaga(
+  action: PayloadAction<CategoryType>
+): Generator<Effect, void, any> {
   try {
     const newCategory: Category = yield call(getCategoryByName, action.payload);
     yield put(updateCategory(newCategory));
