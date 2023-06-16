@@ -32,12 +32,10 @@ export async function createUser(body) {
 
     // const customer = await createStripeUser(fullName, body.email);
     const tier = await getTierByLevel(0);
-    console.log("USER MODEL IS " + UserModel)
     const data = new UserModel(body);
     data.email = body.email;
     data.firstName = body.firstName;
     data.lastName = body.lastName;
-    console.log("DATA IS " + data);
     data.tier = tier;
     return await data.save();
   } catch (error) {

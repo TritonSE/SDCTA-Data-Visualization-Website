@@ -20,7 +20,8 @@ import {
   type GoogleLogInReturn,
 } from "../api/auth";
 import { PayloadAction } from '@reduxjs/toolkit';
-import { type User } from "../api/data";
+import { UserDetails, type User } from "../api/data";
+import { updateUserDetails } from "../api/consumer";
 /*
 const fetchUser = () => {};
 
@@ -42,6 +43,29 @@ function* setUser(action : PayloadAction<string>) {
     yield put(storeUser(user));
     yield put(login());
   }
+}
+
+
+// Saves the new user to the server
+function* saveUser({payload }: any) {
+  const userEmail : string = payload.email;
+  const userDetails: UserDetails = {
+    phone: payload.phone,
+    address: payload.address,
+    city: payload.city,
+    state: payload.state,
+    zipCode: payload.zipCode,
+    country: payload.country
+  }
+  console.log("USER EMAIL IS " + payload.email)
+  yield call(updateUserDetails, payload.email, userDetails);
+  yield put({ type: "STORE_USER", payload: userEmail });
+  // if (user === null) {
+  //   yield put(logout());
+  // } else {
+  //   yield put(storeUser(user));
+  //   yield put(login());
+  // }
 }
 
 function* authenticateUser({ payload }: any): Generator<any> {
@@ -132,6 +156,7 @@ function* loginGoogleUserGenerator({ payload }: any): Generator<any> {
 
 function* registerSaga(): Generator<any> {
   yield takeLatest("LOGIN_USER", authenticateUser);
+  yield takeEvery("SAVE_USER", saveUser)
   yield takeEvery("STORE_USER", setUser);
   yield takeEvery("REGISTER_USER", registerUser);
   yield takeEvery("SIGNUP_GOOGLE_USER", signupGoogleUserGenerator);

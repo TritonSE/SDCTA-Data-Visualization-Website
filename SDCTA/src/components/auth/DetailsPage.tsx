@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { updateUserDetails } from "../../api/consumer";
+import { type User } from "../../api/data"
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
+import { useDispatch } from "react-redux";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 export const DetailsPage: React.FC = () => {
+  const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -25,16 +28,27 @@ export const DetailsPage: React.FC = () => {
       if (email == null) {
         return;
       } else {
-        const response = await updateUserDetails(email, {
-          phone: phoneNumber,
-          address,
-          city,
-          state,
-          zipCode,
-          country,
+        dispatch({
+          type: "SAVE_USER",
+          payload: {
+            email: email,
+            phone: phoneNumber,
+            address,
+            city,
+            state,
+            zipCode,
+            country,
+          },
         });
-        console.log(response);
       }
+      //     const response = await updateUserDetails(email, {
+      //   phone: phoneNumber,
+      //   address,
+      //   city,
+      //   state,
+      //   zipCode,
+      //   country,
+      // });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);

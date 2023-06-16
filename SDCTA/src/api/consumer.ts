@@ -1,8 +1,11 @@
 import { type Visualization, type Category } from "./data";
 import { useDispatch } from "react-redux";
+import { type UserDetails, type User } from "./data";
 export const API_URL = process.env.REACT_APP_API_URL ?? "";
 export const GET_VIS = `${API_URL}/visualization`;
 export const CATEGORY_PREFIX = `${API_URL}/category`;
+export const USER_PREFIX = `${API_URL}/user`;
+
 
 export const getVisByTitle = async (
   title: string
@@ -42,18 +45,9 @@ export const getCsvByTitle = async (title: string): Promise<void> => {
   }
 };
 
-interface userDetails {
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  country?: string;
-}
-
 const updateUserDetails = async (
   emailIn: string,
-  userDetails: userDetails
+  userDetails: UserDetails
 ): Promise<Response> => {
   const updateRequestOptions = {
     method: "PATCH",
@@ -64,15 +58,16 @@ const updateUserDetails = async (
   const requestLink = "http://localhost:3001/user/";
 
   const response = await fetch(
-    requestLink.concat(emailIn),
+    `${USER_PREFIX}/${emailIn}`,
     updateRequestOptions
   );
-  const dispatch = useDispatch();
+  console.log("RESPONSE IS " + response)
+  // const dispatch = useDispatch();
 
-  dispatch({
-    type: "STORE_USER",
-    payload: emailIn,
-  });
+  // dispatch({
+  //   type: "STORE_USER",
+  //   payload: emailIn,
+  // });
 
   return response;
 };

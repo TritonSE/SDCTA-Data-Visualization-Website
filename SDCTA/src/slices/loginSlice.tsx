@@ -44,11 +44,12 @@ export const loginSlice = createSlice({
       state.value = false;
       state.user = null;
     },
+    updateUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload
+    },
     storeUser: (state, action: PayloadAction<User>) => {
-      console.log("IN REDUCER " + action.payload)
       state.user = action.payload;
       state.loadingUser = false;
-      console.log(state.user)
     },
     setLoginError: (state, action) => {
       state.loginError = action.payload;
@@ -59,7 +60,7 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { login, logout, storeUser, setLoginError, setSignUpError } =
+export const { login, logout, storeUser, setLoginError, setSignUpError, updateUser } =
   loginSlice.actions;
 
 export const selectLogin = (state: RootState): boolean => state.login.value;

@@ -13,9 +13,19 @@ export interface Category {
 
 
 export interface User {
-  username: string;
+  firstName?: string,
+  lastName?: string,
   email: string;
   compName?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+}
+
+export interface UserDetails {
   phone?: string;
   address?: string;
   city?: string;
