@@ -21,6 +21,7 @@ router.post("/addCard", async (req, res, next) => {
 // Create User Post Method
 router.post("/", async (req, res, next) => {
   try {
+    console.log("here");
     const user = await createUser(req.body);
     console.log(user);
     res.status(200).json(user);

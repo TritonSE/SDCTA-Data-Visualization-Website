@@ -75,4 +75,12 @@ export const selectSignUpError = (state: RootState): SignUpError =>
 export const selectUser = (state: RootState): User | null => state.login.user;
 
 
+export const selectLoginError = (state: RootState): LoginError =>
+  state.login.loginError;
+
+export const selectSignUpError = (state: RootState): SignUpError =>
+  state.login.signUpError;
+
+export const selectUser = (state: RootState): any => state.login.user;
+
 export default loginSlice.reducer;

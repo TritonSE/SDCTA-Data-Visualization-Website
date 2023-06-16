@@ -61,7 +61,6 @@ const updateUserDetails = async (
     `${USER_PREFIX}/${emailIn}`,
     updateRequestOptions
   );
-  console.log("RESPONSE IS " + response)
   // const dispatch = useDispatch();
 
   // dispatch({

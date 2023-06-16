@@ -55,7 +55,6 @@ export const DetailsPage: React.FC = () => {
       }
     }
   };
-
   return (
     <div>
       <h1 className="signup-form-title details_title">
