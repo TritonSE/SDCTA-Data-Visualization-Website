@@ -26,7 +26,7 @@ export const store = configureStore({
 
 // Then run the saga
 // uncomment when root saga is made
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

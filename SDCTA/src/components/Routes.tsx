@@ -21,9 +21,18 @@ export const Routes: React.FC = () => {
       <Navbar />
       <ReactRoutes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/Education" element={<CategoryPage category={CategoryType.Education} />} />
-        <Route path="/Homelessness" element={<CategoryPage category={CategoryType.Homelessness} />} />
-        <Route path="/Municipal" element={<CategoryPage category={CategoryType.Municipal} />} />
+        <Route
+          path="/Education"
+          element={<CategoryPage category={CategoryType.Education} />}
+        />
+        <Route
+          path="/Homelessness"
+          element={<CategoryPage category={CategoryType.Homelessness} />}
+        />
+        <Route
+          path="/Municipal"
+          element={<CategoryPage category={CategoryType.Municipal} />}
+        />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/Subscribe" element={<Subscribe />} />

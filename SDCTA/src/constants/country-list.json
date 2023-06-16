@@ -1,6 +1,6 @@
 {
-    "country": [
-    { "code": "NULL", "name": "--Select Country--"},
+  "country": [
+    { "code": "NULL", "name": "--Select Country--" },
     { "code": "AD", "name": "Andorra" },
     { "code": "AE", "name": "Arab Emirates" },
     { "code": "AF", "name": "Afghanistan" },
@@ -77,7 +77,10 @@
     { "code": "FO", "name": "Faroe Islands" },
     { "code": "FR", "name": "France" },
     { "code": "GA", "name": "Gabon" },
-    { "code": "GB", "name": "United Kingdom of Great Britain and Northern Ireland" },
+    {
+      "code": "GB",
+      "name": "United Kingdom of Great Britain and Northern Ireland"
+    },
     { "code": "GD", "name": "Grenada" },
     { "code": "GE", "name": "Georgia" },
     { "code": "GF", "name": "French Guiana" },

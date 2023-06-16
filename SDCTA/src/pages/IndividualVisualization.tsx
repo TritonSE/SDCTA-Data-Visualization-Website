@@ -1,8 +1,7 @@
-import backIcon from "./backIcon.svg";
 import downloadIcon from "./downloadIcon.svg";
 import "./IndividualVisualization.css";
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import TableauEmbed from "../components/TableauEmbed";
 import { getVisByTitle, getCsvByTitle } from "../api/consumer";
 import { type Visualization } from "../api/data";
@@ -19,9 +18,7 @@ const initialState: Visualization = {
 export const IndividualVisualization: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [title] = useState(searchParams.get("title"));
-  const [visObj, setVisObj] = useState<Visualization | null>(
-    initialState
-  );
+  const [visObj, setVisObj] = useState<Visualization | null>(initialState);
 
   if (title === "" || title === null) {
     return <Error404 />;

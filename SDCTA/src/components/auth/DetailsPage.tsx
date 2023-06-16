@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { updateUserDetails } from "../../api/consumer";
-import { type User } from "../../api/data"
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useDispatch } from "react-redux";
@@ -31,7 +29,7 @@ export const DetailsPage: React.FC = () => {
         dispatch({
           type: "SAVE_USER",
           payload: {
-            email: email,
+            email,
             phone: phoneNumber,
             address,
             city,

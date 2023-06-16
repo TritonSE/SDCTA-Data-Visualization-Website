@@ -6,15 +6,14 @@ export interface Visualization {
 }
 
 export interface Category {
-	_id: string;	
-	name: string;
-	visualizations: Array<Visualization>;
+  _id: string;
+  name: string;
+  visualizations: Visualization[];
 }
 
-
 export interface User {
-  firstName?: string,
-  lastName?: string,
+  firstName?: string;
+  lastName?: string;
   email: string;
   compName?: string;
   phone?: string;

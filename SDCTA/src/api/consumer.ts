@@ -1,11 +1,12 @@
-import { type Visualization, type Category } from "./data";
-import { useDispatch } from "react-redux";
-import { type UserDetails, type User } from "./data";
+import {
+  type Visualization,
+  type Category,
+  type UserDetails,
+} from "./data";
 export const API_URL = process.env.REACT_APP_API_URL ?? "";
 export const GET_VIS = `${API_URL}/visualization`;
 export const CATEGORY_PREFIX = `${API_URL}/category`;
 export const USER_PREFIX = `${API_URL}/user`;
-
 
 export const getVisByTitle = async (
   title: string
@@ -54,9 +55,6 @@ const updateUserDetails = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userDetails),
   };
-
-  const requestLink = "http://localhost:3001/user/";
-
   const response = await fetch(
     `${USER_PREFIX}/${emailIn}`,
     updateRequestOptions
@@ -71,18 +69,17 @@ const updateUserDetails = async (
   return response;
 };
 
-export const getCategoryByName = async(categoryName: string) : Promise<Category | null> => {
-	try {
-		const url = `${CATEGORY_PREFIX}/${categoryName}`;
-		const response = await fetch(url);
-		let data = await response.json();		
-		return (data as Category);
-		
-	}
-	
-	catch {
-		return null;
-	}
-}
+export const getCategoryByName = async (
+  categoryName: string
+): Promise<Category | null> => {
+  try {
+    const url = `${CATEGORY_PREFIX}/${categoryName}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data as Category;
+  } catch {
+    return null;
+  }
+};
 
 export { updateUserDetails };
