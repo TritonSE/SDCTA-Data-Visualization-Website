@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 10",
     "start": "nodemon index.js",
     "lint-fix": "(eslint --fix --cache --report-unused-disable-directives . || true) && prettier --write .",
@@ -28,5 +29,9 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "2.8.8"
-  }
+  },
+
+"engines": {
+  "node": "16.15.0"
+}
 }

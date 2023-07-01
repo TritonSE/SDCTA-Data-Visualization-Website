@@ -7,6 +7,13 @@ import userRouter from "./routes/user.js";
 import categoryRouter from "./routes/category.js";
 import visRouter from "./routes/visualization.js";
 import { CustomError, InternalError } from "./errors.js";
+import path from "path"
+import { fileURLToPath } from "url";
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 dotenv.config();
 
@@ -47,7 +54,6 @@ const errorHandler = (err, req, res, next) => {
   }
 };
 
-const path = require("path")
 const app = express();
 app.use(cors());
 app.use(express.json());

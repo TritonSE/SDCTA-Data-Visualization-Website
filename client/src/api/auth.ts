@@ -10,6 +10,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+export const API_URL = process.env.REACT_APP_API_URL ?? "";
+
+export const USER_PREFIX = `${API_URL}/user/`;
 
 import { auth } from "../firebase-config";
 
@@ -83,7 +86,7 @@ const registerUser = async (
       email: userCredential.user.email,
     }),
   };
-  const response = await fetch("http://localhost:3001/user/", requestOptions);
+  const response = await fetch(USER_PREFIX, requestOptions);
   return response;
 };
 
@@ -121,7 +124,7 @@ const getUser = async (email: string): Promise<User | null> => {
     headers: { "Content-Type": "application/json" },
   };
 
-  const requestLink = "http://localhost:3001/user/";
+  const requestLink = USER_PREFIX;
   const response = await fetch(requestLink.concat(email), requestOptions);
   if (response.status === 404) {
     return null;
