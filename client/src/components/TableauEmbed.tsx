@@ -37,7 +37,7 @@ export default function TableauEmbed({ url, interactive }: TableauEmbedProp) {
     <div
       ref={ref}
       style={{
-        width: "70%",
+        width: "100%",
         margin: "auto",
         pointerEvents: interactive ? "auto" : "none",
       }}
