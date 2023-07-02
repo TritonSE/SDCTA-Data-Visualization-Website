@@ -37,13 +37,12 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
       search: `?title=${encodeURIComponent(title)}`,
     });
   };
-
   const vizs = currCategory?.visualizations ?? [];
   return (
     <>
       <div className="heading">{category}</div>
       {vizs?.map((viz: Visualization) => (
-        <>
+        <div key={viz.title}>
           <div className="top-row">
             <div className="subheading">{viz.title}</div>
 
@@ -56,7 +55,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               navigateToViz(viz.title);
             }}
           >
-            <TableauEmbed url={viz.link} interactive={false} />
+            <TableauEmbed url={viz.link} interactive={false} key={viz.title} />
           </div>
           <div className="description">{viz.analysis}</div>
           <div
@@ -68,7 +67,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
             {" "}
             Learn more
           </div>
-        </>
+        </div>
       ))}
       <Footer />
     </>
