@@ -11,7 +11,7 @@ import {
   logInErrorHandler,
   signUpErrorHandler,
 } from "../error_handling/auth-errors";
-import { auth } from "../firebase-config";
+import { auth } from "../firebase-setup";
 import { deleteUser } from "firebase/auth";
 import {
   register,

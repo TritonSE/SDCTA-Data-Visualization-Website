@@ -14,7 +14,7 @@ export const API_URL = process.env.REACT_APP_API_URL ?? "";
 
 export const USER_PREFIX = `${API_URL}/user/`;
 
-import { auth } from "../firebase-config";
+import { auth } from "../firebase-setup";
 
 export interface GoogleLogInReturn {
   type: string;

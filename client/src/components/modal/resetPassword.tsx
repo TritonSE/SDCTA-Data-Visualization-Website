@@ -4,7 +4,7 @@ import "../auth/auth.css";
 import "./styleObjects/resetPassword.css";
 import { sendPasswordResetEmail } from "firebase/auth";
 
-import { auth } from "../../firebase-config";
+import { auth } from "../../firebase-setup";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import IconButton from "@mui/material/IconButton";

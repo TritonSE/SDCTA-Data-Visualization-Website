@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase-config";
+import { auth } from "../../firebase-setup";
 import { useDispatch } from "react-redux";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 

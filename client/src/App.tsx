@@ -1,7 +1,8 @@
 import "./App.css";
 import { Routes } from "./components/Routes";
-import { auth } from "./firebase-config";
+import { auth } from "./firebase-setup";
 import { useDispatch } from "react-redux";
+import dotenv from "dotenv";
 
 declare global {
   interface Window {
