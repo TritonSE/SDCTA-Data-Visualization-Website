@@ -17,6 +17,8 @@ interface CategoryPageProps {
   category: CategoryType;
 }
 
+const ANALYSIS_TEXT_LENGTH = 100;
+
 export const CategoryPage: React.FC<CategoryPageProps> = ({
   category,
 }: CategoryPageProps) => {
@@ -57,7 +59,10 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
           >
             <TableauEmbed url={viz.link} interactive={false} key={viz.title} />
           </div>
-          <div className="description">{viz.analysis}</div>
+          <div className="description">{`${viz.analysis.substring(
+            0,
+            ANALYSIS_TEXT_LENGTH
+          )}...`}</div>
           <div
             onClick={() => {
               navigateToViz(viz.title);
